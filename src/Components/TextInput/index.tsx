@@ -9,7 +9,8 @@ const TextInput = ({
   disabled,
   onBlur,
   name,
-  type
+  type,
+  required
 }: PropsInputText) => {
   return (
     <div>
@@ -20,6 +21,7 @@ const TextInput = ({
         disabled={disabled}
         value={value}
         name={name}
+        required={required}
         onChange={onChange}
         placeholder={placeholder}
       />

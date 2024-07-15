@@ -4,25 +4,131 @@ import color from "../../Styles/colors";
 import styles from "../../Styles";
 
 export const BackgroundTopLeft = styled.div`
-    background-position: top left;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    z-index: 100;
-    
-`;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: auto;
+  width: auto;
+  margin-top: 32px;
+  margin-left: 32px;
 
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+`;
 
 export const BackgroundBottomRight = styled.div`
-    background-position: center right;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    z-index: 100;
-    
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  height: auto;
+  width: auto;
+  margin-right: 32px;
+  margin-bottom: 32px;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+  
 `;
 
-export const ContainerLogin = styled.div`
+export const FormaLeft = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  height: auto;
+  width: auto;
+  margin-bottom: -10px;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+  @media screen and (max-width: 1350px) {
+    img {
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 1080px) {
+    img {
+      width: 60%;
+    }
+  }
+`;
+export const PersonLeft = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  height: auto;
+  width: auto;
+  margin-bottom: -10px;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+  @media screen and (max-width: 1350px) {
+    img {
+      width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 1080px) {
+    img {
+      width: 60%;
+    }
+  }
+`;
+export const PersonRight = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  height: auto;
+  width: auto;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+  @media screen and (max-width: 1350px) {
+    img {
+      width: 80%;
+      margin-left: 20%;
+    }
+  }
+
+  @media screen and (max-width: 1080px) {
+    img {
+      width: 60%;
+      margin-left: 40%;
+    }
+  }
+`;
+
+export const FormaRight = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  height: auto;
+  width: auto;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+  @media screen and (max-width: 1350px) {
+    img {
+      width: 80%;
+      margin-left: 20%;
+    }
+  }
+
+  @media screen and (max-width: 1080px) {
+    img {
+      width: 60%;
+      margin-left: 40%;
+    }
+  }
+`;
+
+export const ContainerOut = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
@@ -58,27 +164,6 @@ export const ContainerLogin = styled.div`
     border-top-left-radius: 40px;
   }
 
-  .imgBack {
-    height: 100%;
-    font-size: ${typography.font.small};
-    color: ${color.white};
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    position: fixed;
-    border-bottom-left-radius: 40px;
-    border-top-left-radius: 40px;
-  }
-
-  .formSignUp {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-  }
 
   .noAcesso {
     color: ${color.colorPrimary};
@@ -109,13 +194,12 @@ export const ContainerLogin = styled.div`
     margin-left: 5px;
   }
 
-  .pLogin {
-    font-family: ${styles.typography.types.inter};
-    font-size: 16.25px;
-    font-weight: 500;
-    line-height: 20.9px;
-    text-align: left;
+  .linkSignUp {
+    font-family: ${typography.types.inter};
+    color: ${color.colorPrimary};
+    text-decoration: none;
   }
+
   .titleLogin {
     text-align: center;
     margin-top: 64px;
@@ -135,27 +219,7 @@ export const ContainerLogin = styled.div`
     color: ${color.colorPrimary};
   }
 
-  #margin {
-    margin: 20px;
-    position: absolute;
-  }
-
-  #resetPassword {
-    color: ${color.grayClear};
-    font-size: ${typography.font.small};
-    margin-top: 30;
-    margin-bottom: 30;
-    width: 100%;
-  }
-  #textCenter {
-    text-align: "center";
-  }
-  #link {
-    font-family: ${typography.types.bold};
-    color: ${color.gray};
-    text-decoration: none;
-    margin-left: 20;
-  }
+ 
 `;
 export const TopColors = styled.div<{ color: string }>`
   width: 25%;

@@ -1,18 +1,30 @@
-import { Link } from "react-router-dom";
-import { Column, Padding, Row } from "../../Styles/styles";
-import { BackgroundBottomRight, BackgroundTopLeft, ContainerLogin } from "./styles";
+import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import TextInput from "../../Components/TextInput";
-import { Form, Formik } from "formik";
 import PasswordInput from "../../Components/TextPassword";
+import { Column, Padding, Row } from "../../Styles/styles";
+import backgroundBottomRight from "../../assets/image/backgroundbottomright.png";
+import backgroundTopLeft from "../../assets/image/backgroundtopleft.png";
+import formaLeft from "../../assets/image/formaLeft.svg";
+import formaRight from "../../assets/image/formaRight.svg";
+import personLeft from "../../assets/image/personLeft.svg";
+import personRight from "../../assets/image/personRight.svg";
+
 import logo from "../../assets/image/logo-edmundo.svg";
 import LoginProvider, { LoginContext } from "./context/context";
-import { useContext } from "react";
 import { LoginContextText } from "./context/types";
-import backgroundTopLeft from "../../assets/image/backgroundtopleft.png";
-import backgroundBottomRight from "../../assets/image/backgroundbottomright.png";
-
+import {
+  BackgroundBottomRight,
+  BackgroundTopLeft,
+  ContainerOut,
+  FormaLeft,
+  FormaRight,
+  PersonLeft,
+  PersonRight,
+} from "./styles";
 
 const Login = () => {
   const LoginSchema = Yup.object().shape({
@@ -23,19 +35,31 @@ const Login = () => {
   const props = useContext(LoginContext) as LoginContextText;
   return (
     <LoginProvider>
-      <ContainerLogin>
       <BackgroundTopLeft>
         <img src={backgroundTopLeft} alt="" />
       </BackgroundTopLeft>
       <BackgroundBottomRight>
         <img src={backgroundBottomRight} alt="" />
       </BackgroundBottomRight>
+      <FormaLeft>
+        <img src={formaLeft} alt="" />
+      </FormaLeft>
+      <FormaRight>
+        <img src={formaRight} alt="" />
+      </FormaRight>
+      <PersonLeft>
+        <img src={personLeft} alt="" />
+      </PersonLeft>
+      <PersonRight>
+        <img src={personRight} alt="" />
+      </PersonRight>
+      <ContainerOut>
         <h1 className="titleLogin">Login</h1>
         <Row style={{ justifyContent: "center" }}>
           <div className="noAcesso textCenter">
             <Row id="center" className="buttonNoAcesso">
               Não tem acesso?
-              <Link className="link" to="/register">
+              <Link className="link" to="/cadastro">
                 Clique aqui
               </Link>
             </Row>
@@ -122,7 +146,7 @@ const Login = () => {
             <img src={logo} alt="" />
           </Row>
         </Column>
-      </ContainerLogin>
+      </ContainerOut>
     </LoginProvider>
   );
 };

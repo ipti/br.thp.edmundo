@@ -13,6 +13,7 @@ export interface PropsInputText {
     onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
     name?: string
     type?: HTMLInputTypeAttribute | undefined
+    required?: boolean
 }
 
 export interface PropsInputMask {
