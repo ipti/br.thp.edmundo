@@ -1,0 +1,149 @@
+@layer primereact {
+  :root {
+    --primary-color: #2E62AC;
+    --primary-color-text: #ffffff;
+    --surface-ground: #ffffff;
+    --surface-section: #ffffff;
+    --surface-card: #f4f4f4;
+    --text-color: #333333;
+    /* Adicione mais variáveis conforme necessário */
+}
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', 'Poppins', sans-serif;
+  }
+
+  html,
+  body,
+  #root,
+  .App {
+    height: 100%;
+    width: 100%;
+    background-color: var(--white);
+    position: fixed;
+    color: #333;
+    -webkit-font-smoothing: antialiased !important;
+    scroll-behavior: smooth;
+  }
+
+
+  @font-face {
+    font-family: "Poppins Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Poppins Regular"),
+      url("./../font/Poppins-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Poppins ExtraLight";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Poppins ExtraLight"),
+      url("../font/Poppins-ExtraLight.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Poppins Light";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Poppins Light"), url("../font/Poppins-Light.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Poppins SemiBold";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Poppins SemiBold"),
+      url("../font/Poppins-SemiBold.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Poppins Bold";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Poppins Bold"), url("../font/Poppins-Bold.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Inter Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Inter Regular"), url("../font/Inter-Regular.ttf") format("truetype");
+  }
+
+  :root {
+
+    --primary-color: #636644;
+
+
+  }
+
+  .t-button-primary {
+    width: 100%;
+    border: none;
+    padding: 10.5px;
+    margin-right: 0px;
+  }
+
+  .t-button-danger {
+    width: 100%;
+    border: none;
+    padding: 10.5px;
+    margin-right: 0px;
+  }
+
+  .t-button-secondary.t-warning {
+    width: 100%;
+    border: none;
+    padding: 10.5px;
+    margin-right: 0px;
+    background-color: #E98305;
+    color: white;
+
+  }
+
+  :hover.t-button-secondary.t-warning {
+    background-color: #DC7C05;
+    color: white;
+  }
+
+  .t-button-secondary.t-success {
+    width: 100%;
+    border: none;
+    padding: 10.5px;
+    margin-right: 0px;
+    height: 37px;
+    background-color: #28A138;
+    color: white;
+  }
+
+  :hover.t-button-secondary.t-button-success {
+    background-color: #238B31;
+    color: white;
+  }
+
+  .card {
+    background: var(--surface-card);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  }
+
+  .card {
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+
+  .p-button.p-button-secondary,
+  .p-buttonset.p-button-secondary>.p-button,
+  .p-splitbutton.p-button-secondary>.p-button,
+  .p-fileupload-choose.p-button-secondary {
+    background-color: #EFF2F5;
+  }
+}
