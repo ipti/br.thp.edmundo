@@ -27,14 +27,23 @@ import {
 } from "./styles";
 
 const Login = () => {
+  return(
+    <LoginProvider>
+      <LoginPage />
+    </LoginProvider>
+  )
+}
+
+const LoginPage = () => {
   const LoginSchema = Yup.object().shape({
     password: Yup.string().required("Campo Obrigatório"),
-    username: Yup.string().required("Campo Obrigatório"),
+    email: Yup.string().required("Campo Obrigatório"),
   });
+
 
   const props = useContext(LoginContext) as LoginContextText;
   return (
-    <LoginProvider>
+    <div>
       <BackgroundTopLeft>
         <img src={backgroundTopLeft} alt="" />
       </BackgroundTopLeft>
@@ -71,6 +80,7 @@ const Login = () => {
             <Formik
               initialValues={{ email: "", password: "" }}
               onSubmit={(values) => {
+                console.log(values)
                 props.Login(values);
               }}
               validationSchema={LoginSchema}
@@ -149,7 +159,7 @@ const Login = () => {
           </Row>
         </Column>
       </ContainerOut>
-    </LoginProvider>
+    </div>
   );
 };
 

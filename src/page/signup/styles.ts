@@ -11,6 +11,11 @@ export const FormaSignUp = styled.div`
   @media screen and (max-width: 990px) {
     display: none;
   }
+  @media screen and (max-width: 1550px) {
+    img {
+      width: 80%;
+    }
+  }
   @media screen and (max-width: 1350px) {
     img {
       width: 80%;

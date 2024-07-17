@@ -13,6 +13,14 @@ export const BackgroundTopLeft = styled.div`
   margin-top: 32px;
   margin-left: 32px;
 
+
+
+  @media screen and (max-width: 1550px) {
+    img {
+      width: 70%;
+    }
+  }
+
   @media screen and (max-width: 800px) {
     display: none;
   }
@@ -30,6 +38,12 @@ export const BackgroundBottomRight = styled.div`
   @media screen and (max-width: 800px) {
     display: none;
   }
+
+  @media screen and (max-width: 1550px) {
+    img {
+      width: 70%;
+    }
+  }
   
 `;
 
@@ -45,6 +59,12 @@ export const FormaLeft = styled.div`
     display: none;
   }
   @media screen and (max-width: 1350px) {
+    img {
+      width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 1550px) {
     img {
       width: 80%;
     }
@@ -66,9 +86,16 @@ export const PersonLeft = styled.div`
   @media screen and (max-width: 800px) {
     display: none;
   }
+  
+  @media screen and (max-width: 1550px) {
+    img {
+      width: 70%;
+    }
+  }
+
   @media screen and (max-width: 1350px) {
     img {
-      width: 80%;
+      width: 70%;
     }
   }
 
@@ -88,10 +115,10 @@ export const PersonRight = styled.div`
   @media screen and (max-width: 800px) {
     display: none;
   }
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1550px) {
     img {
-      width: 80%;
-      margin-left: 20%;
+      width: 70%;
+      margin-left: 30%;
     }
   }
 
@@ -113,7 +140,7 @@ export const FormaRight = styled.div`
   @media screen and (max-width: 800px) {
     display: none;
   }
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1550px) {
     img {
       width: 80%;
       margin-left: 20%;

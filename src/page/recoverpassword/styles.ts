@@ -11,7 +11,7 @@ export const FormaRecover = styled.div`
   @media screen and (max-width: 990px) {
     display: none;
   }
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1550px) {
     img {
       width: 80%;
       margin-left: 20%;

@@ -51,7 +51,6 @@ const SignUp = () => {
                             <Padding />
                             <TextInput
                               name="email"
-                              type="email"
                               required
                               value={values.name}
                               onChange={handleChange}
