@@ -10,8 +10,8 @@ import backgroundBottomRight from "../../assets/image/backgroundbottomright.png"
 import backgroundTopLeft from "../../assets/image/backgroundtopleft.png";
 import formaLeft from "../../assets/image/formaLeft.svg";
 import formaRight from "../../assets/image/formaRight.svg";
-import personLeft from "../../assets/image/personLeft.svg";
-import personRight from "../../assets/image/personRight.svg";
+import personLeft from "../../assets/image/personLeft.png";
+import personRight from "../../assets/image/personRight.png";
 
 import logo from "../../assets/image/logo-edmundo.svg";
 import LoginProvider, { LoginContext } from "./context/context";
@@ -137,7 +137,9 @@ const Login = () => {
         <Padding />
         <Column>
           <Row id="center">
-            <p className="resetPassword">Recuperar senha</p>
+            <Link className="resetPassword" to={"/recuperar"}>
+              <p >Recuperar senha</p>
+            </Link>
           </Row>
         </Column>
         <Padding padding="16px" />

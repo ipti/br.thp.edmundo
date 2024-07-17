@@ -7,7 +7,7 @@ import { Button } from "primereact/button";
 import logo from "../../assets/image/logo-edmundo.svg";
 import { FormaSignUp } from "./styles";
 import forma from "../../assets/image/forma-signup.svg";
-import person from "../../assets/image/person-signup.svg";
+import person from "../../assets/image/person-sign.png";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {

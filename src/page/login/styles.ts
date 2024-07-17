@@ -200,6 +200,13 @@ export const ContainerOut = styled.div`
     text-decoration: none;
   }
 
+  .recoverResponsive {
+    display: none;
+    @media screen and (max-width: 800px) {
+      display: flex;
+  }
+  }
+
   .titleLogin {
     text-align: center;
     margin-top: 64px;
@@ -207,6 +214,11 @@ export const ContainerOut = styled.div`
     color: ${color.colorPrimary};
     font-family: ${typography.types.semiBold};
     font-weight: 800;
+    line-height: 1;
+
+    @media screen and (max-width: 800px) {
+      font-size: 38px;
+  }
   }
 
   .resetPassword {
@@ -214,6 +226,7 @@ export const ContainerOut = styled.div`
     font-weight: 500;
     line-height: 20px;
     text-align: center;
+    text-decoration: none;
     cursor: pointer;
     font-family: ${typography.types.inter};
     color: ${color.colorPrimary};
