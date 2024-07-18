@@ -1,16 +1,55 @@
 import { Form, Formik } from "formik";
-import { Column, Padding, Row } from "../../Styles/styles";
-import { ContainerOut } from "../login/styles";
+import { Button } from "primereact/button";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import forma from "../../assets/image/forma-signup.svg";
+import logo from "../../assets/image/logo-edmundo.svg";
+import person from "../../assets/image/person-sign.png";
 import TextInput from "../../Components/TextInput";
 import PasswordInput from "../../Components/TextPassword";
-import { Button } from "primereact/button";
-import logo from "../../assets/image/logo-edmundo.svg";
+import { Column, Padding, Row } from "../../Styles/styles";
+import { ContainerOut } from "../login/styles";
+import SignUpProvider, { SignUpContext } from "./context/context";
 import { FormaSignUp } from "./styles";
-import forma from "../../assets/image/forma-signup.svg";
-import person from "../../assets/image/person-sign.png";
-import { Link } from "react-router-dom";
+import { SignUpContextTypes } from "./context/types";
+
 
 const SignUp = () => {
+  return (
+    <SignUpProvider>
+      <SignUpPage />
+    </SignUpProvider>
+  )
+}
+
+const SignUpPage = () => {
+
+  const props = useContext(SignUpContext) as SignUpContextTypes
+
+  const CreateUserSchema = Yup.object().shape({
+    name: Yup.string()
+      .required("Campo Obrigatório")
+      .min(8, "Nome deve ter pelo menos 8 caracteres"),
+    email: Yup.string()
+      .required("Campo Obrigatório")
+      .min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
+    password: Yup.string()
+      .required("Campo Obrigatório")
+      .min(8, "Senha deve ter pelo menos 8 caracteres"),
+    confirmpassword: Yup.string()
+      .label("Confirmar senha")
+      .required("Campo Obrigatório")
+      .oneOf([Yup.ref("password")], "Senhas difirentes"),
+  });
+
+  interface FormValues {
+    name: string;
+    email: string;
+    password: string;
+    confirmpassword?: string; // Torna confirmpassword opcional
+  }
+
   return (
     <div>
       <FormaSignUp>
@@ -35,14 +74,17 @@ const SignUp = () => {
             <Column>
               <Row id="center">
                 <Formik
-                  initialValues={{ name: "", email: "", password: "" }}
-                  onSubmit={(values) => {
-                    //   props.Login(values);
+                  initialValues={{ name: "", email: "", password: "", confirmpassword: "", }}
+                  onSubmit={(values: FormValues) => {
+                    delete values.confirmpassword;
+                    props.CreateUser(values);
                   }}
-                  // validationSchema={LoginSchema}
+                  validationSchema={CreateUserSchema}
                   validateOnChange={false}
                 >
                   {({ values, errors, handleChange, touched }) => {
+
+                    console.log(errors)
                     return (
                       <Form className="col-11 md:col-7">
                         <div>
@@ -50,7 +92,7 @@ const SignUp = () => {
                             <label>Nome *</label>
                             <Padding />
                             <TextInput
-                              name="email"
+                              name="name"
                               required
                               value={values.name}
                               onChange={handleChange}
@@ -109,15 +151,15 @@ const SignUp = () => {
                             <label>Confirmar senha *</label>
                             <Padding />
                             <PasswordInput
-                              name="password"
+                              name="confirmpassword"
                               placeholder="Confirmar senha *"
                               onChange={handleChange}
-                              value={values.password}
+                              value={values.confirmpassword}
                             />
                             <Padding />
-                            {errors.password && touched.password ? (
+                            {errors.confirmpassword && touched.confirmpassword ? (
                               <div style={{ color: "red", marginTop: "8px" }}>
-                                {errors.password}
+                                {errors.confirmpassword}
                               </div>
                             ) : null}
                           </div>
