@@ -7,7 +7,7 @@ interface PropsActive {
 }
 
 export const Container = styled.div<PropsActive>`
-    background-color: ${styles.colors.grayOne};
+    background-color: ${styles.colors.grayClearOne};
     min-width: 256px;
     @media screen and (max-width: 1080px) {
         display: ${(props: any) => props.active ? "" : "none" };

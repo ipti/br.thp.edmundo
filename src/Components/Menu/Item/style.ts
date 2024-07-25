@@ -9,7 +9,10 @@ export const Text = styled.h3<PropsActive>`
     display: flex;
     flex-direction: row;
     cursor: pointer;
-    color:  ${props => props.active ? styles.colors.colorNavyBlue : styles.colors.colorNavyBlue};
+    color:  ${props => props.active ? styles.colors.colorPrimary : styles.colors.colorPrimary};
+    &:hover{
+        color: ${styles.colors.grayClearOne};
+    }
 `;
 
 
@@ -19,7 +22,7 @@ border-radius: ${props => props.active ? "8px" : "0"};
 width: 100%;
     &:hover{
         border-radius: 8px;
-        background-color: ${styles.colors.colorNavyBlue};
-        color: ${styles.colors.gray};
+        background-color: ${styles.colors.colorPrimary};
+        color: ${styles.colors.grayClearOne};
     }
 `;

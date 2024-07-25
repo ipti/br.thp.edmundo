@@ -2,7 +2,7 @@ import styled from "styled-components";
 import styles from "../../../../Styles";
 
 export const Container = styled.div`
-    background-color: ${styles.colors.colorNavyBlue};
+    background-color: ${styles.colors.colorPrimary};
 
     
     width: auto;

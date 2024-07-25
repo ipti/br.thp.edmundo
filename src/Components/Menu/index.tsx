@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import TagLogin from "../../assets/image/logo.svg";
+import TagLogin from "../../assets/image/logo-edmundo.svg";
 
 import turmasHover from "../../assets/image/turmasPessoas.svg";
 import styles from "../../Styles";
@@ -41,7 +41,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Column id="center">
             <div
               style={{
-                border: `2px solid ${styles.colors.colorNavyBlue}`,
+                border: `2px solid ${styles.colors.colorPrimary}`,
                 padding: "8px 16px",
                 borderRadius: "20px",
                 cursor: "pointer",
@@ -85,7 +85,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               menuItem("4");
             }}
             active={active === 4 ? true : false}
-            path={"/turma"}
+            path={"/turmas"}
             icon={active === 4 ? turmasHover : turmas}
           />
           <Padding />

@@ -25,7 +25,8 @@ const Item = ({ icon, path, text, active, funcActiv }: Propsitem) => {
                 <Padding />
                 <Text active={active}>
                     <Column id="center">
-                            <img src={icon} alt="" style={{ height: 24 }} />                    </Column>
+                        <img src={icon} alt="" style={{ height: 24 }} />
+                    </Column>
                     <Padding />
                     <Column id="center">
                         {text}

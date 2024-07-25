@@ -1,14 +1,9 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { idTs, menuItem } from "../../../service/localstorage";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import {
-  Projects,
-  PropsAplicationContext
-} from "../../../Types/types";
 import DropdownComponent from "../../Dropdown";
 import LogoutTopBar from "./Logout";
 import { Back, Container } from "./style";
-import { GetIdTs, idTs, menuItem } from "../../../service/localstorage";
 
 const TopBar = ({
   setViewdMenu,
