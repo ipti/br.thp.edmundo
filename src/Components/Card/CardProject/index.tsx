@@ -1,17 +1,20 @@
 import { ConfirmDialog } from "primereact/confirmdialog";
-import { useContext, useState } from "react";
-import { Column, Padding, Row } from "../../../Styles/styles";
-import IconClassroom from "./../../../Assets/images/project_card.svg";
-import { Container } from "./style";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Column, Padding, Row } from "../../../Styles/styles";
+import IconClassroom from "./../../../assets/image/project_card.svg";
+import meeting from "./../../../assets/image/school_teacher.svg";
+import { Container } from "./style";
 
 
-const CardProject = ({
+const CardReapplication = ({
   title,
   id,
+  registrationCount,
+  classroomCount
 }: {
   title: string;
-  meetingCount?: number;
+  classroomCount?: number;
   registrationCount?: number,
   id: number;
 }) => {
@@ -41,21 +44,15 @@ const CardProject = ({
             <Icon icon="pi pi-trash" color={styles.colors.colorGrayElephant} size="1rem" fontWeight="900" />
           </div> */}
         </Row>
-        {/* < Padding padding="8px" />
+        < Padding padding="8px" />
         <Row style={{ gap: 16 }}>
-          <Row style={{ gap: 8, alignItems: "center" }}>
-            <img src={pessoas} alt="" style={{ width: 24 }} />
-            <p>
-              Alunos: {registrationCount}
-            </p>
-          </Row>
           <Row style={{ gap: 8, alignItems: "center" }}>
             <img src={meeting} alt="" style={{ width: 19 }} />
             <p>
-              Encontros: {meetingCount}
+              turmas: {classroomCount}
             </p>
           </Row>
-        </Row> */}
+        </Row>
       </Container>
       <ConfirmDialog
         visible={visible}
@@ -70,4 +67,4 @@ const CardProject = ({
   );
 };
 
-export default CardProject;
+export default CardReapplication;

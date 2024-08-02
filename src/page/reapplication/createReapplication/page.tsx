@@ -3,25 +3,26 @@ import ContentPage from "../../../Components/ContentPage";
 import TextInput from "../../../Components/TextInput";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import { Button } from "primereact/button";
-import CreateClassroomProvider, { CreateClassroomContext } from "./context/context";
+import CreateReapplicationProvider, { CreateReapplicationContext } from "./context/context";
 import { useContext } from "react";
-import { CreateClassroomContextType } from "./context/types";
+import { CreateReapplicationContextType } from "./context/types";
 
 
-const ClassroomCreate = () => {
+const ReapplicationCreate = () => {
     return (
-        <CreateClassroomProvider>
-            <ClassroomCreatePage />
-        </CreateClassroomProvider>
+        <CreateReapplicationProvider>
+            <ReapplicationCreatePage />
+        </CreateReapplicationProvider>
     )
 }
 
-const ClassroomCreatePage = () => {
+const ReapplicationCreatePage = () => {
 
-    const props = useContext(CreateClassroomContext) as CreateClassroomContextType
+    const props = useContext(CreateReapplicationContext) as CreateReapplicationContextType
+
     return (
-        <ContentPage title="Criar Turma" description="Crie a sua turmas">
-            <Formik initialValues={props.initialValue} onSubmit={(values) => { props.CreateClassroom({...values, reapplication: 2})}}>
+        <ContentPage title="Criar Local de Reaplicação" description="Crie a sua reaplicação para poder gerenciar suas aulas e alunos">
+            <Formik initialValues={props.initialValue} onSubmit={(body) => { props.CreateReapplication(body)}}>
 
                 {({ errors, values, touched, handleChange }) => {
                     return (
@@ -35,11 +36,11 @@ const ClassroomCreatePage = () => {
 
                             <div className="grid">
                                 <div className="col-12 md:col-6">
-                                    <label>Nome</label>
+                                    <label>Nome do Local de Reaplicação</label>
                                     <Padding />
                                     <TextInput
                                         value={values.name}
-                                        placeholder="Nome"
+                                        placeholder="Digite o nome do Local de Reaplicação"
                                         onChange={handleChange}
                                         name="name"
                                     />
@@ -58,4 +59,4 @@ const ClassroomCreatePage = () => {
     )
 }
 
-export default ClassroomCreate;
+export default ReapplicationCreate;

@@ -2,8 +2,22 @@ import { Button } from "primereact/button";
 import ContentPage from "../../../Components/ContentPage";
 import { Column, Row } from "../../../Styles/styles";
 import { useNavigate } from "react-router-dom";
+import ListClassroomProvider, { ListClassroomContext } from "./context/context";
+import CardClassroom from "../../../Components/Card/CardClassroom";
+import { useContext } from "react";
+import { ListClassroomContextType } from "./context/types";
 
 const ClassroomList = () => {
+    return (
+        <ListClassroomProvider>
+            <ClassroomListPage />
+        </ListClassroomProvider>
+    )
+}
+
+const ClassroomListPage = () => {
+
+    const props = useContext(ListClassroomContext) as ListClassroomContextType
 
     const history = useNavigate()
     return (
@@ -13,8 +27,15 @@ const ClassroomList = () => {
                     <Button label="Criar Turma" onClick={() => { history("/turmas/criar") }} />
                 </Row>
             </Column>
-            <div>
+            <div className="grid">
+                {props.classroomList?.map((item) => {
+                    return (
+                        <div className="col-12 md:col-6 lg:col-4" key={item.id}>
 
+                            <CardClassroom id={item.id} title={item.name} registrationCount={item._count.user}  />
+                        </div>
+                    )
+                })}
             </div>
         </ContentPage>
     )

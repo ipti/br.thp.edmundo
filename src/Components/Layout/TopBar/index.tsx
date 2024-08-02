@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { idTs, menuItem } from "../../../service/localstorage";
+import { GetIdReapplication, idReapplication, menuItem } from "../../../service/localstorage";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import DropdownComponent from "../../Dropdown";
 import LogoutTopBar from "./Logout";
 import { Back, Container } from "./style";
+import { useFetchRequestReapplicationList } from "../../../page/reapplication/listReapplication/service/query";
 
 const TopBar = ({
   setViewdMenu,
@@ -14,12 +15,13 @@ const TopBar = ({
 }) => {
   // const props = useContext(AplicationContext) as PropsAplicationContext;
 
+  const { data: reapplicationRequest} = useFetchRequestReapplicationList();
 
-  // const verifyValueProject = (id: number | null) => {
-  //   return props.project?.find(
-  //     (props: Projects) => props.id === id
-  //   );
-  // };
+  const verifyValueProject = (id: number | null) => {
+    return reapplicationRequest?.find(
+      (props: any) => props.id === id
+    );
+  };
 
   const history = useNavigate();
 
@@ -49,12 +51,15 @@ const TopBar = ({
       <Column style={{ width: "auto" }} id="center">
         <Row>
           <Column className="w-12rem md:w-16rem">
-            {true ? (
+            {reapplicationRequest ? (
               <DropdownComponent
                 placerholder="Projetos"
-                options={[]}
+                optionsLabel="name"
+                optionsValue="id"
+                value={verifyValueProject(parseInt(GetIdReapplication()!))}
+                options={reapplicationRequest}
                 onChange={(e) => {
-                  idTs(e.target.value.id);
+                  idReapplication(e.target.value.id);
                   history("/");
                   menuItem("1");
                   window.location.reload();

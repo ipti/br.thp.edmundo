@@ -25,7 +25,8 @@ export const LoginController = () => {
         idUser(data.data.userRegistered.id);
         history("/");
         menuItem("1");
-        window.location.reload();
+        console.log(data)
+        // window.location.reload();
       },
 
     }

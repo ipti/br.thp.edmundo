@@ -1,16 +1,11 @@
 import { ConfirmDialog } from "primereact/confirmdialog";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import IconClassroom from "./../../../Assets/images/cardturmas.svg";
+import IconClassroom from "./../../../assets/image/cardturmas.svg";
 import { Container } from "./style";
-import Icon from "../../Icon";
 
-import pessoas from "../../../Assets/images/pessoasgray.svg";
-import meeting from "../../../Assets/images/school_teacher.svg";
-import styles from "../../../Styles";
-import { PropsAplicationContext } from "../../../Types/types";
-import { ROLE } from "../../../Controller/controllerGlobal";
+import pessoas from "./../../../assets/image/pessoasgray.svg";
 import { menuItem } from "../../../service/localstorage";
 
 const CardClassroom = ({
@@ -70,10 +65,6 @@ const CardClassroom = ({
           <Row style={{ gap: 8, alignItems: "center" }}>
             <img src={pessoas} alt="" style={{ width: 24 }} />
             <p>Alunos: {registrationCount}</p>
-          </Row>
-          <Row style={{ gap: 8, alignItems: "center" }}>
-            <img src={meeting} alt="" style={{ width: 19 }} />
-            <p>Encontros: {meetingCount}</p>
           </Row>
         </Row>
       </Container>

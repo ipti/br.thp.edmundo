@@ -12,14 +12,10 @@ import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
 
-import home from "../../assets/image/iconsMenu/home.svg";
-import homeHover from "../../assets/image/iconsMenu/home_active.svg";
 import turmas from "../../assets/image/peoples.svg";
 
 
 
-import beneficiaries from "../../assets/image/iconsMenu/diversity_4.svg";
-import beneficiaries_hover from "../../assets/image/iconsMenu/diversity_hover.svg";
 
 import user from "../../assets/image/iconsMenu/person.svg";
 import user_hover from "../../assets/image/iconsMenu/person_active.svg";
@@ -37,21 +33,6 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Column id="center">
             <img src={TagLogin} style={{ width: "128px" }} alt=""></img>
           </Column>
-          <Padding />
-          <Column id="center">
-            <div
-              style={{
-                border: `2px solid ${styles.colors.colorPrimary}`,
-                padding: "8px 16px",
-                borderRadius: "20px",
-                cursor: "pointer",
-              }}
-              onClick={() => setVisibleModal(!visibleModal)}
-            >
-              {getYear() ? getYear() : "Sem ano"}
-              <Icon icon="pi pi-angle-down" size="0.8rem" />
-            </div>
-          </Column>
         </Row>
       </Padding>
       <Padding padding="8px" />
@@ -67,7 +48,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/cronograma"}
             icon={"pi pi-calendar"}
           /> */}
-          <Item
+          {/* <Item
             text={"Pagina Inicial"}
             funcActiv={() => {
               setActive(1);
@@ -76,6 +57,17 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 1 ? true : false}
             path={"/"}
             icon={active === 1 ? homeHover : home}
+          />
+          <Padding /> */}
+          <Item
+            text={"Reaplicações"}
+            funcActiv={() => {
+              setActive(2);
+              menuItem("2");
+            }}
+            active={active === 2 ? true : false}
+            path={"/reaplicacoes"}
+            icon={active === 2 ? turmasHover : turmas}
           />
           <Padding />
           <Item
@@ -89,7 +81,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={active === 4 ? turmasHover : turmas}
           />
           <Padding />
-          <Item
+          {/* <Item
             text={"Beneficiários"}
             funcActiv={() => {
               setActive(5);
@@ -99,7 +91,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/beneficiarios"}
             icon={active === 5 ? beneficiaries_hover : beneficiaries}
           />
-          <Padding />
+          <Padding /> */}
             <Item
               text={"Meu Perfil"}
               funcActiv={() => {
