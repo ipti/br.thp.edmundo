@@ -5,6 +5,7 @@ import { Column, Padding, Row } from "../../../Styles/styles";
 import IconClassroom from "./../../../assets/image/project_card.svg";
 import meeting from "./../../../assets/image/school_teacher.svg";
 import { Container } from "./style";
+import { idReapplication, menuItem } from "../../../service/localstorage";
 
 
 const CardReapplication = ({
@@ -23,7 +24,7 @@ const CardReapplication = ({
 
   return (
     <>
-      <Container className="card" onClick={() => {history(`${id}`) }}>
+      <Container className="card" onClick={() => {history(`/turmas`); menuItem("4"); idReapplication(id.toString())}}>
         <Row id="space-between">
           <Row >
             <div className={`boxQuantity`}>

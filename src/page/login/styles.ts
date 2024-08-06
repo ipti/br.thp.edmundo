@@ -51,7 +51,7 @@ export const FormaLeft = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 10;
   height: auto;
   width: auto;
   margin-bottom: -10px;
@@ -79,7 +79,7 @@ export const PersonLeft = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 200;
+  z-index: 20;
   height: auto;
   width: auto;
   margin-bottom: -10px;
@@ -109,7 +109,7 @@ export const PersonRight = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 200;
+  z-index: 20;
   height: auto;
   width: auto;
   @media screen and (max-width: 800px) {
@@ -134,7 +134,7 @@ export const FormaRight = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 100;
+  z-index: 10;
   height: auto;
   width: auto;
   @media screen and (max-width: 800px) {
@@ -155,8 +155,9 @@ export const FormaRight = styled.div`
   }
 `;
 
-export const ContainerOut = styled.div`
-  width: 100%;
+
+export const Background = styled.div`
+   width: 100%;
   height: 100%;
   overflow-y: auto;
   max-height: 100vh;
@@ -171,6 +172,21 @@ export const ContainerOut = styled.div`
 
   background-position: right top;
   position: fixed;
+`;
+
+
+export const ContainerOut = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: ${typography.types.light};
+
+  z-index: 200;
+
 
   .TextLarge {
     font-family: ${styles.typography.types.bold};

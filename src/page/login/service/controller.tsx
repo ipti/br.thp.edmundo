@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginRequest } from "./request";
 import { LoginTypes } from "./types";
 import Swal from "sweetalert2";
-import { idUser, login, logout, menuItem } from "../../../service/localstorage";
+import { idReapplication, idUser, login, logout, menuItem } from "../../../service/localstorage";
 import styles from "../../../Styles";
 
 export const LoginController = () => {
@@ -21,10 +21,11 @@ export const LoginController = () => {
       },
       onSuccess: (data) => {
         logout()
-        login(data.data.access_token);
-        idUser(data.data.userRegistered.id);
+        login(data.data?.access_token);
+        idUser(data.data?.userRegistered?.id);
+        idReapplication(data.data?.reapplication[0]?.id)
         history("/");
-        menuItem("1");
+        menuItem("2");
         console.log(data)
         // window.location.reload();
       },

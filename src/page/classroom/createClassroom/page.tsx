@@ -1,10 +1,11 @@
 import { Form, Formik } from "formik";
+import { Button } from "primereact/button";
+import { useContext } from "react";
 import ContentPage from "../../../Components/ContentPage";
 import TextInput from "../../../Components/TextInput";
+import { GetIdReapplication } from "../../../service/localstorage";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import { Button } from "primereact/button";
 import CreateClassroomProvider, { CreateClassroomContext } from "./context/context";
-import { useContext } from "react";
 import { CreateClassroomContextType } from "./context/types";
 
 
@@ -21,7 +22,7 @@ const ClassroomCreatePage = () => {
     const props = useContext(CreateClassroomContext) as CreateClassroomContextType
     return (
         <ContentPage title="Criar Turma" description="Crie a sua turmas">
-            <Formik initialValues={props.initialValue} onSubmit={(values) => { props.CreateClassroom({...values, reapplication: 2})}}>
+            <Formik initialValues={props.initialValue} onSubmit={(values) => { props.CreateClassroom({...values, reapplication: parseInt(GetIdReapplication()!)})}}>
 
                 {({ errors, values, touched, handleChange }) => {
                     return (

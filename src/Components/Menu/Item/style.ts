@@ -9,10 +9,7 @@ export const Text = styled.h3<PropsActive>`
     display: flex;
     flex-direction: row;
     cursor: pointer;
-    color:  ${props => props.active ? styles.colors.colorPrimary : styles.colors.colorPrimary};
-    &:hover{
-        color: ${styles.colors.grayClearOne};
-    }
+    color:  ${props => props.active ? styles.colors.colorPrimary : styles.colors.colorsBaseInkLight};
 `;
 
 
@@ -22,7 +19,7 @@ border-radius: ${props => props.active ? "8px" : "0"};
 width: 100%;
     &:hover{
         border-radius: 8px;
-        background-color: ${styles.colors.colorPrimary};
-        color: ${styles.colors.grayClearOne};
+        background-color: ${styles.colors.colorsBaseProductLightActive};
+        color: ${styles.colors.gray};
     }
 `;

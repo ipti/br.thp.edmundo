@@ -15,6 +15,10 @@ const color = {
   colorPrimary: "#2E62AC",
   colorNavyBlue: "#24234F",
   colorCardOrange: "#FCAD09",
+  colorsBaseMenu: "#fafafe",
+  colorBorderCard: "#DBE6FF",
+  colorsBaseInkLight: "#5F738C",
+colorsBaseProductLightActive: "#ccd0ee",
 };
 
 export default color;

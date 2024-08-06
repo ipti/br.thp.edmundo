@@ -6,6 +6,7 @@ import ListReapplicationProvider, { ListReapplicationContext } from "./context/c
 import { useContext } from "react"
 import { ListReapplicationContextType } from "./context/types"
 import CardProject from "../../../Components/Card/CardProject"
+import Empty from "../../../Components/Empty"
 
 const ReapplicationList = () => {
     return (
@@ -38,6 +39,8 @@ const ReapplicationListPage = () => {
                     )
                 })}
             </div>
+
+            {props.reapplicationList?.length === 0 && <Empty title="Reaplicações"/>}
         </ContentPage>
     )
 }

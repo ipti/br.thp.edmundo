@@ -9,6 +9,7 @@ import ReapplicationList from "../page/reapplication/listReapplication/page";
 import RecoverPassword from "../page/recoverpassword/page";
 import SignUp from "../page/signup/page";
 import PrivateRoute from "./privaterouter";
+import ClassroomOne from "../page/classroom/oneClassroom/page";
 
 const RoutesApp = () => {
     return (
@@ -19,7 +20,9 @@ const RoutesApp = () => {
           <Route element={<RecoverPassword />} path="/recuperar"  />
           <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/"  />
           <Route element={<PrivateRoute Component={<Profile />} />} path="/perfil"  />
+          
           <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
+          <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
           <Route element={<PrivateRoute Component={<ClassroomCreate />} />} path="/turmas/criar" />
           <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/reaplicacoes" />
           <Route element={<PrivateRoute Component={<ReapplicationCreate />} />} path="/reaplicacoes/criar" />

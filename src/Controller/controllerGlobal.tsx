@@ -46,6 +46,10 @@ export const VerifySex = (sex: number) => {
   return typesex.find((props) => props.id === sex);
 };
 
+export const VerifyKinship = (id: string) => {
+  return kinship.find((props) => props.id === id);
+};
+
 export const VerifyColor = (color_race_number: number) => {
   return color_race.find((props) => props.id === color_race_number);
 };
@@ -129,3 +133,23 @@ export const convertImageUrlToBase64 = async (imageUrl: string): Promise<string>
     throw new Error(`Failed to convert image to Base64: ${error.message}`);
   }
 };
+
+
+export function isMaiorDeIdade(dataString: string) {
+  const [dia, mes, ano] = dataString.split('/');
+  const dataNascimento = new Date(`${mes}/${dia}/${ano}`);
+  const hoje = new Date();
+  const idadeMinima = 18;
+
+  // Calcula a idade
+  let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+  const mesAtual = hoje.getMonth();
+  const mesNascimento = dataNascimento.getMonth();
+  
+  // Ajusta a idade se o aniversário não foi atingido este ano
+  if (mesAtual < mesNascimento || (mesAtual === mesNascimento && hoje.getDate() < dataNascimento.getDate())) {
+      idade--;
+  }
+
+  return idade >= idadeMinima;
+}

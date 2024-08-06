@@ -5,16 +5,15 @@ import { Dialog } from "primereact/dialog";
 import TagLogin from "../../assets/image/logo-edmundo.svg";
 
 import turmasHover from "../../assets/image/turmasPessoas.svg";
-import styles from "../../Styles";
 import { Column, Padding, Row } from "../../Styles/styles";
 import DropdownComponent from "../Dropdown";
-import Icon from "../Icon";
 import Item from "./Item";
 import { Container } from "./style";
 
 import turmas from "../../assets/image/peoples.svg";
 
-
+import reapplication from "../../assets/image/iconsMenu/note_add.svg";
+import reapplication_hover from "../../assets/image/iconsMenu/note_add_hover.svg";
 
 
 import user from "../../assets/image/iconsMenu/person.svg";
@@ -67,7 +66,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 2 ? true : false}
             path={"/reaplicacoes"}
-            icon={active === 2 ? turmasHover : turmas}
+            icon={active === 2 ? reapplication_hover : reapplication}
           />
           <Padding />
           <Item

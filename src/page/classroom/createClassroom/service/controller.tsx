@@ -20,8 +20,8 @@ export const CreateClassroomController = () => {
         })
       },
       onSuccess: (data) => {
-        queryClient.refetchQueries("useRequestsListReapplication")
-       history("/reaplicacoes")
+        queryClient.refetchQueries("useRequestsListClassroom")
+       history("/turmas")
       },
 
     }
