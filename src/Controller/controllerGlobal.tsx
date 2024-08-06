@@ -86,9 +86,8 @@ export const Status = {
 
 export const ROLE = {
   ADMIN: "ADMIN",
-  USER: "USER",
-  REAPPLICATORS: "REAPPLICATORS",
-  COORDINATORS: "COORDINATORS",
+  STUDENT: "STUDENT",
+  TEACHER: "TEACHER",
 };
 
 export const kinship = [
@@ -152,4 +151,12 @@ export function isMaiorDeIdade(dataString: string) {
   }
 
   return idade >= idadeMinima;
+}
+
+export function generateCode(id: number) {
+  return String(id).padStart(6, '0');
+}
+
+export function removeLeadingZeros(code: string) {
+  return parseInt(code, 10);
 }

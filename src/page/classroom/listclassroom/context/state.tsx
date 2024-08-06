@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestClassroomList } from "../service/query";
-import { ClassroomList } from "../service/types";
+import { ClassroomList, JoinTheClassroom } from "../service/types";
+import { ListClassroomController } from "../service/controller";
 
 export const ListClassroomState = () => {
     const [classroomList, setClassroomList] = useState<ClassroomList | undefined>()
@@ -9,6 +10,12 @@ export const ListClassroomState = () => {
     const { data: classroomRequest, isLoading, isError } = useFetchRequestClassroomList();
 
 
+    const { JoinTheClassroomMutation } = ListClassroomController();
+
+    const JoinTheClassroomClassroom = (body: JoinTheClassroom) => {
+        JoinTheClassroomMutation.mutate(body)
+    }
+
     useEffect(() => {
         if (classroomRequest) {
             setClassroomList(classroomRequest)
@@ -16,5 +23,5 @@ export const ListClassroomState = () => {
     }, [classroomRequest])
 
 
-    return {classroomList, isLoading,isError }
+    return {classroomList, isLoading,isError, JoinTheClassroomClassroom }
 }

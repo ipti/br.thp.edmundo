@@ -13,6 +13,7 @@ import { ContainerOut } from "../login/styles";
 import SignUpProvider, { SignUpContext } from "./context/context";
 import { FormaSignUp } from "./styles";
 import { SignUpContextTypes } from "./context/types";
+import DropdownComponent from "../../Components/Dropdown";
 
 
 const SignUp = () => {
@@ -34,6 +35,8 @@ const SignUpPage = () => {
     email: Yup.string()
       .required("Campo Obrigatório")
       .min(8, "Nome do usuário deve ter pelo menos 8 caracteres"),
+    role: Yup.object()
+      .required("Campo Obrigatório"),
     password: Yup.string()
       .required("Campo Obrigatório")
       .min(8, "Senha deve ter pelo menos 8 caracteres"),
@@ -47,7 +50,11 @@ const SignUpPage = () => {
     name: string;
     email: string;
     password: string;
-    confirmpassword?: string; // Torna confirmpassword opcional
+    confirmpassword?: string; // Torna confirmpassword opcional,
+    role: {
+      id: string,
+      name: string
+    }
   }
 
   return (
@@ -74,17 +81,16 @@ const SignUpPage = () => {
             <Column>
               <Row id="center">
                 <Formik
-                  initialValues={{ name: "", email: "", password: "", confirmpassword: "", }}
+                  initialValues={{ name: "", email: "", password: "", confirmpassword: "", role: { name: "Estudante", id: "STUDENT" }, }}
                   onSubmit={(values: FormValues) => {
                     delete values.confirmpassword;
-                    props.CreateUser(values);
+                    props.CreateUser({ ...values, role: values.role?.id });
                   }}
                   validationSchema={CreateUserSchema}
                   validateOnChange={false}
                 >
                   {({ values, errors, handleChange, touched }) => {
 
-                    console.log(errors)
                     return (
                       <Form className="col-11 md:col-7">
                         <div>
@@ -128,6 +134,28 @@ const SignUpPage = () => {
                         </div>
                         <div className="p-2" />
                         <div>
+                          <label>Tipo de usuário *</label>
+                          <Padding />
+                          <DropdownComponent
+                            optionsLabel="name"
+                            options={[
+                              { name: "Estudante", id: "STUDENT" },
+                              { name: "Professor", id: "TEACHER" }
+                            ]}
+                            optionsValue="id"
+                            value={values.role}
+                            placerholder="Selecione seu tipo de usuário"
+                            name="role"
+                            onChange={handleChange}
+                          />
+                          {errors.role && touched.role ? (
+                            <div style={{ color: "red", marginTop: "8px" }}>
+                              {errors.role.toString()}
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="p-2" />
+                        <div>
                           <div>
                             <label>Senha *</label>
                             <Padding />
@@ -145,6 +173,8 @@ const SignUpPage = () => {
                             ) : null}
                           </div>
                         </div>
+
+
                         <div className="p-2" />
                         <div>
                           <div>

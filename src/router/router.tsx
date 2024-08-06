@@ -18,7 +18,7 @@ const RoutesApp = () => {
           <Route element={<Login />} path="/login"  />
           <Route element={<SignUp />} path="/cadastro"  />
           <Route element={<RecoverPassword />} path="/recuperar"  />
-          <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/"  />
+          <Route element={<PrivateRoute Component={<Profile />} />} path="/"  />
           <Route element={<PrivateRoute Component={<Profile />} />} path="/perfil"  />
           
           <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />

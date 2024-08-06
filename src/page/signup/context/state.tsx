@@ -5,7 +5,8 @@ export const CreateUserState = () => {
     const initialValue: CreateUserTypes = {
         email: "",
         name: "",
-        password: ""
+        password: "",
+        role: ""
     }
 
 

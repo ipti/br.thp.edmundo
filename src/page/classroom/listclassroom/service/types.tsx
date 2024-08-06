@@ -14,3 +14,9 @@ export interface Classroom {
 export interface Count {
   user: number
 }
+
+
+export interface JoinTheClassroom {
+  idUser : number
+  idClassroom: number
+}

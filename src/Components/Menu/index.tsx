@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -19,8 +19,12 @@ import reapplication_hover from "../../assets/image/iconsMenu/note_add_hover.svg
 import user from "../../assets/image/iconsMenu/person.svg";
 import user_hover from "../../assets/image/iconsMenu/person_active.svg";
 import { getMenuItem, getYear, menuItem, setYear } from "../../service/localstorage";
+import { AplicationContext } from "../../context/context";
+import { PropsAplicationContext } from "../../context/type";
+import { ROLE } from "../../Controller/controllerGlobal";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
+  const propsAplication = useContext(AplicationContext) as PropsAplicationContext
   const [active, setActive] = useState(parseInt(getMenuItem()!));
   const [visibleModal, setVisibleModal] = useState(false);
   return (
@@ -58,7 +62,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={active === 1 ? homeHover : home}
           />
           <Padding /> */}
-          <Item
+          {propsAplication.user?.role !== ROLE.STUDENT && <><Item
             text={"Reaplicações"}
             funcActiv={() => {
               setActive(2);
@@ -68,7 +72,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             path={"/reaplicacoes"}
             icon={active === 2 ? reapplication_hover : reapplication}
           />
-          <Padding />
+            <Padding /></>}
           <Item
             text={"Turmas"}
             funcActiv={() => {
@@ -91,21 +95,21 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={active === 5 ? beneficiaries_hover : beneficiaries}
           />
           <Padding /> */}
-            <Item
-              text={"Meu Perfil"}
-              funcActiv={() => {
-                setActive(6);
-                menuItem("6");
-              }}
-              active={active === 6 ? true : false}
-              path={"/perfil"}
-              icon={active === 6 ? user_hover : user}
-            />
-          
+          <Item
+            text={"Meu Perfil"}
+            funcActiv={() => {
+              setActive(6);
+              menuItem("6");
+            }}
+            active={active === 6 ? true : false}
+            path={"/perfil"}
+            icon={active === 6 ? user_hover : user}
+          />
+
 
           <Padding />
 
-         
+
         </Padding>
       ) : null}
       <ModalYear visible={visibleModal} onHide={() => setVisibleModal(false)} />
