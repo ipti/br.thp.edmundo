@@ -61,7 +61,7 @@ const TopBar = ({
                 onChange={(e) => {
                   idReapplication(e.target.value.id);
                   history("/");
-                  menuItem("1");
+                  menuItem("6");
                   window.location.reload();
                 }}
               />

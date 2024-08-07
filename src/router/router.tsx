@@ -10,6 +10,7 @@ import RecoverPassword from "../page/recoverpassword/page";
 import SignUp from "../page/signup/page";
 import PrivateRoute from "./privaterouter";
 import ClassroomOne from "../page/classroom/oneClassroom/page";
+import MembersClassroom from "../page/classroom/membersClassroom/page";
 
 const RoutesApp = () => {
     return (
@@ -23,6 +24,7 @@ const RoutesApp = () => {
           
           <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
           <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
+          <Route element={<PrivateRoute Component={<MembersClassroom />} />} path="/turma/:id/membros" />
           <Route element={<PrivateRoute Component={<ClassroomCreate />} />} path="/turmas/criar" />
           <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/reaplicacoes" />
           <Route element={<PrivateRoute Component={<ReapplicationCreate />} />} path="/reaplicacoes/criar" />

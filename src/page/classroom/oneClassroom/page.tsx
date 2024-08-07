@@ -5,6 +5,7 @@ import { Padding } from "../../../Styles/styles";
 import pessoas from "../../../assets/image/pessoasgray.svg";
 
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import meeting from "../../../assets/image/school_teacher.svg";
 import OneClassroomProvider, { OneClassroomContext } from "./context/context";
 import { OneClassroomContextType } from "./context/types";
@@ -19,12 +20,11 @@ const ClassroomOne = () => {
 }
 
 const ClassroomOnePage = () => {
+    const history = useNavigate()
 
 
     const props = useContext(OneClassroomContext) as OneClassroomContextType
 
-
-    console.log(props.classroomOne)
 
     return (
         <ContentPage title={props.classroomOne?.classroom?.name!} description={"Dono da turma: " + props.classroomOne?.owner?.name}>
@@ -35,9 +35,9 @@ const ClassroomOnePage = () => {
             <div className="grid">
                 <div
                     className="col-12 md:col-6"
-                    onClick={() => { }}
+                    onClick={() => { history('membros')}}
                 >
-                    <CardItensClassrooom title="Membros" description="Visualize os membros da turma" icon={pessoas} count={props.classroomOne?.classroom._count.user} />
+                    <CardItensClassrooom title="Membros" description="Visualize os membros da turma" icon={pessoas} count={props.classroomOne?.classroom._count.user}   />
                 </div>
                 <div className="col-12 md:col-6">
                     <CardItensClassrooom title="Atividades" description="Visualizr as atividades da turma" icon={meeting} />

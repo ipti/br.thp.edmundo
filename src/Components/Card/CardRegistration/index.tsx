@@ -1,14 +1,9 @@
 import { ConfirmDialog } from "primereact/confirmdialog";
-import { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import IconActive from "../../../Assets/images/activeRegistration.svg";
-import IconClasMedia from "../../../Assets/images/iconClasMedia.svg";
-import IconNotActive from "../../../Assets/images/notactiveRegistration.svg";
-import { ROLE, Status } from "../../../Controller/controllerGlobal";
+import { useState } from "react";
+import avatar from "../../../assets/image/avatar.svg";
+import { ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import Icon from "../../Icon";
 import { Container } from "./style";
-import { PropsAplicationContext } from "../../../Types/types";
 
 const CardRegistration = ({
   title,
@@ -22,13 +17,6 @@ const CardRegistration = ({
   status: string;
 }) => {
   const [visible, setVisible] = useState(false);
-  const history = useNavigate();
-
-  const statuGlobal = Status;
-
-  const { id } = useParams();
-
-
 
   return (
     <>
@@ -43,7 +31,7 @@ const CardRegistration = ({
         }}
       >
         <Row id="space-between">
-          <h3>{subtitle}</h3>
+
           {/* {(propsAplication.user?.role === ROLE.ADMIN ||
             propsAplication.user?.role === ROLE.COORDINATORS) && <div
               className="cursor-pointer"
@@ -61,32 +49,28 @@ const CardRegistration = ({
             <Column id="center">
               <img
                 src={
-                  status === statuGlobal.APPROVED
-                    ? IconActive
-                    : status === statuGlobal.PENDING
-                      ? IconClasMedia
-                      : status === statuGlobal.REPROVED
-                        ? IconNotActive
-                        : ""
+                  avatar
                 }
                 alt=""
-                style={{ height: 40 }}
+                style={{ height: 72, width: 72, borderRadius: "50%" }}
               />
             </Column>
           </div>
           <Padding />
           <Column>
+            <h3>{subtitle}</h3>
+            <Padding />
             <div className={"boxDescriptionSchedule"}>
               {"Matricula - " + title}
             </div>
             <Padding />
             <div className={"boxDescriptionScheduleSubtitle"}>
-              {status === statuGlobal.APPROVED
-                ? "Aprovado"
-                : status === statuGlobal.PENDING
-                  ? "Pendente"
-                  : status === statuGlobal.REPROVED
-                    ? "Reprovado"
+              {status === ROLE.STUDENT
+                ? "Aluno"
+                : status === ROLE.TEACHER
+                  ? "Professor"
+                  : status === ROLE.ADMIN
+                    ? "Administrador"
                     : ""}
             </div>
           </Column>
