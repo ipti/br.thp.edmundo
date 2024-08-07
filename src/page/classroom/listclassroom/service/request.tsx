@@ -5,7 +5,7 @@ import { JoinTheClassroom } from "./types";
 export const ListClassroomRequest = async () => {
 
     return await http
-      .get("/classroom-bff?idReapplication=" + GetIdReapplication())
+      .get("/classroom-bff/reapplications?idReapplication=" + GetIdReapplication())
       .then((response) => response.data)
       .catch((err) => {
         if (err.response.status === 401) {
