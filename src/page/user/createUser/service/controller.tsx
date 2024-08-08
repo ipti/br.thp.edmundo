@@ -1,9 +1,9 @@
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import styles from "../../../Styles";
 import { CreateUserRequest } from "./request";
 import { CreateUserTypes } from "./types";
+import styles from "../../../../Styles";
 
 export const CreateUserController = () => {
   const history = useNavigate();
@@ -19,7 +19,7 @@ export const CreateUserController = () => {
         })
       },
       onSuccess: (data) => {
-        history("/login");
+        history("/usuarios");
       },
 
     }

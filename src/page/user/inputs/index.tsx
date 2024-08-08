@@ -1,0 +1,102 @@
+import { Form } from "formik";
+import { useContext } from "react";
+import DropdownComponent from "../../../Components/Dropdown";
+import TextInput from "../../../Components/TextInput";
+import {
+  ROLE
+} from "../../../Controller/controllerGlobal";
+import { Padding } from "../../../Styles/styles";
+import { PropsAplicationContext } from "../../../Types/types";
+import { AplicationContext } from "../../../context/context";
+
+const InputsUser = ({
+  values,
+  handleChange,
+  errors,
+  touched,
+}: {
+  values: any;
+  handleChange: any;
+  errors: any;
+  touched: any;
+}) => {
+
+  const props = useContext(AplicationContext) as PropsAplicationContext;
+  console.log(errors);
+  return (
+    <Form>
+      <div className="grid">
+        <div className="col-12 md:col-6">
+          <label>Nome</label>
+          <Padding />
+          <TextInput
+            placeholder="Nome"
+            value={values.name}
+            onChange={handleChange}
+            name="name"
+          />
+          <Padding />
+          {errors.name && touched.name ? (
+            <div style={{ color: "red" }}>
+              {errors.name}
+              <Padding />
+            </div>
+          ) : null}
+        </div>
+
+        <div className="col-12 md:col-6">
+          <label>Email</label>
+          <Padding />
+          <TextInput
+            placeholder="Digite o seu email"
+            value={values.email}
+            onChange={handleChange}
+            name="email"
+          />
+          <Padding />
+          {errors.email && touched.email ? (
+            <div style={{ color: "red" }}>
+              {errors.email}
+              <Padding />
+            </div>
+          ) : null}
+        </div>
+      </div>{" "}
+      <div className="grid">
+        <div className="col-12 md:col-6">
+          <label>Tipo de usuário</label>
+          <Padding />
+          <DropdownComponent
+            name="role"
+            placerholder="Tipo de usuário"
+            optionsLabel="name"
+            optionsValue="id"
+            value={values.role}
+            onChange={handleChange}
+            options={
+              props.user?.role === ROLE.ADMIN
+                ? [
+                    { id: ROLE.ADMIN, name: "Admin" },
+                    { id: ROLE.STUDENT, name: "Estudante" },
+                    { id: ROLE.TEACHER, name: "Professor" },
+                  ]
+                : [
+                    { id: ROLE.STUDENT, name: "Estudante" },
+                    { id: ROLE.TEACHER, name: "Professor" },
+                  ]
+            }
+          />
+          <Padding />
+          {errors.role && touched.role ? (
+            <div style={{ color: "red" }}>
+              {errors.role}
+              <Padding />
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </Form>
+  );
+};
+
+export default InputsUser;

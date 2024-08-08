@@ -7,17 +7,17 @@ import Profile from "../page/profile/page";
 import ReapplicationCreate from "../page/reapplication/createReapplication/page";
 import ReapplicationList from "../page/reapplication/listReapplication/page";
 import RecoverPassword from "../page/recoverpassword/page";
-import SignUp from "../page/signup/page";
 import PrivateRoute from "./privaterouter";
 import ClassroomOne from "../page/classroom/oneClassroom/page";
 import MembersClassroom from "../page/classroom/membersClassroom/page";
+import UserList from "../page/user/listUser/page";
+import UserCreate from "../page/user/createUser/page";
 
 const RoutesApp = () => {
     return (
       <BrowserRouter>
         <Routes>
           <Route element={<Login />} path="/login"  />
-          <Route element={<SignUp />} path="/cadastro"  />
           <Route element={<RecoverPassword />} path="/recuperar"  />
           <Route element={<PrivateRoute Component={<Profile />} />} path="/"  />
           <Route element={<PrivateRoute Component={<Profile />} />} path="/perfil"  />
@@ -28,6 +28,9 @@ const RoutesApp = () => {
           <Route element={<PrivateRoute Component={<ClassroomCreate />} />} path="/turmas/criar" />
           <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/reaplicacoes" />
           <Route element={<PrivateRoute Component={<ReapplicationCreate />} />} path="/reaplicacoes/criar" />
+          <Route element={<PrivateRoute Component={<UserList />} />} path="/usuarios" />
+          <Route element={<PrivateRoute Component={<UserCreate />} />} path="/usuarios/criar" />
+
 
           {/* <Route path="/*" element={<NotFoundPage />} /> */}
         </Routes>

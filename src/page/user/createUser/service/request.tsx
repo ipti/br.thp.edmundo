@@ -1,4 +1,4 @@
-import http from "../../../service/axios"
+import http from "../../../../service/axios"
 import { CreateUserTypes } from "./types"
 
 export const CreateUserRequest = async (body: CreateUserTypes) => {

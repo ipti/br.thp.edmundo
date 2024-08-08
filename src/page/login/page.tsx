@@ -64,7 +64,7 @@ const LoginPage = () => {
       </PersonRight>
       <ContainerOut>
         <h1 className="titleLogin">Login</h1>
-        <Row style={{ justifyContent: "center" }}>
+        {/* <Row style={{ justifyContent: "center" }}>
           <div className="noAcesso textCenter">
             <Row id="center" className="buttonNoAcesso">
               Não tem acesso?
@@ -73,14 +73,13 @@ const LoginPage = () => {
               </Link>
             </Row>
           </div>
-        </Row>
+        </Row> */}
         <div className="p-6" />
         <Column>
           <Row id="center">
             <Formik
               initialValues={{ email: "", password: "" }}
               onSubmit={(values) => {
-                console.log(values)
                 props.Login(values);
               }}
               validationSchema={LoginSchema}

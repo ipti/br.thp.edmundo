@@ -10,6 +10,8 @@ import DropdownComponent from "../Dropdown";
 import Item from "./Item";
 import { Container } from "./style";
 
+import avatar from "../../assets/image/avatar.svg"
+
 import turmas from "../../assets/image/peoples.svg";
 
 import reapplication from "../../assets/image/iconsMenu/note_add.svg";
@@ -95,6 +97,20 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={active === 5 ? beneficiaries_hover : beneficiaries}
           />
           <Padding /> */}
+          {propsAplication.user?.role !== ROLE.STUDENT && <>
+            <Item
+              text={"Usuários"}
+              funcActiv={() => {
+                setActive(7);
+                menuItem("7");
+              }}
+              active={active === 7 ? true : false}
+              path={"/usuarios"}
+              icon={active === 7 ? user_hover : user}
+            />
+
+            <Padding />
+          </>}
           <Item
             text={"Meu Perfil"}
             funcActiv={() => {
@@ -103,11 +119,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 6 ? true : false}
             path={"/perfil"}
-            icon={active === 6 ? user_hover : user}
+            icon={avatar}
           />
-
-
           <Padding />
+          
 
 
         </Padding>
