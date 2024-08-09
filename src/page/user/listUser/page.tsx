@@ -6,10 +6,8 @@ import { ProgressBar } from "primereact/progressbar"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
-import { AplicationContext } from "../../../context/context"
-import { PropsAplicationContext } from "../../../context/type"
 import { ROLE } from "../../../Controller/controllerGlobal"
-import { Padding, Row } from "../../../Styles/styles"
+import { Padding } from "../../../Styles/styles"
 import ListUserProvider, { ListUserContext } from "./context/context"
 import { ListUserContextType } from "./context/types"
 
@@ -27,7 +25,7 @@ const UserListPage = () => {
 
     const props = useContext(ListUserContext) as ListUserContextType;
     const history = useNavigate();
-    const propsAplication = useContext(AplicationContext) as PropsAplicationContext;
+    // const propsAplication = useContext(AplicationContext) as PropsAplicationContext;
 
     const [visible, setVisible] = useState<any>(false);
 
@@ -50,28 +48,28 @@ const UserListPage = () => {
         return <p>{rowData.active ? "Ativo" : "Desativado"}</p>;
     };
 
-    const ActionsUserBody = (rowData: any) => {
-        return (
-            <Row>
-                <Button
-                    icon="pi pi-pencil"
-                    rounded
-                    className="mr-2"
-                    onClick={() => {
-                        history("/users/" + rowData.id);
-                    }}
-                />
-                <Button
-                    severity="danger"
-                    rounded
-                    icon={"pi pi-trash"}
-                    onClick={() => {
-                        setVisible(rowData);
-                    }}
-                />
-            </Row>
-        );
-    };
+    // const ActionsUserBody = (rowData: any) => {
+    //     return (
+    //         <Row>
+    //             <Button
+    //                 icon="pi pi-pencil"
+    //                 rounded
+    //                 className="mr-2"
+    //                 onClick={() => {
+    //                     history("/users/" + rowData.id);
+    //                 }}
+    //             />
+    //             <Button
+    //                 severity="danger"
+    //                 rounded
+    //                 icon={"pi pi-trash"}
+    //                 onClick={() => {
+    //                     setVisible(rowData);
+    //                 }}
+    //             />
+    //         </Row>
+    //     );
+    // };
 
     if (props.isLoading) return <ProgressBar />;
 
