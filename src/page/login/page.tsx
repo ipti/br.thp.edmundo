@@ -27,7 +27,7 @@ import {
 } from "./styles";
 
 const Login = () => {
-  return(
+  return (
     <LoginProvider>
       <LoginPage />
     </LoginProvider>
@@ -75,74 +75,78 @@ const LoginPage = () => {
           </div>
         </Row> */}
         <div className="p-6" />
-        <Column>
-          <Row id="center">
-            <Formik
-              initialValues={{ email: "", password: "" }}
-              onSubmit={(values) => {
-                props.Login(values);
-              }}
-              validationSchema={LoginSchema}
-              validateOnChange={false}
-            >
-              {({ values, errors, handleChange, touched }) => {
-                return (
-                  <Form className="col-11 md:col-3">
-                    <div>
+        <div style={{ zIndex: "500" }}>
+
+          <Column >
+            <Row id="center">
+              <Formik
+                initialValues={{ email: "", password: "" }}
+                onSubmit={(values) => {
+                  props.Login(values);
+                }}
+                validationSchema={LoginSchema}
+                validateOnChange={false}
+              >
+                {({ values, errors, handleChange, touched }) => {
+                  return (
+                    <Form className="col-11 md:col-3">
                       <div>
-                        <label>Email</label>
-                        <Padding />
-                        <TextInput
-                          name="email"
-                          type="email"
-                          value={values.email}
-                          onChange={handleChange}
-                          placeholder="Email"
-                        />
-                        <Padding />
-                        {errors.email && touched.email ? (
-                          <div style={{ color: "red", marginTop: "8px" }}>
-                            {errors.email}
-                          </div>
-                        ) : null}
+                        <div>
+                          <label>Email</label>
+                          <Padding />
+                          <TextInput
+                            name="email"
+                            type="email"
+                            value={values.email}
+                            onChange={handleChange}
+                            placeholder="Email"
+                          />
+                          <Padding />
+                          {errors.email && touched.email ? (
+                            <div style={{ color: "red", marginTop: "8px" }}>
+                              {errors.email}
+                            </div>
+                          ) : null}
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-2" />
-                    <div>
+                      <div className="p-2" />
                       <div>
-                        <label>Senha</label>
-                        <Padding />
-                        <PasswordInput
-                          name="password"
-                          placeholder="Senha"
-                          onChange={handleChange}
-                          value={values.password}
-                        />
-                        <Padding />
-                        {errors.password && touched.password ? (
-                          <div style={{ color: "red", marginTop: "8px" }}>
-                            {errors.password}
-                          </div>
-                        ) : null}
+                        <div>
+                          <label>Senha</label>
+                          <Padding />
+                          <PasswordInput
+                            name="password"
+                            placeholder="Senha"
+                            onChange={handleChange}
+                            value={values.password}
+                          />
+                          <Padding />
+                          {errors.password && touched.password ? (
+                            <div style={{ color: "red", marginTop: "8px" }}>
+                              {errors.password}
+                            </div>
+                          ) : null}
+                        </div>
                       </div>
-                    </div>
-                    <Padding />
-                    <div className="p-2" />
-                    <div>
+                      <Padding />
+                      <div className="p-2" />
                       <div>
-                        <Button
-                          className={"t-button-primary"}
-                          type="submit"
-                          label="Entrar"
-                        />
+                        <div>
+                          <Button
+                            className={"t-button-primary"}
+                            type="submit"
+                            label="Entrar"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </Form>
-                );
-              }}
-            </Formik>
-          </Row>
-        </Column>
+                    </Form>
+                  );
+                }}
+              </Formik>
+            </Row>
+          </Column>
+
+        </div>
         <Padding />
         <Column>
           <Row id="center">

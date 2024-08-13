@@ -26,8 +26,8 @@ const MembersClassroomPage = () => {
     const search = () => {
         if (filter !== "") {
             const buscaLowerCase = filter.toLowerCase();
-            return props.classroomMembersList?.classroom.user?.filter((props) =>
-                props.users.name.toLowerCase().includes(buscaLowerCase)
+            return props.classroomMembersList?.classroom?.user?.filter((props) =>
+                props?.users?.name?.toLowerCase().includes(buscaLowerCase)
             );
         }
         return props.classroomMembersList?.classroom.user;
@@ -36,7 +36,7 @@ const MembersClassroomPage = () => {
 
     console.log(props.classroomMembersList)
     return (
-        <ContentPage title={"Membros " + props.classroomMembersList?.classroom.name} description="Visualize os membros da sua turma">
+        <ContentPage title={"Membros " + props.classroomMembersList?.classroom?.name} description="Visualize os membros da sua turma">
             <Row id="end">
                 <IconField iconPosition="left">
                     <InputIcon  className="pi pi-search" />
@@ -50,16 +50,16 @@ const MembersClassroomPage = () => {
                 </IconField>
             </Row>
             <Padding padding="16px" />
-            {props.classroomMembersList?.classroom.user?.length! > 0 ? (
+            {props.classroomMembersList?.classroom?.user?.length! > 0 ? (
                 <div className="grid">
                     {search()?.map((item, index) => {
                         return (
                             <div className="col-12 md:col-6 lg:col-4" key={index}>
                                 <CardRegistration
-                                    title={item.usersId.toString()}
-                                    subtitle={item.users.name}
-                                    idRegistration={item.id}
-                                    status={item.users.role}
+                                    title={item?.usersId?.toString()}
+                                    subtitle={item?.users?.name}
+                                    idRegistration={item?.id}
+                                    status={item?.users?.role}
                                 />
                             </div>
                         );
