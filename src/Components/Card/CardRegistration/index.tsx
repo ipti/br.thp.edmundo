@@ -43,7 +43,7 @@ const CardRegistration = ({
               <Icon icon="pi pi-trash" size="1rem" />
             </div>} */}
         </Row>
-        <Padding padding="8px" />
+        {/* <Padding padding="8px" /> */}
         <Row>
           <div className={`boxQuantity`}>
             <Column id="center">
@@ -58,7 +58,7 @@ const CardRegistration = ({
           </div>
           <Padding />
           <Column>
-            <h3>{subtitle}</h3>
+            <h3>{subtitle.substring(0, 24)}{subtitle.length > 24 && "..."}</h3>
             <Padding />
             <div className={"boxDescriptionSchedule"}>
               {"Matricula - " + title}
