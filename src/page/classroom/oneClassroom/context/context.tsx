@@ -6,10 +6,10 @@ export const OneClassroomContext = createContext<OneClassroomContextType | null>
 
 const OneClassroomProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { classroomOne, isError, isLoading} = OneClassroomState()
+    const { classroomOne, isError, isLoading, UpdateClassroom} = OneClassroomState()
 
     return (
-        <OneClassroomContext.Provider value={{ classroomOne, isError, isLoading }}>
+        <OneClassroomContext.Provider value={{ classroomOne, isError, isLoading, UpdateClassroom }}>
             {children}
         </OneClassroomContext.Provider>
     )

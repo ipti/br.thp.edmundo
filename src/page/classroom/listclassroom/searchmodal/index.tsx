@@ -50,7 +50,6 @@ const ClassroomFind = ({ idClassroom, onHide }: { idClassroom: string | number |
     const { data, isLoading } = useFetchRequestOneClassroom(removeLeadingZeros(idClassroom?.toString()!).toString())
 
 
-    console.log(data)
     if (isLoading) return <ProgressSpinner />
     var classroom: Classroom = data
     return (
@@ -65,7 +64,7 @@ const ClassroomFind = ({ idClassroom, onHide }: { idClassroom: string | number |
                     </p>
                 </Column>
                 <Column id="end">
-                    <Button label="Entrar" style={{ height: "48px" }} icon="pi pi-sign-in" onClick={() => { props.JoinTheClassroomClassroom({idClassroom: parseInt(idClassroom?.toString()!), idUser: propsAplication.user?.id!}); onHide()}} />
+                    <Button label={classroom.isOpen ? "Entrar" : "Não disponivel" } disabled={!classroom.isOpen} style={{ height: "48px" }} icon="pi pi-sign-in" onClick={() => { props.JoinTheClassroomClassroom({idClassroom: parseInt(idClassroom?.toString()!), idUser: propsAplication.user?.id!}); onHide()}} />
                 </Column>
             </Row>
         </Container>

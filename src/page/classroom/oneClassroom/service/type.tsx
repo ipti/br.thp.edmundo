@@ -8,6 +8,7 @@ export interface ClassroomOne {
     name: string
     owner_user_fk: number
     reapplication_fk: number
+    isOpen: boolean
     active: boolean
     createdAt: string
     updatedAt: string
@@ -22,5 +23,11 @@ export interface ClassroomOne {
     id: number
     name: string
     email: string
+  }
+
+
+  export interface UpdateClassroom {
+    name: string
+    isOpen: boolean
   }
   

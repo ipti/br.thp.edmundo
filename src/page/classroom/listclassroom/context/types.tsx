@@ -15,4 +15,5 @@ export interface Classroom {
     active: boolean
     createdAt: string
     updatedAt: string
+    isOpen: boolean
   }
