@@ -24,4 +24,10 @@ export interface ClassroomOne {
     name: string
     email: string
   }
+
+
+  export interface UpdateClassroom {
+    name: string
+    isOpen: boolean
+  }
   
