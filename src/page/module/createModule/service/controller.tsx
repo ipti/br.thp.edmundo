@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
 import { CreateModuleRequest } from "./request";
-import { CreateModule } from "./types";
+import { CreateModule } from "../../type";
 
 export const CreateModuleController = () => {
   const history = useNavigate();
@@ -20,8 +20,8 @@ export const CreateModuleController = () => {
         })
       },
       onSuccess: (data) => {
-        queryClient.refetchQueries("useRequestsListClassroom")
-       history("/turmas")
+        queryClient.refetchQueries("useRequestsListModule")
+       history("/modulos")
       },
 
     }

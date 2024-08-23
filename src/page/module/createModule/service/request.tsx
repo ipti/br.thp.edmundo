@@ -1,7 +1,6 @@
 import http from "../../../../service/axios"
-import { CreateModule } from "./types"
-
+import { CreateModule } from "../../type"
 export const CreateModuleRequest = async (body: CreateModule) => {
-    return await http.post("/module", body)
+    return await http.post("/modules", body)
 }
 

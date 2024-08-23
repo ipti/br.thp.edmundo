@@ -1,10 +1,10 @@
-import { Container } from "./style";
-import IconSchedule from "./../../../Assets/images/calendar.png";
+import { ConfirmDialog } from "primereact/confirmdialog";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import Icon from "../../Icon";
-import { useContext, useState } from "react";
-import { ConfirmDialog } from "primereact/confirmdialog";
-import { useNavigate } from "react-router-dom";
+import IconSchedule from "./../../../Assets/images/calendar.png";
+import { Container } from "./style";
 
 const CardSchedule = ({
   title,

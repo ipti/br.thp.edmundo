@@ -1,5 +1,5 @@
+import { CreateModule } from "../../type";
 import { CreateModuleController } from "../service/controller"
-import { CreateModule } from "../service/types"
 
 export const CreateModuleState = () => {
     const initialValue: CreateModule = {

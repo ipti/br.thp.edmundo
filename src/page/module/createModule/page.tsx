@@ -4,7 +4,9 @@ import { Column, Padding, Row } from "../../../Styles/styles"
 import { Button } from "primereact/button"
 import TextInput from "../../../Components/TextInput"
 import TextAreaComponent from "../../../Components/TextArea"
-import CreateModuleProvider from "./context/context"
+import CreateModuleProvider, { CreateModuleContext } from "./context/context"
+import { useContext } from "react"
+import { CreateModuleContextType } from "../type"
 
 
 const ModulesCreate = () => {
@@ -16,9 +18,11 @@ const ModulesCreate = () => {
 }
 
 const ModulesCreatePage = () => {
+
+    const modulesContext = useContext(CreateModuleContext) as CreateModuleContextType
     return (
         <ContentPage title="Criar Módulos" description="Crie os módulos de aula">
-            <Formik initialValues={{ name: "", description: "", }} onSubmit={(values) => { }}>
+            <Formik initialValues={{ name: "", description: "", }} onSubmit={(values) => { modulesContext.CreateModule(values)}}>
                 {({ errors, values, touched, handleChange }) => {
                     return (
                         <Form>

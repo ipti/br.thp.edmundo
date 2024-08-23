@@ -14,6 +14,7 @@ import UserList from "../page/user/listUser/page";
 import UserCreate from "../page/user/createUser/page";
 import ModuleList from "../page/module/listModule/page";
 import ModulesCreate from "../page/module/createModule/page";
+import ModuleOne from "../page/module/oneModule/page";
 
 const RoutesApp = () => {
   return (
@@ -32,6 +33,7 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<ReapplicationCreate />} />} path="/reaplicacoes/criar" />
         <Route element={<PrivateRoute Component={<ModuleList />} />} path="/modulos" />
         <Route element={<PrivateRoute Component={<ModulesCreate />} />} path="/modulos/criar" />
+        <Route element={<PrivateRoute Component={<ModuleOne />} />} path="/modulos/:id" />
 
         <Route element={<PrivateRoute Component={<UserList />} />} path="/usuarios" />
         <Route element={<PrivateRoute Component={<UserCreate />} />} path="/usuarios/criar" />

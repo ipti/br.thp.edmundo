@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { CreateModuleState } from "./state";
-import { CreateModuleContextType } from "./types";
+import { CreateModuleContextType } from "../../type";
 
 export const CreateModuleContext = createContext<CreateModuleContextType | null>(null);
 

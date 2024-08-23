@@ -86,6 +86,18 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={active === 4 ? turmasHover : turmas}
           />
           <Padding />
+
+          <Item
+            text={"Módulos"}
+            funcActiv={() => {
+              setActive(5);
+              menuItem("5");
+            }}
+            active={active === 5 ? true : false}
+            path={"/modulos"}
+            icon={active === 5 ? turmasHover : turmas}
+          />
+          <Padding />
           {/* <Item
             text={"Beneficiários"}
             funcActiv={() => {
