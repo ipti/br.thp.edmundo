@@ -5,23 +5,24 @@ import { Button } from "primereact/button";
 import TextInput from "../../../Components/TextInput";
 import TextAreaComponent from "../../../Components/TextArea";
 import InputNumberComponent from "../../../Components/InputNumber";
+import CreateClassesProvider, { CreateClassesContext } from "./context/context";
+import { useContext } from "react";
+import { CreateClassesContextType } from "../type";
 
 const ClassesCreate = () => {
-  return <ClassesCreatePage />;
+
+  return <CreateClassesProvider><ClassesCreatePage /></CreateClassesProvider>;
 };
 
 const ClassesCreatePage = () => {
+
+  const createClassesContext = useContext(CreateClassesContext) as CreateClassesContextType
   return (
     <ContentPage title="Criar Aulas" description="Crie as aulas do seu módulo">
       <Padding />
       <Formik
-        initialValues={{
-          name: "",
-          objective: "",
-          necessary_material: "",
-          duration: 0,
-        }}
-        onSubmit={(values) => {}}
+        initialValues={createClassesContext.initialValue}
+        onSubmit={(values) => { createClassesContext.CreateClasses(values) }}
       >
         {({ errors, values, touched, handleChange }) => {
           return (
@@ -70,7 +71,7 @@ const ClassesCreatePage = () => {
                   value={values.necessary_material}
                   placeholder="Escreva os materiais necessários para a aula"
                   onChange={handleChange}
-                  name=".necessary_material"
+                  name="necessary_material"
                 />
                 {errors.necessary_material && touched.necessary_material ? (
                   <div style={{ color: "red", marginTop: "8px" }}>

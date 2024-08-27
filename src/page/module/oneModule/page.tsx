@@ -4,7 +4,7 @@ import ContentPage from "../../../Components/ContentPage"
 import { Padding, Row } from "../../../Styles/styles"
 import { OneModulesContextType } from "../type"
 import OneModuleProvider, { OneModuleContext } from "./context/context"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 const ModuleOne = () => {
     return(
@@ -17,6 +17,8 @@ const ModuleOne = () => {
 
 const ModuleOnePage = () => {
 
+    const {id} = useParams()
+
     const moduleOneContext = useContext(OneModuleContext) as OneModulesContextType
 
     const history = useNavigate()
@@ -26,7 +28,7 @@ const ModuleOnePage = () => {
             <Padding padding="32px" />
             <Row id="space-between">
                 <h2>Aulas</h2>
-                <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => {history("/aulas/criar")}} />
+                <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => {history("/aulas/"+ id + "/criar")}} />
             </Row>
         </ContentPage>
     )

@@ -23,10 +23,10 @@ const ModuleListPage = () => {
     ListModulesContext
   ) as ListModulesContextType;
   return (
-    <ContentPage title="Modulos adicionados" description="Listar modules ">
+    <ContentPage title="Módulos adicionados" description="Listar módulos ">
       <Row id="end">
         <Button
-          label="Criar module"
+          label="Criar módulos"
           onClick={() => {
             history("/modulos/criar");
           }}
