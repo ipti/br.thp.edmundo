@@ -16,6 +16,7 @@ import ModuleList from "../page/module/listModule/page";
 import ModulesCreate from "../page/module/createModule/page";
 import ModuleOne from "../page/module/oneModule/page";
 import ClassesCreate from "../page/classes/createClasses/page";
+import ActivitiesCreate from "../page/activities/createActivities/page";
 
 const RoutesApp = () => {
   return (
@@ -36,6 +37,8 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<ModulesCreate />} />} path="/modulos/criar" />
         <Route element={<PrivateRoute Component={<ModuleOne />} />} path="/modulos/:id" />
         <Route element={<PrivateRoute Component={<ClassesCreate />} />} path="/aulas/:idModule/criar" />
+        <Route element={<PrivateRoute Component={<ActivitiesCreate />} />} path="/atividades/:idClasses/criar" />
+
 
 
         <Route element={<PrivateRoute Component={<UserList />} />} path="/usuarios" />

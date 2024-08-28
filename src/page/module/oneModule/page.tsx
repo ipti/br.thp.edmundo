@@ -1,11 +1,12 @@
+import { Accordion, AccordionTab } from "primereact/accordion"
 import { Button } from "primereact/button"
 import { useContext } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
-import { Padding, Row } from "../../../Styles/styles"
+import { Column, Padding, Row } from "../../../Styles/styles"
 import { OneModulesContextType } from "../type"
 import OneModuleProvider, { OneModuleContext } from "./context/context"
-import { useNavigate, useParams } from "react-router-dom"
-import { Accordion, AccordionTab } from "primereact/accordion"
+import Icon from "../../../Components/Icon"
 
 const ModuleOne = () => {
     return (
@@ -36,9 +37,46 @@ const ModuleOnePage = () => {
                 {moduleOneContext.moduleOne?.classes.map((item, index) => {
                     return (
                         <AccordionTab header={item.name}>
-                            <p className="m-0">
-                                {item.objective}
-                            </p>
+                            <Row>
+                                <h4 className="m-0">
+                                    Objetivo:
+                                </h4>
+                                <Padding />
+                                <p className="m-0">
+                                    {item.objective}
+                                </p>
+                            </Row>
+                            <Padding padding="8px" />
+                            <Row>
+                                <h4 className="m-0">
+                                    Material necessario:
+                                </h4>
+                                <Padding />
+
+                                <p className="m-0">
+                                    {item.necessary_material}
+                                </p>
+                            </Row>
+                            <Padding padding="8px" />
+                            <Row >
+                                <h4>Duração da aula: </h4>
+                                <Padding />
+
+                                <p className="m-0">
+                                    {item.duration}h
+                                </p>
+                            </Row>
+                            <Padding padding="8px" />
+                            <h4>Atividades</h4>
+                            <Padding padding="8px" />
+                            <Row style={{gap: "8px"}}>
+                                <Icon icon="pi pi-book" />
+                                <Column id="center">
+                                <Link style={{fontWeight: "bold"}} to={""}>Atividade</Link>
+                                </Column>
+                            </Row>
+                            <Padding padding="8px" />
+                            <Button icon={"pi pi-plus"} onClick={() => {history("/atividades/" + item.id + "/criar")}}/>
                         </AccordionTab>
                     )
                 })}
