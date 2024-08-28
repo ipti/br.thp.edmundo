@@ -4,7 +4,7 @@ import { logout } from "../../../../service/localstorage";
 export const FindOneModuleRequest = async (id: string) => {
     if (id) {
         return await http
-            .get("/modules/" + id)
+            .get("/module-bff?id=" + id)
             .then((response) => response.data)
             .catch((err) => {
                 if (err.response.status === 401) {

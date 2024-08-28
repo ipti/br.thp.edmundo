@@ -8,12 +8,26 @@ export interface ListModulesContextType {
 export type ModulesList = Modules[]
 
 export interface Modules {
-  id: number
-  name: string
-  description: string
-  createdAt: string
-  updatedAt: string
-}
+    id: number
+    name: string
+    description: string
+    createdAt: string
+    updatedAt: string
+    classes: Class[]
+  }
+  
+  export interface Class {
+    id: number
+    name: string
+    necessary_material?: string
+    objective?: string
+    duration?: number
+    active: boolean
+    createdAt: string
+    updatedAt: string
+    moduleId: number
+  }
+  
 
 export interface CreateModule {
     name: string,
