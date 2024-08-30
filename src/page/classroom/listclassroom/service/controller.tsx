@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
-import { JoinTheClassroomRequest } from "./request";
+import { JoinTheClassroomRequest, DeleteClassroomRequest } from "./request";
 import { JoinTheClassroom } from "./types";
 
 export const ListClassroomController = () => {
@@ -31,7 +31,25 @@ export const ListClassroomController = () => {
         }
     );
 
+    const DeleteClassroomRequestMutation = useMutation(
+        (id: number) => DeleteClassroomRequest(id),
+        {
+          onError: (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              title: error.response.data.message,
+              confirmButtonColor: styles.colors.colorPrimary,
+            })
+          },
+          onSuccess: (data) => {
+            queryClient.refetchQueries("useRequestsListClassroom")
+          },
+    
+        }
+      );
+    
+
     return {
-        JoinTheClassroomMutation
+        JoinTheClassroomMutation, DeleteClassroomRequestMutation
     }
 }

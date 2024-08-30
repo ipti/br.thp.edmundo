@@ -88,7 +88,7 @@ const ActivitiesCreatePage = () => {
                                     value={values.time_activities!}
                                     placeholder="Escreva os materiais necessários para a aula"
                                     onChange={handleChange}
-                                    name=".time_activities"
+                                    name="time_activities"
                                 />
                                 {errors.time_activities && touched.time_activities ? (
                                     <div style={{ color: "red", marginTop: "8px" }}>

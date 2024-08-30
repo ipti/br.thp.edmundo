@@ -6,10 +6,10 @@ export const ListUserContext = createContext<ListUserContextType | null>(null);
 
 const ListUserProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { users, isError, isLoading } = ListUserState()
+    const { users, isError, isLoading, DeleteUser } = ListUserState()
 
     return (
-        <ListUserContext.Provider value={{ users, isError, isLoading }}>
+        <ListUserContext.Provider value={{ users, isError, isLoading, DeleteUser }}>
             {children}
         </ListUserContext.Provider>
     )

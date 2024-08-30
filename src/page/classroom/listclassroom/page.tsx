@@ -40,7 +40,7 @@ const ClassroomListPage = () => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4" key={item.id}>
 
-                            <CardClassroom id={item.id} title={item.name} registrationCount={item._count.user} />
+                            <CardClassroom id={item.id} title={item.name} registrationCount={item._count.user} handleDelete={() => props.DeleteClassroom(item.id)} />
                         </div>
                     )
                 })}

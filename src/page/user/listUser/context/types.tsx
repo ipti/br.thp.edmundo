@@ -4,4 +4,5 @@ export interface ListUserContextType {
     users: User[] | undefined;
     isLoading: boolean;
     isError: boolean;
+    DeleteUser: (id: number) => void
 }
