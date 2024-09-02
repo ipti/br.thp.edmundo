@@ -8,6 +8,8 @@ import InputNumberComponent from "../../../Components/InputNumber"
 import CreateActivitiesProvider, { CreateActivitiesContext } from "./context/context"
 import { useContext } from "react"
 import { CreateActivitiesType } from "../type"
+import DropdownComponent from "../../../Components/Dropdown"
+import { difficult } from "../../../Controller/controllerGlobal"
 
 const ActivitiesCreate = () => {
     return (
@@ -24,9 +26,9 @@ const ActivitiesCreatePage = () => {
             <Padding />
             <Formik
                 initialValues={activitiesCreate.initialValue}
-                onSubmit={(values) => { }}
+                onSubmit={(values) => { activitiesCreate.CreateActivities(values) }}
             >
-                {({ errors, values, touched, handleChange }) => {
+                {({ errors, values, touched, handleChange, setFieldValue }) => {
                     return (
                         <Form>
                             <Column>
@@ -67,28 +69,31 @@ const ActivitiesCreatePage = () => {
                             </div>
 
                             <div className="col-12 md:col-6">
-                                <label>Materias necessários </label>
+                                <label>Nivel de dificuldade </label>
                                 <Padding />
-                                <TextAreaComponent
-                                    value={values.description}
-                                    placeholder="Escreva os materiais necessários para a aula"
-                                    onChange={handleChange}
-                                    name=".description"
+                                <DropdownComponent
+                                    value={values.difficult}
+                                    options={difficult}
+                                    optionsValue="id"
+                                    optionsLabel="name"
+                                    placerholder="Escolha o nivel de dificuldade"
+                                    onChange={e => setFieldValue("difficult", e.target.value)}
+                                    name="difficult"
                                 />
-                                {errors.description && touched.description ? (
+                                {errors.difficult && touched.difficult ? (
                                     <div style={{ color: "red", marginTop: "8px" }}>
-                                        {errors.description}
+                                        {errors.difficult.id}
                                     </div>
                                 ) : null}
                             </div>
                             <div className="col-12 md:col-6">
-                                <label>Duração da aula (horas) </label>
+                                <label>Duração da atividades (minutos) </label>
                                 <Padding />
                                 <InputNumberComponent
                                     value={values.time_activities!}
-                                    placeholder="Escreva os materiais necessários para a aula"
+                                    placeholder="Escreva a duração da atividade"
                                     onChange={handleChange}
-                                    name=".time_activities"
+                                    name="time_activities"
                                 />
                                 {errors.time_activities && touched.time_activities ? (
                                     <div style={{ color: "red", marginTop: "8px" }}>
@@ -105,3 +110,4 @@ const ActivitiesCreatePage = () => {
 }
 
 export default ActivitiesCreate
+

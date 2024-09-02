@@ -7,6 +7,8 @@ export interface ListModulesContextType {
 
 export type ModulesList = Modules[]
 
+
+
 export interface Modules {
     id: number
     name: string
@@ -19,15 +21,30 @@ export interface Modules {
   export interface Class {
     id: number
     name: string
-    necessary_material?: string
-    objective?: string
-    duration?: number
+    necessary_material: string
+    objective: string
+    duration: number
     active: boolean
     createdAt: string
     updatedAt: string
     moduleId: number
+    activities: Activity[]
   }
   
+  export interface Activity {
+    id: number
+    name: string
+    description: any
+    type_activities: string
+    points_activities: number
+    difficult: string
+    time_activities: number
+    createdAt: string
+    updatedAt: string
+    classesId: number
+  }
+  
+
 
 export interface CreateModule {
     name: string,

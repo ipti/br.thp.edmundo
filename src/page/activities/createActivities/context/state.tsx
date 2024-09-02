@@ -4,16 +4,17 @@ import { CreateActivitiesController } from "../service/controller"
 
 export const CreateActivitiesState = () => {
 
-    const { idModule } = useParams()
+    const { idClasses } = useParams()
 
 
     const initialValue: CreateActivities = {
         name: "",
         description: "",
-        difficult: 0,
+        difficult: {id: "", name: ""},
         points_activities: 0,
         time_activities: 0,
-        type_activities: 0,
+        type_activities: "CODE",
+        id_classes: parseInt(idClasses!)
     }
 
 
@@ -21,7 +22,7 @@ export const CreateActivitiesState = () => {
     const { CreateActivitiesMutation } = CreateActivitiesController();
 
     const CreateActivities = (body: CreateActivities) => {
-        CreateActivitiesMutation.mutate(body)
+        CreateActivitiesMutation.mutate({...body})
     }
     return { initialValue, CreateActivities }
 }

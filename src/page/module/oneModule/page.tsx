@@ -69,14 +69,18 @@ const ModuleOnePage = () => {
                             <Padding padding="8px" />
                             <h4>Atividades</h4>
                             <Padding padding="8px" />
-                            <Row style={{gap: "8px"}}>
-                                <Icon icon="pi pi-book" />
-                                <Column id="center">
-                                <Link style={{fontWeight: "bold"}} to={""}>Atividade</Link>
-                                </Column>
-                            </Row>
+                            {item.activities.map((activities) => {
+                                return (
+                                    <Row style={{ gap: "8px", marginBottom: 8 }}>
+                                        <Icon icon="pi pi-book" />
+                                        <Column id="center">
+                                            <Link style={{ fontWeight: "bold" }} to={""}>{activities.name}</Link>
+                                        </Column>
+                                    </Row>
+                                )
+                            })}
                             <Padding padding="8px" />
-                            <Button icon={"pi pi-plus"} onClick={() => {history("/atividades/" + item.id + "/criar")}}/>
+                            <Button icon={"pi pi-plus"} onClick={() => { history("/atividades/" + item.id + "/criar") }} />
                         </AccordionTab>
                     )
                 })}

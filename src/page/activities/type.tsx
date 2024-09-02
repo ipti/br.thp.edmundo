@@ -1,10 +1,11 @@
 export interface CreateActivities {
     name: string,
     description: string,
-    type_activities: Type_Activities,
+    type_activities: string,
     points_activities: number,
-    difficult: Difficulties,
-    time_activities: number
+    difficult: { id: string; name: string; },
+    time_activities: number,
+    id_classes: number
 }
 
 export interface CreateActivitiesType {
@@ -12,14 +13,5 @@ export interface CreateActivitiesType {
     CreateActivities: (body: CreateActivities) => void;
 }
 
-enum Difficulties {
-    BAIXO,
-    MEDIO,
-    ALTO,
-    MUITO_ALTO
-  }
+
   
-  enum Type_Activities {
-    QUIZ,
-    CODE
-  }

@@ -19,9 +19,9 @@ export const CreateActivitiesController = () => {
           confirmButtonColor: styles.colors.colorPrimary,
         })
       },
-      onSuccess: (data) => {
+      onSuccess: (data, va) => {
         queryClient.refetchQueries("useRequestsListModule")
-        history("/modulos/1")
+        history("/modulos/"+va.id_classes)
       },
 
     }
