@@ -10,10 +10,14 @@ export const ListClassroomState = () => {
     const { data: classroomRequest, isLoading, isError } = useFetchRequestClassroomList();
 
 
-    const { JoinTheClassroomMutation } = ListClassroomController();
+    const { JoinTheClassroomMutation, DeleteClassroomRequestMutation } = ListClassroomController();
 
     const JoinTheClassroomClassroom = (body: JoinTheClassroom) => {
         JoinTheClassroomMutation.mutate(body)
+    }
+
+    const DeleteClassroom = (id: number) => {
+        DeleteClassroomRequestMutation.mutate(id)
     }
 
     useEffect(() => {
@@ -23,5 +27,5 @@ export const ListClassroomState = () => {
     }, [classroomRequest])
 
 
-    return {classroomList, isLoading,isError, JoinTheClassroomClassroom }
+    return {classroomList, isLoading,isError, JoinTheClassroomClassroom, DeleteClassroom }
 }

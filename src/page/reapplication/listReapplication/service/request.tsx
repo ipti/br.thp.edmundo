@@ -14,3 +14,16 @@ export const ListReapplicationRequest = async () => {
     });
 }
 
+export const DeleteReaplicationRequest = async (id: number) => {
+  return await http
+      .delete("/reapplication/" + id)
+      .then((response) => response.data)
+      .catch((err) => {
+          if (err.response.status === 401) {
+              logout()
+              window.location.reload()
+          }
+          throw err;
+      });
+
+}

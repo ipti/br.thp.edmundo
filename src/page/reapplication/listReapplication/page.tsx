@@ -34,7 +34,7 @@ const ReapplicationListPage = () => {
                     return (
                         <div className="col-12 md:col-6 lg:col-4" key={item.id}>
 
-                            <CardProject id={item.id} title={item.name} registrationCount={item._count.user_reapplication} classroomCount={item._count.classrooms} />
+                            <CardProject id={item.id} handleDelete={() => props.DeleteReapplication(item.id)} title={item.name} registrationCount={item._count.user_reapplication} classroomCount={item._count.classrooms} />
                         </div>
                     )
                 })}

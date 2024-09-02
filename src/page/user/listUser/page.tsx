@@ -7,7 +7,7 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
 import { ROLE } from "../../../Controller/controllerGlobal"
-import { Padding } from "../../../Styles/styles"
+import { Padding, Row } from "../../../Styles/styles"
 import ListUserProvider, { ListUserContext } from "./context/context"
 import { ListUserContextType } from "./context/types"
 
@@ -48,28 +48,28 @@ const UserListPage = () => {
         return <p>{rowData.active ? "Ativo" : "Desativado"}</p>;
     };
 
-    // const ActionsUserBody = (rowData: any) => {
-    //     return (
-    //         <Row>
-    //             <Button
-    //                 icon="pi pi-pencil"
-    //                 rounded
-    //                 className="mr-2"
-    //                 onClick={() => {
-    //                     history("/users/" + rowData.id);
-    //                 }}
-    //             />
-    //             <Button
-    //                 severity="danger"
-    //                 rounded
-    //                 icon={"pi pi-trash"}
-    //                 onClick={() => {
-    //                     setVisible(rowData);
-    //                 }}
-    //             />
-    //         </Row>
-    //     );
-    // };
+    const ActionsUserBody = (rowData: any) => {
+        return (
+            <Row>
+                {/* <Button
+                    icon="pi pi-pencil"
+                    rounded
+                    className="mr-2"
+                    onClick={() => {
+                        history("/users/" + rowData.id);
+                    }}
+                /> */}
+                <Button
+                    severity="danger"
+                    rounded
+                    icon={"pi pi-trash"}
+                    onClick={() => {
+                        setVisible(rowData);
+                    }}
+                />
+            </Row>
+        );
+    };
 
     if (props.isLoading) return <ProgressBar />;
 
@@ -112,7 +112,7 @@ const UserListPage = () => {
                     <Column field="email" header="Email"></Column>
                     <Column field="role" body={typeUserBody} header="Tipo"></Column>
                     <Column field="active" body={ActiveUserBody} header="Ativo"></Column>
-                    {/* <Column field="actions" body={ActionsUserBody} header="Ações"></Column> */}
+                    <Column field="actions" body={ActionsUserBody} header="Ações"></Column>
 
                 </DataTable>
             </ContentPage>
@@ -122,7 +122,7 @@ const UserListPage = () => {
                 message="Tem certeza de que deseja prosseguir?"
                 header="Confirmation"
                 icon="pi pi-exclamation-triangle"
-                accept={() => { }}
+                accept={() => { props.DeleteUser(visible.id) }}
                 reject={() => setVisible(false)}
             />
         </>

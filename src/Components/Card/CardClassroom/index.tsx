@@ -7,21 +7,23 @@ import { Container } from "./style";
 
 import pessoas from "./../../../assets/image/pessoasgray.svg";
 import { menuItem } from "../../../service/localstorage";
+import Icon from "../../Icon";
+import styles from "../../../Styles";
 
 const CardClassroom = ({
   title,
-  meetingCount,
+  handleDelete,
   registrationCount,
   id,
 }: {
   title: string;
   meetingCount?: number;
+  handleDelete?: any;
   registrationCount?: number;
   id: number;
 }) => {
   const history = useNavigate();
   const [visible, setVisible] = useState(false);
-
 
   return (
     <>
@@ -42,8 +44,7 @@ const CardClassroom = ({
               <h3>{title}</h3>
             </Column>
           </Row>
-          {/* {(propsAplication.user?.role === ROLE.ADMIN ||
-            propsAplication.user?.role === ROLE.COORDINATORS) && (
+          {
             <div
               className="cursor-pointer"
               onClick={(e) => {
@@ -53,12 +54,12 @@ const CardClassroom = ({
             >
               <Icon
                 icon="pi pi-trash"
-                color={styles.colors.colorGrayElephant}
+                color={styles.colors.grayOne}
                 size="1rem"
                 fontWeight="900"
               />
             </div>
-          )} */}
+          }
         </Row>
         <Padding padding="8px" />
         <Row style={{ gap: 16 }}>
@@ -74,7 +75,7 @@ const CardClassroom = ({
         message="Tem certeza de que deseja prosseguir?"
         header="Confirmation"
         icon="pi pi-exclamation-triangle"
-        // accept={() => props.DeleteClassroom(id)}
+        accept={() => handleDelete(id)}
         reject={() => setVisible(false)}
       />
     </>
