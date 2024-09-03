@@ -27,7 +27,7 @@ const ModuleOnePage = () => {
 
     return (
         <ContentPage title={moduleOneContext.moduleOne?.name!} description={moduleOneContext.moduleOne?.description!} >
-            <Padding padding="32px" />
+            <Padding padding="16px" />
             <Row id="space-between">
                 <h2>Aulas</h2>
                 <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar") }} />

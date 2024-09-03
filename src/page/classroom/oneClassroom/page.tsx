@@ -82,8 +82,8 @@ const ClassroomOnePage = () => {
                 >
                     <CardItensClassrooom title="Membros" description="Visualize os membros da turma" icon={pessoas} count={props.classroomOne?.classroom._count.user} />
                 </div>
-                <div className="col-12 md:col-6">
-                    <CardItensClassrooom title="Aulas" description="Visualize as aulas da turma" icon={meeting} />
+                <div className="col-12 md:col-6" onClick={() => { history('modulos') }}>
+                    <CardItensClassrooom title="Módulos" description="Visualize os módulos adicionados a turma" icon={meeting} />
                 </div>
             </div>
         </ContentPage>
