@@ -39,11 +39,11 @@ const ClassroomClassePage = () => {
                         <Divider />
                         <Padding />
 
-                        {item.classroom.classroom_classes.map((classes) => {
+                        {item.module.classes.map((classes) => {
                             return (
                                 <Row id="space-between">
                                     <Column id="center">
-                                        <h4>{classes.classes.name}</h4>
+                                        <h4>{classes.name}</h4>
                                         <Link to={"/"}>
                                             Ver aulas
                                         </Link>
@@ -51,7 +51,7 @@ const ClassroomClassePage = () => {
                                     <Column>
                                         <label>Ativar visualização</label>
                                         <Padding />
-                                        <SelectButton value={classes.classes.active} onChange={() => { props.UpdateclasseClassroom({ active: !item.active }, item.id) }} options={options2} optionLabel="name" />
+                                        <SelectButton value={classes.active} onChange={() => { props.UpdateclasseClassroom({ active: !item.active }, item.id) }} options={options2} optionLabel="name" />
                                     </Column>
                                 </Row>
                             )

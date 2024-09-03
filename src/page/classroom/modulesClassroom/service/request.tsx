@@ -15,6 +15,19 @@ export const AllModuleRequest = async () => {
     });
 }
 
+export const AllclasseRequest = async () => {
+  return await http
+    .get("/classes")
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      throw err;
+    });
+}
+
 export const AllModuleClassroomRequest = async (id: number) => {
   return await http
     .get("/module-bff/classroom?id="+ id)

@@ -22,20 +22,25 @@ export interface Classes {
   module_fk: number
   classroom_fk: number
   module: Module
-  classroom: Classroom
 }
 
 export interface Module {
   name: string
+  classes: Class[]
 }
 
-export interface Classroom {
-  classroom_classes: ClassroomClass[]
+export interface Class {
+  id: number
+  name: string
+  necessary_material: string
+  objective: string
+  duration: number
+  active: boolean
+  createdAt: string
+  updatedAt: string
+  moduleId: number
 }
 
-export interface ClassroomClass {
-  classes: Classes
-}
 
 export interface Classes {
   active: boolean
