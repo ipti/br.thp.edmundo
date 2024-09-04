@@ -41,7 +41,7 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<ModulesCreate />} />} path="/modulos/criar" />
         <Route element={<PrivateRoute Component={<ModuleOne />} />} path="/modulos/:id" />
         <Route element={<PrivateRoute Component={<ClassesCreate />} />} path="/aulas/:idModule/criar" />
-        <Route element={<PrivateRoute Component={<ActivitiesCreate />} />} path="/atividades/:idClasses/criar" />
+        <Route element={<PrivateRoute Component={<ActivitiesCreate />} />} path="/atividades/:idClasses/criar/:idModule" />
 
 
 

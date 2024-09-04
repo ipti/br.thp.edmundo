@@ -30,7 +30,7 @@ const ModuleOnePage = () => {
             <Padding padding="16px" />
             <Row id="space-between">
                 <h2>Aulas</h2>
-                <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar") }} />
+                <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar" ) }} />
             </Row>
             <Padding padding="16px" />
             <Accordion activeIndex={0}>
@@ -80,7 +80,7 @@ const ModuleOnePage = () => {
                                 )
                             })}
                             <Padding padding="8px" />
-                            <Button icon={"pi pi-plus"} onClick={() => { history("/atividades/" + item.id + "/criar") }} />
+                            <Button icon={"pi pi-plus"} onClick={() => { history("/atividades/" + item.id + "/criar/" + id) }} />
                         </AccordionTab>
                     )
                 })}

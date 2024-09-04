@@ -7,6 +7,8 @@ import ContentPage from "../../../Components/ContentPage"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomModulesProvider, { ClassroomModulesContext } from "./context/context"
 import ModalAddModule from "./modalAddModule"
+import Icon from "../../../Components/Icon"
+import { InputSwitch } from "primereact/inputswitch"
 
 
 const ClassroomModules = () => {
@@ -35,23 +37,57 @@ const ClassroomModulesPage = () => {
                     <div>
                         <Row id="space-between">
                             <Column id="center">
-                                <h4>{item.module.name}</h4>
+                                <h2>{item.name}</h2>
                                 <Padding />
-                                <Link to={"/turma/" + id + "/aulas"}>
-                                    Ver aulas
-                                </Link>
                             </Column>
                             <Column>
-                                <label>Ativar visualização</label>
-                                <Padding />
-                                <SelectButton value={item.active} onChange={() => { props.UpdateModuleClassroom({ active: !item.active }, item.id) }} options={options2} optionLabel="name" />
+                                <InputSwitch checked={true} onChange={(e) => { }} />
                             </Column>
                         </Row>
+                        <Padding />
+                        <Row>
+                            <Column id="center">
+                                <Icon icon="pi pi-chevron-down" size="16px" />
+                            </Column>
+                            <Padding />
+                            <h3>Aulas</h3>
+                        </Row>
+                        <Padding padding="8px" />
+                        <Column>
+                            {item.classes.map((classes) => {
+                                return (
+                                    <Column>
+                                        <Row id="space-between">
+                                            <Row>
+                                                <Padding padding="8px" />
+                                                <Column id="center">
+                                                    <Icon icon="pi pi-chevron-down" size="16px" />
+                                                </Column>
+                                                <Padding />
+                                                <h4>
+                                                    {classes.name}
+                                                </h4>
+                                                <Column>
+                                                    <InputSwitch checked={true} onChange={(e) => { }} />
+                                                </Column>
+                                            </Row>
+                                        </Row>
+                                        {classes.activities.map((activities) => {
+                                            return(
+                                                <>
+                                                  
+                                                </>
+                                            )
+                                        })}
+                                    </Column>
+                                )
+                            })}
+                        </Column>
                         <Divider />
                     </div>
                 )
             })}
-            <ModalAddModule onHide={() => setVisible(!visible)} visible={visible} />
+            {/* <ModalAddModule onHide={() => setVisible(!visible)} visible={visible} /> */}
         </ContentPage >
     )
 }

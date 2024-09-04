@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
@@ -8,6 +8,8 @@ import { CreateActivities } from "../../type";
 
 export const CreateActivitiesController = () => {
   const history = useNavigate();
+
+  const {idModule} = useParams()
 
   const CreateActivitiesMutation = useMutation(
     (data: CreateActivities) => CreateActivitiesRequest(data),
@@ -21,7 +23,7 @@ export const CreateActivitiesController = () => {
       },
       onSuccess: (data, va) => {
         queryClient.refetchQueries("useRequestsListModule")
-        history("/modulos/"+va.id_classes)
+        history("/modulos/"+idModule)
       },
 
     }
