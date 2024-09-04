@@ -1284,7 +1284,7 @@
     transition-duration: 0.2s;
   }
   .p-inputswitch.p-highlight .p-inputswitch-slider {
-    background: var(--primary-color);
+    background: brown;
   }
   .p-inputswitch.p-highlight .p-inputswitch-slider:before {
     background: #ffffff;

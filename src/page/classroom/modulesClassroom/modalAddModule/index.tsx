@@ -15,7 +15,7 @@ const ModalAddModule = ({ onHide, visible }: { visible?: boolean | undefined, on
             <div style={{ gap: '16px' }}>
 
 
-                {/* {props?.allmodulesList?.map((item) => {
+                {props?.allModules?.map((item) => {
                     return (
                         <Column>
                             <Row style={{ width: "100%" }} id="space-between">
@@ -28,7 +28,7 @@ const ModalAddModule = ({ onHide, visible }: { visible?: boolean | undefined, on
                             <Padding />
                         </Column>
                     )
-                })} */}
+                })}
             </div>
         </Dialog>
     )

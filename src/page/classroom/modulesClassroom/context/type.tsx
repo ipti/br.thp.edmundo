@@ -1,12 +1,13 @@
-import { AddModuleClassroom, ModuleClassroom } from "../type";
+import { AddModuleClassroom, Module } from "../type";
 
 export interface ClassroomModulesContextType {
-    modulesClassroomList: ModulesList | undefined;
-    isLoading: boolean;
-    isError: boolean;
-    AddModuleClassroom: (body: AddModuleClassroom) => void
-    UpdateModuleClassroom: (body: {
-      active: boolean;
+  allModules: Module[] | undefined
+  modulesClassroomList: ModulesList | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  AddModuleClassroom: (body: AddModuleClassroom) => void
+  UpdateModuleClassroom: (body: {
+    active: boolean;
   }, id: number) => void
 }
 
@@ -44,9 +45,22 @@ export interface Class {
   updatedAt: string
   moduleId: number
   classroom_classes: ClassroomClass[]
-  activities: any[]
+  activities: Activities[]
 }
 
+export interface Activities {
+  id: number
+  name: string
+  description: any
+  type_activities: string
+  points_activities: number
+  difficult: string
+  time_activities: number
+  createdAt: string
+  updatedAt: string
+  classesId: number
+  classroom_activities: any[]
+}
 export interface ClassroomClass {
   id: number
   active: boolean

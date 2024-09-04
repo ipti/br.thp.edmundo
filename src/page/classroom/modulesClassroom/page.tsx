@@ -56,30 +56,44 @@ const ClassroomModulesPage = () => {
                         <Column>
                             {item.classes.map((classes) => {
                                 return (
-                                    <Column>
+                                    <Padding padding="16px">
                                         <Row id="space-between">
                                             <Row>
-                                                <Padding padding="8px" />
+
                                                 <Column id="center">
                                                     <Icon icon="pi pi-chevron-down" size="16px" />
                                                 </Column>
                                                 <Padding />
-                                                <h4>
-                                                    {classes.name}
-                                                </h4>
-                                                <Column>
-                                                    <InputSwitch checked={true} onChange={(e) => { }} />
+                                                <Column id="center">
+                                                    <h4>
+                                                        {classes.name}
+                                                    </h4>
                                                 </Column>
                                             </Row>
+                                            <Column>
+                                                <InputSwitch style={{color: "cadetblue"}} checked={true} onChange={(e) => { }} />
+                                            </Column>
                                         </Row>
+                                        <Padding />
                                         {classes.activities.map((activities) => {
-                                            return(
-                                                <>
-                                                  
-                                                </>
+                                            return (
+                                                <Padding padding="16px">
+                                                    <Row id="space-between">
+                                                        <Row>
+                                                        <Icon icon="pi pi-file" />
+                                                        <Padding />
+                                                        <Column id="center">
+                                                            {activities.name}
+                                                        </Column>
+                                                        </Row>
+                                                        <Column>
+                                                            <InputSwitch checked={false} onChange={(e) => { }} />
+                                                        </Column>
+                                                    </Row>
+                                                </Padding>
                                             )
                                         })}
-                                    </Column>
+                                    </Padding>
                                 )
                             })}
                         </Column>
@@ -87,7 +101,7 @@ const ClassroomModulesPage = () => {
                     </div>
                 )
             })}
-            {/* <ModalAddModule onHide={() => setVisible(!visible)} visible={visible} /> */}
+            <ModalAddModule onHide={() => setVisible(!visible)} visible={visible} />
         </ContentPage >
     )
 }
