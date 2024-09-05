@@ -3,8 +3,8 @@ import { AllclasseRequest, AllModuleClassroomRequest, AllModuleRequest } from ".
 
 
 
-export const useFetchRequestAllModule = () => {
-  return useQuery(["useRequestsListModule"], () => AllModuleRequest());
+export const useFetchRequestAllModule = (id: number) => {
+  return useQuery(["useRequestsListModule", id], () => AllModuleRequest(id));
 };
 
 export const useFetchRequestAllModuleClassroom = (id: number) => {

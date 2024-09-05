@@ -20,3 +20,14 @@ export interface ModuleClassroom {
     updatedAt: string
   }
   
+  export interface AddClasseClassroom {
+    idClasse: number, 
+    idClassroom: number
+}
+
+
+export interface AddAtivitiesClassroom {
+  idClassroom: number, 
+  idActivities : number
+}
+

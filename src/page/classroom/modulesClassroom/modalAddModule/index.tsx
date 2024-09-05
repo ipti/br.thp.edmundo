@@ -1,9 +1,9 @@
 import { Dialog } from "primereact/dialog"
 import { useContext } from "react"
-import { ClassroomModulesContext } from "../context/context"
-import { Column, Padding, Row } from "../../../../Styles/styles"
-import { Button } from "primereact/button"
 import { useParams } from "react-router-dom"
+import CheckboxComponent from "../../../../Components/Checkbox"
+import { Column, Padding, Row } from "../../../../Styles/styles"
+import { ClassroomModulesContext } from "../context/context"
 
 const ModalAddModule = ({ onHide, visible }: { visible?: boolean | undefined, onHide(): void }) => {
 
@@ -11,8 +11,9 @@ const ModalAddModule = ({ onHide, visible }: { visible?: boolean | undefined, on
 
     const props = useContext(ClassroomModulesContext)
     return (
-        <Dialog header="Adicionar Módulos" visible={visible} onHide={onHide}>
-            <div style={{ gap: '16px' }}>
+        <Dialog header="Adicionar Módulos" visible={visible}  onHide={onHide}>
+             <Padding />
+            <div style={{ gap: '16px' }} className="card">
 
 
                 {props?.allModules?.map((item) => {
@@ -23,9 +24,9 @@ const ModalAddModule = ({ onHide, visible }: { visible?: boolean | undefined, on
                                     {item.name}
                                 </Column>
                                 <Padding />
-                                <Button icon="pi pi-plus" onClick={() => { props.AddModuleClassroom({ idClassroom: parseInt(id!), idModule: item.id }); onHide() }} />
+                                <CheckboxComponent checked={item.classroom_module[0] ? true : false}  onChange={() => { item.classroom_module[0] ? props.RemoveModuleClassroom({ idClassroom: parseInt(id!), idModule: item.id }) : props.AddModuleClassroom({ idClassroom: parseInt(id!), idModule: item.id }); onHide() }} />
                             </Row>
-                            <Padding />
+                            <Padding padding="8px" />
                         </Column>
                     )
                 })}
