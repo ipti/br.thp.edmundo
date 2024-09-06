@@ -4,4 +4,5 @@ export interface ListReapplicationContextType {
     reapplicationList: ReapplicationList | undefined;
     isLoading: boolean;
     isError: boolean;
+    DeleteReapplication: (id: number) => void
 }

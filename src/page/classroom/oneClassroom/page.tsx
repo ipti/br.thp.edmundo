@@ -44,7 +44,6 @@ const ClassroomOnePage = () => {
 
             {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false }) }}>
                 {({ values, handleChange }) => {
-
                     return (
                         <Form>
                             <Row id="end" style={{ gap: "10px" }}>
@@ -74,8 +73,6 @@ const ClassroomOnePage = () => {
 
             </Formik>}
             <Padding />
-
-
             <h3>Código da turma: {generateCode(props.classroomOne?.classroom?.id!)}</h3>
             <Padding padding="16px" />
             <div className="grid">
@@ -85,13 +82,10 @@ const ClassroomOnePage = () => {
                 >
                     <CardItensClassrooom title="Membros" description="Visualize os membros da turma" icon={pessoas} count={props.classroomOne?.classroom._count.user} />
                 </div>
-                <div className="col-12 md:col-6">
-                    <CardItensClassrooom title="Atividades" description="Visualizr as atividades da turma" icon={meeting} />
+                <div className="col-12 md:col-6" onClick={() => { history('modulos') }}>
+                    <CardItensClassrooom title="Módulos" description="Visualize os módulos adicionados a turma" icon={meeting} />
                 </div>
-
-
             </div>
-
         </ContentPage>
     )
 }

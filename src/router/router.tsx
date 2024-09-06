@@ -12,31 +12,47 @@ import ClassroomOne from "../page/classroom/oneClassroom/page";
 import MembersClassroom from "../page/classroom/membersClassroom/page";
 import UserList from "../page/user/listUser/page";
 import UserCreate from "../page/user/createUser/page";
+import ModuleList from "../page/module/listModule/page";
+import ModulesCreate from "../page/module/createModule/page";
+import ModuleOne from "../page/module/oneModule/page";
+import ClassesCreate from "../page/classes/createClasses/page";
+import ActivitiesCreate from "../page/activities/createActivities/page";
+import ClassroomModules from "../page/classroom/modulesClassroom/page";
+import ClassroomClasse from "../page/classroom/classesClassroom/page";
 
 const RoutesApp = () => {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Login />} path="/login"  />
-          <Route element={<RecoverPassword />} path="/recuperar"  />
-          <Route element={<PrivateRoute Component={<Profile />} />} path="/"  />
-          <Route element={<PrivateRoute Component={<Profile />} />} path="/perfil"  />
-          
-          <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
-          <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
-          <Route element={<PrivateRoute Component={<MembersClassroom />} />} path="/turma/:id/membros" />
-          <Route element={<PrivateRoute Component={<ClassroomCreate />} />} path="/turmas/criar" />
-          <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/reaplicacoes" />
-          <Route element={<PrivateRoute Component={<ReapplicationCreate />} />} path="/reaplicacoes/criar" />
-          <Route element={<PrivateRoute Component={<UserList />} />} path="/usuarios" />
-          <Route element={<PrivateRoute Component={<UserCreate />} />} path="/usuarios/criar" />
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Login />} path="/login" />
+        <Route element={<RecoverPassword />} path="/recuperar" />
+        <Route element={<PrivateRoute Component={<Profile />} />} path="/" />
+        <Route element={<PrivateRoute Component={<Profile />} />} path="/perfil" />
+
+        <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
+        <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
+        <Route element={<PrivateRoute Component={<MembersClassroom />} />} path="/turma/:id/membros" />
+        <Route element={<PrivateRoute Component={<ClassroomModules />} />} path="/turma/:id/modulos" />
+        <Route element={<PrivateRoute Component={<ClassroomClasse />} />} path="/turma/:id/aulas" />
+        <Route element={<PrivateRoute Component={<ClassroomCreate />} />} path="/turmas/criar" />
+        <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/reaplicacoes" />
+        <Route element={<PrivateRoute Component={<ReapplicationCreate />} />} path="/reaplicacoes/criar" />
+        <Route element={<PrivateRoute Component={<ModuleList />} />} path="/modulos" />
+        <Route element={<PrivateRoute Component={<ModulesCreate />} />} path="/modulos/criar" />
+        <Route element={<PrivateRoute Component={<ModuleOne />} />} path="/modulos/:id" />
+        <Route element={<PrivateRoute Component={<ClassesCreate />} />} path="/aulas/:idModule/criar" />
+        <Route element={<PrivateRoute Component={<ActivitiesCreate />} />} path="/atividades/:idClasses/criar/:idModule" />
 
 
-          {/* <Route path="/*" element={<NotFoundPage />} /> */}
-        </Routes>
-      </BrowserRouter>
-    );
-  };
-  
-  export default RoutesApp;
-  
+
+        <Route element={<PrivateRoute Component={<UserList />} />} path="/usuarios" />
+        <Route element={<PrivateRoute Component={<UserCreate />} />} path="/usuarios/criar" />
+
+
+        {/* <Route path="/*" element={<NotFoundPage />} /> */}
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default RoutesApp;

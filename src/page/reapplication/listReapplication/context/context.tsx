@@ -6,10 +6,10 @@ export const ListReapplicationContext = createContext<ListReapplicationContextTy
 
 const ListReapplicationProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { reapplicationList, isError, isLoading } = ListReapplicationState()
+    const { reapplicationList, isError, isLoading, DeleteReapplication } = ListReapplicationState()
 
     return (
-        <ListReapplicationContext.Provider value={{ reapplicationList, isError, isLoading }}>
+        <ListReapplicationContext.Provider value={{ reapplicationList, isError, isLoading, DeleteReapplication }}>
             {children}
         </ListReapplicationContext.Provider>
     )

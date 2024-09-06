@@ -5,6 +5,7 @@ export interface ListClassroomContextType {
     isLoading: boolean;
     isError: boolean;
     JoinTheClassroomClassroom: (body: JoinTheClassroom) => void
+    DeleteClassroom: (id: number) => void
 }
 
 export interface Classroom {

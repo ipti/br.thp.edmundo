@@ -69,6 +69,13 @@ export var typesex = [
   { id: 1, type: "Masculino" },
 ];
 
+export var difficult = [
+  { id: "BAIXO", name: "Baixo" },
+  { id: "MEDIO", name: "Media" },
+  { id: "ALTO", name: "Alto" },
+  { id: "MUITO_ALTO", name: "Muito alto" },
+];
+
 export const color_race = [
   { id: 0, name: "Não Declarada" },
   { id: 1, name: "Branca" },
@@ -160,3 +167,4 @@ export function generateCode(id: number) {
 export function removeLeadingZeros(code: string) {
   return parseInt(code, 10);
 }
+

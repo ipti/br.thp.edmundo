@@ -76,7 +76,6 @@ const LoginPage = () => {
         </Row> */}
         <div className="p-6" />
         <div style={{ zIndex: "500" }}>
-
           <Column >
             <Row id="center">
               <Formik

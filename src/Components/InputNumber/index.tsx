@@ -18,6 +18,7 @@ const InputNumberComponent = ({
                 style={{ width: "100%" }}
                 onBlur={onBlur}
                 disabled={disabled}
+                minFractionDigits={2} maxFractionDigits={5}
                 value={value}
                 name={name}
                 suffix={suffix}

@@ -33,6 +33,20 @@ export const OneClassroomRequest = async (id: string) => {
   }
 }
 
+export const DeleteClassroomRequest = async (id: number) => {
+  return await http
+      .delete("/classroom/" + id)
+      .then((response) => response.data)
+      .catch((err) => {
+          if (err.response.status === 401) {
+              logout()
+              window.location.reload()
+          }
+          throw err;
+      });
+
+}
+
 
 export const JoinTheClassroomRequest = async (body: JoinTheClassroom) => {
   return await http.put("/classroom-bff/join-the-classroom?idClassroom=" + body.idClassroom + "&idUser=" + body.idUser)
