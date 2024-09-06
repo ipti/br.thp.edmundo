@@ -11,10 +11,11 @@ const ModalAddModule = ({ onHide, visible }: { visible?: boolean | undefined, on
 
     const props = useContext(ClassroomModulesContext)
     return (
-        <Dialog header="Adicionar Módulos" visible={visible}  onHide={onHide}>
-             <Padding />
+        <Dialog header="Adicionar Módulos" visible={visible} style={{width: window.innerWidth > 600 ? "50%" : "80%"}} onHide={onHide}>
+            <Padding />
             <div style={{ gap: '16px' }} className="card">
 
+            <Padding padding="8px" />
 
                 {props?.allModules?.map((item) => {
                     return (

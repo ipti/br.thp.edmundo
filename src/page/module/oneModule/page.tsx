@@ -7,6 +7,7 @@ import { Column, Padding, Row } from "../../../Styles/styles"
 import { OneModulesContextType } from "../type"
 import OneModuleProvider, { OneModuleContext } from "./context/context"
 import Icon from "../../../Components/Icon"
+import { Divider } from "primereact/divider"
 
 const ModuleOne = () => {
     return (
@@ -67,6 +68,7 @@ const ModuleOnePage = () => {
                                 </p>
                             </Row>
                             <Padding padding="8px" />
+                            <Divider />
                             <h4>Atividades</h4>
                             <Padding padding="8px" />
                             {item.activities.map((activities) => {
@@ -80,11 +82,12 @@ const ModuleOnePage = () => {
                                 )
                             })}
                             <Padding padding="8px" />
-                            <Button icon={"pi pi-plus"} onClick={() => { history("/atividades/" + item.id + "/criar/" + id) }} />
+                            <Button icon={"pi pi-plus"} label="Adicionar atividade" onClick={() => { history("/atividades/" + item.id + "/criar/" + id) }} />
                         </AccordionTab>
                     )
                 })}
             </Accordion>
+            <Padding padding="32px" />
         </ContentPage>
     )
 }

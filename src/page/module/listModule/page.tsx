@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CardModule from "../../../Components/Card/CardModule";
 import ContentPage from "../../../Components/ContentPage";
 import Empty from "../../../Components/Empty";
-import { Row } from "../../../Styles/styles";
+import { Padding, Row } from "../../../Styles/styles";
 import { ListModulesContextType } from "../type";
 import ListModulesProvider, { ListModulesContext } from "./context/context";
 
@@ -32,11 +32,12 @@ const ModuleListPage = () => {
           }}
         />
       </Row>
+      <Padding />
       <div className="grid">
         {modulesListContext.modulesList?.map((item) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={item.id}>
-              <CardModule id={item.id} title={item.name} />
+              <CardModule id={item.id} title={item.name} handleDelete={() => { modulesListContext.DeleteModule(item.id) }} />
             </div>
           );
         })}

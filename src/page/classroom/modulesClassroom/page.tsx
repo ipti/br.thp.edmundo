@@ -32,7 +32,6 @@ const ClassroomModulesPage = () => {
                 return (
                     <div className="card">
                         <Padding />
-
                         <Row id="space-between">
                             <Column id="center">
                                 <h2>{item.name}</h2>
@@ -52,12 +51,10 @@ const ClassroomModulesPage = () => {
                                 return <ListActivities classes={classes} />
                             })}
                         </div>}
-
                     </div>
                 )
             })}
             <ModalAddModule onHide={() => setVisible(!visible)} visible={visible} />
-
         </ContentPage >
     )
 }

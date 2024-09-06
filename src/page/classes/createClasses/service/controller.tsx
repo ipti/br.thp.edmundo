@@ -19,11 +19,10 @@ export const CreateClassesController = () => {
           confirmButtonColor: styles.colors.colorPrimary,
         })
       },
-      onSuccess: (data) => {
+      onSuccess: (data, pd) => {
         queryClient.refetchQueries("useRequestsListModule")
-        history("/modulos/1")
+        history("/modulos/" + pd.module_id)
       },
-
     }
   );
 

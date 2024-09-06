@@ -13,3 +13,17 @@ export const AllModuleRequest = async () => {
       throw err;
     });
 }
+
+export const DeleteModuleRequest = async (id: number) => {
+  return await http
+      .delete("/modules/" + id)
+      .then((response) => response.data)
+      .catch((err) => {
+          if (err.response.status === 401) {
+              logout()
+              window.location.reload()
+          }
+          throw err;
+      });
+
+}

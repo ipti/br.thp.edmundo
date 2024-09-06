@@ -6,10 +6,10 @@ export const ListModulesContext = createContext<ListModulesContextType | null>(n
 
 const ListModulesProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { modulesList, isError, isLoading } = ListModulesState()
+    const { modulesList, isError, isLoading, DeleteModule } = ListModulesState()
 
     return (
-        <ListModulesContext.Provider value={{ modulesList, isError, isLoading }}>
+        <ListModulesContext.Provider value={{ modulesList, isError, isLoading, DeleteModule }}>
             {children}
         </ListModulesContext.Provider>
     )

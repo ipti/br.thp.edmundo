@@ -4,15 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import IconClassroom from "./../../../assets/image/project_card.svg";
 import { Container } from "./style";
+import Icon from "../../Icon";
+import styles from "../../../Styles";
 
 
 const CardModule = ({
   title,
-  id
+  id,
+  handleDelete
 }: {
   title: string;
-  classroomCount?: number;
-  registrationCount?: number,
+  handleDelete?: any;
+
   id: number;
 }) => {
   const [visible, setVisible] = useState(false);
@@ -31,17 +34,16 @@ const CardModule = ({
               <h3>{title}</h3>
             </Column>
           </Row>
-          {/* <div
+          <div
             className="cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               setVisible(true);
             }}
           >
-            <Icon icon="pi pi-trash" color={styles.colors.colorGrayElephant} size="1rem" fontWeight="900" />
-          </div> */}
+            <Icon icon="pi pi-trash" color={styles.colors.grayOne} size="1rem" fontWeight="900" />
+          </div>
         </Row>
-        < Padding padding="8px" />
       </Container>
       <ConfirmDialog
         visible={visible}
@@ -49,7 +51,7 @@ const CardModule = ({
         message="Tem certeza de que deseja prosseguir?"
         header="Confirmation"
         icon="pi pi-exclamation-triangle"
-        // accept={() => props.DeleteClassroom(id)}
+        accept={handleDelete}
         reject={() => setVisible(false)}
       />
     </>
