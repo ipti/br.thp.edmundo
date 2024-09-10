@@ -8,6 +8,8 @@ import { Padding } from "../../../Styles/styles";
 import InputsUser from "../inputs";
 import SignUpProvider, { SignUpContext } from "./context/context";
 import { SignUpContextTypes } from "./context/types";
+import Register from "./register/registerInput";
+import { validaCPF } from "../../../Controller/controllerValidCPF";
 
 const UserCreate = () => {
     return (
@@ -23,17 +25,29 @@ interface FormValues {
     password: string;
     confirmpassword?: string; // Torna confirmpassword opcional,
     role: {
-      id: string,
-      name: string
+        id: string,
+        name: string
     }
-  }
+    birthday: Date | string,
+    color_race: number | undefined,
+    sex: number | undefined,
+    zone: number | undefined,
+    deficiency: boolean | undefined,
+    cpf: string,
+    responsable_telephone: string,
+    responsable_name: string,
+    responsable_cpf: string,
+    kinship: string
+}
 
 
 const UserCreatePage = () => {
 
     const props = useContext(SignUpContext) as SignUpContextTypes
 
-    const CreateUserSchema = Yup.object().shape({
+
+
+    const schema = Yup.object().shape({
 
         name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
         password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
@@ -43,20 +57,92 @@ const UserCreatePage = () => {
             .label("Confirmar senha")
             .required("Campo Obrigatório")
             .oneOf([Yup.ref("password")], "Senhas difirentes"),
+        color_race: Yup.object().required("Raça/cor é obrigatório"),
+        deficiency: Yup.object().required("Deficiência é obrigatória"),
+        cpf: Yup.string().test("cpf-valid", "CPF inválido", (value) => {
+            if (value && value.trim() !== "") {
+                return validaCPF(value);
+            }
+            return true;
+        }),
+        responsable_cpf: Yup.string().test("cpf-valid", "CPF inválido", (value) => {
+            if (value && value.trim() !== "") {
+                return validaCPF(value);
+            }
+            return true;
+        }),
+        responsable_telephone: Yup.string().required("Telefone é obrigatório"),
+        birthday: Yup.string()
+            .nullable()
+            .required("Data de nascimento é obrigatória"),
+        zone: Yup.string().nullable().required("Zona é obrigatório"),
+        sex: Yup.object().nullable().required("Sexo é obrigatória"),
+    });
+
+    const schemaResponsable = Yup.object().shape({
+
+        name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
+        password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
+        role: Yup.object().required("Campo Obrigatório"),
+        email: Yup.string().required("Campo Obrigatório"),
+        confirmpassword: Yup.string()
+            .label("Confirmar senha")
+            .required("Campo Obrigatório")
+            .oneOf([Yup.ref("password")], "Senhas difirentes"),
+        color_race: Yup.object().required("Raça/cor é obrigatório"),
+        deficiency: Yup.object().required("Deficiência é obrigatória"),
+        cpf: Yup.string().test("cpf-valid", "CPF inválido", (value) => {
+            if (value && value.trim() !== "") {
+                return validaCPF(value);
+            }
+            return true;
+        }),
+        responsable_cpf: Yup.string().test("cpf-valid", "CPF inválido", (value) => {
+            if (value && value.trim() !== "") {
+                return validaCPF(value);
+            }
+            return true;
+        }),
+        responsable_telephone: Yup.string().required("Telefone é obrigatório"),
+        birthday: Yup.string()
+            .nullable()
+            .required("Data de nascimento é obrigatória"),
+        zone: Yup.string().nullable().required("Zona é obrigatório"),
+        sex: Yup.object().nullable().required("Sexo é obrigatória"),
+        responsable_name: Yup.string().required("Nome do responsável é obrigatório"),
+        kinship: Yup.object().required("Parentesco é obrigatório"),
     });
 
     return (
         <ContentPage title="Criar usuários" description="Criar usuário no Edmundo.">
             <Padding />
             <Formik
-                 initialValues={{ name: "", email: "", password: "", confirmpassword: "", role: { name: "Estudante", id: "STUDENT" }, }}
-                 onSubmit={(values: FormValues) => {
-                   delete values.confirmpassword;
-                   props.CreateUser({ ...values, role: values.role?.id });
-                 }}
-                validationSchema={CreateUserSchema}
+                initialValues={{
+                    name: "",
+                    email: "",
+                    password: "",
+                    confirmpassword: "",
+                    birthday: "",
+                    color_race: undefined,
+                    cpf: "",
+                    deficiency: false,
+                    kinship: "",
+                    responsable_cpf: "",
+                    responsable_name: "",
+                    responsable_telephone: "",
+                    role: { name: "", id: "" },
+                    sex: undefined,
+                    zone: undefined
+                }}
+                onSubmit={(values: FormValues) => {
+                    delete values.confirmpassword;
+                    props.CreateUser({ ...values, role: values.role?.id, });
+                }}
+                validationSchema={schema}
             >
-                {({ values, handleChange, errors, touched }) => {
+                {({ values, handleChange, errors, touched, setFieldValue }) => {
+
+                    console.log(values);
                     return (
                         <Form>
                             <InputsUser
@@ -101,6 +187,7 @@ const UserCreatePage = () => {
                                     ) : null}
                                 </div>
                             </div>{" "}
+                            <Register errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
                             <Padding padding="16px" />
                             <Button label="Criar" />
                         </Form>

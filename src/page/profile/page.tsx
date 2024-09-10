@@ -120,7 +120,6 @@ const ProfilePage = () => {
             }} onSubmit={(values) => {
                 const [dia, mes, ano] = values.birthday.split('/');
                 const data = new Date(`${mes}/${dia}/${ano}`);
-
                 props.UpdateUser({ ...values, sex: values.sex?.id, color_race: values.color_race?.id, deficiency: values.deficiency.id, zone: values.zone, birthday: data, kinship: values.kinship?.id! })
             }}>
 

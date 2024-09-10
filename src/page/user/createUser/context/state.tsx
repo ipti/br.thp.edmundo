@@ -2,7 +2,7 @@ import { CreateUserController } from "../service/controller"
 import { CreateUserTypes } from "../service/types"
 
 export const CreateUserState = () => {
-    const initialValue: CreateUserTypes = {
+    const initialValue: any = {
         email: "",
         name: "",
         password: "",
