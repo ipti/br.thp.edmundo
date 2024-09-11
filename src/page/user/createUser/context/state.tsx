@@ -14,7 +14,7 @@ export const CreateUserState = () => {
     const { CreateUserRequestMutation } = CreateUserController();
 
     const CreateUser = (body: CreateUserTypes) => {
-        CreateUserRequestMutation.mutate(body)
+        CreateUserRequestMutation.mutate({...body })
     }
     return { initialValue, CreateUser }
 }

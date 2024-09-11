@@ -1,5 +1,5 @@
 import { FormikErrors } from "formik"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, Dispatch, SetStateAction } from "react"
 import DropdownComponent from "../../../../Components/Dropdown"
 import MaskInput from "../../../../Components/InputMask"
 import RadioButtonComponent from "../../../../Components/RadioButton"
@@ -17,10 +17,11 @@ interface PropsRegister {
     errors: any,
     touched: any,
     setFieldValue: (field: string, value: any, shouldValidate?: boolean) => Promise<void | FormikErrors<any>>
+    isMaior: boolean
+    setIsMaior: Dispatch<SetStateAction<boolean>>
 }
 
-const Register = ({handleChange, values, errors, touched, setFieldValue}: PropsRegister) => {
-    const [isMaior, setIsMaior] = useState(true)
+const Register = ({handleChange, values, errors, touched, setFieldValue, isMaior, setIsMaior}: PropsRegister) => {
 
 
     return (

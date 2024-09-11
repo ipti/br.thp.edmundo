@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import * as Yup from "yup";
 import ContentPage from "../../../Components/ContentPage";
 import PasswordInput from "../../../Components/TextPassword";
@@ -42,6 +42,8 @@ interface FormValues {
 
 
 const UserCreatePage = () => {
+
+    const [isMaior, setIsMaior] = useState(true)
 
     const props = useContext(SignUpContext) as SignUpContextTypes
 
@@ -138,7 +140,7 @@ const UserCreatePage = () => {
                     delete values.confirmpassword;
                     props.CreateUser({ ...values, role: values.role?.id, });
                 }}
-                validationSchema={schema}
+                validationSchema={isMaior ? schema : schemaResponsable}
             >
                 {({ values, handleChange, errors, touched, setFieldValue }) => {
 
@@ -187,7 +189,7 @@ const UserCreatePage = () => {
                                     ) : null}
                                 </div>
                             </div>{" "}
-                            <Register errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
+                            <Register errors={errors} handleChange={handleChange} isMaior={isMaior} setIsMaior={setIsMaior} setFieldValue={setFieldValue} touched={touched} values={values} />
                             <Padding padding="16px" />
                             <Button label="Criar" />
                         </Form>
