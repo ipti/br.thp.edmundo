@@ -2,7 +2,7 @@ import { CreateUserController } from "../service/controller"
 import { CreateUserTypes } from "../service/types"
 
 export const CreateUserState = () => {
-    const initialValue: CreateUserTypes = {
+    const initialValue: any = {
         email: "",
         name: "",
         password: "",
@@ -14,7 +14,7 @@ export const CreateUserState = () => {
     const { CreateUserRequestMutation } = CreateUserController();
 
     const CreateUser = (body: CreateUserTypes) => {
-        CreateUserRequestMutation.mutate(body)
+        CreateUserRequestMutation.mutate({...body })
     }
     return { initialValue, CreateUser }
 }

@@ -5,7 +5,9 @@ import { UpdateUser } from "./types"
 export const UpdateUserRequest = async (body: UpdateUser) => {
     if (GetIdUser()) {
 
-        return await http.put("/user-registration-bff?idUser=" + GetIdUser(), {...body, cpf: body.cpf.replace(/[^a-zA-Z0-9]/g, ''), responsable_telephone: body.responsable_telephone.replace(/[^a-zA-Z0-9]/g, ''), responsable_cpf: body.responsable_cpf.replace(/[^a-zA-Z0-9]/g, '')})
+  
+
+        return await http.put("/user-registration-bff?idUser=" + GetIdUser(), {...body,  responsable_telephone: body?.responsable_telephone?.replace(/[^a-zA-Z0-9]/g, '')})
     } else {
         logout()
         window.location.reload()
