@@ -59,11 +59,13 @@ export const Padding =styled.div<PropsPadding> `
 `;
 
 export const Container = styled.div`
+background: linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%);
+  z-index: 1;
   min-height: 100%;
   height: auto;
   overflow-y: auto;
   width: 100%;
-  padding: 4% ;
+  padding: 32px ;
   font-size: ${styles.typography.font.medium};
   font-family: ${styles.typography.types.inter};
 `;

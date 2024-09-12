@@ -6,6 +6,7 @@ import { isAuthenticated } from "../service/localstorage";
 import AplicationProvider, { AplicationContext } from "../context/context";
 import { ROLE } from "../Controller/controllerGlobal";
 import LayoutStudent from "../Components/LayoutStudent/layout";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const PrivateRoute = ({ Component }: { Component: React.ReactNode }) => {
 
@@ -23,10 +24,12 @@ const LayoutVerify = ({ Component }: { Component: React.ReactNode }) => {
   const propsAplication = useContext(AplicationContext)
   return (
     <>
+    {propsAplication?.user ?<>
       {propsAplication?.user?.role === ROLE.STUDENT ? <LayoutStudent>{Component}</LayoutStudent> : <Layout>
 
         {Component}
       </Layout>}
+    </> : <ProgressSpinner />}
     </>
   )
 }
