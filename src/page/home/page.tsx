@@ -10,6 +10,10 @@ import { useFetchRequestOneClassroom } from "../classroom/listclassroom/service/
 import { Classroom } from "../classroom/oneClassroom/service/type";
 import HomeProvider, { HomeContext } from "./context/context";
 import { FormaRecover } from "./styles";
+import avatar from "../../assets/image/avatar.svg"
+import styled from "styled-components";
+import styles from "../../Styles";
+import CardHome from "../../Components/Card/CardsHome";
 
 
 const Home = () => {
@@ -17,6 +21,63 @@ const Home = () => {
         <HomeProvider>
             <HomePage />
         </HomeProvider>
+    )
+}
+
+const Avatar = styled.div`
+  border: 1px solid ${styles.colors.colorBorderCard};
+  height: 128px;
+  width: 128px;
+  border-radius: 50%;
+  
+  img {
+    border-radius: 50%; /* This will make the image circular */
+    height: 100%;
+    width: 100%;
+  }
+`;
+
+
+const HomeClassroomPage = () => {
+
+
+    return (
+        <Container style={{
+            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px"
+        }}>
+            <Row>
+                <Avatar>
+                    <img alt="" src={avatar} />
+                </Avatar>
+                <Padding />
+                <Column id="center">
+                    <h2>
+                        Lúcio Gomes
+                    </h2>
+                </Column>
+            </Row>
+            <Padding />
+            <h1>
+                Bem vindo a Turma a!
+            </h1>
+            <Padding />
+            <p>
+                Visualize as suas atividades:
+            </p>
+            <Padding padding="16px"/>
+            <div className="grid">
+                <div className="col-12 md:col-3">
+                    <CardHome />
+                </div>
+                <div className="col-12 md:col-3">
+                    <CardHome />
+                </div>
+                <div className="col-12 md:col-3">
+                    <CardHome />
+                </div>
+            </div>
+
+        </Container>
     )
 }
 
@@ -31,6 +92,8 @@ const HomePage = () => {
             setSearch(true)
         }
     }, [token])
+
+    if (true) return <HomeClassroomPage />
 
 
     return (
