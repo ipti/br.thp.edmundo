@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import TagLogin from "../../../assets/image/logo-edmundo.svg";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import LogoutTopBar from "./Logout";
@@ -13,7 +12,6 @@ const TopBar = ({
   setViewdMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 
-  const history = useNavigate();
 
   return (
     <Container>

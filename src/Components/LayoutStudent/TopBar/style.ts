@@ -9,7 +9,7 @@ export const Container = styled.div`
    height: 128px;
    justify-content: space-around;
    padding: 10px;
-   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
    .iconResponsive {
       @media screen and (min-width: 750px) {

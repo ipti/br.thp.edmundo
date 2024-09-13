@@ -17,14 +17,14 @@ export const FormaRecover = styled.div`
 
   @media screen and (max-width: 1550px) {
     img {
-      width: 80%;
-      margin-left: 20%;
+      width: 50%;
+      margin-left: 50%;
     }
   }
   @media screen and (max-width: 1200px) {
     img {
-      width: 70%;
-      margin-left: 30%;
+      width: 30%;
+      margin-left: 70%;
     }
   }
 `;
