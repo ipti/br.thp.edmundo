@@ -19,6 +19,8 @@ import ClassesCreate from "../page/classes/createClasses/page";
 import ActivitiesCreate from "../page/activities/createActivities/page";
 import ClassroomModules from "../page/classroom/modulesClassroom/page";
 import Home from "../page/home/page";
+import HomeModules from "../page/homeModule/page";
+import HomeActivities from "../page/homeActivities/page";
 
 const RoutesApp = () => {
   return (
@@ -27,6 +29,8 @@ const RoutesApp = () => {
         <Route element={<Login />} path="/login" />
         <Route element={<RecoverPassword />} path="/recuperar" />
         <Route element={<PrivateRoute Component={<Home />} />} path="/" />
+        <Route element={<PrivateRoute Component={<HomeModules />} />} path="/turma/:idClassroom/modulo/:idModule" />
+        <Route element={<PrivateRoute Component={<HomeActivities />} />} path="/turma/:idClassroom/modulo/:idModule/atividade/:idActivities" />
         <Route element={<PrivateRoute Component={<Profile />} />} path="/perfil" />
 
         <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
