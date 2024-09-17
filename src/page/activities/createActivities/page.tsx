@@ -10,6 +10,7 @@ import { useContext } from "react"
 import { CreateActivitiesType } from "../type"
 import DropdownComponent from "../../../Components/Dropdown"
 import { difficult } from "../../../Controller/controllerGlobal"
+import { Editor } from "primereact/editor"
 
 const ActivitiesCreate = () => {
     return (
@@ -21,6 +22,8 @@ const ActivitiesCreate = () => {
 
 const ActivitiesCreatePage = () => {
     const activitiesCreate = useContext(CreateActivitiesContext) as CreateActivitiesType
+
+
     return (
         <ContentPage title="Criar atividades" description="">
             <Padding />
@@ -55,12 +58,13 @@ const ActivitiesCreatePage = () => {
                             <div className="col-12 md:col-6">
                                 <label>Descrição</label>
                                 <Padding />
-                                <TextAreaComponent
+                                <Editor value={values.description} onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} />
+                                {/* <TextAreaComponent
                                     value={values.description}
                                     placeholder="Escreva a descrição da atividades"
                                     onChange={handleChange}
                                     name="description"
-                                />
+                                /> */}
                                 {errors.description && touched.description ? (
                                     <div style={{ color: "red", marginTop: "8px" }}>
                                         {errors.description}

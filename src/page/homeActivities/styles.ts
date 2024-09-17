@@ -1,4 +1,38 @@
 import styled from "styled-components";
+import typography from "../../Styles/typography";
+
+export const TextActivities = styled.div`
+  font-family: ${typography.types.regular};
+font-size: 22px;
+font-weight: bold;
+line-height: 22px;
+text-align: "justified";
+
+`;
+
+export const ButtonStart = styled.div`
+  padding: 16px;
+  width: auto;
+  color: white;
+  background-color: #2E62AC;
+  border-radius: 27px;
+  font-family: ${typography.types.regular};
+  font-size: 30.34px;
+  font-weight: 700;
+  line-height: 26.14px;
+  text-align: left;
+cursor: pointer;
+
+`;
+
+export const TextActivitiesParagraph = styled.div`
+  font-family: ${typography.types.normal};
+font-size: 22px;
+font-weight: 400;
+line-height: 22px;
+text-align: "justified";
+
+`;
 
 export const FormaRecover = styled.div`
   position: absolute;
