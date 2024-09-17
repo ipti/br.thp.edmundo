@@ -1,18 +1,18 @@
 import { createContext } from "react";
-import { HomeState } from "./state";
-import { HomeContextType } from "./types";
+import { HomeActivitiesState } from "./state";
+import { HomeActivitiesContextType } from "./types";
 
-export const HomeContext = createContext<HomeContextType | null>(null);
+export const HomeActivitiesContext = createContext<HomeActivitiesContextType | null>(null);
 
-const HomeProvider = ({ children }: { children: React.ReactNode }) => {
+const HomeActivitiesProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const {  JoinTheClassroomClassroom, classroomUser } = HomeState()
+    const {  activitiesOne } = HomeActivitiesState()
 
     return (
-        <HomeContext.Provider value={{  JoinTheClassroomClassroom, classroomUser }}>
+        <HomeActivitiesContext.Provider value={{ activitiesOne }}>
             {children}
-        </HomeContext.Provider>
+        </HomeActivitiesContext.Provider>
     )
 }
 
-export default HomeProvider;
+export default HomeActivitiesProvider;

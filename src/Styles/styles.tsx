@@ -31,6 +31,12 @@ export const Row = styled.div<PropsReverse>`
   display: flex;
   flex-direction: row;
 
+  #space-around {
+    
+    justify-content: space-around;
+  }
+
+
   #space-between {
     justify-content: space-between;
   }
@@ -54,7 +60,7 @@ interface PropsPadding {
   padding?: string;
 }
 
-export const Padding =styled.div<PropsPadding> `
+export const Padding = styled.div<PropsPadding> `
     padding: ${(props: any) => props.padding || "4px"};
 `;
 
@@ -67,5 +73,5 @@ background: linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%);
   width: 100%;
   padding: 32px ;
   font-size: ${styles.typography.font.medium};
-  font-family: ${styles.typography.types.inter};
+  font-family: ${styles.typography.types.regular};
 `;

@@ -9,6 +9,7 @@ import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeModulesProvider, { HomeModulesContext } from "./context/context";
 import { Class } from "./type";
 import { useNavigate, useParams } from "react-router-dom";
+import { AplicationContext } from "../../context/context";
 
 
 
@@ -39,6 +40,7 @@ const HomeModulePage = () => {
     const { idClassroom, idModule } = useParams()
 
     const [classes, setClass] = useState<Class | undefined>()
+    const propsAplication = useContext(AplicationContext)
 
 
     const propsHome = useContext(HomeModulesContext)
@@ -63,13 +65,13 @@ const HomeModulePage = () => {
                 <Padding />
                 <Column id="center">
                     <h2>
-                        Lúcio Gomes
+                        {propsAplication?.user?.name}
                     </h2>
                 </Column>
             </Row>
             <Padding />
             <h1>
-                Bem vindo a Turma a!
+                Bem vindo ao {propsHome.modules.name}
             </h1>
             <Padding />
             <p>

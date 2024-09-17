@@ -25,7 +25,7 @@ const CardHome = ({ name, status }: CardHomeType) => {
                     <Row id="center">
 
                         <div style={{ background: " #6E97D2", padding: "8px", borderRadius: "25px", maxWidth: 160 }}>
-                            {status ? <Row>
+                            {!status ? <Row>
                                 <img src={look} alt="" /><Padding /> <h4 style={{ color: "white" }}>Bloqueado</h4>
                             </Row> : <Row> <img src={look_open} alt="" /> <Padding /><h4 style={{ color: "white" }}>Desbloqueado</h4></Row>}
                         </div>

@@ -2,11 +2,23 @@ import styled from "styled-components";
 import typography from "../../Styles/typography";
 
 export const TextActivities = styled.div`
+
+h1 {
   font-family: ${typography.types.regular};
-font-size: 22px;
-font-weight: bold;
-line-height: 22px;
-text-align: "justified";
+
+}
+  font-family: ${typography.types.regular};
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 22px;
+  text-align: "justified";
+p {
+  font-family: ${typography.types.regular};
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: "justified";
+}
 
 `;
 
@@ -26,7 +38,7 @@ cursor: pointer;
 `;
 
 export const TextActivitiesParagraph = styled.div`
-  font-family: ${typography.types.normal};
+  font-family: ${typography.types.regular};
 font-size: 22px;
 font-weight: 400;
 line-height: 22px;

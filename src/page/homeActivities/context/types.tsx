@@ -1,7 +1,6 @@
-import { ClasroomUser, JoinTheClassroom } from "../type";
+import { Activities } from "../type";
 
-export interface HomeContextType {
-    JoinTheClassroomClassroom: (body: JoinTheClassroom) => void
-    classroomUser: ClasroomUser | undefined
+export interface HomeActivitiesContextType {
+    activitiesOne: Activities | undefined
 }
 

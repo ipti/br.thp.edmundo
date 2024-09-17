@@ -42,7 +42,7 @@ const Avatar = styled.div`
 
 
 const HomeClassroomPage = () => {
-
+    const propsAplication = useContext(AplicationContext)
     const propsHome = useContext(HomeContext)
     const history = useNavigate()
 
@@ -61,25 +61,25 @@ const HomeClassroomPage = () => {
                 <Padding />
                 <Column id="center">
                     <h2>
-                        Lúcio Gomes
+                        {propsAplication?.user?.name}
                     </h2>
                 </Column>
             </Row>
             <Padding />
             <h1>
-                Bem vindo a Turma a!
+                Bem vindo a {propsHome?.classroomUser[0]?.name}!
             </h1>
             <Padding />
             <p>
-                Visualize as suas atividades:
+                Visualize os modulos da turma:
             </p>
             <Padding padding="16px" />
             <div className="grid">
 
                 {propsHome?.classroomUser![0].classroom_module?.map((item) => {
                     return (
-                        <div className="col-12 md:col-3" onClick={() => {
-                            history("/turma/" + propsHome?.classroomUser![0].id + "/modulo/" + item.module.id)
+                        <div className="col-12 md:col-3" style={{cursor: item.active ? "pointer" : "not-allowed"}} onClick={() => {
+                            if(item.active) history("/turma/" + propsHome?.classroomUser![0].id + "/modulo/" + item.module.id)
                         }} >
                             <CardHome name={item.module.name} status={item.active} />
                         </div>

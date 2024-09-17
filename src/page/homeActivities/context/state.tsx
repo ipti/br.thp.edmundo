@@ -1,27 +1,23 @@
 import { useEffect, useState } from "react";
-import { HomeController } from "../service/controller";
-import { JoinTheClassroom } from "../type";
-import { useFetchRequestClassroomUser } from "../service/query";
+import { useFetchRequestActivitiesOne } from "../service/query";
+import { useParams } from "react-router-dom";
+import { Activities } from "../type";
 
-export const HomeState = () => {
-    const [classroomUser, setClassroomuser] = useState<any | undefined>()
+export const HomeActivitiesState = () => {
+  const { idActivities } = useParams()
+  const [activitiesOne, setactivitiesOne] = useState<Activities | undefined>()
 
-    const {data: classroomUserRequest} = useFetchRequestClassroomUser()
+  const { data: activitiesOneRequest } = useFetchRequestActivitiesOne(idActivities!)
 
-    useEffect(() => {
-      if(classroomUserRequest){
-        setClassroomuser(classroomUserRequest)
-      }
-    }, [classroomUserRequest])
-    
-
-
-    const { JoinTheClassroomMutation } = HomeController();
-
-    const JoinTheClassroomClassroom = (body: JoinTheClassroom) => {
-        JoinTheClassroomMutation.mutate(body)
+  useEffect(() => {
+    if (activitiesOneRequest) {
+      setactivitiesOne(activitiesOneRequest)
     }
+  }, [activitiesOneRequest])
 
- 
-    return { JoinTheClassroomClassroom, classroomUser }
+
+
+console.log(activitiesOne)
+
+  return { activitiesOne }
 }

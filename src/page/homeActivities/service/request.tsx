@@ -1,15 +1,11 @@
-import http from "../../../service/axios"
-import { logout } from "../../../service/localstorage"
-import { JoinTheClassroom } from "../type"
+import http from "../../../service/axios";
+import { logout } from "../../../service/localstorage";
 
-export const JoinTheClassroomRequest = async (body: JoinTheClassroom) => {
-    return await http.put("/classroom-bff/join-the-classroom?idClassroom=" + body.idClassroom + "&idUser=" + body.idUser)
-  }
   
-  export const ListClassroomRequest = async () => {
+  export const ActivitiesRequest = async (id: string) => {
 
     return await http
-      .get("/classroom-bff/user")
+      .get("/activities/"+id)
       .then((response) => response.data)
       .catch((err) => {
         if (err.response.status === 401) {

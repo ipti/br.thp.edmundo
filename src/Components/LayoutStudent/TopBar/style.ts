@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import styles from "../../../Styles";
+import typography from "../../../Styles/typography";
+import color from "../../../Styles/colors";
 
 
 export const Container = styled.div`
@@ -27,4 +29,21 @@ export const Back = styled.div`
    :hover{
       color: ${styles.colors.colorNavyBlue}
    }
+`;
+
+
+interface TextHeaderType {
+   isActive: boolean
+}
+
+export const TextHeader = styled.div<TextHeaderType>`
+
+color: ${props => props.isActive ? "black" : color.grayOne};
+cursor: pointer;
+  font-family: ${typography.types.regular};
+font-size: 22px;
+font-weight: bold;
+line-height: 22px;
+text-align: "justified";
+
 `;

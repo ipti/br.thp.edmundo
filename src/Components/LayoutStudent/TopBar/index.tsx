@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import TagLogin from "../../../assets/image/logo-edmundo.svg";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import LogoutTopBar from "./Logout";
-import { Container } from "./style";
+import { Container, TextHeader } from "./style";
 
 
 const TopBar = ({
@@ -11,6 +12,8 @@ const TopBar = ({
   viewdMenu: boolean;
   setViewdMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+
+  const history = useNavigate()
 
 
   return (
@@ -44,11 +47,11 @@ const TopBar = ({
         </Row>
       </Column>
       <Column id="center">
-        <Row style={{gap: "16px"}}>
-          <h3>Home</h3>
-          <h3>Acessar turma</h3>
-          <h3>Historico</h3>
-          <h3>Perfil</h3>
+        <Row style={{gap: "32px"}}>
+          <TextHeader isActive={true} onClick={() => history("/")}>Home</TextHeader>
+          <TextHeader isActive={false}>Acessar turma</TextHeader>
+          <TextHeader isActive={false}>Historico</TextHeader>
+          <TextHeader isActive={false} onClick={() => history("/perfil")}>Perfil</TextHeader>
         </Row>
       </Column>
       <Column style={{ width: "auto" }} id="center">

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { ListClassroomRequest } from "./request";
+import { ActivitiesRequest } from "./request";
 
-export const useFetchRequestClassroomUser = () => {
-    return useQuery(["useRequestsListClassroomUser"], () => ListClassroomRequest());
+export const useFetchRequestActivitiesOne = (id: string) => {
+    return useQuery(["useRequestActivitiesOne", id], () => ActivitiesRequest(id));
   };

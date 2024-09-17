@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Buffer } from 'buffer'; 
+import { Buffer } from 'buffer';
 
 
 export const gerarIdAleatorio = (tamanho: number) => {
@@ -24,15 +24,15 @@ export function formatarData(data: string): string {
 export function converterData(data: string) {
   // Divide a string pelo separador "/"
   const partes = data.split('/');
-  
+
   // As partes serão: partes[0] = dia, partes[1] = mês, partes[2] = ano
   const dia = partes[0];
   const mes = partes[1];
   const ano = partes[2];
-  
+
   // Reorganiza no formato YYYY-MM-DD
   const dataFormatada = `${ano}-${mes}-${dia}`;
-  
+
   return dataFormatada;
 }
 
@@ -112,6 +112,21 @@ export const kinship = [
   { id: "NAO_PARENTE", name: 'Não Parente' }
 ]
 
+type DifficulteKeys = keyof typeof difficulte;
+
+
+export function getDifficulte(key: DifficulteKeys): string {
+  return difficulte[key];
+}
+
+
+export const difficulte = {
+  BAIXO: "Baixo",
+  MEDIO: "Media",
+  ALTO: "Alto",
+  MUITO_ALTO: "Muito alto",
+}
+
 export const loadImageFileAsBase64 = (imagePath: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     fetch(imagePath)
@@ -151,10 +166,10 @@ export function isMaiorDeIdade(dataString: string) {
   let idade = hoje.getFullYear() - dataNascimento.getFullYear();
   const mesAtual = hoje.getMonth();
   const mesNascimento = dataNascimento.getMonth();
-  
+
   // Ajusta a idade se o aniversário não foi atingido este ano
   if (mesAtual < mesNascimento || (mesAtual === mesNascimento && hoje.getDate() < dataNascimento.getDate())) {
-      idade--;
+    idade--;
   }
 
   return idade >= idadeMinima;
