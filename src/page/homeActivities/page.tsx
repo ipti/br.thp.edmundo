@@ -4,6 +4,9 @@ import { getDifficulte } from "../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeActivitiesProvider, { HomeActivitiesContext } from "./context/context";
 import { ButtonStart, TextActivities, TextActivitiesParagraph } from "./styles";
+import { useParams } from "react-router-dom";
+import DropFileInput from "../../Components/DragAndDropFile";
+import { Button } from "primereact/button";
 
 
 const HomeActivities = () => {
@@ -19,7 +22,11 @@ const HomeActivitiesPage = () => {
 
     const propsAplication = useContext(HomeActivitiesContext)
 
-    const dif = getDifficulte(propsAplication?.activitiesOne?.difficult!)
+    const dif = getDifficulte(propsAplication?.activitiesOne?.difficult)
+
+    const { idClassroom } = useParams()
+
+
 
 
     return (
@@ -27,22 +34,21 @@ const HomeActivitiesPage = () => {
             height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px"
         }}>
             <div className="grid">
-                <div className="card col-12 md:col-6">
-                    <Padding padding="32px">
-                        <TextActivities>{propsAplication?.activitiesOne?.name}</TextActivities>
-                        <Padding padding="16px" />
-                        <TextActivities>
-                            <div
-                                dangerouslySetInnerHTML={{ __html: propsAplication?.activitiesOne?.description! }}
-                            />
-                        </TextActivities>
-                        <Padding padding="16px" />
-                    </Padding>
-                </div>
-                <div className="col-12 md:col-6">
-                    <Row id="center">
+                <div className="col-12 md:col-5 md:px-8">
+                    <Row id="start">
                         <Column>
-                            <ButtonStart><Row id="space-around"><div></div><Column id="center">Iniciar atividade</Column> <img style={{ width: 48 }} src={sound} alt="" /></Row></ButtonStart>
+
+                            {!propsAplication?.activitiesOne?.user_activities ? <ButtonStart onClick={() => {
+                                propsAplication?.JoinTheActivitiesUser({ idActivities: propsAplication.activitiesOne?.id!, idClassroom: parseInt(idClassroom!) })
+                            }}><Row id="space-around"><div></div><Column id="center">Iniciar atividade</Column> <img style={{ width: 48 }} src={sound} alt="" /></Row></ButtonStart>
+                                : <>
+                                    <h1>1. Anexe sua atividade clicando no botão a seguir:</h1>
+                                    <Padding padding="8px" />
+                                    <DropFileInput />
+                                    <Padding padding="8px" />
+                                    <Button label="Enviar Atividade" />
+                                </>
+                            }
                             <Padding padding="16px" />
                             <div className="card">
                                 <Row style={{ gap: "4px" }}>
@@ -76,6 +82,19 @@ const HomeActivitiesPage = () => {
                         </Column>
                     </Row>
                 </div>
+                <div className="card col-12 md:col-7">
+                    <Padding padding="32px">
+                        <TextActivities>{propsAplication?.activitiesOne?.name}</TextActivities>
+                        <Padding padding="16px" />
+                        <TextActivities>
+                            <div
+                                dangerouslySetInnerHTML={{ __html: propsAplication?.activitiesOne?.description! }}
+                            />
+                        </TextActivities>
+                        <Padding padding="16px" />
+                    </Padding>
+                </div>
+
             </div>
         </Container>
     )

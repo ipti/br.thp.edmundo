@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestActivitiesOne } from "../service/query";
 import { useParams } from "react-router-dom";
-import { Activities } from "../type";
+import { Activities, JoinTheActivitiesUser } from "../type";
+import { HomeActivitiesController } from "../service/controller";
 
 export const HomeActivitiesState = () => {
   const { idActivities } = useParams()
@@ -15,9 +16,11 @@ export const HomeActivitiesState = () => {
     }
   }, [activitiesOneRequest])
 
+  const {JoinTheActivitiesUserMutation} = HomeActivitiesController()
 
+  const JoinTheActivitiesUser = (body: JoinTheActivitiesUser) => {
+    JoinTheActivitiesUserMutation.mutate(body)
+}
 
-console.log(activitiesOne)
-
-  return { activitiesOne }
+  return { activitiesOne, JoinTheActivitiesUser }
 }

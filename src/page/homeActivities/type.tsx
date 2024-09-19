@@ -1,5 +1,5 @@
-export interface JoinTheClassroom {
-    idUser : number
+export interface JoinTheActivitiesUser {
+    idActivities : number
     idClassroom: number
   }
   
@@ -15,5 +15,16 @@ export interface JoinTheClassroom {
     createdAt: string
     updatedAt: string
     classesId: number
+    user_activities: UserActivity[]
+  }
+  
+  export interface UserActivity {
+    id: number
+    status: string
+    createdAt: string
+    updatedAt: string
+    activities_fk: number
+    usersId: any
+    user_classroomId: number
   }
   
