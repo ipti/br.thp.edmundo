@@ -88,12 +88,14 @@ const HomeModulePage = () => {
             <Padding padding="16px" />
 
             <div className="grid">
-                {classes?.activities?.map((item) => {
+                {classes?.activities?.map((item, index) => {
                     return (
-                        <div className="col-12 md:col-3" onClick={() => {
-                            history("/turma/" + idClassroom + "/modulo/" + idModule + "/atividade/" + item.id)
-                        }}>
-                            <CardHome name={item.name} status={false} />
+                        <div className="col-12 md:col-3"
+                        style={{cursor: item?.classroom_activities[0]?.active ? "pointer" : "not-allowed"}}
+                        onClick={() => 
+                            item?.classroom_activities[0]?.active ? history("/turma/" + idClassroom + "/modulo/" + idModule + "/atividade/" + item.id) : null
+                        }>
+                            <CardHome name={item.name} status={item?.classroom_activities[0]?.active} index={index} />
                         </div>
                     )
                 })}

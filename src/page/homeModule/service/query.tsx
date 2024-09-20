@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { FindOneModuleRequest } from "../../module/oneModule/service/request";
+import { FindOneModuleClassroomRequest } from "./request";
 
-export const useFetchRequestHomeFindOneModuleBff = (id: string) => {
-  return useQuery(["useRequestsFindOneModuleHome", id], () => FindOneModuleRequest(id));
+export const useFetchRequestHomeFindOneModuleBff = (id: string, idClassroom: string) => {
+  return useQuery(["useRequestsFindOneModuleHome", id], () => FindOneModuleClassroomRequest(id, idClassroom));
 };

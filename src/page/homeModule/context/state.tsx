@@ -5,10 +5,10 @@ import { Module } from "../type";
 
 export const HomeModulesState = () => {
 
-  const { idModule } = useParams()
+  const { idModule, idClassroom } = useParams()
   const [modules, setModuleuser] = useState<Module | undefined>()
 
-  const { data: ModuleUserRequest } = useFetchRequestHomeFindOneModuleBff(idModule!)
+  const { data: ModuleUserRequest } = useFetchRequestHomeFindOneModuleBff(idModule!, idClassroom!)
 
   useEffect(() => {
     if (ModuleUserRequest) {

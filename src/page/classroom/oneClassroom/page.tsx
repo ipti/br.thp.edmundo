@@ -85,6 +85,9 @@ const ClassroomOnePage = () => {
                 <div className="col-12 md:col-6" onClick={() => { history('modulos') }}>
                     <CardItensClassrooom title="Módulos" description="Visualize os módulos adicionados a turma" icon={meeting} />
                 </div>
+                <div className="col-12 md:col-6" onClick={() => { history('atividades') }}>
+                    <CardItensClassrooom title="Atividades" description="Visualize as atividades entregues pelos alunos" icon={meeting} />
+                </div>
             </div>
         </ContentPage>
     )

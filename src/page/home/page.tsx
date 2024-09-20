@@ -76,12 +76,12 @@ const HomeClassroomPage = () => {
             <Padding padding="16px" />
             <div className="grid">
 
-                {propsHome?.classroomUser![0].classroom_module?.map((item) => {
+                {propsHome?.classroomUser![0].classroom_module?.map((item, index) => {
                     return (
-                        <div className="col-12 md:col-3" style={{cursor: item.active ? "pointer" : "not-allowed"}} onClick={() => {
+                        <div key={index} className="col-12 md:col-3" style={{cursor: item.active ? "pointer" : "not-allowed"}} onClick={() => {
                             if(item.active) history("/turma/" + propsHome?.classroomUser![0].id + "/modulo/" + item.module.id)
                         }} >
-                            <CardHome name={item.module.name} status={item.active} />
+                            <CardHome name={item.module.name} status={item.active} index={index} />
                         </div>
                     )
                 })}
