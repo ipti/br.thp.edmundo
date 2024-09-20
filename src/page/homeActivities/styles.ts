@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import typography from "../../Styles/typography";
+import color from "../../Styles/colors";
 
 export const TextActivities = styled.div`
 
@@ -10,6 +11,7 @@ h1 {
   font-family: ${typography.types.regular};
   font-size: 22px;
   font-weight: bold;
+  gap: 8;
   line-height: 22px;
   text-align: "justified";
 p {
@@ -22,18 +24,22 @@ p {
 
 `;
 
-export const ButtonStart = styled.div`
+interface ButtonStartType {
+  type?: "PRIMARY" | "SUCCESS"
+}
+
+export const ButtonStart = styled.div<ButtonStartType>`
   padding: 16px;
   width: auto;
   color: white;
-  background-color: #2E62AC;
+  background-color: ${props => props.type === "PRIMARY" ? color.colorPrimary: props.type === "SUCCESS" ? color.green : color.colorPrimary};
   border-radius: 27px;
   font-family: ${typography.types.regular};
   font-size: 30.34px;
   font-weight: 700;
   line-height: 26.14px;
   text-align: left;
-cursor: pointer;
+cursor: ${props => props.type === "PRIMARY" ? "pointer": props.type === "SUCCESS" ? "" : "pointer"};
 
 `;
 

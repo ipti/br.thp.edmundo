@@ -7,6 +7,8 @@ import { ButtonStart, TextActivities, TextActivitiesParagraph } from "./styles";
 import { useParams } from "react-router-dom";
 import DropFileInput from "../../Components/DragAndDropFile";
 import { Button } from "primereact/button";
+import Icon from "../../Components/Icon";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 
 const HomeActivities = () => {
@@ -27,6 +29,7 @@ const HomeActivitiesPage = () => {
     const { idClassroom } = useParams()
 
 
+    if(!propsAplication?.activitiesOne?.user_activities) return <ProgressSpinner />
 
 
     return (
@@ -38,15 +41,15 @@ const HomeActivitiesPage = () => {
                     <Row id="start">
                         <Column>
 
-                            {!propsAplication?.activitiesOne?.user_activities ? <ButtonStart onClick={() => {
+                            {propsAplication?.activitiesOne?.user_activities.length === 0 ? <ButtonStart onClick={() => {
                                 propsAplication?.JoinTheActivitiesUser({ idActivities: propsAplication.activitiesOne?.id!, idClassroom: parseInt(idClassroom!) })
                             }}><Row id="space-around"><div></div><Column id="center">Iniciar atividade</Column> <img style={{ width: 48 }} src={sound} alt="" /></Row></ButtonStart>
-                                : <>
+                                : propsAplication?.activitiesOne?.user_activities[0].status === "COMPLETED" ? <ButtonStart type="SUCCESS"><Row id="space-around"><div></div><Column id="center">Atividade enviada</Column> <Icon icon="pi pi-check" size="32px"/></Row></ButtonStart> : <>
                                     <h1>1. Anexe sua atividade clicando no botão a seguir:</h1>
                                     <Padding padding="8px" />
-                                    <DropFileInput />
+                                    <DropFileInput onFileChange={propsAplication?.onChangeFile} />
                                     <Padding padding="8px" />
-                                    <Button label="Enviar Atividade" />
+                                    <Button label="Enviar Atividade" onClick={() => propsAplication?.FinishActivitiesUser(propsAplication?.activitiesOne?.user_activities[0].id!)} />
                                 </>
                             }
                             <Padding padding="16px" />

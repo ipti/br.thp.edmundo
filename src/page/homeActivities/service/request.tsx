@@ -6,6 +6,14 @@ import { JoinTheActivitiesUser } from "../type";
 export const AddActivitiesUserRequest = async (body: JoinTheActivitiesUser) => {
   return await http.post("/activities-bff/add-activities-classroom-user?idClassroom=" + body.idClassroom + "&idActivities=" + body.idActivities)
 }
+
+export const FinishActivitiesUserRequest = async (id: number, files: any) => {
+  return await http.put("/activities-bff/finish-activities-classroom-user?id=" + id, files)
+}
+
+
+
+
 export const ActivitiesRequest = async (id: string) => {
 
   return await http

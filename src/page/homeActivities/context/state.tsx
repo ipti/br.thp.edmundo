@@ -8,6 +8,13 @@ export const HomeActivitiesState = () => {
   const { idActivities } = useParams()
   const [activitiesOne, setactivitiesOne] = useState<Activities | undefined>()
 
+  const [file, setFile] = useState<any>();
+
+
+  const onChangeFile = (e: any) => {
+    setFile(e)
+  }
+
   const { data: activitiesOneRequest } = useFetchRequestActivitiesOne(idActivities!)
 
   useEffect(() => {
@@ -16,11 +23,23 @@ export const HomeActivitiesState = () => {
     }
   }, [activitiesOneRequest])
 
-  const {JoinTheActivitiesUserMutation} = HomeActivitiesController()
+  const { JoinTheActivitiesUserMutation, FinishActivitiesUserMutation } = HomeActivitiesController()
 
   const JoinTheActivitiesUser = (body: JoinTheActivitiesUser) => {
     JoinTheActivitiesUserMutation.mutate(body)
-}
+  }
 
-  return { activitiesOne, JoinTheActivitiesUser }
+  const FinishActivitiesUser = (id: number) => {
+
+    const formData = new FormData();
+    if (file.length > 0) {
+      file.forEach((file: any) => {
+        formData.append("files", file);
+      });
+    }
+
+    FinishActivitiesUserMutation.mutate({ id: id, file: formData })
+  }
+
+  return { activitiesOne, JoinTheActivitiesUser, FinishActivitiesUser, onChangeFile }
 }
