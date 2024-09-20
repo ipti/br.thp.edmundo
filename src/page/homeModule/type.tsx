@@ -3,7 +3,6 @@ export interface JoinTheClassroom {
     idClassroom: number
   }
   
-
   export interface Module {
     id: number
     name: string
@@ -16,20 +15,13 @@ export interface JoinTheClassroom {
   export interface Class {
     id: number
     name: string
-    necessary_material: string
-    objective: string
-    duration: number
-    active: boolean
-    createdAt: string
-    updatedAt: string
-    moduleId: number
     activities: Activity[]
   }
   
   export interface Activity {
     id: number
     name: string
-    description: any
+    description?: string
     type_activities: string
     points_activities: number
     difficult: string
@@ -37,5 +29,23 @@ export interface JoinTheClassroom {
     createdAt: string
     updatedAt: string
     classesId: number
+    classroom_activities: ClassroomActivity[]
+    user_activities: UserActivity[]
+  }
+  
+  export interface ClassroomActivity {
+    id: number
+    active: boolean
+    activities_fk: number
+    classroom_fk: number
+  }
+  
+  export interface UserActivity {
+    id: number
+    status: string
+    createdAt: string
+    updatedAt: string
+    activities_fk: number
+    user_classroomId: number
   }
   
