@@ -1,15 +1,15 @@
 import { Form, Formik } from "formik"
-import ContentPage from "../../../Components/ContentPage"
-import { Column, Padding, Row } from "../../../Styles/styles"
 import { Button } from "primereact/button"
-import TextInput from "../../../Components/TextInput"
-import TextAreaComponent from "../../../Components/TextArea"
-import InputNumberComponent from "../../../Components/InputNumber"
-import CreateActivitiesProvider, { CreateActivitiesContext } from "./context/context"
+import { Editor } from "primereact/editor"
 import { useContext } from "react"
-import { CreateActivitiesType } from "../type"
+import ContentPage from "../../../Components/ContentPage"
 import DropdownComponent from "../../../Components/Dropdown"
+import InputNumberComponent from "../../../Components/InputNumber"
+import TextInput from "../../../Components/TextInput"
 import { difficult } from "../../../Controller/controllerGlobal"
+import { Column, Padding, Row } from "../../../Styles/styles"
+import { CreateActivitiesType } from "../type"
+import CreateActivitiesProvider, { CreateActivitiesContext } from "./context/context"
 
 const ActivitiesCreate = () => {
     return (
@@ -21,6 +21,8 @@ const ActivitiesCreate = () => {
 
 const ActivitiesCreatePage = () => {
     const activitiesCreate = useContext(CreateActivitiesContext) as CreateActivitiesType
+
+
     return (
         <ContentPage title="Criar atividades" description="">
             <Padding />
@@ -51,23 +53,22 @@ const ActivitiesCreatePage = () => {
                                     </div>
                                 ) : null}
                             </div>
-
                             <div className="col-12 md:col-6">
                                 <label>Descrição</label>
                                 <Padding />
-                                <TextAreaComponent
+                                <Editor  value={values.description} onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} />
+                                {/* <TextAreaComponent
                                     value={values.description}
                                     placeholder="Escreva a descrição da atividades"
                                     onChange={handleChange}
                                     name="description"
-                                />
+                                /> */}
                                 {errors.description && touched.description ? (
                                     <div style={{ color: "red", marginTop: "8px" }}>
                                         {errors.description}
                                     </div>
                                 ) : null}
                             </div>
-
                             <div className="col-12 md:col-6">
                                 <label>Nivel de dificuldade </label>
                                 <Padding />
