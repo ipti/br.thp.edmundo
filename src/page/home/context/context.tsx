@@ -6,10 +6,10 @@ export const HomeContext = createContext<HomeContextType | null>(null);
 
 const HomeProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const {  JoinTheClassroomClassroom, classroomUser } = HomeState()
+    const {  JoinTheClassroomClassroom, classroomUser, searchClassroom, setSearchClassroom } = HomeState()
 
     return (
-        <HomeContext.Provider value={{  JoinTheClassroomClassroom, classroomUser }}>
+        <HomeContext.Provider value={{  JoinTheClassroomClassroom, classroomUser, searchClassroom, setSearchClassroom }}>
             {children}
         </HomeContext.Provider>
     )

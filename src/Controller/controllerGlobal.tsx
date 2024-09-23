@@ -16,9 +16,31 @@ export const gerarIdAleatorio = (tamanho: number) => {
 };
 
 export function formatarData(data: string): string {
+
+  
+
   var date = data.toString().split("T")[0];
   var dataEdit = date.split("-").reverse().join("/");
   return dataEdit;
+}
+
+
+export function formatarDataHours(data: string): string {
+  // Criando um objeto Date a partir da string ISO (data)
+  const dateObj = new Date(data);
+
+  // Subtraindo 3 horas
+  dateObj.setHours(dateObj.getHours());
+
+  // Formatando a data no formato dd/mm/yyyy
+  const dataEdit = dateObj.toLocaleDateString('pt-BR'); // Converte para dd/mm/yyyy
+
+  // Formatando as horas e minutos (hh:mm)
+  const horas = dateObj.getHours().toString().padStart(2, '0'); // Adiciona zero à esquerda se necessário
+  const minutos = dateObj.getMinutes().toString().padStart(2, '0');
+
+  // Retornando a data no formato desejado (dd/mm/yyyy hh:mm)
+  return `${dataEdit} ${horas}:${minutos}`;
 }
 
 export function converterData(data: string) {

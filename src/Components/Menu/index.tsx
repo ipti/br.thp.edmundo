@@ -67,12 +67,12 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           {propsAplication.user?.role !== ROLE.STUDENT && <><Item
             text={"Reaplicações"}
             funcActiv={() => {
-              setActive(2);
-              menuItem("2");
+              setActive(1);
+              menuItem("1");
             }}
-            active={active === 2 ? true : false}
+            active={active === 1 ? true : false}
             path={"/reaplicacoes"}
-            icon={active === 2 ? reapplication_hover : reapplication}
+            icon={active === 1 ? reapplication_hover : reapplication}
           />
             <Padding /></>}
           <Item

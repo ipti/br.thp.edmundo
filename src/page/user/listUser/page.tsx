@@ -2,7 +2,7 @@ import { Button } from "primereact/button"
 import { Column } from "primereact/column"
 import { ConfirmDialog } from "primereact/confirmdialog"
 import { DataTable } from "primereact/datatable"
-import { ProgressBar } from "primereact/progressbar"
+import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
@@ -71,7 +71,7 @@ const UserListPage = () => {
         );
     };
 
-    if (props.isLoading) return <ProgressBar />;
+    if (props.isLoading) return <ProgressSpinner />;
 
     const renderHeader = () => {
         return (

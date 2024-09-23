@@ -7,7 +7,6 @@ import { AplicationContext } from "../../context/context";
 import { generateCode, removeLeadingZeros, ROLE } from "../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import { useFetchRequestOneClassroom } from "../classroom/listclassroom/service/query";
-import { Classroom } from "../classroom/oneClassroom/service/type";
 import HomeProvider, { HomeContext } from "./context/context";
 import { FormaRecover } from "./styles";
 import avatar from "../../assets/image/avatar.svg"
@@ -16,6 +15,8 @@ import styles from "../../Styles";
 import CardHome from "../../Components/Card/CardsHome";
 import { useNavigate } from "react-router-dom";
 import IconClassroom from "./../../assets/image/cardturmas.svg";
+import DropdownComponent from "../../Components/Dropdown";
+import { Classroom } from "./type";
 
 
 
@@ -29,8 +30,8 @@ const Home = () => {
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
-  height: 128px;
-  width: 128px;
+  height: 64px;
+  width: 64px;
   border-radius: 50%;
   
   img {
@@ -45,7 +46,17 @@ const HomeClassroomPage = () => {
     const propsAplication = useContext(AplicationContext)
     const propsHome = useContext(HomeContext)
     const history = useNavigate()
+    const [classes, setClass] = useState<Classroom | undefined>()
 
+
+    useEffect(() => {
+        if (propsHome?.classroomUser) {
+
+            if (propsHome?.classroomUser![0]!) {
+                setClass(propsHome?.classroomUser[0])
+            }
+        }
+    }, [propsHome?.classroomUser])
 
     if (!propsHome?.classroomUser) return <ProgressSpinner />
 
@@ -73,13 +84,28 @@ const HomeClassroomPage = () => {
             <p>
                 Visualize os modulos da turma:
             </p>
-            <Padding padding="16px" />
-            <div className="grid">
+            <Padding padding="8px" />
+            <Row id="end">
 
-                {propsHome?.classroomUser![0].classroom_module?.map((item, index) => {
+                <Button label="Buscar turma" icon="pi pi-search" iconPos="right" onClick={() => {
+                    propsHome.setSearchClassroom(!propsHome.searchClassroom)
+                }} />
+            </Row>
+            <Padding padding="8px" />
+            <div className="grid">
+                <div className="col-12 md:col-4">
+                    <label>Selecione a aula</label>
+                    <Padding />
+                    <DropdownComponent options={propsHome?.classroomUser} value={classes} onChange={(e) => setClass(e.target.value)} placerholder="selecione a aula" />
+                </div>
+            </div>
+            <Padding padding="16px" />
+
+            <div className="grid">
+                {classes?.classroom_module?.map((item, index) => {
                     return (
-                        <div key={index} className="col-12 md:col-3" style={{cursor: item.active ? "pointer" : "not-allowed"}} onClick={() => {
-                            if(item.active) history("/turma/" + propsHome?.classroomUser![0].id + "/modulo/" + item.module.id)
+                        <div key={index} className="col-12 md:col-3" style={{ cursor: item.active ? "pointer" : "not-allowed" }} onClick={() => {
+                            if (item.active) history("/turma/" + propsHome?.classroomUser![0].id + "/modulo/" + item.module.id)
                         }} >
                             <CardHome name={item.module.name} status={item.active} index={index} />
                         </div>
@@ -87,6 +113,8 @@ const HomeClassroomPage = () => {
                 })}
             </div>
 
+            {propsHome?.classroomUser.length === 0 && <h3>
+                Sem modulos</h3>}
         </Container>
     )
 }
@@ -114,14 +142,17 @@ const HomeSearchClassroomPage = () => {
         }
     }, [token])
 
-    if (propsHome?.classroomUser?.length! > 0) return <HomeClassroomPage />
+    if (!propsHome?.searchClassroom) return <HomeClassroomPage />
 
 
     return (
         <div style={{
-            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)"
+            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "4%"
         }} >
-            <Column style={{ height: "100%", padding: "4%" }} id="center">
+            <Button label="Voltar" icon="pi pi-chevron-left" onClick={() => {
+                propsHome.setSearchClassroom(!propsHome.searchClassroom)
+            }} />
+            <Column style={{ height: "100%" }} id="center">
                 <Row >
 
                     <Column id="center">

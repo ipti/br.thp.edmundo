@@ -3,6 +3,8 @@ import TagLogin from "../../../assets/image/logo-edmundo.svg";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import LogoutTopBar from "./Logout";
 import { Container, TextHeader } from "./style";
+import { useState } from "react";
+import { getMenuItem, menuItem } from "../../../service/localstorage";
 
 
 const TopBar = ({
@@ -14,6 +16,9 @@ const TopBar = ({
 }) => {
 
   const history = useNavigate()
+
+  const [active, setActive] = useState(parseInt(getMenuItem()!));
+
 
 
   return (
@@ -47,11 +52,18 @@ const TopBar = ({
         </Row>
       </Column>
       <Column id="center">
-        <Row style={{gap: "32px"}}>
-          <TextHeader isActive={true} onClick={() => history("/")}>Home</TextHeader>
+        <Row style={{ gap: "32px" }}>
+          <TextHeader isActive={active === 1 ? true : false} onClick={() => {
+            history("/");
+            setActive(1);
+            menuItem("1");
+          }}>Home</TextHeader>
           <TextHeader isActive={false}>Acessar turma</TextHeader>
           <TextHeader isActive={false}>Historico</TextHeader>
-          <TextHeader isActive={false} onClick={() => history("/perfil")}>Perfil</TextHeader>
+          <TextHeader isActive={active === 6 ? true : false} onClick={() => {
+            history("/perfil"); setActive(6);
+            menuItem("6");
+          }}>Perfil</TextHeader>
         </Row>
       </Column>
       <Column style={{ width: "auto" }} id="center">
@@ -61,7 +73,7 @@ const TopBar = ({
           </Column>
         </Row>
       </Column>
-    </Container>
+    </Container >
   );
 };
 

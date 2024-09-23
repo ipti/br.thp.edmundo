@@ -33,10 +33,10 @@ const CardHome = ({ name, status, index }: CardHomeType) => {
                     <Padding padding="8px" />
                     <Row id="center">
 
-                        <div style={{ background: colorWithOpacity, padding: "8px", borderRadius: "25px", maxWidth: 160 }}>
-                            {!status ? <Row>
-                                <img src={look} alt="" /><Padding /> <h4 style={{ color: "white" }}>Bloqueado</h4>
-                            </Row> : <Row> <img src={look_open} alt="" /> <Padding /><h4 style={{ color: "white" }}>Desbloqueado</h4></Row>}
+                        <div style={{ background: colorWithOpacity, padding: "4px 16px", borderRadius: "25px", maxWidth: 180 }}>
+                            {!status ? <Row style={{gap: 4}}>
+                                <img src={look} alt="" style={{ width: 32 }} /> <Column id="center"><h4 style={{ color: "white" }}>Bloqueado</h4></Column>
+                            </Row> : <Row style={{gap: 4}}> <img src={look_open} alt="" style={{ width: 32 }} /> <Column id="center"><h4 style={{ color: "white" }}>Desbloqueado</h4></Column></Row>}
                         </div>
                     </Row>
                 </Column>

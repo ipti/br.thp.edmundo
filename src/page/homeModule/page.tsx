@@ -23,8 +23,8 @@ const HomeModules = () => {
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
-  height: 128px;
-  width: 128px;
+  height: 64px;
+  width: 64px;
   border-radius: 50%;
   
   img {
@@ -46,8 +46,10 @@ const HomeModulePage = () => {
     const propsHome = useContext(HomeModulesContext)
 
     useEffect(() => {
-        if (propsHome?.modules?.classes[0]) {
-            setClass(propsHome?.modules?.classes[0])
+        if (propsHome?.modules?.classes) {
+            if (propsHome?.modules?.classes[0]) {
+                setClass(propsHome?.modules?.classes[0])
+            }
         }
     }, [propsHome?.modules?.classes])
 
@@ -91,15 +93,17 @@ const HomeModulePage = () => {
                 {classes?.activities?.map((item, index) => {
                     return (
                         <div className="col-12 md:col-3"
-                        style={{cursor: item?.classroom_activities[0]?.active ? "pointer" : "not-allowed"}}
-                        onClick={() => 
-                            item?.classroom_activities[0]?.active ? history("/turma/" + idClassroom + "/modulo/" + idModule + "/atividade/" + item.id) : null
-                        }>
+                            style={{ cursor: item?.classroom_activities[0]?.active ? "pointer" : "not-allowed" }}
+                            onClick={() =>
+                                item?.classroom_activities[0]?.active ? history("/turma/" + idClassroom + "/modulo/" + idModule + "/atividade/" + item.id) : null
+                            }>
                             <CardHome name={item.name} status={item?.classroom_activities[0]?.active} index={index} />
                         </div>
                     )
                 })}
             </div>
+
+            {propsHome?.modules?.classes.length === 0 && <h3>Sem atividades</h3>}
 
         </Container>
     )

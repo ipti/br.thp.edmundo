@@ -5,6 +5,7 @@ import { useFetchRequestClassroomUser } from "../service/query";
 
 export const HomeState = () => {
     const [classroomUser, setClassroomuser] = useState<any | undefined>()
+    const [searchClassroom, setSearchClassroom] = useState(false)
 
     const {data: classroomUserRequest} = useFetchRequestClassroomUser()
 
@@ -23,5 +24,5 @@ export const HomeState = () => {
     }
 
  
-    return { JoinTheClassroomClassroom, classroomUser }
+    return { JoinTheClassroomClassroom, classroomUser, searchClassroom, setSearchClassroom }
 }
