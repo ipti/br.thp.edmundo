@@ -1,16 +1,13 @@
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
-import { EditModuleRequest } from "./request";
 import { CreateModule } from "../../type";
+import { EditModuleRequest } from "./request";
 
 export const EditModuleController = () => {
-  const history = useNavigate();
 
   const EditModuleMutation = useMutation(
-    (data: CreateModule) => EditModuleRequest(data),
+    ({ data, id }: { data: CreateModule, id: number }) => EditModuleRequest(data, id),
     {
       onError: (error: any) => {
         Swal.fire({
@@ -20,7 +17,11 @@ export const EditModuleController = () => {
         })
       },
       onSuccess: (data) => {
-        queryClient.refetchQueries("useRequestsListModule")
+        Swal.fire({
+          icon: 'success',
+          title: "Salvo com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+        })
       },
 
     }

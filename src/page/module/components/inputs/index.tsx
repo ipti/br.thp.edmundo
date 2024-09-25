@@ -1,17 +1,10 @@
-import { Form } from "react-router-dom"
-import { Column, Padding, Row } from "../../../../Styles/styles"
-import { Button } from "primereact/button"
-import TextInput from "../../../../Components/TextInput"
 import TextAreaComponent from "../../../../Components/TextArea"
+import TextInput from "../../../../Components/TextInput"
+import { Padding } from "../../../../Styles/styles"
 
 const Inputs = ({ errors, handleChange, touched, values }: { errors: any, values: any, touched: any, handleChange: any }) => {
     return (
-        <Form>
-            <Column>
-                <Row id="end">
-                    <Button label="Criar" type="submit" />
-                </Row>
-            </Column>
+        <div>
             <div className="col-12 md:col-6">
                 <label>Nome</label>
                 <Padding />
@@ -43,7 +36,7 @@ const Inputs = ({ errors, handleChange, touched, values }: { errors: any, values
                     </div>
                 ) : null}
             </div>
-        </Form>
+        </div>
     )
 }
 
