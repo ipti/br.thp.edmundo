@@ -6,10 +6,10 @@ export const EditModuleContext = createContext<EditModuleContextType | null>(nul
 
 const EditModuleProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { EditModule, initialValue } = EditModuleState()
+    const { EditModule, initialValue, isError, isLoading, moduleOne } = EditModuleState()
 
     return (
-        <EditModuleContext.Provider value={{ EditModule, initialValue }}>
+        <EditModuleContext.Provider value={{ EditModule, initialValue, isError, isLoading, moduleOne }}>
             {children}
         </EditModuleContext.Provider>
     )
