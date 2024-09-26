@@ -6,6 +6,7 @@ import { formatarDataHours } from "../../../Controller/controllerGlobal"
 import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomCorrectionOfActivitiesProvider, { ClassroomCorrectionOfActivitiesContext } from "./context/context"
+import { ProgressSpinner } from "primereact/progressspinner"
 
 const ClassroomCorrectionOfActivities = () => {
     return (
@@ -23,6 +24,8 @@ const ClassroomCorrectionOfActivitiesPage = () => {
     }
 
     const propsClassroomCorrectionOfActivities = useContext(ClassroomCorrectionOfActivitiesContext)
+
+    if(propsClassroomCorrectionOfActivities?.isLoading) return <ProgressSpinner />
 
 
 
