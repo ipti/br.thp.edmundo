@@ -26,7 +26,7 @@ const ActivitiesEditPage = () => {
 
 
     return (
-        <ContentPage title="Criar atividades" description="">
+        <ContentPage title="Editar atividade" description="Modifique a atividade">
             <Padding />
             <Formik
                 initialValues={activitiesEdit.initialValue}

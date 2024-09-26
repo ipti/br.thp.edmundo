@@ -23,7 +23,7 @@ const ModulesEditPage = () => {
 
     const modulesContext = useContext(EditModuleContext)
     return (
-        <ContentPage title="Editar Módulos" description="Edite o módulos de aula">
+        <ContentPage title="Editar Módulo" description="Edite o módulo de aula">
             {modulesContext?.moduleOne ? <Formik initialValues={modulesContext?.initialValue!} onSubmit={(values) => { modulesContext?.EditModule(values, +id!) }}>
                 {({ errors, values, touched, handleChange }) => {
                     return (
