@@ -58,8 +58,25 @@ export interface CreateModuleContextType {
 }
 
 
+export interface EditModuleContextType {
+  initialValue: CreateModule;
+  EditModule: (body: CreateModule, id: number) => void
+  moduleOne: ModulesOneEdit | undefined;
+  isLoading: boolean;
+  isError: boolean;
+}
+
 export interface OneModulesContextType {
   moduleOne: Modules | undefined;
   isLoading: boolean;
   isError: boolean;
 }
+
+export interface ModulesOneEdit {
+  id: number
+  name: string
+  description: string
+  createdAt: string
+  updatedAt: string
+}
+

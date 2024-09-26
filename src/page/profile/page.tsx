@@ -75,7 +75,7 @@ const ProfilePage = () => {
                         <Form>
                             <Column>
                                 <Row id="end">
-                                    <Button label="Salvar" type="submit" />
+                                    <Button label="Salvar" icon="pi pi-save" type="submit" />
                                 </Row>
                             </Column>
                             <Padding />

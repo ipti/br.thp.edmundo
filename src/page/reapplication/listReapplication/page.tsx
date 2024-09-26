@@ -25,7 +25,7 @@ const ReapplicationListPage = () => {
         <ContentPage title="Reaplicações" description="Visualize as seus locais de reaplicação">
             <Column>
                 <Row id="end">
-                    <Button label="Criar Reaplicação" onClick={() => { history("/reaplicacoes/criar") }} />
+                    <Button label="Criar Reaplicação" icon="pi pi-plus" onClick={() => { history("/reaplicacoes/criar") }} />
                 </Row>
             </Column>
             <Padding padding="32px" />

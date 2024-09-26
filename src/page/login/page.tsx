@@ -1,7 +1,6 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import TextInput from "../../Components/TextInput";
 import PasswordInput from "../../Components/TextPassword";
@@ -147,13 +146,13 @@ const LoginPage = () => {
 
         </div>
         <Padding />
-        <Column>
+        {/* <Column>
           <Row id="center">
             <Link className="resetPassword" to={"/recuperar"}>
               <p >Recuperar senha</p>
             </Link>
           </Row>
-        </Column>
+        </Column> */}
         <Padding padding="16px" />
         <Column style={{ marginTop: "auto", marginBottom: "64px" }}>
           <Row id="center">

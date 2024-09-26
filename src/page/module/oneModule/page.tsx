@@ -28,10 +28,18 @@ const ModuleOnePage = () => {
 
     return (
         <ContentPage title={moduleOneContext.moduleOne?.name!} description={moduleOneContext.moduleOne?.description!} >
+            <Row id="end">
+                <Button
+                    icon="pi pi-pencil"
+                    onClick={() => {
+                        history("/modulos/" + id + "/editar");
+                    }}
+                />
+            </Row>
             <Padding padding="16px" />
             <Row id="space-between">
                 <h2>Aulas</h2>
-                <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar" ) }} />
+                <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar") }} />
             </Row>
             <Padding padding="16px" />
             <Accordion activeIndex={0}>
@@ -76,7 +84,7 @@ const ModuleOnePage = () => {
                                     <Row style={{ gap: "8px", marginBottom: 8 }}>
                                         <Icon icon="pi pi-book" />
                                         <Column id="center">
-                                            <Link style={{ fontWeight: "bold" }} to={""}>{activities.name}</Link>
+                                            <Link style={{ fontWeight: "bold" }} to={"/atividades/" + activities.id}>{activities.name}</Link>
                                         </Column>
                                     </Row>
                                 )

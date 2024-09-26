@@ -31,7 +31,7 @@ const ClassroomListPage = () => {
         <ContentPage title="Turmas" description="Visualize as suas turmas">
             <Column>
                 <Row id="end">
-                    <Button label={propsAplication.user?.role === ROLE.STUDENT ? "Buscar turmas" : "Criar turma"} onClick={() => { propsAplication.user?.role === ROLE.STUDENT ? setSearch(true) : history("/turmas/criar") }} />
+                    <Button label={propsAplication.user?.role === ROLE.STUDENT ? "Buscar turmas" : "Criar turma"} icon="pi pi-plus" onClick={() => { propsAplication.user?.role === ROLE.STUDENT ? setSearch(true) : history("/turmas/criar") }} />
                 </Row>
             </Column>
             <Padding padding="16px" />

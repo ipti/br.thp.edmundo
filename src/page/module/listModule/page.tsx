@@ -27,6 +27,7 @@ const ModuleListPage = () => {
       <Row id="end">
         <Button
           label="Criar módulos"
+          icon="pi pi-plus"
           onClick={() => {
             history("/modulos/criar");
           }}

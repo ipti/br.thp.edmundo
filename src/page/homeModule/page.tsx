@@ -73,7 +73,7 @@ const HomeModulePage = () => {
             </Row>
             <Padding />
             <h1>
-                Bem vindo ao {propsHome.modules.name}
+                 {propsHome.modules.name}
             </h1>
             <Padding />
             <p>

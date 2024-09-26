@@ -79,7 +79,7 @@ const UserListPage = () => {
                 className="flex justify-content-between"
             // style={{ background: color.colorCard }}
             >
-                <Button label="Criar usuário" onClick={() => history("/usuarios/criar")} />
+                <Button label="Criar usuário" icon="pi pi-plus" onClick={() => history("/usuarios/criar")} />
 
                 {/* <div>
                     <DropdownComponent optionsLabel="name" value={""} onChange={(e) => { }} optionsValue="id" placerholder="Filtrar tipo de usuário" options={propsAplication.user?.role === ROLE.ADMIN

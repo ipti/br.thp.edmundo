@@ -23,6 +23,8 @@ import HomeModules from "../page/homeModule/page";
 import HomeActivities from "../page/homeActivities/page";
 import ClassroomActivities from "../page/classroom/activitiesClassroom/page";
 import ClassroomCorrectionOfActivities from "../page/classroom/correctionOfActivitiesClassroom/page";
+import ModulesEdit from "../page/module/editModule/page";
+import ActivitiesEdit from "../page/activities/editActivities/page";
 
 const RoutesApp = () => {
   return (
@@ -47,9 +49,12 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<ModuleList />} />} path="/modulos" />
         <Route element={<PrivateRoute Component={<ModulesCreate />} />} path="/modulos/criar" />
         <Route element={<PrivateRoute Component={<ModuleOne />} />} path="/modulos/:id" />
+        <Route element={<PrivateRoute Component={<ModulesEdit />} />} path="/modulos/:id/editar" />
         <Route element={<PrivateRoute Component={<ClassesCreate />} />} path="/aulas/:idModule/criar" />
         <Route element={<PrivateRoute Component={<ActivitiesCreate />} />} path="/atividades/:idClasses/criar/:idModule" />
+        <Route element={<PrivateRoute Component={<ActivitiesEdit />} />} path="/atividades/:id" />
 
+        
 
 
         <Route element={<PrivateRoute Component={<UserList />} />} path="/usuarios" />

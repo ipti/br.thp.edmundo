@@ -1,12 +1,11 @@
 import { Form, Formik } from "formik"
-import ContentPage from "../../../Components/ContentPage"
-import { Column, Padding, Row } from "../../../Styles/styles"
-import { Button } from "primereact/button"
-import TextInput from "../../../Components/TextInput"
-import TextAreaComponent from "../../../Components/TextArea"
-import CreateModuleProvider, { CreateModuleContext } from "./context/context"
 import { useContext } from "react"
+import ContentPage from "../../../Components/ContentPage"
+import Inputs from "../components/inputs"
 import { CreateModuleContextType } from "../type"
+import CreateModuleProvider, { CreateModuleContext } from "./context/context"
+import { Column, Row } from "../../../Styles/styles"
+import { Button } from "primereact/button"
 
 
 const ModulesCreate = () => {
@@ -22,46 +21,17 @@ const ModulesCreatePage = () => {
     const modulesContext = useContext(CreateModuleContext) as CreateModuleContextType
     return (
         <ContentPage title="Criar Módulos" description="Crie os módulos de aula">
-            <Formik initialValues={{ name: "", description: "", }} onSubmit={(values) => { modulesContext.CreateModule(values)}}>
+            <Formik initialValues={{ name: "", description: "", }} onSubmit={(values) => { modulesContext.CreateModule(values) }}>
                 {({ errors, values, touched, handleChange }) => {
                     return (
                         <Form>
+
                             <Column>
                                 <Row id="end">
-                                    <Button label="Criar" type="submit" />
+                                    <Button label="Criar" icon="pi pi-plus" type="submit" />
                                 </Row>
                             </Column>
-                            <div className="col-12 md:col-6">
-                                <label>Nome</label>
-                                <Padding />
-                                <TextInput
-                                    value={values.name}
-                                    placeholder="Nome"
-                                    onChange={handleChange}
-                                    name="name"
-                                />
-                                {errors.name && touched.name ? (
-                                    <div style={{ color: "red", marginTop: "8px" }}>
-                                        {errors.name}
-                                    </div>
-                                ) : null}
-                            </div>
-
-                            <div className="col-12 md:col-6">
-                                <label>Descrição</label>
-                                <Padding />
-                                <TextAreaComponent
-                                    value={values.description}
-                                    placeholder="Escreva uma descrição para módulo"
-                                    onChange={handleChange}
-                                    name="description"
-                                />
-                                {errors.description && touched.description ? (
-                                    <div style={{ color: "red", marginTop: "8px" }}>
-                                        {errors.description}
-                                    </div>
-                                ) : null}
-                            </div>
+                            <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} />
                         </Form>
                     )
                 }}
