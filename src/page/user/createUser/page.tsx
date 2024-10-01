@@ -24,7 +24,7 @@ interface FormValues {
     email: string;
     password: string;
     confirmpassword?: string; // Torna confirmpassword opcional,
-    role: {
+    role?: {
         id: string,
         name: string
     }
@@ -54,7 +54,8 @@ const UserCreatePage = () => {
         name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
         password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
         role: Yup.object().required("Campo Obrigatório"),
-        email: Yup.string().required("Campo Obrigatório"),
+        email: Yup.string(),
+        username: Yup.string().required("Campo Obrigatório"),
         confirmpassword: Yup.string()
             .label("Confirmar senha")
             .required("Campo Obrigatório")
@@ -86,7 +87,8 @@ const UserCreatePage = () => {
         name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
         password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
         role: Yup.object().required("Campo Obrigatório"),
-        email: Yup.string().required("Campo Obrigatório"),
+        email: Yup.string(),
+        username: Yup.string().required("Campo Obrigatório"),
         confirmpassword: Yup.string()
             .label("Confirmar senha")
             .required("Campo Obrigatório")
@@ -124,6 +126,7 @@ const UserCreatePage = () => {
                     email: "",
                     password: "",
                     confirmpassword: "",
+                    username: "",
                     birthday: "",
                     color_race: undefined,
                     cpf: "",
@@ -132,19 +135,18 @@ const UserCreatePage = () => {
                     responsable_cpf: "",
                     responsable_name: "",
                     responsable_telephone: "",
-                    role: { name: "", id: "" },
+                    role: undefined,
                     sex: undefined,
                     zone: undefined
                 }}
                 onSubmit={(values: FormValues) => {
                     delete values.confirmpassword;
-                    props.CreateUser({ ...values, role: values.role?.id, });
+                    props.CreateUser({ ...values, role: values.role?.id!, });
                 }}
                 validationSchema={isMaior ? schema : schemaResponsable}
             >
                 {({ values, handleChange, errors, touched, setFieldValue }) => {
 
-                    console.log(values);
                     return (
                         <Form>
                             <InputsUser
@@ -155,7 +157,7 @@ const UserCreatePage = () => {
                             />
                             <div className="grid">
                                 <div className="col-12 md:col-6">
-                                    <label>Senha</label>
+                                    <label>Senha *</label>
                                     <Padding />
                                     <PasswordInput
                                         placeholder="Senha"
@@ -172,7 +174,7 @@ const UserCreatePage = () => {
                                     ) : null}
                                 </div>
                                 <div className="col-12 md:col-6">
-                                    <label>Confirmar senha</label>
+                                    <label>Confirmar senha *</label>
                                     <Padding />
                                     <PasswordInput
                                         placeholder="Senha"

@@ -38,11 +38,12 @@ const ProfilePage = () => {
 
     const props = useContext(UpdateUserContext) as UpdateUserContextType
 
- 
+
 
     const schema = Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
-        email: Yup.string().required("Email é obrigatório"),
+        email: Yup.string(),
+        username: Yup.string().required("Nome de usuário é obrigatório"),
         responsable_telephone: Yup.string().required("Telefone é obrigatório"),
         birthday: Yup.string()
             .nullable()
@@ -62,6 +63,7 @@ const ProfilePage = () => {
                     ? formatarData(props.user?.registration[0]?.birthday!)
                     : "",
                 email: props.user?.email ?? "",
+                username: props.user?.username ?? "",
                 responsable_telephone: props.user?.registration[0]?.responsable_telephone ?? "",
             }} onSubmit={(values) => {
                 const [dia, mes, ano] = values.birthday.split('/');
@@ -80,8 +82,22 @@ const ProfilePage = () => {
                             </Column>
                             <Padding />
                             <Avatar>
-                                <img alt="" src={avatar} />
+                                <img alt="" src={props.file ? (URL.createObjectURL(props.file![0]) ?? undefined) : props.user?.registration![0]?.avatar_url ? props.user?.registration![0]?.avatar_url : avatar} />
                             </Avatar>
+                            <Padding padding="8px" />
+                            <div className="grid">
+                                <div className="col-12 md:col-6">
+                                    <label>Avatar </label>
+                                    <Padding />
+                                    <TextInput
+                                        // value={props.file}
+                                        type="file"
+                                        placeholder="Avatar"
+                                        onChange={(e: any) => props.setFile(e.target.files)}
+                                        name="name"
+                                    />
+                                </div>
+                            </div>
                             <Padding padding="16px" />
 
                             <div className="grid">
@@ -101,7 +117,22 @@ const ProfilePage = () => {
                                     ) : null}
                                 </div>
                                 <div className="col-12 md:col-6">
-                                    <label>Email *</label>
+                                    <label>Nome usuário *</label>
+                                    <Padding />
+                                    <TextInput
+                                        value={values.username}
+                                        placeholder="Nome usuário"
+                                        onChange={handleChange}
+                                        name="username"
+                                    />
+                                    {errors.username && touched.username ? (
+                                        <div style={{ color: "red", marginTop: "8px" }}>
+                                            {errors.username}
+                                        </div>
+                                    ) : null}
+                                </div>
+                                <div className="col-12 md:col-6">
+                                    <label>Email </label>
                                     <Padding />
                                     <TextInput
                                         value={values.email}

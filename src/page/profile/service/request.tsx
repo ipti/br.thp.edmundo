@@ -29,3 +29,22 @@ export const FindOneUserRequest = async (id: string) => {
     }
 }
 
+
+export const requestUpdateAvatarRegistration = ( id: number, file: File) => {
+
+    const formData = new FormData()
+  
+    formData.append("file", file)
+  
+    return http
+      .put("/user-registration-bff/avatar/" + id, formData)
+      .then(response => response.data)
+      .catch(err => {
+        if (err.response.status === 401) {
+          window.location.reload()
+        }
+        alert(err.response.message)
+  
+        throw err;
+      });
+  };

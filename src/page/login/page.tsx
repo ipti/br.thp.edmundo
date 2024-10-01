@@ -90,14 +90,13 @@ const LoginPage = () => {
                     <Form className="col-11 md:col-3">
                       <div>
                         <div>
-                          <label>Email</label>
+                          <label>Nome de usuário</label>
                           <Padding />
                           <TextInput
                             name="email"
-                            type="email"
                             value={values.email}
                             onChange={handleChange}
-                            placeholder="Email"
+                            placeholder="Nome de usuário"
                           />
                           <Padding />
                           {errors.email && touched.email ? (

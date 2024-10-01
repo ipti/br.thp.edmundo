@@ -135,7 +135,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 6 ? true : false}
             path={"/perfil"}
-            icon={avatar}
+            icon={propsAplication.user?.registration![0]?.avatar_url ??avatar}
           />
           <Padding />
 

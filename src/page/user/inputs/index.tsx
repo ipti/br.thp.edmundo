@@ -22,12 +22,11 @@ const InputsUser = ({
 }) => {
 
   const props = useContext(AplicationContext) as PropsAplicationContext;
-  console.log(errors);
   return (
     <Form>
       <div className="grid">
         <div className="col-12 md:col-6">
-          <label>Nome</label>
+          <label>Nome *</label>
           <Padding />
           <TextInput
             placeholder="Nome"
@@ -45,6 +44,57 @@ const InputsUser = ({
         </div>
 
         <div className="col-12 md:col-6">
+          <label>Nome usuário *</label>
+          <Padding />
+          <TextInput
+            placeholder="Digite o seu nome usuário"
+            value={values.username}
+            onChange={handleChange}
+            name="username"
+          />
+          <Padding />
+          {errors.username && touched.username ? (
+            <div style={{ color: "red" }}>
+              {errors.username}
+              <Padding />
+            </div>
+          ) : null}
+        </div>
+
+      </div>{" "}
+      <div className="grid">
+        <div className="col-12 md:col-6">
+          <label>Tipo de usuário *</label>
+          <Padding />
+          <DropdownComponent
+            name="role"
+            placerholder="Tipo de usuário"
+            optionsLabel="name"
+            optionsValue="id"
+            value={values.role}
+            onChange={handleChange}
+            options={
+              props.user?.role === ROLE.ADMIN
+                ? [
+                  { id: ROLE.ADMIN, name: "Admin" },
+                  { id: ROLE.STUDENT, name: "Estudante" },
+                  { id: ROLE.TEACHER, name: "Professor" },
+                ]
+                : [
+                  { id: ROLE.STUDENT, name: "Estudante" },
+                  { id: ROLE.TEACHER, name: "Professor" },
+                ]
+            }
+          />
+          <Padding />
+          {errors.role && touched.role ? (
+            <div style={{ color: "red" }}>
+              {errors.role}
+              <Padding />
+            </div>
+          ) : null}
+        </div>
+        <div className="col-12 md:col-6">
           <label>Email</label>
           <Padding />
           <TextInput
@@ -57,39 +107,6 @@ const InputsUser = ({
           {errors.email && touched.email ? (
             <div style={{ color: "red" }}>
               {errors.email}
-              <Padding />
-            </div>
-          ) : null}
-        </div>
-      </div>{" "}
-      <div className="grid">
-        <div className="col-12 md:col-6">
-          <label>Tipo de usuário</label>
-          <Padding />
-          <DropdownComponent
-            name="role"
-            placerholder="Tipo de usuário"
-            optionsLabel="name"
-            optionsValue="id"
-            value={values.role}
-            onChange={handleChange}
-            options={
-              props.user?.role === ROLE.ADMIN
-                ? [
-                    { id: ROLE.ADMIN, name: "Admin" },
-                    { id: ROLE.STUDENT, name: "Estudante" },
-                    { id: ROLE.TEACHER, name: "Professor" },
-                  ]
-                : [
-                    { id: ROLE.STUDENT, name: "Estudante" },
-                    { id: ROLE.TEACHER, name: "Professor" },
-                  ]
-            }
-          />
-          <Padding />
-          {errors.role && touched.role ? (
-            <div style={{ color: "red" }}>
-              {errors.role}
               <Padding />
             </div>
           ) : null}

@@ -67,7 +67,7 @@ const HomeClassroomPage = () => {
         }}>
             <Row>
                 <Avatar>
-                    <img alt="" src={avatar} />
+                    <img alt="" src={propsAplication?.user?.registration![0]?.avatar_url ? propsAplication?.user?.registration![0]?.avatar_url :avatar} />
                 </Avatar>
                 <Padding />
                 <Column id="center">
@@ -78,11 +78,11 @@ const HomeClassroomPage = () => {
             </Row>
             <Padding />
             <h1>
-                Bem vindo a {propsHome?.classroomUser[0]?.name}!
+                Bem vindo a {propsHome?.classroomUser[0]?.name ?? "Coded"}!
             </h1>
             <Padding />
             <p>
-                Visualize os modulos da turma:
+                Visualize os módulos da turma:
             </p>
             <Padding padding="8px" />
             <Row id="end">

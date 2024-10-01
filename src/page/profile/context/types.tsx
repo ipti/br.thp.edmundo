@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { UpdateUser, User } from "../service/types";
 
 export interface UpdateUserContextType {
@@ -6,4 +7,6 @@ export interface UpdateUserContextType {
     user: User | undefined;
     isLoading: boolean;
     isError: boolean;
+    setFile: Dispatch<SetStateAction<File[] | undefined>>
+    file: File[] | undefined
 }
