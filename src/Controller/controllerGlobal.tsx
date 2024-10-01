@@ -98,6 +98,11 @@ export var difficult = [
   { id: "MUITO_ALTO", name: "Muito alto" },
 ];
 
+export var type_activities = [
+  { id: "QUIZ", name: "Quiz" },
+  { id: "CODE", name: "Código" },
+];
+
 export const color_race = [
   { id: 0, name: "Não Declarada" },
   { id: 1, name: "Branca" },

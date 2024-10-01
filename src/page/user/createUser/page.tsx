@@ -54,8 +54,7 @@ const UserCreatePage = () => {
         name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
         password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
         role: Yup.object().required("Campo Obrigatório"),
-        email: Yup.string(),
-        username: Yup.string().required("Campo Obrigatório"),
+        email: Yup.string().required("Campo Obrigatório"),
         confirmpassword: Yup.string()
             .label("Confirmar senha")
             .required("Campo Obrigatório")
@@ -87,8 +86,7 @@ const UserCreatePage = () => {
         name: Yup.string().required("Campo Obrigatório").min(8, "Nome deve ter pelo menos 8 caracteres"),
         password: Yup.string().required("Campo Obrigatório").min(8, "Senha deve ter pelo menos 8 caracteres"),
         role: Yup.object().required("Campo Obrigatório"),
-        email: Yup.string(),
-        username: Yup.string().required("Campo Obrigatório"),
+        email: Yup.string().required("Campo Obrigatório"),
         confirmpassword: Yup.string()
             .label("Confirmar senha")
             .required("Campo Obrigatório")
@@ -146,7 +144,7 @@ const UserCreatePage = () => {
                 validationSchema={isMaior ? schema : schemaResponsable}
             >
                 {({ values, handleChange, errors, touched, setFieldValue }) => {
-
+                    console.log(errors);
                     return (
                         <Form>
                             <InputsUser

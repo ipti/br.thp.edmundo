@@ -54,9 +54,6 @@ const ProfilePage = () => {
     const date = new Date(props.user?.registration[0]?.birthday);
     return (
         <ContentPage title="Perfil" description="Visualize ou edite os dados do seu perfil.">
-
-
-
             {props.user && <Formik validationSchema={schema} initialValues={{
                 name: props.user?.name ?? "",
                 birthday: !isNaN(date.getTime())
@@ -120,24 +117,8 @@ const ProfilePage = () => {
                                     <label>Nome usuário *</label>
                                     <Padding />
                                     <TextInput
-                                        value={values.username}
-                                        placeholder="Nome usuário"
-                                        onChange={handleChange}
-                                        name="username"
-                                    />
-                                    {errors.username && touched.username ? (
-                                        <div style={{ color: "red", marginTop: "8px" }}>
-                                            {errors.username}
-                                        </div>
-                                    ) : null}
-                                </div>
-                                <div className="col-12 md:col-6">
-                                    <label>Email </label>
-                                    <Padding />
-                                    <TextInput
                                         value={values.email}
-                                        type="email"
-                                        placeholder="Email"
+                                        placeholder="Nome usuário"
                                         onChange={handleChange}
                                         name="email"
                                     />

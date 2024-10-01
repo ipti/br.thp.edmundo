@@ -2,13 +2,13 @@ import { Editor } from "primereact/editor"
 import DropdownComponent from "../../../Components/Dropdown"
 import InputNumberComponent from "../../../Components/InputNumber"
 import TextInput from "../../../Components/TextInput"
-import { difficult } from "../../../Controller/controllerGlobal"
+import { difficult, type_activities } from "../../../Controller/controllerGlobal"
 import { Padding } from "../../../Styles/styles"
 
 
 const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { errors: any, values: any, touched: any, handleChange: any, setFieldValue: any }) => {
     return (
-        <div>
+        <div className="grid">
             <div className="col-12 md:col-6">
                 <label>Nome</label>
                 <Padding />
@@ -24,19 +24,22 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { erro
                     </div>
                 ) : null}
             </div>
+
             <div className="col-12 md:col-6">
-                <label>Descrição</label>
+                <label>Tipo de atividade </label>
                 <Padding />
-                <Editor value={values.description} onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} />
-                {/* <TextAreaComponent
-                                    value={values.description}
-                                    placeholder="Escreva a descrição da atividades"
-                                    onChange={handleChange}
-                                    name="description"
-                                /> */}
-                {errors.description && touched.description ? (
+                <DropdownComponent
+                    value={values.type_activities}
+                    options={type_activities}
+                    optionsValue="id"
+                    optionsLabel="name"
+                    placerholder="Escolha o tipo de atividade"
+                    onChange={e => setFieldValue("type_activities", e.target.value)}
+                    name="type_activities"
+                />
+                {errors.type_activities && touched.type_activities ? (
                     <div style={{ color: "red", marginTop: "8px" }}>
-                        {errors.description}
+                        {errors.type_activities.id}
                     </div>
                 ) : null}
             </div>
@@ -70,6 +73,22 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { erro
                 {errors.time_activities && touched.time_activities ? (
                     <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.time_activities}
+                    </div>
+                ) : null}
+            </div>
+            <div className="col-12 md:col-6">
+                <label>Descrição</label>
+                <Padding />
+                <Editor value={values.description} onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} />
+                {/* <TextAreaComponent
+                                    value={values.description}
+                                    placeholder="Escreva a descrição da atividades"
+                                    onChange={handleChange}
+                                    name="description"
+                                /> */}
+                {errors.description && touched.description ? (
+                    <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.description}
                     </div>
                 ) : null}
             </div>

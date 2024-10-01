@@ -29,7 +29,7 @@ const ClassesCreatePage = () => {
             <Form>
               <Column>
                 <Row id="end">
-                  <Button label="Criar" type="submit" />
+                  <Button label="Criar" icon="pi pi-plus" type="submit" />
                 </Row>
               </Column>
               <div className="col-12 md:col-6">

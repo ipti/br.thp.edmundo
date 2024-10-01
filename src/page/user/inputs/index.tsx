@@ -48,14 +48,14 @@ const InputsUser = ({
           <Padding />
           <TextInput
             placeholder="Digite o seu nome usuário"
-            value={values.username}
+            value={values.email}
             onChange={handleChange}
-            name="username"
+            name="email"
           />
           <Padding />
-          {errors.username && touched.username ? (
+          {errors.email && touched.enail ? (
             <div style={{ color: "red" }}>
-              {errors.username}
+              {errors.enail}
               <Padding />
             </div>
           ) : null}
@@ -90,23 +90,6 @@ const InputsUser = ({
           {errors.role && touched.role ? (
             <div style={{ color: "red" }}>
               {errors.role}
-              <Padding />
-            </div>
-          ) : null}
-        </div>
-        <div className="col-12 md:col-6">
-          <label>Email</label>
-          <Padding />
-          <TextInput
-            placeholder="Digite o seu email"
-            value={values.email}
-            onChange={handleChange}
-            name="email"
-          />
-          <Padding />
-          {errors.email && touched.email ? (
-            <div style={{ color: "red" }}>
-              {errors.email}
               <Padding />
             </div>
           ) : null}

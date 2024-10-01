@@ -13,7 +13,7 @@ export const CreateActivitiesState = () => {
         difficult: {id: "", name: ""},
         points_activities: 0,
         time_activities: 0,
-        type_activities: "CODE",
+        type_activities: {id:"", name: ""},
         id_classes: parseInt(idClasses!)
     }
 
@@ -24,5 +24,6 @@ export const CreateActivitiesState = () => {
     const CreateActivities = (body: CreateActivities) => {
         CreateActivitiesMutation.mutate({...body})
     }
+    
     return { initialValue, CreateActivities }
 }
