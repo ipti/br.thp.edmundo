@@ -42,8 +42,7 @@ const ProfilePage = () => {
 
     const schema = Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
-        email: Yup.string(),
-        username: Yup.string().required("Nome de usuário é obrigatório"),
+        email: Yup.string().required("Nome de usuário é obrigatório"),
         responsable_telephone: Yup.string().required("Telefone é obrigatório"),
         birthday: Yup.string()
             .nullable()
@@ -69,6 +68,8 @@ const ProfilePage = () => {
             }}>
 
                 {({ errors, values, handleChange, touched, setFieldValue }) => {
+
+                    console.log(errors)
 
                     return (
                         <Form>

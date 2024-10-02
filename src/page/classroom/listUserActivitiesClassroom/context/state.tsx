@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFetchRequestClassroomCorrectionOfActivities } from "../service/query";
+import { useFetchRequestActivitiesSent } from "../service/query";
 
-export const ClassroomCorrectionOfActivitiesState = () => {
+export const ActivitiesSentState = () => {
     const [activities, setactivities] = useState<any | undefined>()
 
-    const {idUserActivities} = useParams()
+    const {idClassroomUser} = useParams()
 
-    const { data: activitiesRequest, isLoading, isError } = useFetchRequestClassroomCorrectionOfActivities(idUserActivities!);
+    const { data: activitiesRequest, isLoading, isError } = useFetchRequestActivitiesSent(idClassroomUser!);
   
     useEffect(() => {
         if (activitiesRequest) {

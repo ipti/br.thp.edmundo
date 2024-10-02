@@ -1,84 +1,54 @@
+import { Column } from "primereact/column"
+import { DataTable } from "primereact/datatable"
+import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
-import { ImageConfig } from "../../../Components/DragAndDropFile/imageConfig"
 import Icon from "../../../Components/Icon"
 import { formatarDataHours } from "../../../Controller/controllerGlobal"
 import color from "../../../Styles/colors"
-import { Column, Padding, Row } from "../../../Styles/styles"
-import ClassroomCorrectionOfActivitiesProvider, { ClassroomCorrectionOfActivitiesContext } from "./context/context"
-import { ProgressSpinner } from "primereact/progressspinner"
+import { Padding } from "../../../Styles/styles"
+import ActivitiesSentProvider, { ActivitiesSentContext } from "./context/context"
 
-const ClassroomCorrectionOfActivities = () => {
+const ActivitiesSent = () => {
     return (
-        <ClassroomCorrectionOfActivitiesProvider>
-            <ClassroomCorrectionOfActivitiesPage />
-        </ClassroomCorrectionOfActivitiesProvider>
+        <ActivitiesSentProvider>
+            <ActivitiesSentPage />
+        </ActivitiesSentProvider>
     )
 }
 
-const ClassroomCorrectionOfActivitiesPage = () => {
+const ActivitiesSentPage = () => {
+
+    const history = useNavigate()
 
     const status = {
         COMPLETED: "Finalizado",
         PENDING: "Em andamento"
     }
 
-    const propsClassroomCorrectionOfActivities = useContext(ClassroomCorrectionOfActivitiesContext)
+    const propsActivitiesSent = useContext(ActivitiesSentContext)
 
-    if(propsClassroomCorrectionOfActivities?.isLoading) return <ProgressSpinner />
+    if (propsActivitiesSent?.isLoading) return <ProgressSpinner />
 
 
 
     return (
-        <ContentPage title={propsClassroomCorrectionOfActivities?.activities?.activities.name!} description="Visualize a atividade enviado pelo aluno">
+        <ContentPage title={propsActivitiesSent?.activities?.activities?.name!} description="Visualize as atividades enviadas pelos alunos">
             <Padding padding="16px" />
-            <>
-                <Row id="space-between" style={{ marginBottom: "8px" }}>
-                    <Column>
-                        <h3>
-                            {propsClassroomCorrectionOfActivities?.activities?.user_classroom.users.name}
-                        </h3>
-                        <Padding />
-                        <p>Última atualização: {formatarDataHours(propsClassroomCorrectionOfActivities?.activities?.updatedAt!)}</p>
-                    </Column>
-                    <div style={{ padding: 16, cursor: "pointer", borderRadius: 8, background: propsClassroomCorrectionOfActivities?.activities?.status === "COMPLETED" ? color.green : propsClassroomCorrectionOfActivities?.activities?.status === "PENDING" ? color.colorSecondary : "" }}>
-                        <h4 style={{ color: "white" }}>{status[propsClassroomCorrectionOfActivities?.activities?.status as keyof typeof status]}</h4>
-                    </div>
-                </Row>
-                {
-                    propsClassroomCorrectionOfActivities?.activities?.user_activities_archives.length! > 0 ? (
-                        <div className="drop-file-preview">
-                            <p className="drop-file-preview__title">
-                                Arquivos anexados
-                            </p>
-                            {
-                                propsClassroomCorrectionOfActivities?.activities?.user_activities_archives.map((item, index: number) => (
-                                    <div key={index} className="drop-file-preview__item">
-                                        <img src={ImageConfig[item.archive_url.split('/')[1]] ||
-                                            ImageConfig['default']} alt="" />
-                                        <div className="drop-file-preview__item__info">
-                                            <p>{item.original_name}</p>
-                                            <p>{item.size}B</p>
-                                        </div>
-                                        <span className="drop-file-preview__item__del"
-                                            onClick={() => { window.open(item.archive_url) }}>
-                                            <Icon icon='pi pi-download' />
-                                        </span>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    ) : <>
-                    <Padding padding="16px" />
-                    <p className="drop-file-preview__title">
-                        Sem arquivos enviados
-                    </p>
-                    </>
-                }
+            <DataTable value={propsActivitiesSent?.activities?.activities?.user_activities} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="user_classroom.users.name" header="Nome"></Column>
+                <Column body={(data) => <>{formatarDataHours(data.createdAt)}</>} header="Última Atualização"></Column>
+                <Column body={(data) =>
+                    <div style={{ padding: 16, width: 160, borderRadius: 8, background: data?.status === "COMPLETED" ? color.green : data?.status === "PENDING" ? color.colorSecondary : "" }}>
+                        <h4 style={{ color: "white", textAlign: "center" }}>{status[data?.status as keyof typeof status]}</h4>
+                    </div>}
+                    header="Status"></Column>
+                <Column body={(data) => <div style={{cursor: data.status === "COMPLETED" ? "pointer" : "not-allowed"}} onClick={() => data.status === "COMPLETED" ? history("correcao/"+data.id) : null}><Icon icon="pi pi-eye" color={data.status === "COMPLETED" ? color.colorPrimary : color.grayOne}  /></div>} align="center" header="Visualizar"></Column>
 
-            </>
+            </DataTable>
         </ContentPage>
     )
 }
 
-export default ClassroomCorrectionOfActivities
+export default ActivitiesSent

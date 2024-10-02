@@ -1,7 +1,6 @@
-import { UserActivities } from "../service/types";
 
-export interface ClassroomCorrectionOfActivitiesContextType {
-  activities: UserActivities | undefined;
+export interface ActivitiesSentContextType {
+  activities: any | undefined;
   isLoading: boolean;
   isError: boolean;
 }

@@ -11,11 +11,13 @@ const CardActivities = ({
   handleDelete,
   index,
   id,
+  idClassroom
 }: {
   title: string;
   handleDelete?: any;
   index: number
   id: number;
+  idClassroom: number
 }) => {
   const history = useNavigate();
   const [visible, setVisible] = useState(false);
@@ -25,7 +27,7 @@ const CardActivities = ({
       <Container
         className="card"
         onClick={() => {
-          history(`/turma/${id}`);
+          history(`/turma/${idClassroom}/atividades/${id}`);
         }}
       >
         <Column>

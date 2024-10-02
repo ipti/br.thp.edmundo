@@ -40,7 +40,7 @@ export function formatarDataHours(data: string): string {
   const minutos = dateObj.getMinutes().toString().padStart(2, '0');
 
   // Retornando a data no formato desejado (dd/mm/yyyy hh:mm)
-  return `${dataEdit} ${horas}:${minutos}`;
+  return `${dataEdit} às ${horas}:${minutos}`;
 }
 
 export function converterData(data: string) {

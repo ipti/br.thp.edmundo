@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
-import { ClassroomCorrectionOfActivitiesRequest } from "./request";
+import { ActivitiesSentRequest } from "./request";
 
 
 
-  export const useFetchRequestClassroomCorrectionOfActivities = (id: string) => {
-    return useQuery(["useRequestsClassroomCorrectionOfActivities", id], () => ClassroomCorrectionOfActivitiesRequest(id));
+  export const useFetchRequestActivitiesSent = (id: string) => {
+    return useQuery(["useRequestsActivitiesSent", id], () => ActivitiesSentRequest(id));
   };

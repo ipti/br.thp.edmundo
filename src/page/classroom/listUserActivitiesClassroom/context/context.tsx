@@ -1,18 +1,18 @@
 import { createContext } from "react";
-import { ClassroomCorrectionOfActivitiesState } from "./state";
-import { ClassroomCorrectionOfActivitiesContextType } from "./types";
+import { ActivitiesSentState } from "./state";
+import { ActivitiesSentContextType } from "./types";
 
-export const ClassroomCorrectionOfActivitiesContext = createContext<ClassroomCorrectionOfActivitiesContextType | null>(null);
+export const ActivitiesSentContext = createContext<ActivitiesSentContextType | null>(null);
 
-const ClassroomCorrectionOfActivitiesProvider = ({ children }: { children: React.ReactNode }) => {
+const ActivitiesSentProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { activities, isError, isLoading } = ClassroomCorrectionOfActivitiesState()
+    const { activities, isError, isLoading } = ActivitiesSentState()
 
     return (
-        <ClassroomCorrectionOfActivitiesContext.Provider value={{ activities, isError, isLoading }}>
+        <ActivitiesSentContext.Provider value={{ activities, isError, isLoading }}>
             {children}
-        </ClassroomCorrectionOfActivitiesContext.Provider>
+        </ActivitiesSentContext.Provider>
     )
 }
 
-export default ClassroomCorrectionOfActivitiesProvider;
+export default ActivitiesSentProvider;
