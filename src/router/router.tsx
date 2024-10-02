@@ -25,6 +25,7 @@ import ClassroomActivities from "../page/classroom/activitiesClassroom/page";
 import ClassroomCorrectionOfActivities from "../page/classroom/correctionOfActivitiesClassroom/page";
 import ModulesEdit from "../page/module/editModule/page";
 import ActivitiesEdit from "../page/activities/editActivities/page";
+import ActivitiesSent from "../page/classroom/listUserActivitiesClassroom/page";
 
 const RoutesApp = () => {
   return (
@@ -42,7 +43,8 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<MembersClassroom />} />} path="/turma/:id/membros" />
         <Route element={<PrivateRoute Component={<ClassroomModules />} />} path="/turma/:id/modulos" />
         <Route element={<PrivateRoute Component={<ClassroomActivities />} />} path="/turma/:id/atividades" />
-        <Route element={<PrivateRoute Component={<ClassroomCorrectionOfActivities />} />} path="/turma/:id/atividades/:idUserActivities" />
+        <Route element={<PrivateRoute Component={<ActivitiesSent />} />} path="/turma/:id/atividades/:idClassroomUser" />
+        <Route element={<PrivateRoute Component={<ClassroomCorrectionOfActivities />} />} path="/turma/:id/atividades/:idClassroomUser/correcao/:idUserActivities" />
         <Route element={<PrivateRoute Component={<ClassroomCreate />} />} path="/turmas/criar" />
         <Route element={<PrivateRoute Component={<ReapplicationList />} />} path="/reaplicacoes" />
         <Route element={<PrivateRoute Component={<ReapplicationCreate />} />} path="/reaplicacoes/criar" />

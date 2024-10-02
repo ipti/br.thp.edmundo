@@ -109,7 +109,7 @@ const UserListPage = () => {
                 <Padding padding="16px" />
                 <DataTable value={props.users} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
                     <Column field="name" header="Nome"></Column>
-                    <Column field="email" header="Email"></Column>
+                    <Column field="email" header="Usuário"></Column>
                     <Column field="role" body={typeUserBody} header="Tipo"></Column>
                     <Column field="active" body={ActiveUserBody} header="Ativo"></Column>
                     <Column field="actions" body={ActionsUserBody} header="Ações"></Column>

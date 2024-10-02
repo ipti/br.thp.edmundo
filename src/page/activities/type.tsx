@@ -1,7 +1,7 @@
 export interface CreateActivities {
     name: string,
     description: string,
-    type_activities: string,
+    type_activities: { id: string; name: string; },
     points_activities: number,
     difficult: { id: string; name: string; },
     time_activities: number,

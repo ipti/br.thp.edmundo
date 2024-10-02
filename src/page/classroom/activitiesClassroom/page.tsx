@@ -1,11 +1,10 @@
-import { Accordion, AccordionTab } from "primereact/accordion"
-import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import CardActivities from "../../../Components/Card/CardActivities"
 import ContentPage from "../../../Components/ContentPage"
-import { formatarDataHours } from "../../../Controller/controllerGlobal"
-import color from "../../../Styles/colors"
-import { Column, Padding, Row } from "../../../Styles/styles"
+import DropdownComponent from "../../../Components/Dropdown"
+import { Padding } from "../../../Styles/styles"
 import ActivitiesClassroomProvider, { ActivitiesClassroomContext } from "./context/context"
+import { ClassroomModule } from "./service/types"
 
 const ClassroomActivities = () => {
     return (
@@ -17,19 +16,40 @@ const ClassroomActivities = () => {
 
 const ClassroomActivitiesPage = () => {
 
-    const history = useNavigate()
+    const [value, setValue] = useState<ClassroomModule | undefined>()
 
-    const status = {
-        COMPLETED: "Finalizado",
-        PENDING: "Em andamento"
-    }
+   
 
+    
     const propsActivitiesClassroom = useContext(ActivitiesClassroomContext)
+
+    useEffect(() => {
+        setValue(propsActivitiesClassroom?.classroomActivitiesList?.classroom_module[0])
+      }, [propsActivitiesClassroom?.classroomActivitiesList?.classroom_module])
+      
+
+
 
     return (
         <ContentPage title="Atividades" description="Lista atividades enviadas pelos alunos">
+            <div className="grid">
+                <div className="col-12 md:col-3">
+                    <label>Módulos</label>
+                    <DropdownComponent options={propsActivitiesClassroom?.classroomActivitiesList?.classroom_module} optionsLabel="module.name" value={value} onChange={(e) => setValue(e.target.value)} />
+                </div>
+            </div>
+            <Padding padding="16px" />
+            <div className="grid">
+                {value?.classroom.classroom_activities.map((item, index) => {
+                    return (
+                        <div className="col-12 md:col-3" key={item.activities.id}>
+                            <CardActivities title={item.activities.name.toString()} id={item.activities.id} index={index} idClassroom={propsActivitiesClassroom?.classroomActivitiesList?.id!} />
+                        </div>
+                    )
+                })}
+            </div>
             <>
-                <Accordion activeIndex={0}>
+                {/* <Accordion activeIndex={0}>
                     {
                         propsActivitiesClassroom?.classroomActivitiesList?.classroom_activities.map((item) => {
                             return (
@@ -54,7 +74,7 @@ const ClassroomActivitiesPage = () => {
                             )
                         })
                     }
-                </Accordion>
+                </Accordion> */}
             </>
         </ContentPage>
     )

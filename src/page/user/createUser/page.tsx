@@ -24,7 +24,7 @@ interface FormValues {
     email: string;
     password: string;
     confirmpassword?: string; // Torna confirmpassword opcional,
-    role: {
+    role?: {
         id: string,
         name: string
     }
@@ -124,6 +124,7 @@ const UserCreatePage = () => {
                     email: "",
                     password: "",
                     confirmpassword: "",
+                    username: "",
                     birthday: "",
                     color_race: undefined,
                     cpf: "",
@@ -132,19 +133,18 @@ const UserCreatePage = () => {
                     responsable_cpf: "",
                     responsable_name: "",
                     responsable_telephone: "",
-                    role: { name: "", id: "" },
+                    role: undefined,
                     sex: undefined,
                     zone: undefined
                 }}
                 onSubmit={(values: FormValues) => {
                     delete values.confirmpassword;
-                    props.CreateUser({ ...values, role: values.role?.id, });
+                    props.CreateUser({ ...values, role: values.role?.id!, });
                 }}
                 validationSchema={isMaior ? schema : schemaResponsable}
             >
                 {({ values, handleChange, errors, touched, setFieldValue }) => {
-
-                    console.log(values);
+                    console.log(errors);
                     return (
                         <Form>
                             <InputsUser
@@ -155,7 +155,7 @@ const UserCreatePage = () => {
                             />
                             <div className="grid">
                                 <div className="col-12 md:col-6">
-                                    <label>Senha</label>
+                                    <label>Senha *</label>
                                     <Padding />
                                     <PasswordInput
                                         placeholder="Senha"
@@ -172,7 +172,7 @@ const UserCreatePage = () => {
                                     ) : null}
                                 </div>
                                 <div className="col-12 md:col-6">
-                                    <label>Confirmar senha</label>
+                                    <label>Confirmar senha *</label>
                                     <Padding />
                                     <PasswordInput
                                         placeholder="Senha"

@@ -22,12 +22,11 @@ const InputsUser = ({
 }) => {
 
   const props = useContext(AplicationContext) as PropsAplicationContext;
-  console.log(errors);
   return (
     <Form>
       <div className="grid">
         <div className="col-12 md:col-6">
-          <label>Nome</label>
+          <label>Nome *</label>
           <Padding />
           <TextInput
             placeholder="Nome"
@@ -45,26 +44,27 @@ const InputsUser = ({
         </div>
 
         <div className="col-12 md:col-6">
-          <label>Email</label>
+          <label>Nome usuário *</label>
           <Padding />
           <TextInput
-            placeholder="Digite o seu email"
+            placeholder="Digite o seu nome usuário"
             value={values.email}
             onChange={handleChange}
             name="email"
           />
           <Padding />
-          {errors.email && touched.email ? (
+          {errors.email && touched.enail ? (
             <div style={{ color: "red" }}>
-              {errors.email}
+              {errors.enail}
               <Padding />
             </div>
           ) : null}
         </div>
+
       </div>{" "}
       <div className="grid">
         <div className="col-12 md:col-6">
-          <label>Tipo de usuário</label>
+          <label>Tipo de usuário *</label>
           <Padding />
           <DropdownComponent
             name="role"
@@ -76,14 +76,14 @@ const InputsUser = ({
             options={
               props.user?.role === ROLE.ADMIN
                 ? [
-                    { id: ROLE.ADMIN, name: "Admin" },
-                    { id: ROLE.STUDENT, name: "Estudante" },
-                    { id: ROLE.TEACHER, name: "Professor" },
-                  ]
+                  { id: ROLE.ADMIN, name: "Admin" },
+                  { id: ROLE.STUDENT, name: "Estudante" },
+                  { id: ROLE.TEACHER, name: "Professor" },
+                ]
                 : [
-                    { id: ROLE.STUDENT, name: "Estudante" },
-                    { id: ROLE.TEACHER, name: "Professor" },
-                  ]
+                  { id: ROLE.STUDENT, name: "Estudante" },
+                  { id: ROLE.TEACHER, name: "Professor" },
+                ]
             }
           />
           <Padding />

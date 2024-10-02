@@ -62,7 +62,7 @@ const HomeModulePage = () => {
         }}>
             <Row>
                 <Avatar>
-                    <img alt="" src={avatar} />
+                    <img alt="" src={propsAplication?.user?.registration![0]?.avatar_url ? propsAplication?.user?.registration![0]?.avatar_url : avatar} />
                 </Avatar>
                 <Padding />
                 <Column id="center">
@@ -73,7 +73,7 @@ const HomeModulePage = () => {
             </Row>
             <Padding />
             <h1>
-                 {propsHome.modules.name}
+                {propsHome.modules.name}
             </h1>
             <Padding />
             <p>

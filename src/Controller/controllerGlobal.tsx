@@ -40,7 +40,7 @@ export function formatarDataHours(data: string): string {
   const minutos = dateObj.getMinutes().toString().padStart(2, '0');
 
   // Retornando a data no formato desejado (dd/mm/yyyy hh:mm)
-  return `${dataEdit} ${horas}:${minutos}`;
+  return `${dataEdit} às ${horas}:${minutos}`;
 }
 
 export function converterData(data: string) {
@@ -96,6 +96,11 @@ export var difficult = [
   { id: "MEDIO", name: "Media" },
   { id: "ALTO", name: "Alto" },
   { id: "MUITO_ALTO", name: "Muito alto" },
+];
+
+export var type_activities = [
+  { id: "QUIZ", name: "Quiz" },
+  { id: "CODE", name: "Código" },
 ];
 
 export const color_race = [

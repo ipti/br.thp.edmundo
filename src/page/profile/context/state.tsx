@@ -8,6 +8,8 @@ export const UpdateUserState = () => {
    
 
     const [user, setuser] = useState<User | undefined>()
+    const [file, setFile] = useState<File[] | undefined>();
+
 
 
     const { data: userRequest, isLoading, isError } = useFetchRequestFindOneUser(GetIdUser()!);
@@ -35,10 +37,16 @@ export const UpdateUserState = () => {
     }
   
 
-    const { UpdateUserMutation } = UpdateUserController();
+    const { UpdateUserMutation, requestChangeAvatarRegistrationMutation } = UpdateUserController();
 
     const UpdateUser = (body: UpdateUser) => {
+        if (file) {
+            requestChangeAvatarRegistrationMutation.mutate({
+              id: user?.id!,
+              file: file[0],
+            });
+          }
         UpdateUserMutation.mutate(body)
     }
-    return { initialValue, UpdateUser, user, isLoading, isError }
+    return { initialValue, UpdateUser, user, isLoading, isError, file, setFile }
 }

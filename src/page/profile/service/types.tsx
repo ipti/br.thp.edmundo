@@ -16,6 +16,7 @@ export interface UpdateUser {
 export interface User {
     id: number
     name: string
+    username: string
     email: string
     active: boolean
     role: string

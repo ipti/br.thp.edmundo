@@ -34,6 +34,7 @@ const ActivitiesCreatePage = () => {
                                 <Button label="Criar" icon={"pi pi-plus"} type="submit" />
                             </Row>
                         </Column>
+                        <Padding />
                         <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
                     </Form>
                     );
