@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetchRequestMActivitiesClassroom } from "../service/query";
-import { ClassroomActivities } from "../service/types";
+import { ClassroomModulesActivities } from "../service/types";
 
 export const ActivitiesClassroomState = () => {
-    const [classroomActivitiesList, setClassroomList] = useState<ClassroomActivities | undefined>()
+    const [classroomActivitiesList, setClassroomList] = useState<ClassroomModulesActivities | undefined>()
 
     const {id} = useParams()
 

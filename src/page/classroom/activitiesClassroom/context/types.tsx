@@ -1,7 +1,7 @@
-import { ClassroomActivities } from "../service/types";
+import { ClassroomModulesActivities } from "../service/types";
 
 export interface ActivitiesClassroomContextType {
-  classroomActivitiesList: ClassroomActivities | undefined;
+  classroomActivitiesList: ClassroomModulesActivities | undefined;
   isLoading: boolean;
   isError: boolean;
 }
