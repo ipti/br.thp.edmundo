@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik"
 import { Button } from "primereact/button"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import ContentPage from "../../../Components/ContentPage"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
@@ -8,19 +8,30 @@ import { EditActivitiesType } from "../type"
 import EditActivitiesProvider, { EditActivitiesContext } from "./context/context"
 import { useParams } from "react-router-dom"
 import { ProgressSpinner } from "primereact/progressspinner"
+import { TabMenu } from "primereact/tabmenu"
+import CreateOrEditForm from "../CreateForms"
+import CreateOrEditFormProvider from "../CreateForms/context/context"
 
 const ActivitiesEdit = () => {
     return (
         <EditActivitiesProvider>
+            <CreateOrEditFormProvider>
+
             <ActivitiesEditPage />
+            </CreateOrEditFormProvider>
         </EditActivitiesProvider>
     )
 }
 
 const ActivitiesEditPage = () => {
     const activitiesEdit = useContext(EditActivitiesContext) as EditActivitiesType
-
+    const [activeIndex, setActiveIndex] = useState(0);
     const { id } = useParams()
+
+    const items = [
+        { label: 'Atividade', icon: 'pi pi-home' },
+        { label: 'Formulário', icon: ' pi pi-list' },
+    ];
 
     if (!activitiesEdit.activitiesOne) return <ProgressSpinner />
 
@@ -28,7 +39,10 @@ const ActivitiesEditPage = () => {
     return (
         <ContentPage title="Editar atividade" description="Modifique a atividade">
             <Padding />
-            <Formik
+            <TabMenu model={items}  activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}  />
+
+            <Padding padding="16px" />
+           {activeIndex === 0 && <Formik
                 initialValues={activitiesEdit.initialValue}
                 onSubmit={(values) => { activitiesEdit.EditActivities(values, +id!) }}
             >
@@ -44,7 +58,9 @@ const ActivitiesEditPage = () => {
                         </Form>
                     );
                 }}
-            </Formik>
+            </Formik>}
+
+            {activeIndex === 1 && <CreateOrEditForm />}
         </ContentPage>
     )
 }

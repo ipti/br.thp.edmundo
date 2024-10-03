@@ -35,3 +35,20 @@ export interface EditActivitiesType {
 
 
 
+export interface PropsFormActivities {
+    questions: Question[]
+  }
+  
+  export interface Question {
+    content: string
+    form_fk: number
+    type: string
+    options: Option[]
+  }
+  
+  export interface Option {
+    content: string
+    value: number
+    isResponse: boolean
+  }
+  

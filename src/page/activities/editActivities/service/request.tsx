@@ -1,8 +1,14 @@
 import http from "../../../../service/axios"
 import { logout } from "../../../../service/localstorage"
-import { EditActivities } from "../../type"
+import { EditActivities, PropsFormActivities } from "../../type"
+
+
 export const EditActivitiesRequest = async (body: EditActivities, id: number) => {
     return await http.put("/activities/" + id, { ...body, difficult: body.difficult.id })
+}
+
+export const CreateFormRequest = async (body: PropsFormActivities) => {
+    return await http.post("/form-bff", body)
 }
 
 export const FindOneActivitiesRequest = async (id: string) => {
