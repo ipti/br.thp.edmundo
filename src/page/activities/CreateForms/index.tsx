@@ -35,11 +35,11 @@ const CreateOrEditForms = () => {
     <>
       {form ? (
         <Row id="end" style={{ gap: "4px" }}>
-          <Button
+          {/* <Button
             label="Preview"
             icon="pi pi-eye"
             // onClick={() => history(`/view/${form.id}`)}
-          />{" "}
+          />{" "} */}
           <Button
             label="Salvar"
             icon="pi pi-save"

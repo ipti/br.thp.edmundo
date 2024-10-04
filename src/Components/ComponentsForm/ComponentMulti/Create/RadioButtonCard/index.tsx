@@ -20,7 +20,7 @@ export default function RadioButtonCard({
           return (
             <Row key={indexRadioButton}>
               <Column id="center">
-                <CheckboxComponent value={item.isResponse} checked={item.isResponse === true} onChange={() => {
+                <RadioButton value={item.isResponse} checked={item.isResponse === true} onChange={() => {
                   const newForm = {...form}
                   newForm.questions[index].options[indexRadioButton].isResponse = !newForm.questions[index].options[indexRadioButton].isResponse
                   for(const i of newForm.questions[index].options ){

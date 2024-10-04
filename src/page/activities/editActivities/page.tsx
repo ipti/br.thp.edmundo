@@ -17,7 +17,7 @@ const ActivitiesEdit = () => {
         <EditActivitiesProvider>
             <CreateOrEditFormProvider>
 
-            <ActivitiesEditPage />
+                <ActivitiesEditPage />
             </CreateOrEditFormProvider>
         </EditActivitiesProvider>
     )
@@ -39,10 +39,9 @@ const ActivitiesEditPage = () => {
     return (
         <ContentPage title="Editar atividade" description="Modifique a atividade">
             <Padding />
-            <TabMenu model={items}  activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}  />
-
+            <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
             <Padding padding="16px" />
-           {activeIndex === 0 && <Formik
+            {activeIndex === 0 && <Formik
                 initialValues={activitiesEdit.initialValue}
                 onSubmit={(values) => { activitiesEdit.EditActivities(values, +id!) }}
             >

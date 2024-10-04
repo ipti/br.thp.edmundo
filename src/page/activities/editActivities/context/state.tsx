@@ -3,7 +3,7 @@ import { EditActivities } from "../../type";
 import { EditActivitiesController } from "../service/controller"
 import { useEffect, useState } from "react";
 import { useFetchRequestFindOneActivities } from "../service/query";
-import { difficult } from "../../../../Controller/controllerGlobal";
+import { difficult, type_activities } from "../../../../Controller/controllerGlobal";
 import queryClient from "../../../../service/reactquery";
 
 export const EditActivitiesState = () => {
@@ -37,7 +37,7 @@ const [is, setIs] = useState(false)
         difficult: difficult?.find(props => props.id === activitiesOne?.difficult) ?? { id: "", name: "" },
         points_activities: activitiesOne?.points_activities ?? 0,
         time_activities: activitiesOne?.time_activities ?? 0,
-        type_activities: "CODE",
+        type_activities: type_activities?.find(props => props.id === activitiesOne?.type_activities) ?? {id: "", name: ""},
     }
 
 

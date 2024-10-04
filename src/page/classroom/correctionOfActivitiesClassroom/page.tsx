@@ -7,6 +7,8 @@ import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomCorrectionOfActivitiesProvider, { ClassroomCorrectionOfActivitiesContext } from "./context/context"
 import { ProgressSpinner } from "primereact/progressspinner"
+import { Formik } from "formik"
+import TextInput from "../../../Components/TextInput"
 
 const ClassroomCorrectionOfActivities = () => {
     return (
@@ -25,7 +27,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
     const propsClassroomCorrectionOfActivities = useContext(ClassroomCorrectionOfActivitiesContext)
 
-    if(propsClassroomCorrectionOfActivities?.isLoading) return <ProgressSpinner />
+    if (propsClassroomCorrectionOfActivities?.isLoading) return <ProgressSpinner />
 
 
 
@@ -69,14 +71,61 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                             }
                         </div>
                     ) : <>
-                    <Padding padding="16px" />
-                    <p className="drop-file-preview__title">
-                        Sem arquivos enviados
-                    </p>
+                        <Padding padding="16px" />
+                        <p className="drop-file-preview__title">
+                            Sem arquivos enviados
+                        </p>
                     </>
                 }
 
             </>
+
+            <Padding />
+            <Row>
+
+                <h1>
+                    Avalie o aluno
+                </h1>
+                <Padding />
+                <Column id="center">
+                    <Icon icon="pi pi-star-fill" color={color.colorThird} />
+                </Column>
+            </Row>
+            <Padding padding="8px" />
+            <Formik initialValues={{}} onSubmit={() => {
+
+            }}>
+                {({ errors, values, touched, handleChange }) => {
+                    return (
+                        <div className="grid">
+                            <div className="col-12 md:col-6">
+                                <TextInput placeholder="Cumpriu a atividade corretamente" />
+                                <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
+                            </div>
+                            <div className="col-12 md:col-6">
+                                <TextInput placeholder="Cumpriu a atividade corretamente" />
+                                <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
+                            </div>
+                            <div className="col-12 md:col-6">
+                                <TextInput placeholder="Cumpriu a atividade corretamente" />
+                                <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
+                            </div>
+                            <div className="col-12 md:col-6">
+                                <TextInput placeholder="Cumpriu a atividade corretamente" />
+                                <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
+                            </div>
+                            <div className="col-12 md:col-6">
+                                <TextInput placeholder="Cumpriu a atividade corretamente" />
+                                <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
+                            </div>
+                            <div className="col-12 md:col-6">
+                                <TextInput placeholder="Cumpriu a atividade corretamente" />
+                                <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
+                            </div>
+                        </div>
+                    )
+                }}
+            </Formik>
         </ContentPage>
     )
 }
