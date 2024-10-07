@@ -32,9 +32,11 @@ const ClassroomActivitiesPage = () => {
 
     return (
         <ContentPage title="Atividades" description="Lista atividades enviadas pelos alunos">
+            <Padding padding="16px" />
             <div className="grid">
                 <div className="col-12 md:col-3">
                     <label>Módulos</label>
+                    <Padding />
                     <DropdownComponent options={propsActivitiesClassroom?.classroomActivitiesList?.classroom_module} optionsLabel="module.name" value={value} onChange={(e) => setValue(e.target.value)} />
                 </div>
             </div>

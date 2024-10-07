@@ -1,5 +1,6 @@
 import http from "../../../../service/axios";
 import { logout } from "../../../../service/localstorage";
+import { CreateNotasType } from "./types";
 
 export const ClassroomCorrectionOfActivitiesRequest = async (id: string) => {
 
@@ -17,4 +18,12 @@ export const ClassroomCorrectionOfActivitiesRequest = async (id: string) => {
 }
 
 
+export const CreateAvaliationRequest = async (body: CreateNotasType, id: number) => {
+  return await http.post("/user-activities-bff/user-avaliation?id="+id, body)
+}
+
+
+export const UpdateAvaliationRequest = async (body: CreateNotasType, id: number) => {
+  return await http.put("/user-activities-bff/user-avaliation?id="+id, body)
+}
 

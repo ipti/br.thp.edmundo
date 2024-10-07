@@ -10,6 +10,7 @@ import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomModulesProvider, { ClassroomModulesContext } from "./context/context"
 import { Class } from "./context/type"
 import ModalAddModule from "./modalAddModule"
+import Empty from "../../../Components/Empty"
 
 
 const ClassroomModules = () => {
@@ -54,6 +55,8 @@ const ClassroomModulesPage = () => {
                     </div>
                 )
             })}
+
+            {props?.modulesClassroomList?.length === 0 && <Empty title="módulos" />}
             <ModalAddModule onHide={() => setVisible(!visible)} visible={visible} />
         </ContentPage >
     )

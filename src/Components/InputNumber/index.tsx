@@ -10,20 +10,27 @@ const InputNumberComponent = ({
     disabled,
     onBlur,
     name,
-    suffix
+    suffix,
+    max,
+    showButtons
 }: PropsInputNumber) => {
     return (
         <div>
             <InputNumber
                 style={{ width: "100%" }}
                 onBlur={onBlur}
+                
                 disabled={disabled}
-                minFractionDigits={2} maxFractionDigits={5}
+                max={max}
+                minFractionDigits={2}
+                maxFractionDigits={5}
+                showButtons={showButtons}
                 value={value}
                 name={name}
                 suffix={suffix}
                 onValueChange={onChange}
                 placeholder={placeholder}
+
             />
         </div>
     );

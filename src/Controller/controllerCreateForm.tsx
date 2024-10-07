@@ -1,6 +1,4 @@
 import { PropsFormActivities } from "../page/activities/type";
-import { PropsForm } from "../Types/types";
-import { gerarIdAleatorio } from "./controllerGlobal";
 
 export const ControllerCreateForm = () => {
   return { editType, AddRadiosButtonandBoxSelect, AddBoxSelect, editlabelRadioButtonandBoxSelect, editIsRequiredForm, deleteOptions, deleteQuestion, editLabelForm }

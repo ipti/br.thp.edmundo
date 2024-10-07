@@ -1,10 +1,9 @@
 import { RadioButton } from "primereact/radiobutton";
 import { useEffect, useState } from "react";
-import { PropsRadioButtonCardCreate } from "../../../../../Types/types";
 import { ControllerCreateForm } from "../../../../../Controller/controllerCreateForm";
 import { Column, Padding, Row } from "../../../../../Styles/styles";
+import { PropsRadioButtonCardCreate } from "../../../../../Types/types";
 import TextInput from "../../../../TextInput";
-import CheckboxComponent from "../../../../Checkbox";
 
 export default function RadioButtonCard({
   options,

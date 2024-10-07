@@ -11,7 +11,7 @@ export const CreateOrEditFormState = () => {
 
     const [form, setform] = useState<PropsFormActivities | undefined>({questions: []})
 
-    const [responses, setResponses] = useState<any | undefined>()
+    const [responses] = useState<any | undefined>()
 
 
     const { id } = useParams()

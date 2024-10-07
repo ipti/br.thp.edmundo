@@ -1,19 +1,16 @@
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import { InputSwitch } from "primereact/inputswitch";
 import { useContext, useState } from "react";
-import { CreateOrEditFormTypes, PropsComponentForm } from "../../../../Types/types";
-import { ControllerCreateForm } from "../../../../Controller/controllerCreateForm";
-import { Column, Padding, Row } from "../../../../Styles/styles";
-import TextInput from "../../../../Components/TextInput";
-import TextAreaComponent from "../../../../Components/TextArea";
-import DropdownComponent from "../../../../Components/Dropdown";
-import { gerarIdAleatorio } from "../../../../Controller/controllerGlobal";
-import { CreateOrEditFormContext } from "../context/context";
+import RenderFormCheckbox from "../../../../Components/ComponentsForm/ComponentCheckbox/Create";
+import RenderForm from "../../../../Components/ComponentsForm/ComponentMulti/Create";
 import RenderFormTextField from "../../../../Components/ComponentsForm/ComponentTextFiled/Create";
 import RenderFormTextLong from "../../../../Components/ComponentsForm/ComponentTextLong/Create";
-import RenderForm from "../../../../Components/ComponentsForm/ComponentMulti/Create";
-import RenderFormCheckbox from "../../../../Components/ComponentsForm/ComponentCheckbox/Create";
+import DropdownComponent from "../../../../Components/Dropdown";
+import TextAreaComponent from "../../../../Components/TextArea";
+import { ControllerCreateForm } from "../../../../Controller/controllerCreateForm";
+import { Column, Padding, Row } from "../../../../Styles/styles";
+import { CreateOrEditFormTypes, PropsComponentForm } from "../../../../Types/types";
+import { CreateOrEditFormContext } from "../context/context";
 
 const Form = () => {
     const { form, setform } = useContext(
@@ -31,16 +28,7 @@ const Form = () => {
     ];
 
     const [multSelect, setMultSelect] = useState(options[0]);
-    const handleTitleLabel = (e: any) => {
-        // const newData = { ...form, title: e.target.value };
-        // setform(newData);
-    }; // edit textlabel
-
-    const handleTextDescription = (e: any) => {
-        // const newData = { ...form, description: e.target.value };
-        // setform(newData);
-    }; // edit description
-
+   
 
     const handleTextLabel = (e: any, index: number) => {
         props.editLabelForm(index, e.target.value, form, setform);

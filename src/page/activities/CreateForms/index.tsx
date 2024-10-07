@@ -2,7 +2,6 @@ import { Button } from "primereact/button";
 import { useContext, useState } from "react";
 
 import { TabMenu } from "primereact/tabmenu";
-import { useNavigate } from "react-router-dom";
 import { Padding, Row } from "../../../Styles/styles";
 import { CreateOrEditFormTypes } from "../../../Types/types";
 import { CreateOrEditFormContext } from "./context/context";
@@ -19,7 +18,6 @@ const CreateOrEditForms = () => {
   const [tabMenu, setTabMenu] = useState(0);
 
   const { form, CreateForm } = useContext(CreateOrEditFormContext) as CreateOrEditFormTypes;
-  const history = useNavigate();
 
   const items = [
     {
