@@ -6,10 +6,10 @@ export const ClassroomCorrectionOfActivitiesContext = createContext<ClassroomCor
 
 const ClassroomCorrectionOfActivitiesProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { activities, isError, isLoading } = ClassroomCorrectionOfActivitiesState()
+    const { activities, isError, isLoading, createAvaliation, updateAvaliation } = ClassroomCorrectionOfActivitiesState()
 
     return (
-        <ClassroomCorrectionOfActivitiesContext.Provider value={{ activities, isError, isLoading }}>
+        <ClassroomCorrectionOfActivitiesContext.Provider value={{ activities, isError, isLoading, createAvaliation, updateAvaliation }}>
             {children}
         </ClassroomCorrectionOfActivitiesContext.Provider>
     )

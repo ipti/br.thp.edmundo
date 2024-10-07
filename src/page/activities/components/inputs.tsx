@@ -30,6 +30,7 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { erro
                 <Padding />
                 <DropdownComponent
                     value={values.type_activities}
+                    disabled={false}
                     options={type_activities}
                     optionsValue="id"
                     optionsLabel="name"

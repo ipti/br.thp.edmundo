@@ -44,6 +44,9 @@ const ActivitiesSentPage = () => {
                         <h4 style={{ color: "white", textAlign: "center" }}>{status[data?.status as keyof typeof status]}</h4>
                     </div>}
                     header="Status"></Column>
+                    {propsActivitiesSent?.activities?.activities?.user_activities[0]?.user_avaliation?.total &&
+                    <Column field="user_avaliation.total" header="Nota"></Column>
+                    }
                 <Column body={(data) => <div style={{cursor: data.status === "COMPLETED" ? "pointer" : "not-allowed"}} onClick={() => data.status === "COMPLETED" ? history("correcao/"+data.id) : null}><Icon icon="pi pi-eye" color={data.status === "COMPLETED" ? color.colorPrimary : color.grayOne}  /></div>} align="center" header="Visualizar"></Column>
 
             </DataTable>

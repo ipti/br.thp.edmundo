@@ -4,6 +4,7 @@ import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import { SelectItemOptionsType } from "primereact/selectitem";
 import { ChangeEventHandler, Dispatch, FocusEventHandler, HTMLInputTypeAttribute, SetStateAction } from "react";
+import { PropsFormActivities } from "../page/activities/type";
 
 export interface PropsInputText {
     value?: string,
@@ -33,7 +34,9 @@ export interface PropsInputNumber {
     disabled?: boolean | undefined,
     onBlur?: FocusEventHandler<HTMLInputElement> | undefined,
     name?: string
-    suffix?: string
+    suffix?: string,
+    max?: number | undefined
+    showButtons?: boolean | undefined
 }
 
 export interface PropsInputCalendar {
@@ -124,9 +127,10 @@ export interface FormsJson {
 }
 
 export interface CreateOrEditFormTypes {
-    form: PropsForm | undefined,
-    setform: Dispatch<SetStateAction<PropsForm | undefined>>,
-    responses: Responses
+    form: PropsFormActivities | undefined;
+    setform: Dispatch<SetStateAction<PropsFormActivities | undefined>>;
+    responses: any;
+    CreateForm: () => void;
 }
 
 

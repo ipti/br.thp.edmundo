@@ -1,14 +1,13 @@
 import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import styles from "../../../../Styles";
-import { EditActivities, PropsFormActivities } from "../../type";
-import { CreateFormRequest, EditActivitiesRequest } from "./request";
+import { CreateAvaliationRequest, UpdateAvaliationRequest } from "./request";
+import { CreateNotasType } from "./types";
 
-export const EditActivitiesController = () => {
+export const CreateAvaliationController = () => {
 
-
-  const EditActivitiesMutation = useMutation(
-    ({data, id}:{data: EditActivities, id: number}) => EditActivitiesRequest(data, id),
+  const CreateAvaliationMutation = useMutation(
+    ({data, id}:{data: CreateNotasType, id: number}) => CreateAvaliationRequest(data, id),
     {
       onError: (error: any) => {
         Swal.fire({
@@ -17,19 +16,19 @@ export const EditActivitiesController = () => {
           confirmButtonColor: styles.colors.colorPrimary,
         })
       },
-      onSuccess: (data, va) => {
+      onSuccess: (data) => {
         Swal.fire({
-          icon: 'success',
-          title: "Salvo com sucesso!",
+          icon: "success",
+          title: "Nota Salva com sucesso!",
           confirmButtonColor: styles.colors.colorPrimary,
-        })
+        });
       },
 
     }
   );
 
-  const CreateFormMutation = useMutation(
-    ({data}:{data: PropsFormActivities}) => CreateFormRequest(data),
+  const UpdateAvaliationMutation = useMutation(
+    ({data, id}:{data: CreateNotasType, id: number}) => UpdateAvaliationRequest(data, id),
     {
       onError: (error: any) => {
         Swal.fire({
@@ -38,18 +37,18 @@ export const EditActivitiesController = () => {
           confirmButtonColor: styles.colors.colorPrimary,
         })
       },
-      onSuccess: (data, va) => {
+      onSuccess: (data) => {
         Swal.fire({
-          icon: 'success',
-          title: "Salvo com sucesso!",
+          icon: "success",
+          title: "Nota Salva com sucesso!",
           confirmButtonColor: styles.colors.colorPrimary,
-        })
+        });
       },
 
     }
   );
 
   return {
-    EditActivitiesMutation, CreateFormMutation
+    CreateAvaliationMutation, UpdateAvaliationMutation
   }
 }
