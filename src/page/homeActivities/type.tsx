@@ -26,5 +26,8 @@ export interface JoinTheActivitiesUser {
     activities_fk: number
     usersId: any
     user_classroomId: number
+    user_avaliation?: {
+      total: number
+    }
   }
   

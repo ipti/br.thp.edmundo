@@ -1,14 +1,14 @@
+import { Button } from "primereact/button";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import sound from "../../assets/image/sound_sampler.svg";
+import DropFileInput from "../../Components/DragAndDropFile";
+import Icon from "../../Components/Icon";
 import { getDifficulte } from "../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeActivitiesProvider, { HomeActivitiesContext } from "./context/context";
 import { ButtonStart, TextActivities, TextActivitiesParagraph } from "./styles";
-import { useParams } from "react-router-dom";
-import DropFileInput from "../../Components/DragAndDropFile";
-import { Button } from "primereact/button";
-import Icon from "../../Components/Icon";
-import { ProgressSpinner } from "primereact/progressspinner";
 
 
 const HomeActivities = () => {
@@ -29,7 +29,7 @@ const HomeActivitiesPage = () => {
     const { idClassroom } = useParams()
 
 
-    if(!propsAplication?.activitiesOne?.user_activities) return <ProgressSpinner />
+    if (!propsAplication?.activitiesOne?.user_activities) return <ProgressSpinner />
 
 
     return (
@@ -44,7 +44,7 @@ const HomeActivitiesPage = () => {
                             {propsAplication?.activitiesOne?.user_activities.length === 0 ? <ButtonStart onClick={() => {
                                 propsAplication?.JoinTheActivitiesUser({ idActivities: propsAplication.activitiesOne?.id!, idClassroom: parseInt(idClassroom!) })
                             }}><Row id="space-around"><div></div><Column id="center">Iniciar atividade</Column> <img style={{ width: 48 }} src={sound} alt="" /></Row></ButtonStart>
-                                : propsAplication?.activitiesOne?.user_activities[0].status === "COMPLETED" ? <ButtonStart type="SUCCESS"><Row id="space-around"><div></div><Column id="center">Atividade enviada</Column> <Icon icon="pi pi-check" size="32px"/></Row></ButtonStart> : <>
+                                : propsAplication?.activitiesOne?.user_activities[0].status === "COMPLETED" ? <ButtonStart type="SUCCESS"><Row id="space-around"><div></div><Column id="center">Atividade enviada</Column> <Icon icon="pi pi-check" size="32px" /></Row></ButtonStart> : <>
                                     <h1>1. Anexe sua atividade clicando no botão a seguir:</h1>
                                     <Padding padding="8px" />
                                     <DropFileInput onFileChange={propsAplication?.onChangeFile} />
@@ -53,15 +53,17 @@ const HomeActivitiesPage = () => {
                                 </>
                             }
                             <Padding padding="16px" />
+
+
                             <div className="card">
-                                <Row style={{ gap: "4px" }}>
+                                {/* <Row style={{ gap: "4px" }}>
                                     <TextActivitiesParagraph>
                                         Pontos da Atividade:
                                     </TextActivitiesParagraph>
                                     <TextActivities>
                                         25 {`\n`}
                                     </TextActivities>
-                                </Row>
+                                </Row> */}
                                 <Padding />
                                 <Row style={{ gap: "4px" }}>
                                     <TextActivitiesParagraph>
@@ -81,10 +83,26 @@ const HomeActivitiesPage = () => {
                                         {propsAplication?.activitiesOne?.time_activities} Minutos {`\n`}
                                     </TextActivities>
                                 </Row>
+                                {propsAplication.activitiesOne?.user_activities[0]?.user_avaliation?.total && 
+                                <>
+                                 <Padding />
+                                 <Row style={{ gap: "4px" }}>
+                                    <TextActivitiesParagraph>
+                                        Nota:
+                                    </TextActivitiesParagraph>
+                                    <TextActivities>
+                                        {propsAplication.activitiesOne?.user_activities[0]?.user_avaliation?.total} {`\n`}
+                                    </TextActivities>
+                                </Row>
+                                </>
+                                }
                             </div>
+
                         </Column>
                     </Row>
                 </div>
+
+
                 <div className="card col-12 md:col-7">
                     <Padding padding="32px">
                         <TextActivities>{propsAplication?.activitiesOne?.name}</TextActivities>
