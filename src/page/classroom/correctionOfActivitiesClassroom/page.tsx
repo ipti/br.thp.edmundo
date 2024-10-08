@@ -107,11 +107,11 @@ const ClassroomCorrectionOfActivitiesPage = () => {
             <Padding />
 
             <Padding padding="8px" />
-            {propsClassroomCorrectionOfActivities?.activities && <Formik initialValues={{ complete_the_activity_correctly: propsClassroomCorrectionOfActivities?.activities?.user_avaliation.complete_the_activity_correctly ?? undefined, content_organization: propsClassroomCorrectionOfActivities?.activities?.user_avaliation.content_organization ?? undefined, completion_within_the_indicated_deadline: propsClassroomCorrectionOfActivities?.activities?.user_avaliation.completion_within_the_indicated_deadline ?? undefined, creativity_in_the_response: propsClassroomCorrectionOfActivities?.activities?.user_avaliation.creativity_in_the_response ?? undefined, collaboration: propsClassroomCorrectionOfActivities?.activities?.user_avaliation.collaboration ?? undefined, understanding_the_content: propsClassroomCorrectionOfActivities?.activities?.user_avaliation.understanding_the_content ?? undefined }}
+            {propsClassroomCorrectionOfActivities?.activities && <Formik initialValues={{ complete_the_activity_correctly: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.complete_the_activity_correctly ?? undefined, content_organization: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.content_organization ?? undefined, completion_within_the_indicated_deadline: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.completion_within_the_indicated_deadline ?? undefined, creativity_in_the_response: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.creativity_in_the_response ?? undefined, collaboration: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.collaboration ?? undefined, understanding_the_content: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.understanding_the_content ?? undefined }}
                 onSubmit={(values) => {
 
-                    if (propsClassroomCorrectionOfActivities?.activities?.user_avaliation.id) {
-                        propsClassroomCorrectionOfActivities.updateAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation.id!)
+                    if (propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id) {
+                        propsClassroomCorrectionOfActivities.updateAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id!)
                     } else {
                         propsClassroomCorrectionOfActivities?.createAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities.activities?.id!)
 
