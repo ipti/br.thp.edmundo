@@ -30,7 +30,7 @@ const ActivitiesEditPage = () => {
 
     const items = [
         { label: 'Atividade', icon: 'pi pi-home' },
-        { label: 'Formulário', icon: ' pi pi-list' },
+        // { label: 'Formulário', icon: ' pi pi-list' },
     ];
 
     if (!activitiesEdit.activitiesOne) return <ProgressSpinner />
