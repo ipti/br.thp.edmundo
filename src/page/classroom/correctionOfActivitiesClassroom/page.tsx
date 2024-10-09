@@ -84,7 +84,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                             ImageConfig['default']} alt="" />
                                         <div className="drop-file-preview__item__info">
                                             <p>{item.original_name}</p>
-                                            <p>{item.size}B</p>
+                                            <p>{item.size}KB</p>
                                         </div>
                                         <span className="drop-file-preview__item__del"
                                             onClick={() => { window.open(item.archive_url) }}>
@@ -124,9 +124,9 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
                             <Row id="space-between">
                                 <Column id="center">
-                                <h2>
-                                    Avalie o aluno
-                                </h2>
+                                    <h2>
+                                        Avalie o aluno
+                                    </h2>
                                 </Column>
                                 <Button label="Salvar" icon="pi pi-save" />
                             </Row>
