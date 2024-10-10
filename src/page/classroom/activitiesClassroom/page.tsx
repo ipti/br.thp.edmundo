@@ -5,6 +5,7 @@ import DropdownComponent from "../../../Components/Dropdown"
 import { Padding } from "../../../Styles/styles"
 import ActivitiesClassroomProvider, { ActivitiesClassroomContext } from "./context/context"
 import { ClassroomModule } from "./service/types"
+import Empty from "../../../Components/Empty"
 
 const ClassroomActivities = () => {
     return (
@@ -33,6 +34,7 @@ const ClassroomActivitiesPage = () => {
     return (
         <ContentPage title="Atividades" description="Lista atividades enviadas pelos alunos">
             <Padding padding="16px" />
+            {propsActivitiesClassroom?.classroomActivitiesList?.classroom_module?.length! > 0 ?<>
             <div className="grid">
                 <div className="col-12 md:col-3">
                     <label>Módulos</label>
@@ -50,7 +52,10 @@ const ClassroomActivitiesPage = () => {
                     )
                 })}
             </div>
+            </>: <Empty title="módulos associados a turma" />}
+
             <>
+            
                 {/* <Accordion activeIndex={0}>
                     {
                         propsActivitiesClassroom?.classroomActivitiesList?.classroom_activities.map((item) => {

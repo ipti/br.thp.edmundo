@@ -22,16 +22,44 @@ const ActivitiesSent = () => {
     )
 }
 
+interface InitialForm {
+    selection: { name: string, id: number }[]
+}
+
 const ActivitiesSentPage = () => {
 
+
+
+    const getNotas = (values: CreateNotasAvaliationType) => {
+
+        var array = []
+        if (values.collaboration) array.push({ id: 4, name: "Colaboração" })
+
+        if (values.complete_the_activity_correctly) array.push({ id: 0, name: "Cumpriu a atividade corretamente" })
+
+        if (values.completion_within_the_indicated_deadline) array.push({ id: 2, name: "Conclusão no prazo indicado" })
+
+        if (values.content_organization) array.push({ id: 1, name: "Organização do conteúdo" })
+
+        if (values.creativity_in_the_response) array.push({ id: 3, name: "Criatividade na resposta" })
+
+        if (values.understanding_the_content) array.push({ id: 5, name: "Compreensão sobre o conteúdo" })
+
+        return array
+    }
+
     const history = useNavigate()
+    const propsActivitiesSent = useContext(ActivitiesSentContext)
+
+    const initialForm: InitialForm = {
+        selection: propsActivitiesSent!.activities?.activities?.classroom_activities[0]?.classroom_avaliation ? getNotas(propsActivitiesSent!.activities?.activities?.classroom_activities[0]?.classroom_avaliation) : []
+    }
 
     const status = {
         COMPLETED: "Finalizado",
         PENDING: "Em andamento"
     }
 
-    const propsActivitiesSent = useContext(ActivitiesSentContext)
 
     if (propsActivitiesSent?.isLoading) return <ProgressSpinner />
 
@@ -40,34 +68,40 @@ const ActivitiesSentPage = () => {
     return (
         <ContentPage title={propsActivitiesSent?.activities?.activities?.name!} description="Visualize as atividades enviadas pelos alunos">
             <Padding padding="16px" />
-            <Formik initialValues={{ selection: { id: undefined, name: undefined, } }} onSubmit={(values) => {
+            {propsActivitiesSent?.activities?.activities && <Formik initialValues={initialForm} onSubmit={(values) => {
                 const select: CreateNotasAvaliationType = {
-                    collaboration: question.find(props => props.id === values.selection.id)?.id === 4 ? true : false,
-                    complete_the_activity_correctly: question.find(props => props.id === values.selection.id)?.id === 0 ? true : false,
-                    completion_within_the_indicated_deadline: question.find(props => props.id === values.selection.id)?.id === 2 ? true : false,
-                    content_organization: question.find(props => props.id === values.selection.id)?.id === 2 ? true : false,
-                    creativity_in_the_response: question.find(props => props.id === values.selection.id)?.id === 3 ? true : false,
-                    understanding_the_content: question.find(props => props.id === values.selection.id)?.id === 5 ? true : false,
+                    collaboration: values.selection.find(props => props.id === 4) ? true : false,
+                    complete_the_activity_correctly: values.selection.find(props => props.id === 0) ? true : false,
+                    completion_within_the_indicated_deadline: values.selection.find(props => props.id === 2) ? true : false,
+                    content_organization: values.selection.find(props => props.id === 1) ? true : false,
+                    creativity_in_the_response: values.selection.find(props => props.id === 3) ? true : false,
+                    understanding_the_content: values.selection.find(props => props.id === 5) ? true : false,
                 }
-                propsActivitiesSent?.createAvaliation(select, 2)
+                if(propsActivitiesSent!.activities?.activities?.classroom_activities[0]?.classroom_avaliation){
+                    propsActivitiesSent?.updateAvaliation(select, propsActivitiesSent!.activities?.activities?.classroom_activities[0]?.classroom_avaliation.id)
+
+                }else {
+
+                    propsActivitiesSent?.createAvaliation(select, propsActivitiesSent.activities.id)
+                }
             }}>
                 {({ values, handleChange }) => {
                     return (
                         <Form>
-                            <Row id="">
-                                <div className="grid">
-                                    <div className="col-12 md:col-4">
-                                        <label>Formato de Avaliação</label>
-                                        <Padding />
-                                        <MultiSelect style={{ width: 320 }} maxSelectedLabels={3} options={question} optionLabel="name" name="selection" optionValue="id" onChange={handleChange} value={values.selection} placeholder="Escolha sua forma de avaliação" />
-                                    </div>
+                            <Row id="space-between">
+                                <div style={{ display: "flex", flexDirection: "column" }}>
+                                    <label>Formato de Avaliação</label>
+                                    <Padding />
+                                    <MultiSelect style={{ width: 320 }} maxSelectedLabels={3} options={question} optionLabel="name" name="selection" onChange={handleChange} value={values.selection} placeholder="Escolha sua forma de avaliação" />
                                 </div>
-                                <Button label="Salvar" icon="pi pi-save" />
+                                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                                    <Button label="Salvar" icon="pi pi-save" />
+                                </div>
                             </Row>
                         </Form>
                     )
                 }}
-            </Formik>
+            </Formik>}
             <Padding padding="16px" />
             <DataTable value={propsActivitiesSent?.activities?.activities?.user_activities} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="user_classroom.users.name" header="Nome"></Column>
@@ -77,9 +111,10 @@ const ActivitiesSentPage = () => {
                         <h4 style={{ color: "white", textAlign: "center" }}>{status[data?.status as keyof typeof status]}</h4>
                     </div>}
                     header="Status"></Column>
-                {propsActivitiesSent?.activities?.activities?.user_activities[0]?.user_avaliation?.total &&
-                    <Column field="user_avaliation.total" header="Nota"></Column>
-                }
+                <Column field="user_avaliation.total" body={(data) => {
+                    return<>{data.user_avaliation.total ?? "-"}</>
+                }} header="Nota"></Column>
+
                 <Column body={(data) => <div style={{ cursor: data.status === "COMPLETED" ? "pointer" : "not-allowed" }} onClick={() => data.status === "COMPLETED" ? history("correcao/" + data.id) : null}><Icon icon="pi pi-eye" color={data.status === "COMPLETED" ? color.colorPrimary : color.grayOne} /></div>} align="center" header="Visualizar"></Column>
 
             </DataTable>

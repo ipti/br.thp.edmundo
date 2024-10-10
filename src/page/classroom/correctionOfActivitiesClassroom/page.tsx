@@ -44,8 +44,9 @@ const ClassroomCorrectionOfActivitiesPage = () => {
             value.understanding_the_content
         ];
 
+
         attributes.forEach(attr => {
-            if (attr !== undefined) {
+            if (attr) {
                 total += attr;
                 count++;
             }
@@ -103,9 +104,6 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 }
 
             </>
-
-            <Padding />
-
             <Padding padding="8px" />
             {propsClassroomCorrectionOfActivities?.activities && <Formik initialValues={{ complete_the_activity_correctly: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.complete_the_activity_correctly ?? undefined, content_organization: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.content_organization ?? undefined, completion_within_the_indicated_deadline: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.completion_within_the_indicated_deadline ?? undefined, creativity_in_the_response: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.creativity_in_the_response ?? undefined, collaboration: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.collaboration ?? undefined, understanding_the_content: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.understanding_the_content ?? undefined }}
                 onSubmit={(values) => {
@@ -133,14 +131,12 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                             <Padding padding="16px" />
                             <div style={{ padding: 8, background: color.colorPrimary, width: 128, borderRadius: 8 }}>
                                 <h3 style={{ textAlign: "center", color: "white" }}>
-
                                     Nota: {handleMedia(values)}
                                 </h3>
                             </div>
-
                             <Padding padding="16px" />
                             <div className="grid">
-                                <div className="col-12 md:col-6">
+                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.complete_the_activity_correctly && <div className="col-12 md:col-6">
                                     <InputNumberComponent name="complete_the_activity_correctly"
                                         showButtons
                                         value={values.complete_the_activity_correctly}
@@ -155,8 +151,8 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                         placeholder="Cumpriu a atividade corretamente" />
                                     <Padding />
                                     <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
-                                </div>
-                                <div className="col-12 md:col-6">
+                                </div>}
+                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.content_organization && <div className="col-12 md:col-6">
                                     <InputNumberComponent showButtons name="content_organization" value={values.content_organization} onChange={(e) => {
                                         if (e.value! > 10) {
                                             setFieldValue("content_organization", 10);
@@ -166,8 +162,8 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                     }} max={10} placeholder="Organização do conteúdo" />
                                     <Padding />
                                     <label>Quando os alunos organizam as informações de forma estruturada conforme as instruções compartilhadas.</label>
-                                </div>
-                                <div className="col-12 md:col-6">
+                                </div>}
+                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.completion_within_the_indicated_deadline && <div className="col-12 md:col-6">
                                     <InputNumberComponent
                                         showButtons name="completion_within_the_indicated_deadline" value={values.completion_within_the_indicated_deadline} onChange={(e) => {
                                             if (e.value! > 10) {
@@ -179,8 +175,8 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                         placeholder="Conclusão no prazo indicado" />
                                     <Padding />
                                     <label>Quando os alunos realizam a atividade dentro do prazo estipulado pelo professor.</label>
-                                </div>
-                                <div className="col-12 md:col-6">
+                                </div>}
+                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.creativity_in_the_response && <div className="col-12 md:col-6">
                                     <InputNumberComponent
                                         showButtons name="creativity_in_the_response" value={values.creativity_in_the_response} onChange={(e) => {
                                             if (e.value! > 10) {
@@ -192,8 +188,8 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                         placeholder="Criatividade na resposta" />
                                     <Padding />
                                     <label>Quando o aluno entrega algo além do que foi pedido ou utiliza uma nova solução para realizar o desafio.</label>
-                                </div>
-                                <div className="col-12 md:col-6">
+                                </div>}
+                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.collaboration && <div className="col-12 md:col-6">
                                     <InputNumberComponent
                                         showButtons name="collaboration" value={values.collaboration} onChange={(e) => {
                                             if (e.value! > 10) {
@@ -205,8 +201,8 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                         placeholder="Colaboração" />
                                     <Padding />
                                     <label>Quando o aluno ajuda um colega a realizar o desafio, sendo necessário sinalizar na atividade.</label>
-                                </div>
-                                <div className="col-12 md:col-6">
+                                </div>}
+                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.understanding_the_content && <div className="col-12 md:col-6">
                                     <InputNumberComponent
                                         showButtons name="understanding_the_content" value={values.understanding_the_content} onChange={(e) => {
                                             if (e.value! > 10) {
@@ -218,7 +214,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                         placeholder="Compreensão sobre o conteúdo" />
                                     <Padding />
                                     <label>Percepção do professor se o aluno está conectando os conteúdos apresentados.</label>
-                                </div>
+                                </div>}
                             </div>
                         </Form>
                     )

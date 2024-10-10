@@ -7,3 +7,4 @@ export interface ActivitiesSentContextType {
   createAvaliation: (body: CreateNotasAvaliationType, id: number) => void;
   updateAvaliation: (body: CreateNotasAvaliationType, id: number) => void;
 }
+
