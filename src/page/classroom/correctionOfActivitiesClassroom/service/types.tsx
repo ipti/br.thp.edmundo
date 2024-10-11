@@ -29,6 +29,7 @@ export interface UserActivities {
     classroom_activities: ClassroomActivity[]
     name: string
     points_activities: number
+    time_activities: number
   }
   
   export interface ClassroomActivity {

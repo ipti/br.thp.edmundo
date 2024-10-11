@@ -19,7 +19,7 @@ export const CreateAvaliationController = () => {
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
-          title: "Nota Salva com sucesso!",
+          title: "Formato de avaliação Salva com sucesso!",
           confirmButtonColor: styles.colors.colorPrimary,
         });
       },
@@ -40,7 +40,7 @@ export const CreateAvaliationController = () => {
       onSuccess: (data) => {
         Swal.fire({
           icon: "success",
-          title: "Nota Salva com sucesso!",
+          title: "Formato de avaliação Salva com sucesso!",
           confirmButtonColor: styles.colors.colorPrimary,
         });
       },

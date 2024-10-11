@@ -11,6 +11,7 @@ import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomCorrectionOfActivitiesProvider, { ClassroomCorrectionOfActivitiesContext } from "./context/context"
 import { NotasType } from "./context/types"
+import Empty from "../../../Components/Empty"
 
 const ClassroomCorrectionOfActivities = () => {
     return (
@@ -20,12 +21,18 @@ const ClassroomCorrectionOfActivities = () => {
     )
 }
 
+const labelBottom = {
+    color: color.grayOne
+}
+
 const ClassroomCorrectionOfActivitiesPage = () => {
 
     const status = {
         COMPLETED: "Finalizado",
         PENDING: "Em andamento"
     }
+
+
 
     const propsClassroomCorrectionOfActivities = useContext(ClassroomCorrectionOfActivitiesContext)
 
@@ -44,6 +51,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
             value.understanding_the_content
         ];
 
+        console.log(attributes)
 
         attributes.forEach(attr => {
             if (attr) {
@@ -52,9 +60,23 @@ const ClassroomCorrectionOfActivitiesPage = () => {
             }
         });
 
-        const media = count > 0 ? total / count : 5;
+        const media = count > 0 ? total / count : 0;
         return parseFloat(media.toFixed(2))
     }
+
+    const isTime = (time: number, start: any, end: any) => {
+        const createdAt = new Date(start);
+        const updatedAt = new Date(end);
+
+        const differenceInMs = updatedAt.getTime() - createdAt.getTime();
+
+        const differenceInMinutes = Math.floor(differenceInMs / (1000 * 60));
+
+
+        return differenceInMinutes <= time
+    }
+
+    var prazo = isTime(propsClassroomCorrectionOfActivities?.activities?.activities.time_activities!, propsClassroomCorrectionOfActivities?.activities?.createdAt, propsClassroomCorrectionOfActivities?.activities?.updatedAt)
 
     return (
         <ContentPage title={propsClassroomCorrectionOfActivities?.activities?.activities.name!} description="Visualize a atividade enviado pelo aluno">
@@ -74,26 +96,34 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 </Row>
                 {
                     propsClassroomCorrectionOfActivities?.activities?.user_activities_archives.length! > 0 ? (
-                        <div className="drop-file-preview">
+                        <div className="col-12 md:col-6">
                             <h4 className="drop-file-preview__title">
-                                Arquivos anexados
+                                Arquivos Anexados
                             </h4>
-                            {
-                                propsClassroomCorrectionOfActivities?.activities?.user_activities_archives.map((item, index: number) => (
-                                    <div key={index} className="drop-file-preview__item">
-                                        <img src={ImageConfig[item.archive_url.split('/')[1]] ||
-                                            ImageConfig['default']} alt="" />
-                                        <div className="drop-file-preview__item__info">
-                                            <p>{item.original_name}</p>
-                                            <p>{item.size}KB</p>
-                                        </div>
-                                        <span className="drop-file-preview__item__del"
-                                            onClick={() => { window.open(item.archive_url) }}>
-                                            <Icon icon='pi pi-download' />
-                                        </span>
-                                    </div>
-                                ))
-                            }
+                            <div style={{ border: "2px solid #E3E3E3" }}>
+
+                                {
+                                    propsClassroomCorrectionOfActivities?.activities?.user_activities_archives.map((item, index: number) => (
+                                        <Row id="space-between" key={index} className="drop-file-preview__item">
+                                            <Row>
+                                                <img src={ImageConfig[item.archive_url.split('/')[1]] ||
+                                                    ImageConfig['default']} alt="" />
+                                                <div className="drop-file-preview__item__info">
+                                                    <p>{item.original_name}</p>
+                                                    <p>{item.size}KB</p>
+                                                </div>
+                                            </Row>
+                                            <Column id="center">
+                                                <span
+                                                    style={{ cursor: "pointer" }}
+                                                    onClick={() => { window.open(item.archive_url) }}>
+                                                    <Icon icon='pi pi-download' color={color.colorPrimary} />
+                                                </span>
+                                            </Column>
+                                        </Row>
+                                    ))
+                                }
+                            </div>
                         </div>
                     ) : <>
                         <Padding padding="16px" />
@@ -102,125 +132,166 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                         </p>
                     </>
                 }
-
             </>
             <Padding padding="8px" />
-            {propsClassroomCorrectionOfActivities?.activities && <Formik initialValues={{ complete_the_activity_correctly: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.complete_the_activity_correctly ?? undefined, content_organization: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.content_organization ?? undefined, completion_within_the_indicated_deadline: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.completion_within_the_indicated_deadline ?? undefined, creativity_in_the_response: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.creativity_in_the_response ?? undefined, collaboration: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.collaboration ?? undefined, understanding_the_content: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.understanding_the_content ?? undefined }}
-                onSubmit={(values) => {
+            <div style={{ padding: 8, background: prazo ? color.green : color.colorThird, width: 256, borderRadius: 8 }}>
+                <h3 style={{ textAlign: "center", color: "white" }}>
+                    {prazo ? "No prazo" : "Fora do prazo"}
 
-                    if (propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id) {
-                        propsClassroomCorrectionOfActivities.updateAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id!)
-                    } else {
-                        propsClassroomCorrectionOfActivities?.createAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities.activities?.id!)
+                </h3>
+            </div>
+            <Padding padding="16px" />
+            {(propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.complete_the_activity_correctly ||
+                propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.collaboration ||
+                propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.completion_within_the_indicated_deadline ||
+                propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.content_organization ||
+                propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.understanding_the_content ||
+                propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.creativity_in_the_response
+            ) ? <>
+                {
+                    propsClassroomCorrectionOfActivities?.activities && <Formik initialValues={{
+                        complete_the_activity_correctly: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.complete_the_activity_correctly ?? undefined,
+                        content_organization: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.content_organization ?? undefined,
+                        completion_within_the_indicated_deadline: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.completion_within_the_indicated_deadline || propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.completion_within_the_indicated_deadline ? prazo ? 10 : 5 : undefined,
+                        creativity_in_the_response: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.creativity_in_the_response ?? undefined,
+                        collaboration: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.collaboration ?? undefined,
+                        understanding_the_content: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.understanding_the_content ?? undefined
+                    }}
+                        onSubmit={(values) => {
 
-                    }
-                }}>
-                {({ values, setFieldValue }) => {
+                            if (propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id) {
+                                propsClassroomCorrectionOfActivities.updateAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id!)
+                            } else {
+                                propsClassroomCorrectionOfActivities?.createAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities.activities?.id!)
 
-                    return (
-                        <Form>
+                            }
+                        }}>
+                        {({ values, setFieldValue }) => {
 
-                            <Row id="space-between">
-                                <Column id="center">
-                                    <h2>
-                                        Avalie o aluno
-                                    </h2>
-                                </Column>
-                                <Button label="Salvar" icon="pi pi-save" />
-                            </Row>
-                            <Padding padding="16px" />
-                            <div style={{ padding: 8, background: color.colorPrimary, width: 128, borderRadius: 8 }}>
-                                <h3 style={{ textAlign: "center", color: "white" }}>
-                                    Nota: {handleMedia(values)}
-                                </h3>
-                            </div>
-                            <Padding padding="16px" />
-                            <div className="grid">
-                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.complete_the_activity_correctly && <div className="col-12 md:col-6">
-                                    <InputNumberComponent name="complete_the_activity_correctly"
-                                        showButtons
-                                        value={values.complete_the_activity_correctly}
-                                        onChange={(e) => {
-                                            if (e.value! > 10) {
-                                                setFieldValue("complete_the_activity_correctly", 10);
-                                            } else {
-                                                setFieldValue("complete_the_activity_correctly", e.value);
-                                            }
-                                        }}
-                                        max={10}
-                                        placeholder="Cumpriu a atividade corretamente" />
-                                    <Padding />
-                                    <label>Quando os alunos realizam a atividade prevista de forma completa.</label>
-                                </div>}
-                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.content_organization && <div className="col-12 md:col-6">
-                                    <InputNumberComponent showButtons name="content_organization" value={values.content_organization} onChange={(e) => {
-                                        if (e.value! > 10) {
-                                            setFieldValue("content_organization", 10);
-                                        } else {
-                                            setFieldValue("content_organization", e.value);
-                                        }
-                                    }} max={10} placeholder="Organização do conteúdo" />
-                                    <Padding />
-                                    <label>Quando os alunos organizam as informações de forma estruturada conforme as instruções compartilhadas.</label>
-                                </div>}
-                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.completion_within_the_indicated_deadline && <div className="col-12 md:col-6">
-                                    <InputNumberComponent
-                                        showButtons name="completion_within_the_indicated_deadline" value={values.completion_within_the_indicated_deadline} onChange={(e) => {
-                                            if (e.value! > 10) {
-                                                setFieldValue("completion_within_the_indicated_deadline", 10);
-                                            } else {
-                                                setFieldValue("completion_within_the_indicated_deadline", e.value);
-                                            }
-                                        }} max={10}
-                                        placeholder="Conclusão no prazo indicado" />
-                                    <Padding />
-                                    <label>Quando os alunos realizam a atividade dentro do prazo estipulado pelo professor.</label>
-                                </div>}
-                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.creativity_in_the_response && <div className="col-12 md:col-6">
-                                    <InputNumberComponent
-                                        showButtons name="creativity_in_the_response" value={values.creativity_in_the_response} onChange={(e) => {
-                                            if (e.value! > 10) {
-                                                setFieldValue("creativity_in_the_response", 10);
-                                            } else {
-                                                setFieldValue("creativity_in_the_response", e.value);
-                                            }
-                                        }} max={10}
-                                        placeholder="Criatividade na resposta" />
-                                    <Padding />
-                                    <label>Quando o aluno entrega algo além do que foi pedido ou utiliza uma nova solução para realizar o desafio.</label>
-                                </div>}
-                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.collaboration && <div className="col-12 md:col-6">
-                                    <InputNumberComponent
-                                        showButtons name="collaboration" value={values.collaboration} onChange={(e) => {
-                                            if (e.value! > 10) {
-                                                setFieldValue("collaboration", 10);
-                                            } else {
-                                                setFieldValue("collaboration", e.value);
-                                            }
-                                        }} max={10}
-                                        placeholder="Colaboração" />
-                                    <Padding />
-                                    <label>Quando o aluno ajuda um colega a realizar o desafio, sendo necessário sinalizar na atividade.</label>
-                                </div>}
-                                {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation.understanding_the_content && <div className="col-12 md:col-6">
-                                    <InputNumberComponent
-                                        showButtons name="understanding_the_content" value={values.understanding_the_content} onChange={(e) => {
-                                            if (e.value! > 10) {
-                                                setFieldValue("understanding_the_content", 10);
-                                            } else {
-                                                setFieldValue("understanding_the_content", e.value);
-                                            }
-                                        }} max={10}
-                                        placeholder="Compreensão sobre o conteúdo" />
-                                    <Padding />
-                                    <label>Percepção do professor se o aluno está conectando os conteúdos apresentados.</label>
-                                </div>}
-                            </div>
-                        </Form>
-                    )
-                }}
-            </Formik>}
-        </ContentPage>
+                            return (
+                                <Form>
+
+                                    <Row id="space-between">
+                                        <Column id="center">
+                                            <h3>
+                                                AVALIE O ALUNO
+                                            </h3>
+                                        </Column>
+                                        <Button label="Salvar" icon="pi pi-save" />
+                                    </Row>
+
+                                    <Padding padding="16px" />
+                                    <div className="grid">
+                                        {propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.complete_the_activity_correctly && <div className="col-12 md:col-6">
+                                            <label>Cumpriu a atividade corretamente</label>
+                                            <Padding />
+                                            <InputNumberComponent name="complete_the_activity_correctly"
+                                                showButtons
+                                                value={values.complete_the_activity_correctly}
+                                                onChange={(e) => {
+                                                    if (e.value! > 10) {
+                                                        setFieldValue("complete_the_activity_correctly", 10);
+                                                    } else {
+                                                        setFieldValue("complete_the_activity_correctly", e.value);
+                                                    }
+                                                }}
+                                                max={10}
+                                                placeholder="Cumpriu a atividade corretamente" />
+                                            <Padding />
+                                            <label style={labelBottom}>Quando os alunos realizam a atividade prevista de forma completa.</label>
+                                        </div>}
+                                        {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.content_organization && <div className="col-12 md:col-6">
+                                            <label>Organização do conteúdo</label>
+                                            <Padding />
+                                            <InputNumberComponent showButtons name="content_organization" value={values.content_organization} onChange={(e) => {
+                                                if (e.value! > 10) {
+                                                    setFieldValue("content_organization", 10);
+                                                } else {
+                                                    setFieldValue("content_organization", e.value);
+                                                }
+                                            }} max={10} placeholder="Organização do conteúdo" />
+                                            <Padding />
+                                            <label style={labelBottom}>Quando os alunos organizam as informações de forma estruturada conforme as instruções compartilhadas.</label>
+                                        </div>}
+                                        {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.completion_within_the_indicated_deadline && <div className="col-12 md:col-6">
+                                            <label>Conclusão no prazo indicado</label>
+                                            <Padding />
+                                            <div >
+                                                <InputNumberComponent
+                                                    disabled
+                                                    showButtons
+                                                    onChange={(e) => {
+                                                        if (e.value! > 10) {
+                                                            setFieldValue("content_organization", 10);
+                                                        } else {
+                                                            setFieldValue("content_organization", e.value);
+                                                        }
+                                                    }} max={10}
+                                                    value={values.completion_within_the_indicated_deadline}
+                                                    placeholder="Conclusão no prazo indicado" />
+                                            </div>
+                                            <Padding />
+                                            <label style={labelBottom}>Quando os alunos realizam a atividade dentro do prazo estipulado pelo professor.</label>
+                                        </div>}
+                                        {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.creativity_in_the_response && <div className="col-12 md:col-6">
+                                            <label>Criatividade na resposta</label>
+                                            <Padding />
+                                            <InputNumberComponent
+                                                showButtons name="creativity_in_the_response" value={values.creativity_in_the_response} onChange={(e) => {
+                                                    if (e.value! > 10) {
+                                                        setFieldValue("creativity_in_the_response", 10);
+                                                    } else {
+                                                        setFieldValue("creativity_in_the_response", e.value);
+                                                    }
+                                                }} max={10}
+                                                placeholder="Criatividade na resposta" />
+                                            <Padding />
+                                            <label style={labelBottom}>Quando o aluno entrega algo além do que foi pedido ou utiliza uma nova solução para realizar o desafio.</label>
+                                        </div>}
+                                        {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.collaboration && <div className="col-12 md:col-6">
+                                            <label>Colaboração</label>
+                                            <Padding />
+                                            <InputNumberComponent
+                                                showButtons name="collaboration" value={values.collaboration} onChange={(e) => {
+                                                    if (e.value! > 10) {
+                                                        setFieldValue("collaboration", 10);
+                                                    } else {
+                                                        setFieldValue("collaboration", e.value);
+                                                    }
+                                                }} max={10}
+                                                placeholder="Colaboração" />
+                                            <Padding />
+                                            <label style={labelBottom}>Quando o aluno ajuda um colega a realizar o desafio, sendo necessário sinalizar na atividade.</label>
+                                        </div>}
+                                        {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.understanding_the_content && <div className="col-12 md:col-6">
+                                            <label>Compreensão sobre o conteúdo</label>
+                                            <Padding />
+                                            <InputNumberComponent
+                                                showButtons name="understanding_the_content" value={values.understanding_the_content} onChange={(e) => {
+                                                    if (e.value! > 10) {
+                                                        setFieldValue("understanding_the_content", 10);
+                                                    } else {
+                                                        setFieldValue("understanding_the_content", e.value);
+                                                    }
+                                                }} max={10}
+                                                placeholder="Compreensão sobre o conteúdo" />
+                                            <Padding />
+                                            <label style={labelBottom}>Percepção do professor se o aluno está conectando os conteúdos apresentados.</label>
+                                        </div>}
+                                    </div>
+                                    <Padding padding="16px" />
+                                    <div style={{ padding: 8, background: color.colorSecondary, width: 128, borderRadius: 8 }}>
+                                        <h3 style={{ textAlign: "center", color: "white" }}>
+                                            Nota: {handleMedia(values)}
+                                        </h3>
+                                    </div>
+                                </Form>
+                            )
+                        }}
+                    </Formik>
+                }
+            </> : <Empty title="formato de avaliações, adicione para avaliar o aluno" />}
+        </ContentPage >
     )
 }
 

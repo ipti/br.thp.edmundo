@@ -15,6 +15,8 @@ import OneClassroomProvider, { OneClassroomContext } from "./context/context";
 import { OneClassroomContextType } from "./context/types";
 import { AplicationContext } from "../../../context/context";
 import { PropsAplicationContext } from "../../../context/type";
+import Icon from "../../../Components/Icon";
+import color from "../../../Styles/colors";
 
 
 const ClassroomOne = () => {
@@ -32,8 +34,8 @@ const ClassroomOnePage = () => {
     const propsAplication = useContext(AplicationContext) as PropsAplicationContext
 
     const options2 = [
-        { name: 'Ativado', value: true },
-        { name: 'Desativado', value: false }
+        { name: 'Liberar', value: true },
+        { name: 'Bloquear', value: false }
     ];
     const props = useContext(OneClassroomContext) as OneClassroomContextType
 
@@ -42,12 +44,12 @@ const ClassroomOnePage = () => {
         <ContentPage title={props.classroomOne?.classroom?.name!} description={"Dono da turma: " + props.classroomOne?.owner?.name}>
             {(!edit && propsAplication.user?.role !== ROLE.STUDENT) && <Row id="end"><Button icon="pi pi-pencil" onClick={() => { setEdit(!edit) }} /></Row>}
 
-            {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false }) }}>
+            {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false });  setEdit(!edit)}}>
                 {({ values, handleChange }) => {
                     return (
                         <Form>
                             <Row id="end" style={{ gap: "10px" }}>
-                                <Button label="Salvar" type="submit" />
+                                <Button label="Salvar" icon={"pi pi-save"} type="submit" />
                                 <Button label="Cancelar" type="button" severity="secondary" style={{ color: "black" }} onClick={() => { setEdit(!edit) }} />
                             </Row>
                             <Padding />
@@ -73,6 +75,16 @@ const ClassroomOnePage = () => {
 
             </Formik>}
             <Padding />
+            <Row id="center" style={{ padding: 8, background:  color.colorPrimary, width: 220, borderRadius: 8 }}>
+                <Column id="center">
+                    <h3 style={{ textAlign: "center", color: "white" }}>
+                        Turma {props.classroomOne?.classroom.isOpen ? <>Liberada</> : <>Bloqueada</>}
+                    </h3>
+                </Column>
+                <Padding />
+                <Icon color={color.white} icon={props.classroomOne?.classroom.isOpen ? "pi pi-lock-open" : "pi pi-lock"} />
+            </Row>
+            <Padding padding="8px" />
             <h3>Código da turma: {generateCode(props.classroomOne?.classroom?.id!)}</h3>
             <Padding padding="16px" />
             <div className="grid">

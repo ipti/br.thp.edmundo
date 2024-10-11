@@ -112,7 +112,7 @@ const ActivitiesSentPage = () => {
                     </div>}
                     header="Status"></Column>
                 <Column field="user_avaliation.total" body={(data) => {
-                    return<>{data.user_avaliation.total ?? "-"}</>
+                    return<>{data?.user_avaliation?.total ?? "-"}</>
                 }} header="Nota"></Column>
 
                 <Column body={(data) => <div style={{ cursor: data.status === "COMPLETED" ? "pointer" : "not-allowed" }} onClick={() => data.status === "COMPLETED" ? history("correcao/" + data.id) : null}><Icon icon="pi pi-eye" color={data.status === "COMPLETED" ? color.colorPrimary : color.grayOne} /></div>} align="center" header="Visualizar"></Column>
