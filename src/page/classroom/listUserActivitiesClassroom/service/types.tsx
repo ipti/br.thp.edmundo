@@ -33,3 +33,13 @@ export interface Users {
   name: string
   id: number
 }
+
+
+export interface CreateNotasAvaliationType {
+  complete_the_activity_correctly?: boolean;
+  content_organization?: boolean;
+  completion_within_the_indicated_deadline?: boolean;
+  creativity_in_the_response?: boolean;
+  collaboration?: boolean;
+  understanding_the_content?: boolean;
+}

@@ -4,6 +4,7 @@ import InputNumberComponent from "../../../Components/InputNumber"
 import TextInput from "../../../Components/TextInput"
 import { difficult, type_activities } from "../../../Controller/controllerGlobal"
 import { Padding } from "../../../Styles/styles"
+import { InputTextarea } from "primereact/inputtextarea"
 
 
 const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { errors: any, values: any, touched: any, handleChange: any, setFieldValue: any }) => {
@@ -90,6 +91,24 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { erro
                 {errors.description && touched.description ? (
                     <div style={{ color: "red", marginTop: "8px" }}>
                         {errors.description}
+                    </div>
+                ) : null}
+            </div>
+            <div className="col-12 md:col-6">
+                <label>Resposta esperada</label>
+                <Padding />
+                <InputTextarea
+                    style={{width: "100%", height: "128px"}}
+                    autoResize
+                    rows={5}
+                    value={values.expected_return}
+                    placeholder="Escreva a resposta esperada pela atividade"
+                    onChange={handleChange}
+                    name="expected_return"
+                />
+                {errors.expected_return && touched.expected_return ? (
+                    <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.expected_return}
                     </div>
                 ) : null}
             </div>

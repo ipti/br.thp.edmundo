@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetchRequestActivitiesSent } from "../service/query";
+import { CreateAvaliationController } from "../service/controller";
+import { CreateNotasAvaliationType } from "../service/types";
 
 export const ActivitiesSentState = () => {
     const [activities, setactivities] = useState<any | undefined>()
@@ -8,6 +10,18 @@ export const ActivitiesSentState = () => {
     const {idClassroomUser} = useParams()
 
     const { data: activitiesRequest, isLoading, isError } = useFetchRequestActivitiesSent(idClassroomUser!);
+
+    const { CreateAvaliationMutation, UpdateAvaliationMutation } = CreateAvaliationController()
+
+
+    const createAvaliation = (body: CreateNotasAvaliationType, id: number) => {
+        CreateAvaliationMutation.mutate({ data: body, id: id })
+    }
+
+
+    const updateAvaliation = (body: CreateNotasAvaliationType, id: number) => {
+        UpdateAvaliationMutation.mutate({ data: body, id: id })
+    }
   
     useEffect(() => {
         if (activitiesRequest) {
@@ -16,5 +30,5 @@ export const ActivitiesSentState = () => {
     }, [activitiesRequest])
 
 
-    return {activities, isLoading,isError }
+    return {activities, isLoading,isError, createAvaliation, updateAvaliation }
 }

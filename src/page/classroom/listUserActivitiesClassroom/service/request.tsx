@@ -1,8 +1,8 @@
 import http from "../../../../service/axios";
 import { logout } from "../../../../service/localstorage";
+import { CreateNotasAvaliationType } from "./types";
 
 export const ActivitiesSentRequest = async (id: string) => {
-
     return await http
       .get("/activities-bff/user-classroom?id=" + id)
       .then((response) => response.data)
@@ -13,7 +13,15 @@ export const ActivitiesSentRequest = async (id: string) => {
         }
         throw err;
       });
-  
+}
+
+export const CreateAvaliationRequest = async (body: CreateNotasAvaliationType, id: number) => {
+  return await http.post("/activities-bff/classroom-avaliation?id="+id, body)
+}
+
+
+export const UpdateAvaliationRequest = async (body: CreateNotasAvaliationType, id: number) => {
+  return await http.put("/activities-bff/classroom-avaliation?id="+id, body)
 }
 
 

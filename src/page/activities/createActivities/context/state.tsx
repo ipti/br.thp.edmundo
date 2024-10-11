@@ -14,6 +14,7 @@ export const CreateActivitiesState = () => {
         points_activities: 0,
         time_activities: 0,
         type_activities: {id:"", name: ""},
+        expected_return: "",
         id_classes: parseInt(idClasses!)
     }
 

@@ -6,10 +6,10 @@ export const ActivitiesSentContext = createContext<ActivitiesSentContextType | n
 
 const ActivitiesSentProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { activities, isError, isLoading } = ActivitiesSentState()
+    const { activities, isError, isLoading, createAvaliation, updateAvaliation } = ActivitiesSentState()
 
     return (
-        <ActivitiesSentContext.Provider value={{ activities, isError, isLoading }}>
+        <ActivitiesSentContext.Provider value={{ activities, isError, isLoading, createAvaliation, updateAvaliation }}>
             {children}
         </ActivitiesSentContext.Provider>
     )

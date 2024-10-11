@@ -112,6 +112,15 @@ export const color_race = [
   { id: 5, name: "Indígena" },
 ];
 
+export const question = [
+  { id: 0, name: "Cumpriu a atividade corretamente" },
+  { id: 1, name: "Organização do conteúdo" },
+  { id: 2, name: "Conclusão no prazo indicado" },
+  { id: 3, name: "Criatividade na resposta" },
+  { id: 4, name: "Colaboração" },
+  { id: 5, name: "Compreensão sobre o conteúdo" },
+];
+
 export const Status = {
   APPROVED: "APPROVED",
   PENDING: "PENDING",

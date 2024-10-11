@@ -38,6 +38,7 @@ const [is, setIs] = useState(false)
         points_activities: activitiesOne?.points_activities ?? 0,
         time_activities: activitiesOne?.time_activities ?? 0,
         type_activities: type_activities?.find(props => props.id === activitiesOne?.type_activities) ?? {id: "", name: ""},
+        expected_return: activitiesOne?.expected_return ?? ""
     }
 
 

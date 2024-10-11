@@ -142,7 +142,7 @@ const HomeSearchClassroomPage = () => {
         }
     }, [token])
 
-    if (!propsHome?.searchClassroom) return <HomeClassroomPage />
+    if (!propsHome?.searchClassroom && propsHome?.classroomUser?.length! > 0) return <HomeClassroomPage />
 
 
     return (
@@ -150,7 +150,7 @@ const HomeSearchClassroomPage = () => {
             height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "4%"
         }} >
             <Button label="Voltar" icon="pi pi-chevron-left" onClick={() => {
-                propsHome.setSearchClassroom(!propsHome.searchClassroom)
+                propsHome?.setSearchClassroom(!propsHome.searchClassroom)
             }} />
             <Column style={{ height: "100%" }} id="center">
                 <Row >
