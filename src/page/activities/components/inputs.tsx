@@ -7,7 +7,7 @@ import { Padding } from "../../../Styles/styles"
 import { InputTextarea } from "primereact/inputtextarea"
 
 
-const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { errors: any, values: any, touched: any, handleChange: any, setFieldValue: any }) => {
+const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreated }: { errors: any, values: any, touched: any, handleChange: any, setFieldValue: any, isCreated?: boolean }) => {
     return (
         <div className="grid">
             <div className="col-12 md:col-6">
@@ -31,7 +31,7 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue }: { erro
                 <Padding />
                 <DropdownComponent
                     value={values.type_activities}
-                    disabled={false}
+                    disabled={!isCreated}
                     options={type_activities}
                     optionsValue="id"
                     optionsLabel="name"

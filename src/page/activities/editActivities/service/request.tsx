@@ -4,7 +4,7 @@ import { EditActivities, PropsFormActivities } from "../../type"
 
 
 export const EditActivitiesRequest = async (body: EditActivities, id: number) => {
-    return await http.put("/activities/" + id, { ...body, difficult: body.difficult.id })
+    return await http.put("/activities/" + id, { ...body, difficult: body.difficult.id, type_activities: body.type_activities.id })
 }
 
 export const CreateFormRequest = async (body: PropsFormActivities) => {

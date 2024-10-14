@@ -35,7 +35,7 @@ const ActivitiesCreatePage = () => {
                             </Row>
                         </Column>
                         <Padding />
-                        <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
+                        <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} isCreated />
                     </Form>
                     );
                 }}
