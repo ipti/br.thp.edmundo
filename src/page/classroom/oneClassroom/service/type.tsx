@@ -31,3 +31,12 @@ export interface ClassroomOne {
     isOpen: boolean
   }
   
+
+  export interface ChartType {
+    completed_user_activities: number
+    activities_pending: number
+    code_activities: number
+    quiz_activities: number
+    media_notas: number
+  }
+  

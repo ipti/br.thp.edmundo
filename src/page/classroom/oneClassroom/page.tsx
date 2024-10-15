@@ -17,6 +17,8 @@ import { AplicationContext } from "../../../context/context";
 import { PropsAplicationContext } from "../../../context/type";
 import Icon from "../../../Components/Icon";
 import color from "../../../Styles/colors";
+import CardQuant from "../../../Components/Chart/CardQuant";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 
 const ClassroomOne = () => {
@@ -44,7 +46,7 @@ const ClassroomOnePage = () => {
         <ContentPage title={props.classroomOne?.classroom?.name!} description={"Dono da turma: " + props.classroomOne?.owner?.name}>
             {(!edit && propsAplication.user?.role !== ROLE.STUDENT) && <Row id="end"><Button icon="pi pi-pencil" onClick={() => { setEdit(!edit) }} /></Row>}
 
-            {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false });  setEdit(!edit)}}>
+            {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false }); setEdit(!edit) }}>
                 {({ values, handleChange }) => {
                     return (
                         <Form>
@@ -75,7 +77,7 @@ const ClassroomOnePage = () => {
 
             </Formik>}
             <Padding />
-            <Row id="center" style={{ padding: 8, background:  color.colorPrimary, width: 220, borderRadius: 8 }}>
+            <Row id="center" style={{ padding: 8, background: color.colorPrimary, width: 220, borderRadius: 8 }}>
                 <Column id="center">
                     <h3 style={{ textAlign: "center", color: "white" }}>
                         Turma {props.classroomOne?.classroom.isOpen ? <>Liberada</> : <>Bloqueada</>}
@@ -101,6 +103,29 @@ const ClassroomOnePage = () => {
                     <CardItensClassrooom title="Atividades" description="Visualize as atividades entregues pelos alunos" icon={meeting} />
                 </div>
             </div>
+            <h2>
+                Informações
+            </h2>
+            <Padding padding="8px" />
+            {props.classroomChart ? <div className="grid">
+                <div className="col-4 md:col:12">
+                    <CardQuant quant={props.classroomChart?.activities_pending} title="Atividades pendentes" color="primary" />
+                </div>
+                <div className="col-4 md:col:12">
+                    <CardQuant quant={props.classroomChart?.completed_user_activities} title="Atividades finalizadas" color="third" />
+                </div>
+                <div className="col-4 md:col:12">
+                    <CardQuant quant={props.classroomChart.code_activities} title="Atividades de código" color="secondary" />
+                </div>
+                <div className="col-4 md:col:12">
+                    <CardQuant quant={props.classroomChart.quiz_activities} title="Atividades de Múltipla escolha" color="third" />
+                </div>
+                <div className="col-4 md:col:12">
+                    <CardQuant quant={props.classroomChart.media_notas} title="Média da turma" color="secondary" />
+                </div>
+            </div> : <ProgressSpinner />}
+
+
         </ContentPage>
     )
 }

@@ -4,19 +4,24 @@ import avatar from "../../../assets/image/avatar.svg";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import { Container } from "./style";
+import { useNavigate } from "react-router-dom";
 
 const CardRegistration = ({
   title,
   subtitle,
   idRegistration,
+  userId,
   status,
 }: {
   title: string;
   subtitle: string;
   idRegistration: number;
   status: string;
+  userId: number
 }) => {
   const [visible, setVisible] = useState(false);
+  const history = useNavigate()
+
 
   return (
     <>
@@ -24,6 +29,8 @@ const CardRegistration = ({
         className="card cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
+          console.log(userId.toString())
+          history(`${userId}`)
           // if ((propsAplication.user?.role === ROLE.ADMIN ||
           //   propsAplication.user?.role === ROLE.COORDINATORS)) {
           //   history(`/turma/${id}/aluno/${idRegistration}`);

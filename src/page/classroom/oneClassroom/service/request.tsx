@@ -17,6 +17,23 @@ export const FindOneClassroomRequest = async (id: string) => {
     }
 }
 
+export const FindChartClassroomRequest = async (id: string) => {
+  if (id) {
+      return await http
+          .get("/chart-bff/classroom?id=" + id)
+          .then((response) => response.data)
+          .catch((err) => {
+              if (err.response.status === 401) {
+                  logout()
+                  window.location.reload()
+              }
+              throw err;
+          });
+  }
+}
+
+
+
 
 export const PutClassroomRequest = async (id: string, body: UpdateClassroom) => {
     if (id) {
