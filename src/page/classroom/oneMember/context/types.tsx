@@ -10,4 +10,5 @@ export interface UpdateUserContextType {
     setFile: Dispatch<SetStateAction<File[] | undefined>>
     file: File[] | undefined
     classroomUserChart: ChartUserType | undefined
+    moduleAtivities: any,
 }

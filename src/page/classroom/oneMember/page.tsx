@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik"
 import { ProgressSpinner } from "primereact/progressspinner"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
 import ContentPage from "../../../Components/ContentPage"
@@ -13,6 +13,7 @@ import avatar from "../../../assets/image/avatar.svg"
 import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
 import CardQuant from "../../../Components/Chart/CardQuant"
+import { Chart } from 'primereact/chart';
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -37,7 +38,62 @@ const MemberOne = () => {
 
 const MemberOnePage = () => {
 
+    const [chartData, setChartData] = useState({});
+    const [chartOptions, setChartOptions] = useState({});
     const props = useContext(UpdateUserContext) as UpdateUserContextType
+
+
+    useEffect(() => {
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+        const data = {
+            labels: props?.moduleAtivities?.moduloActivities?.map((item: any) => item.name),
+            datasets: [
+                {
+                    label: 'First Dataset',
+                    data: props?.moduleAtivities?.moduloActivities?.map((item: any) => item.total),
+                    fill: false,
+                    borderColor: documentStyle.getPropertyValue('--blue-500'),
+                    tension: 0.4
+                }
+            ]
+        };
+        const options = {
+            maintainAspectRatio: false,
+            aspectRatio: 0.6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder
+                    }
+                }
+            }
+        };
+
+        setChartData(data);
+        setChartOptions(options);
+    }, [props.moduleAtivities]);
+
 
 
 
@@ -188,6 +244,10 @@ const MemberOnePage = () => {
                     <CardQuant quant={props.classroomUserChart.quiz_activities} title="Atividades de Múltipla escolha" color="third" />
                 </div>
             </div> : <ProgressSpinner />}
+
+            <div className="card">
+                <Chart type="line" data={chartData} options={chartOptions} />
+            </div>
         </ContentPage>
     )
 }
