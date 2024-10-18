@@ -4,7 +4,6 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import TagLogin from "../../assets/image/logo-edmundo.svg";
 
-import turmasHover from "../../assets/image/turmasPessoas.svg";
 import { Column, Padding, Row } from "../../Styles/styles";
 import DropdownComponent from "../Dropdown";
 import Item from "./Item";
