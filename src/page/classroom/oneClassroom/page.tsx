@@ -2,7 +2,10 @@ import CardItensClassrooom from "../../../Components/Card/CardItensClassroom";
 import ContentPage from "../../../Components/ContentPage";
 import { generateCode, ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import pessoas from "../../../assets/image/pessoasgray.svg";
+import pessoas from "../../../assets/image/iconsMenu/classroom.svg";
+
+import activities from "../../../assets/image/activities.svg";
+
 
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
@@ -10,13 +13,15 @@ import { SelectButton } from "primereact/selectbutton";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TextInput from "../../../Components/TextInput";
-import meeting from "../../../assets/image/school_teacher.svg";
+import meeting from "../../../assets/image/iconsMenu/module.svg";
 import OneClassroomProvider, { OneClassroomContext } from "./context/context";
 import { OneClassroomContextType } from "./context/types";
 import { AplicationContext } from "../../../context/context";
 import { PropsAplicationContext } from "../../../context/type";
 import Icon from "../../../Components/Icon";
 import color from "../../../Styles/colors";
+import CardQuant from "../../../Components/Chart/CardQuant";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 
 const ClassroomOne = () => {
@@ -44,7 +49,7 @@ const ClassroomOnePage = () => {
         <ContentPage title={props.classroomOne?.classroom?.name!} description={"Dono da turma: " + props.classroomOne?.owner?.name}>
             {(!edit && propsAplication.user?.role !== ROLE.STUDENT) && <Row id="end"><Button icon="pi pi-pencil" onClick={() => { setEdit(!edit) }} /></Row>}
 
-            {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false });  setEdit(!edit)}}>
+            {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false }); setEdit(!edit) }}>
                 {({ values, handleChange }) => {
                     return (
                         <Form>
@@ -75,7 +80,7 @@ const ClassroomOnePage = () => {
 
             </Formik>}
             <Padding />
-            <Row id="center" style={{ padding: 8, background:  color.colorPrimary, width: 220, borderRadius: 8 }}>
+            <Row id="center" style={{ padding: 8, background: color.colorPrimary, width: 220, borderRadius: 8 }}>
                 <Column id="center">
                     <h3 style={{ textAlign: "center", color: "white" }}>
                         Turma {props.classroomOne?.classroom.isOpen ? <>Liberada</> : <>Bloqueada</>}
@@ -86,6 +91,29 @@ const ClassroomOnePage = () => {
             </Row>
             <Padding padding="8px" />
             <h3>Código da turma: {generateCode(props.classroomOne?.classroom?.id!)}</h3>
+            <Padding padding="16px" />
+
+            <h2>
+                Informações
+            </h2>
+            <Padding padding="8px" />
+            {props.classroomChart ? <div className="grid">
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart?.activities_pending} title="Atividades pendentes" color="primary" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart?.completed_user_activities} title="Atividades finalizadas" color="third" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart.code_activities} title="Atividades de código" color="secondary" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart.quiz_activities} title="Múltipla escolha" color="primary" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart.media_notas.toFixed(2)} title="Média da turma" color="secondary" />
+                </div>
+            </div> : <ProgressSpinner />}
             <Padding padding="16px" />
             <div className="grid">
                 <div
@@ -98,9 +126,11 @@ const ClassroomOnePage = () => {
                     <CardItensClassrooom title="Módulos" description="Visualize os módulos adicionados a turma" icon={meeting} />
                 </div>
                 <div className="col-12 md:col-6" onClick={() => { history('atividades') }}>
-                    <CardItensClassrooom title="Atividades" description="Visualize as atividades entregues pelos alunos" icon={meeting} />
+                    <CardItensClassrooom title="Atividades" description="Visualize as atividades entregues pelos alunos" icon={activities} />
                 </div>
             </div>
+
+
         </ContentPage>
     )
 }

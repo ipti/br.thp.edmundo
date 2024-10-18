@@ -12,14 +12,19 @@ import { Container } from "./style";
 
 import avatar from "../../assets/image/avatar.svg"
 
-import turmas from "../../assets/image/peoples.svg";
+import classroom from "../../assets/image/iconsMenu/classroom.svg";
+import classroomHover from "../../assets/image/iconsMenu/classroom_hover.svg";
 
-import reapplication from "../../assets/image/iconsMenu/note_add.svg";
-import reapplication_hover from "../../assets/image/iconsMenu/note_add_hover.svg";
+import module from "../../assets/image/iconsMenu/module.svg";
+import moduleHover from "../../assets/image/iconsMenu/module_hover.svg";
 
 
-import user from "../../assets/image/iconsMenu/person.svg";
-import user_hover from "../../assets/image/iconsMenu/person_active.svg";
+import reapplication from "../../assets/image/iconsMenu/interactive_space.svg";
+import reapplication_hover from "../../assets/image/iconsMenu/interactive_space_hover.svg";
+
+
+import user from "../../assets/image/iconsMenu/user.svg";
+import user_hover from "../../assets/image/iconsMenu/user_hover.svg";
 import { getMenuItem, getYear, menuItem, setYear } from "../../service/localstorage";
 import { AplicationContext } from "../../context/context";
 import { PropsAplicationContext } from "../../context/type";
@@ -83,7 +88,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 4 ? true : false}
             path={"/turmas"}
-            icon={active === 4 ? turmasHover : turmas}
+            icon={active === 4 ? classroomHover : classroom}
           />
           <Padding />
           {propsAplication.user?.role !== ROLE.STUDENT &&
@@ -96,7 +101,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
                 }}
                 active={active === 5 ? true : false}
                 path={"/modulos"}
-                icon={active === 5 ? turmasHover : turmas}
+                icon={active === 5 ? moduleHover : module}
               />
               <Padding />
             </>

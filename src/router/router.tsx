@@ -26,6 +26,7 @@ import ClassroomCorrectionOfActivities from "../page/classroom/correctionOfActiv
 import ModulesEdit from "../page/module/editModule/page";
 import ActivitiesEdit from "../page/activities/editActivities/page";
 import ActivitiesSent from "../page/classroom/listUserActivitiesClassroom/page";
+import MemberOne from "../page/classroom/oneMember/page";
 
 const RoutesApp = () => {
   return (
@@ -41,6 +42,7 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
         <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
         <Route element={<PrivateRoute Component={<MembersClassroom />} />} path="/turma/:id/membros" />
+        <Route element={<PrivateRoute Component={<MemberOne />} />} path="/turma/:id/membros/:idMember" />
         <Route element={<PrivateRoute Component={<ClassroomModules />} />} path="/turma/:id/modulos" />
         <Route element={<PrivateRoute Component={<ClassroomActivities />} />} path="/turma/:id/atividades" />
         <Route element={<PrivateRoute Component={<ActivitiesSent />} />} path="/turma/:id/atividades/:idClassroomUser" />

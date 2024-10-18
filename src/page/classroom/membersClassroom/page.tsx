@@ -60,6 +60,7 @@ const MembersClassroomPage = () => {
                                     subtitle={item?.users?.name}
                                     idRegistration={item?.id}
                                     status={item?.users?.role}
+                                    userId={item.usersId}
                                 />
                             </div>
                         );
