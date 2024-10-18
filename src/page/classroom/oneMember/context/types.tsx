@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ChartUserType, UpdateUser, User } from "../service/types";
+import { ModuleList } from "../../modulesClassroom/context/type";
 
 export interface UpdateUserContextType {
     initialValue: UpdateUser;
@@ -11,4 +12,8 @@ export interface UpdateUserContextType {
     file: File[] | undefined
     classroomUserChart: ChartUserType | undefined
     moduleAtivities: any,
+    classroomModuleMedia: any
+    classroomModule: ModuleList | undefined
+    moduleId: any
+    setModuleId: Dispatch<any>
 }

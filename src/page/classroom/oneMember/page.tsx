@@ -14,6 +14,8 @@ import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
 import CardQuant from "../../../Components/Chart/CardQuant"
 import { Chart } from 'primereact/chart';
+import color from "../../../Styles/colors"
+import DropdownComponent from "../../../Components/Dropdown"
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -40,6 +42,8 @@ const MemberOnePage = () => {
 
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
+
+    const [chartDataMedia, setChartDataMedia] = useState({});
     const props = useContext(UpdateUserContext) as UpdateUserContextType
 
 
@@ -52,14 +56,31 @@ const MemberOnePage = () => {
             labels: props?.moduleAtivities?.moduloActivities?.map((item: any) => item.name),
             datasets: [
                 {
-                    label: 'First Dataset',
+                    label: 'Notas',
                     data: props?.moduleAtivities?.moduloActivities?.map((item: any) => item.total),
                     fill: false,
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
+                    backgroundColor: [color.colorPrimary, color.colorThird, color.colorSecondary],
+                    borderColor: color.colorPrimary,
                     tension: 0.4
                 }
             ]
         };
+
+        const dataMedia = {
+            labels: props?.classroomModuleMedia?.moduloActivities.map((item: any) => item.module_name),
+            datasets: [
+                {
+                    label: 'Notas',
+                    data: props?.classroomModuleMedia?.moduloActivities.map((item: any) => item.media_avaliacao),
+                    fill: false,
+                    backgroundColor: color.colorThird,
+                    borderColor: color.colorThird,
+                    tension: 0.4
+                }
+            ]
+        };
+
+
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.6,
@@ -89,13 +110,13 @@ const MemberOnePage = () => {
                 }
             }
         };
-
+        setChartDataMedia(dataMedia)
         setChartData(data);
         setChartOptions(options);
-    }, [props.moduleAtivities]);
+    }, [props.moduleAtivities, props.classroomModuleMedia]);
 
 
-
+    console.log(props.moduleId)
 
     const schema = Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
@@ -126,8 +147,6 @@ const MemberOnePage = () => {
             }}>
 
                 {({ errors, values, handleChange, touched, setFieldValue }) => {
-
-
                     return (
                         <Form>
                             <Avatar>
@@ -231,22 +250,45 @@ const MemberOnePage = () => {
             <h3>Dashboard</h3>
             <Padding padding="8px" />
             {props.classroomUserChart ? <div className="grid">
-                <div className="col-4 md:col:12">
+                <div className="col-12 md:col-4 lg:col-2">
                     <CardQuant quant={props.classroomUserChart?.activities_pending} title="Atividades pendentes" color="primary" />
                 </div>
-                <div className="col-4 md:col:12">
+                <div className="col-12 md:col-4 lg:col-2">
                     <CardQuant quant={props.classroomUserChart?.completed_user_activities} title="Atividades finalizadas" color="third" />
                 </div>
-                <div className="col-4 md:col:12">
+                <div className="col-12 md:col-4 lg:col-2">
                     <CardQuant quant={props.classroomUserChart.code_activities} title="Atividades de código" color="secondary" />
                 </div>
-                <div className="col-4 md:col:12">
-                    <CardQuant quant={props.classroomUserChart.quiz_activities} title="Atividades de Múltipla escolha" color="third" />
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomUserChart.quiz_activities} title="Múltipla escolha" color="third" />
                 </div>
             </div> : <ProgressSpinner />}
+            <Padding padding="16px" />
+            <div className="grid">
+                <div className=" col-12 md:col-6">
 
-            <div className="card">
-                <Chart type="line" data={chartData} options={chartOptions} />
+                    <Padding className="card" padding="32px">
+                        {props.moduleId&& <h2>Notas do módulo {props.moduleId.name}</h2>}
+                        <Padding padding="8px" />
+                        <div>
+                            <label>
+                                Módulos
+                            </label>
+                            <Padding />
+                            {props.moduleId &&
+                                <DropdownComponent options={props.classroomModule} value={props.moduleId} onChange={(e) => { props.setModuleId(e.value); console.log(e.value) }} />}
+                        </div>
+                        <Padding padding="16px" />
+                        <Chart type="bar" data={chartData} options={chartOptions} />
+                    </Padding>
+                </div>
+                <div className=" col-12 md:col-6">
+                    <Padding className="card" padding="32px">
+                        <h2>Média de notas por módulo</h2>
+                        <Padding padding="16px" />
+                        <Chart type="line" data={chartDataMedia} options={chartOptions} />
+                    </Padding>
+                </div>
             </div>
         </ContentPage>
     )

@@ -17,7 +17,7 @@ export const UpdateUserRequest = async (body: UpdateUser) => {
 export const FindChartClassroomUserRequest = async (idClassroom: string, idUser: string) => {
     if (idClassroom && idUser) {
         return await http
-            .get("/chart-bff/classroom-user?idClassroom =" + idClassroom+"&idUser="+idUser)
+            .get("/chart-bff/classroom-user?idClassroom=" + idClassroom+"&idUser="+idUser)
             .then((response) => response.data)
             .catch((err) => {
                 if (err.response.status === 401) {
@@ -44,6 +44,22 @@ export const FindChartClassroomUserRequest = async (idClassroom: string, idUser:
             });
     }
   }
+
+  export const FindChartClassroomModuleNotasUserMediaRequest = async (idClassroom: string, idUser: string) => {
+    if (idClassroom && idUser) {
+        return await http
+            .get("/chart-bff/module-user-media?idClassroom=" + idClassroom+"&idUser="+idUser)
+            .then((response) => response.data)
+            .catch((err) => {
+                if (err.response.status === 401) {
+                    logout()
+                    window.location.reload()
+                }
+                throw err;
+            });
+    }
+  }
+
 
 export const FindOneUserRequest = async (id: string) => {
     if (id) {

@@ -2,7 +2,10 @@ import CardItensClassrooom from "../../../Components/Card/CardItensClassroom";
 import ContentPage from "../../../Components/ContentPage";
 import { generateCode, ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import pessoas from "../../../assets/image/pessoasgray.svg";
+import pessoas from "../../../assets/image/iconsMenu/classroom.svg";
+
+import activities from "../../../assets/image/activities.svg";
+
 
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
@@ -10,7 +13,7 @@ import { SelectButton } from "primereact/selectbutton";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TextInput from "../../../Components/TextInput";
-import meeting from "../../../assets/image/school_teacher.svg";
+import meeting from "../../../assets/image/iconsMenu/module.svg";
 import OneClassroomProvider, { OneClassroomContext } from "./context/context";
 import { OneClassroomContextType } from "./context/types";
 import { AplicationContext } from "../../../context/context";
@@ -89,6 +92,29 @@ const ClassroomOnePage = () => {
             <Padding padding="8px" />
             <h3>Código da turma: {generateCode(props.classroomOne?.classroom?.id!)}</h3>
             <Padding padding="16px" />
+
+            <h2>
+                Informações
+            </h2>
+            <Padding padding="8px" />
+            {props.classroomChart ? <div className="grid">
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart?.activities_pending} title="Atividades pendentes" color="primary" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart?.completed_user_activities} title="Atividades finalizadas" color="third" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart.code_activities} title="Atividades de código" color="secondary" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart.quiz_activities} title="Múltipla escolha" color="primary" />
+                </div>
+                <div className="col-12 md:col-4 lg:col-2">
+                    <CardQuant quant={props.classroomChart.media_notas.toFixed(2)} title="Média da turma" color="secondary" />
+                </div>
+            </div> : <ProgressSpinner />}
+            <Padding padding="16px" />
             <div className="grid">
                 <div
                     className="col-12 md:col-6"
@@ -100,30 +126,9 @@ const ClassroomOnePage = () => {
                     <CardItensClassrooom title="Módulos" description="Visualize os módulos adicionados a turma" icon={meeting} />
                 </div>
                 <div className="col-12 md:col-6" onClick={() => { history('atividades') }}>
-                    <CardItensClassrooom title="Atividades" description="Visualize as atividades entregues pelos alunos" icon={meeting} />
+                    <CardItensClassrooom title="Atividades" description="Visualize as atividades entregues pelos alunos" icon={activities} />
                 </div>
             </div>
-            <h2>
-                Informações
-            </h2>
-            <Padding padding="8px" />
-            {props.classroomChart ? <div className="grid">
-                <div className="col-4 md:col:12">
-                    <CardQuant quant={props.classroomChart?.activities_pending} title="Atividades pendentes" color="primary" />
-                </div>
-                <div className="col-4 md:col:12">
-                    <CardQuant quant={props.classroomChart?.completed_user_activities} title="Atividades finalizadas" color="third" />
-                </div>
-                <div className="col-4 md:col:12">
-                    <CardQuant quant={props.classroomChart.code_activities} title="Atividades de código" color="secondary" />
-                </div>
-                <div className="col-4 md:col:12">
-                    <CardQuant quant={props.classroomChart.quiz_activities} title="Atividades de Múltipla escolha" color="third" />
-                </div>
-                <div className="col-4 md:col:12">
-                    <CardQuant quant={props.classroomChart.media_notas} title="Média da turma" color="secondary" />
-                </div>
-            </div> : <ProgressSpinner />}
 
 
         </ContentPage>
