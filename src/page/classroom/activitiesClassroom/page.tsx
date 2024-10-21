@@ -47,7 +47,7 @@ const ClassroomActivitiesPage = () => {
                 {value?.classroom.classroom_activities.map((item, index) => {
                     return (
                         <div className="col-12 md:col-3" key={item.activities.id}>
-                            <CardActivities title={item.activities.name.toString()} id={item.activities.id} index={index} idClassroom={propsActivitiesClassroom?.classroomActivitiesList?.id!} />
+                            <CardActivities title={item.activities.name.toString()} id={item.id} index={index} idClassroom={propsActivitiesClassroom?.classroomActivitiesList?.id!} />
                         </div>
                     )
                 })}
