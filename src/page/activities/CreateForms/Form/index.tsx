@@ -11,13 +11,16 @@ import { ControllerCreateForm } from "../../../../Controller/controllerCreateFor
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { CreateOrEditFormTypes, PropsComponentForm } from "../../../../Types/types";
 import { CreateOrEditFormContext } from "../context/context";
+import { EditActivitiesContext } from "../../editActivities/context/context";
+import { EditActivitiesType } from "../../type";
 
 const Form = () => {
     const { form, setform } = useContext(
         CreateOrEditFormContext
     ) as CreateOrEditFormTypes;
 
-    console.log(form)
+    const activitiesEdit = useContext(EditActivitiesContext) as EditActivitiesType
+
 
     const props = ControllerCreateForm()
 
@@ -103,7 +106,7 @@ const Form = () => {
                                 {
                                     type: "MULTIPLE_CHOICE",
                                     content: "Escreva aqui",
-                                    form_fk: 1,
+                                    form_fk: activitiesEdit?.activitiesOne?.form.id,
                                     options: [{ isResponse: false, value: 1, content: "Options 1" }],
                                 },
                             ],

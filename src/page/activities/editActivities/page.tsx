@@ -11,6 +11,7 @@ import { ProgressSpinner } from "primereact/progressspinner"
 import { TabMenu } from "primereact/tabmenu"
 import CreateOrEditForm from "../CreateForms"
 import CreateOrEditFormProvider from "../CreateForms/context/context"
+import FormComponent from "../../../Components/Form"
 
 const ActivitiesEdit = () => {
     return (
@@ -33,13 +34,19 @@ const ActivitiesEditPage = () => {
         // { label: 'Formulário', icon: ' pi pi-list' },
     ];
 
+    const itemsQuiz = [
+        { label: 'Atividade', icon: 'pi pi-home' },
+        { label: 'Formulário', icon: ' pi pi-list' },
+    ];
+
+
     if (!activitiesEdit.activitiesOne) return <ProgressSpinner />
 
 
     return (
         <ContentPage title="Editar atividade" description="Modifique a atividade">
             <Padding />
-            <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
+            <TabMenu model={activitiesEdit.activitiesOne.type_activities === "QUIZ" ? itemsQuiz : items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
             <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesEdit.initialValue}
@@ -59,7 +66,16 @@ const ActivitiesEditPage = () => {
                 }}
             </Formik>}
 
-            {activeIndex === 1 && <CreateOrEditForm />}
+            {activeIndex === 1 &&
+                <>
+                    {activitiesEdit.activitiesOne.form.question.length > 0
+                        ?
+                        <FormComponent form={activitiesEdit.activitiesOne.form} />
+                        :
+                        <CreateOrEditForm />
+                    }
+                </>
+            }
         </ContentPage>
     )
 }

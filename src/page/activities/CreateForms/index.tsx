@@ -6,6 +6,8 @@ import { Padding, Row } from "../../../Styles/styles";
 import { CreateOrEditFormTypes } from "../../../Types/types";
 import { CreateOrEditFormContext } from "./context/context";
 import Form from "./Form";
+import { EditActivitiesContext } from "../editActivities/context/context";
+import { EditActivitiesType } from "../type";
 
 const CreateOrEditForm = () => {
   return (
@@ -16,6 +18,7 @@ const CreateOrEditForm = () => {
 
 const CreateOrEditForms = () => {
   const [tabMenu, setTabMenu] = useState(0);
+  const activitiesEdit = useContext(EditActivitiesContext) as EditActivitiesType
 
   const { form, CreateForm } = useContext(CreateOrEditFormContext) as CreateOrEditFormTypes;
 
@@ -38,11 +41,11 @@ const CreateOrEditForms = () => {
             icon="pi pi-eye"
             // onClick={() => history(`/view/${form.id}`)}
           />{" "} */}
-          <Button
-            label="Salvar"
+         {activitiesEdit.activitiesOne.form.question.length === 0 && <Button
+            label="Criar"
             icon="pi pi-save"
             onClick={() => CreateForm()}
-          />{" "}
+          />}
         </Row>
       ) : null}
       <Padding />

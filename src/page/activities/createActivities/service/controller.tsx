@@ -23,7 +23,7 @@ export const CreateActivitiesController = () => {
       },
       onSuccess: (data, va) => {
         queryClient.refetchQueries("useRequestsListModule")
-        history("/modulos/"+idModule)
+        history("/atividades/"+data.data.id)
       },
 
     }

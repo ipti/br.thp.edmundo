@@ -8,11 +8,14 @@ import { CreateActivitiesType } from "../type"
 import CreateActivitiesProvider, { CreateActivitiesContext } from "./context/context"
 import CreateOrEditForm from "../CreateForms"
 import { TabMenu } from "primereact/tabmenu"
+import CreateOrEditFormProvider from "../CreateForms/context/context"
 
 const ActivitiesCreate = () => {
     return (
         <CreateActivitiesProvider>
-            <ActivitiesCreatePage />
+            <CreateOrEditFormProvider>
+                <ActivitiesCreatePage />
+            </CreateOrEditFormProvider>
         </CreateActivitiesProvider>
     )
 }
@@ -36,7 +39,8 @@ const ActivitiesCreatePage = () => {
     return (
         <ContentPage title="Criar atividades" description="">
             <Padding />
-            <TabMenu model={typeActivites === "QUIZ" ? itemsQuiz :items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
+            <TabMenu model={typeActivites === "QUIZ" ? itemsQuiz : items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
+            <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesCreate.initialValue}
                 onSubmit={(values) => { activitiesCreate.CreateActivities(values) }}
@@ -45,18 +49,18 @@ const ActivitiesCreatePage = () => {
                     setTypeActivites(values.type_activities.id)
                     return (
                         <Form>
-                        <Column>
-                            <Row id="end">
-                                <Button label="Criar" icon={"pi pi-plus"} type="submit" />
-                            </Row>
-                        </Column>
-                        <Padding />
-                        <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} isCreated />
-                    </Form>
+                            <Column>
+                                <Row id="end">
+                                    <Button label="Criar" icon={"pi pi-plus"} type="submit" />
+                                </Row>
+                            </Column>
+                            <Padding />
+                            <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} isCreated />
+                        </Form>
                     );
                 }}
             </Formik>}
-    {activeIndex === 1 && <CreateOrEditForm />}
+            {activeIndex === 1 && <CreateOrEditForm />}
 
         </ContentPage>
     )

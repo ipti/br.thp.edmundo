@@ -29,8 +29,50 @@ export interface EditActivitiesType {
   EditActivities: (body: EditActivities, id: number) => void;
   isLoading: boolean;
   isError: boolean;
-  activitiesOne: any;
+  activitiesOne: ActivitiesOne;
 
+}
+
+export interface ActivitiesOne {
+  id: number
+  name: string
+  description: string
+  expected_return: string
+  type_activities: string
+  points_activities: number
+  difficult: string
+  time_activities: number
+  createdAt: string
+  updatedAt: string
+  classesId: number
+  form: Form
+}
+
+export interface Form {
+  id: number
+  activitiesId: number
+  createdAt: string
+  question: Questions
+}
+
+export type Questions = Question[]
+
+export interface Question {
+  id: number
+  content: string
+  type: string
+  formId: number
+  createdAt: string
+  options: Option[]
+  response_question: any[]
+}
+
+export interface Option {
+  id?: number
+  content: string
+  value: any
+  questionId?: number
+  createdAt?: string
 }
 
 
@@ -50,6 +92,6 @@ export interface Question {
 
 export interface Option {
   content: string
-  value: number
+  value: any
   isResponse: boolean
 }
