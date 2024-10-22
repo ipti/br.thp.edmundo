@@ -24,6 +24,28 @@ p {
 
 `;
 
+export const TextActivitiesCard = styled.div`
+
+h1 {
+  font-family: ${typography.types.regular};
+
+}
+  font-family: ${typography.types.regular};
+  font-size: 16px;
+  font-weight: bold;
+  gap: 8;
+  line-height: 22px;
+  text-align: "justified";
+p {
+  font-family: ${typography.types.regular};
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: "justified";
+}
+
+`;
+
 interface ButtonStartType {
   type?: "PRIMARY" | "SUCCESS"
 }
@@ -46,6 +68,16 @@ cursor: ${props => props.type === "PRIMARY" ? "pointer": props.type === "SUCCESS
 export const TextActivitiesParagraph = styled.div`
   font-family: ${typography.types.regular};
 font-size: 22px;
+font-weight: 400;
+line-height: 22px;
+text-align: "justified";
+
+`;
+
+
+export const TextActivitiesParagraphCard = styled.div`
+  font-family: ${typography.types.regular};
+font-size: 16px;
 font-weight: 400;
 line-height: 22px;
 text-align: "justified";

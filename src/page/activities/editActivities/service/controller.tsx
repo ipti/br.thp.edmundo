@@ -3,11 +3,9 @@ import Swal from "sweetalert2";
 import styles from "../../../../Styles";
 import { EditActivities, PropsFormActivities } from "../../type";
 import { CreateFormRequest, EditActivitiesRequest } from "./request";
-import { useNavigate } from "react-router-dom";
 
 export const EditActivitiesController = () => {
 
-const history = useNavigate()
   const EditActivitiesMutation = useMutation(
     ({data, id}:{data: EditActivities, id: number}) => EditActivitiesRequest(data, id),
     {

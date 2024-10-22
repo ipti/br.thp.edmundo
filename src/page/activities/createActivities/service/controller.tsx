@@ -1,15 +1,14 @@
 import { useMutation } from "react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
-import { CreateActivitiesRequest } from "./request";
 import { CreateActivities } from "../../type";
+import { CreateActivitiesRequest } from "./request";
 
 export const CreateActivitiesController = () => {
   const history = useNavigate();
 
-  const {idModule} = useParams()
 
   const CreateActivitiesMutation = useMutation(
     (data: CreateActivities) => CreateActivitiesRequest(data),

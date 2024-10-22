@@ -1,21 +1,24 @@
-import { Card } from "primereact/card"
 import { Form } from "../../page/activities/type"
+import { Column, Padding } from "../../Styles/styles"
 import RenderRadioButtonCard from "./View"
 
-const FormComponent = ({form}: {form: Form}) => {
+const FormComponent = ({ form }: { form: Form }) => {
 
 
-    return(
-        <Card>
-            {form.question.map((item) => {
-                return(
-                    <>
-                        <h1>{item.content}</h1>
-                        {item.type === "MULTIPLE_CHOICE" && <RenderRadioButtonCard question={item} />}
-                    </>
-                )
-            })}
-        </Card>
+    return (
+        <div>
+            <Column style={{ gap: 32}}>
+                {form.question.map((item) => {
+                    return (
+                        <Padding padding="0">
+                            <p>{item.content}</p>
+                            <Padding padding="8px" />
+                            {item.type === "MULTIPLE_CHOICE" && <RenderRadioButtonCard question={item} />}
+                        </Padding>
+                    )
+                })}
+            </Column>
+        </div>
     )
 }
 
