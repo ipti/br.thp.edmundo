@@ -4,6 +4,7 @@ import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext } from "react"
 import ContentPage from "../../../Components/ContentPage"
 import { ImageConfig } from "../../../Components/DragAndDropFile/imageConfig"
+import Empty from "../../../Components/Empty"
 import Icon from "../../../Components/Icon"
 import InputNumberComponent from "../../../Components/InputNumber"
 import { formatarDataHours } from "../../../Controller/controllerGlobal"
@@ -11,7 +12,6 @@ import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomCorrectionOfActivitiesProvider, { ClassroomCorrectionOfActivitiesContext } from "./context/context"
 import { NotasType } from "./context/types"
-import Empty from "../../../Components/Empty"
 
 const ClassroomCorrectionOfActivities = () => {
     return (
@@ -140,6 +140,9 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
                 </h3>
             </div>
+
+                {/* {propsClassroomCorrectionOfActivities?.activities?.activities?.form.answer_form && <FormComponent form={propsClassroomCorrectionOfActivities?.activities?.activities?.form.answer_form[0].answer_question} />} */}
+
             <Padding padding="16px" />
             {(propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.complete_the_activity_correctly ||
                 propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.collaboration ||

@@ -31,3 +31,19 @@ export interface UserActivity {
   user_classroomId: number
   user_avaliation: any
 }
+
+interface OptionDto {
+  options_fk: number;
+}
+
+interface QuestionDto {
+  question_fk: number;
+  options: OptionDto[];
+}
+
+export interface CreateResponse {
+  form_fk: number;
+  question: QuestionDto[];
+  user_activities_id: number;
+
+}

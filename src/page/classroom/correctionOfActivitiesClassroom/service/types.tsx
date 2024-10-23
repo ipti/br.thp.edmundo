@@ -30,7 +30,51 @@ export interface UserActivities {
     name: string
     points_activities: number
     time_activities: number
+    form: Form
   }
+
+  export interface Form {
+    answer_form: AnswerForm[]
+  }
+  
+  export interface AnswerForm {
+    answer_question: AnswerQuestion[]
+  }
+  
+  export interface AnswerQuestion {
+    question: Question
+    answer_option: AnswerOption[]
+  }
+  
+  export interface Question {
+    content: string
+    options: Option[]
+    response_question: ResponseQuestion[]
+  }
+  
+  export interface Option {
+    id: number
+    content: string
+    value: any
+    questionId: number
+    createdAt: string
+  }
+  
+  export interface ResponseQuestion {
+    id: number
+    option_fk: number
+    question_fk: number
+    createdAt: string
+  }
+  
+  export interface AnswerOption {
+    id: number
+    createdAt: string
+    updatedAt: string
+    answer_question_fk: number
+    options_fk: number
+  }
+  
   
   export interface ClassroomActivity {
     classroom_avaliation: ClassroomAvaliation

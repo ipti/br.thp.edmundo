@@ -11,6 +11,27 @@ import { getDifficulte } from "../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeActivitiesProvider, { HomeActivitiesContext } from "./context/context";
 import { ButtonStart, TextActivities, TextActivitiesCard, TextActivitiesParagraphCard } from "./styles";
+import { Form, Formik } from "formik";
+
+import * as Yup from 'yup';
+
+const optionSchema = Yup.object().shape({
+  options_fk: Yup.number().required("Option is required")
+});
+
+const questionSchema = Yup.object().shape({
+  question_fk: Yup.number().required("Question ID is required"),
+  options: Yup.array()
+    .of(optionSchema)
+    .min(1, "Marque uma opção")
+});
+
+const createResponseSchema = Yup.object().shape({
+  form_fk: Yup.number().required("Form ID is required"),
+  question: Yup.array()
+    .of(questionSchema)
+    .required("At least one question is required")
+});
 
 
 const HomeActivities = () => {
@@ -138,8 +159,19 @@ const HomeActivitiesPage = () => {
                                     </TextActivities>
                                     <Padding padding="16px" />
                                     <TextActivities>
-
-                                        <FormComponent form={propsAplication?.activitiesOne?.form} />
+                                        <Formik validationSchema={createResponseSchema} initialValues={propsAplication.initialValueForm} onSubmit={(values) => {  propsAplication.ResponseActivities(values)}}>
+                                            {({ values, errors, setFieldValue }) => {
+                                                return (
+                                                    <Form>
+                                                        <FormComponent form={propsAplication?.activitiesOne?.form!} setFieldValue={setFieldValue} values={values} errors={errors} />
+                                                        <Padding />
+                                                        <Row id="end">
+                                                            <Button label="Enviar" disabled={propsAplication?.activitiesOne?.user_activities[0].status === "COMPLETED"} />
+                                                        </Row>
+                                                    </Form>
+                                                )
+                                            }}
+                                        </Formik>
                                     </TextActivities>
                                 </>}
                             </Padding>
