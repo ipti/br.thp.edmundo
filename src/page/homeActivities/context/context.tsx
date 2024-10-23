@@ -6,10 +6,10 @@ export const HomeActivitiesContext = createContext<HomeActivitiesContextType | n
 
 const HomeActivitiesProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const {  activitiesOne, JoinTheActivitiesUser, FinishActivitiesUser, onChangeFile, initialValueForm, ResponseActivities } = HomeActivitiesState()
+    const {  activitiesOne, JoinTheActivitiesUser, FinishActivitiesUser, onChangeFile, initialValueForm, ResponseActivities, ActivitiesUserRating } = HomeActivitiesState()
 
     return (
-        <HomeActivitiesContext.Provider value={{ activitiesOne, JoinTheActivitiesUser, onChangeFile, FinishActivitiesUser, initialValueForm, ResponseActivities }}>
+        <HomeActivitiesContext.Provider value={{ activitiesOne, JoinTheActivitiesUser, onChangeFile, FinishActivitiesUser, initialValueForm, ResponseActivities, ActivitiesUserRating }}>
             {children}
         </HomeActivitiesContext.Provider>
     )

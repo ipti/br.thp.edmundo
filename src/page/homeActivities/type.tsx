@@ -5,6 +5,9 @@ export interface JoinTheActivitiesUser {
     idClassroom: number
   }
   
+export interface PropsRating {
+    rating: number
+}
 
   export interface Activities {
     id: number

@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { ProgressSpinner } from "primereact/progressspinner";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import sound from "../../assets/image/sound_sampler.svg";
 import DropFileInput from "../../Components/DragAndDropFile";
@@ -14,6 +14,7 @@ import { ButtonStart, TextActivities, TextActivitiesCard, TextActivitiesParagrap
 import { Form, Formik } from "formik";
 
 import * as Yup from 'yup';
+import ModalRating from "./modalRating";
 
 const optionSchema = Yup.object().shape({
   options_fk: Yup.number().required("Option is required")
@@ -46,6 +47,7 @@ const HomeActivities = () => {
 const HomeActivitiesPage = () => {
 
     const propsAplication = useContext(HomeActivitiesContext)
+    const [visibleRating, setVisibleRating] = useState(false)
 
     const dif = getDifficulte(propsAplication?.activitiesOne?.difficult)
 
@@ -63,7 +65,7 @@ const HomeActivitiesPage = () => {
                 <div className="col-12 md:col-4 lg:col:6">
                     <Row id="center">
                         <Column style={{ width: "100%" }}>
-                            {propsAplication?.activitiesOne?.user_activities.length === 0 ? <ButtonStart onClick={() => {
+                            {propsAplication?.activitiesOne?.user_activities.length === 0 ? <ButtonStart style={{marginBottom: 16}} onClick={() => {
                                 propsAplication?.JoinTheActivitiesUser({ idActivities: propsAplication.activitiesOne?.id!, idClassroom: parseInt(idClassroom!) })
                             }}>
                                 <Row id="space-around"><div></div><Column id="center">Iniciar atividade</Column> <img style={{ width: 48 }} src={sound} alt="" /></Row></ButtonStart>
@@ -159,15 +161,15 @@ const HomeActivitiesPage = () => {
                                     </TextActivities>
                                     <Padding padding="16px" />
                                     <TextActivities>
-                                        <Formik validationSchema={createResponseSchema} initialValues={propsAplication.initialValueForm} onSubmit={(values) => {  propsAplication.ResponseActivities(values)}}>
+                                        <Formik validationSchema={createResponseSchema} initialValues={propsAplication.initialValueForm} onSubmit={(values) => {  propsAplication.ResponseActivities(values); setVisibleRating(true)}}>
                                             {({ values, errors, setFieldValue }) => {
                                                 return (
                                                     <Form>
                                                         <FormComponent form={propsAplication?.activitiesOne?.form!} setFieldValue={setFieldValue} values={values} errors={errors} />
                                                         <Padding />
-                                                        <Row id="end">
+                                                       {propsAplication?.activitiesOne?.user_activities[0].status && <Row id="end">
                                                             <Button label="Enviar" disabled={propsAplication?.activitiesOne?.user_activities[0].status === "COMPLETED"} />
-                                                        </Row>
+                                                        </Row>}
                                                     </Form>
                                                 )
                                             }}
@@ -179,6 +181,7 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
             </Row>
+            <ModalRating  setVisible={setVisibleRating} visible={visibleRating} />
         </Container>
     )
 

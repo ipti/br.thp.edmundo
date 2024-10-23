@@ -12,6 +12,10 @@ export const AddResponseActivitiesRequest = async (body: CreateResponse) => {
   return await http.post("/form-bff/response" ,body)
 }
 
+export const AddRatingActivitiesRequest = async (id: number,body: {rating: number}) => {
+  return await http.post("/user-activities-bff/user-activities-rating?id=" +id ,body)
+}
+
 export const FinishActivitiesUserRequest = async (id: number, files: any) => {
   return await http.put("/activities-bff/finish-activities-classroom-user?id=" + id, files)
 }
