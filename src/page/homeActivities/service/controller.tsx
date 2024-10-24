@@ -60,7 +60,7 @@ export const HomeActivitiesController = () => {
             },
             onSuccess: (data) => {
                 queryClient.refetchQueries("useRequestActivitiesOne")
-              
+                window.location.reload()
             },
 
         }

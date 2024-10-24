@@ -10,7 +10,7 @@ export const HomeActivitiesState = () => {
 
   const initialValueForm: CreateResponse = {
     form_fk: activitiesOne?.form?.id ?? 0,
-    question: activitiesOne?.form?.question.map(item => { return {question_fk: item.id, options: []}} ) ?? [],
+    question: activitiesOne?.form?.question.map((item: any) => { return {question_fk: item.id, options: []}} ) ?? [],
     user_activities_id: activitiesOne?.user_activities![0]?.id ??  0
   }
 

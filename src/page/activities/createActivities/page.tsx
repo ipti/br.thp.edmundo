@@ -1,14 +1,13 @@
 import { Form, Formik } from "formik"
 import { Button } from "primereact/button"
+import { TabMenu } from "primereact/tabmenu"
 import { useContext, useState } from "react"
 import ContentPage from "../../../Components/ContentPage"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
+import CreateOrEditFormProvider from "../CreateForms/context/context"
 import { CreateActivitiesType } from "../type"
 import CreateActivitiesProvider, { CreateActivitiesContext } from "./context/context"
-import CreateOrEditForm from "../CreateForms"
-import { TabMenu } from "primereact/tabmenu"
-import CreateOrEditFormProvider from "../CreateForms/context/context"
 
 const ActivitiesCreate = () => {
     return (
@@ -23,30 +22,25 @@ const ActivitiesCreate = () => {
 const ActivitiesCreatePage = () => {
     const activitiesCreate = useContext(CreateActivitiesContext) as CreateActivitiesType
     const [activeIndex, setActiveIndex] = useState(0);
-    const [typeActivites, setTypeActivites] = useState<string | undefined>()
 
     const items = [
         { label: 'Atividade', icon: 'pi pi-home' },
         // { label: 'Formulário', icon: ' pi pi-list' },
     ];
 
-    const itemsQuiz = [
-        { label: 'Atividade', icon: 'pi pi-home' },
-        { label: 'Formulário', icon: ' pi pi-list' },
-    ];
+   
 
 
     return (
         <ContentPage title="Criar atividades" description="">
             <Padding />
-            <TabMenu model={typeActivites === "QUIZ" ? itemsQuiz : items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
+            <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
             <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesCreate.initialValue}
                 onSubmit={(values) => { activitiesCreate.CreateActivities(values) }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
-                    setTypeActivites(values.type_activities.id)
                     return (
                         <Form>
                             <Column>
@@ -60,7 +54,6 @@ const ActivitiesCreatePage = () => {
                     );
                 }}
             </Formik>}
-            {activeIndex === 1 && <CreateOrEditForm />}
 
         </ContentPage>
     )

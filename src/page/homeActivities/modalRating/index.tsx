@@ -16,7 +16,6 @@ const ModalRating = ({ setVisible, visible }: { visible?: boolean | undefined, s
         
     });
 
-    console.log(window.innerWidth)
 
     return (
         <Dialog header="Avalie a atividade" visible={visible} style={{ width: window.innerWidth > 800 ? '30vw' : '60vw' }} onHide={() => { if (!visible) return; setVisible(false); }}>

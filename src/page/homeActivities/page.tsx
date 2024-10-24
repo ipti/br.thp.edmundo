@@ -15,6 +15,7 @@ import { Form, Formik } from "formik";
 
 import * as Yup from 'yup';
 import ModalRating from "./modalRating";
+import FormViewComponent from "../../Components/FormView";
 
 const optionSchema = Yup.object().shape({
   options_fk: Yup.number().required("Option is required")
@@ -160,7 +161,7 @@ const HomeActivitiesPage = () => {
                                         Formulário
                                     </TextActivities>
                                     <Padding padding="16px" />
-                                    <TextActivities>
+                                    {propsAplication?.activitiesOne?.form.answer_form?.length! > 0  ? <FormViewComponent form={propsAplication?.activitiesOne?.form} />  :<TextActivities>
                                         <Formik validationSchema={createResponseSchema} initialValues={propsAplication.initialValueForm} onSubmit={(values) => {  propsAplication.ResponseActivities(values); setVisibleRating(true)}}>
                                             {({ values, errors, setFieldValue }) => {
                                                 return (
@@ -174,7 +175,7 @@ const HomeActivitiesPage = () => {
                                                 )
                                             }}
                                         </Formik>
-                                    </TextActivities>
+                                    </TextActivities>}
                                 </>}
                             </Padding>
                         </Column>

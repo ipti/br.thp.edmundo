@@ -144,7 +144,6 @@ const UserCreatePage = () => {
                 validationSchema={isMaior ? schema : schemaResponsable}
             >
                 {({ values, handleChange, errors, touched, setFieldValue }) => {
-                    console.log(errors);
                     return (
                         <Form>
                             <InputsUser

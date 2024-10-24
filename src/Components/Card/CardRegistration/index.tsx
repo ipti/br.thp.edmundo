@@ -29,7 +29,6 @@ const CardRegistration = ({
         className="card cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
-          console.log(userId.toString())
           history(`${userId}`)
           // if ((propsAplication.user?.role === ROLE.ADMIN ||
           //   propsAplication.user?.role === ROLE.COORDINATORS)) {

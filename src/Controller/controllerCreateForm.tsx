@@ -23,7 +23,6 @@ const editType = (index: number, novoAtributo: any, set: any, form: PropsFormAct
   if (novoAtributo === "MULTIPLE_CHOICE" || novoAtributo === "SELECTION_BOX") {
     if (novoAtributo === "MULTIPLE_CHOICE") {
       
-      console.log(novoAtributo)
       newData.questions![index] = {
         ...newData.questions![index],
         type: novoAtributo,
@@ -63,12 +62,12 @@ const editlabelRadioButtonandBoxSelect = (
   index: number,
   indexRadioButton: number,
   newLabel: string,
-  form: any,
+  form: PropsFormActivities,
   setform: any
 ) => {
   const newData = { ...form };
-  newData.question[index] = { ...newData.question[index], options: form.question[index]?.options };
-  newData.question[index].options[indexRadioButton].label = newLabel;
+  newData.questions[index] = { ...newData.questions[index], options: form.questions[index]?.options };
+  newData.questions[index].options[indexRadioButton].content = newLabel;
   setform(newData);
 }; // edita label do radiobutton
 
@@ -80,18 +79,18 @@ const editLabelForm = (index: number, novoLabel: string, form: any, setform: any
 
 const editIsRequiredForm = (index: number, isRequerid: boolean, form: any, setform: any) => {
   const newData = { ...form };
-  newData.question[index] = { ...newData.question[index], required: isRequerid };
+  newData.questions[index] = { ...newData.questions[index], required: isRequerid };
   setform(newData);
 }; // edit requerid form
 
 const deleteOptions = (index: number, indexRadioButton: number, form: any, setform: any) => {
   const newData = { ...form };
-  newData.question[index].options?.splice(indexRadioButton, 1);
+  newData.questions[index].options?.splice(indexRadioButton, 1);
   setform(newData);
 }; // delete options
 
 const deleteQuestion = (indexRadioButton: number, form: any, setform: any) => {
   const newData = { ...form };
-  newData.question.splice(indexRadioButton, 1);
+  newData.questions.splice(indexRadioButton, 1);
   setform(newData);
 }; // delete options

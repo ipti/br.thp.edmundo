@@ -28,13 +28,14 @@ export interface UserActivities {
   
   export interface Activities {
     classroom_activities: ClassroomActivity[]
+    type_activities: string
     name: string
     points_activities: number
     time_activities: number
-    form: Form
+    form: FormView
   }
 
-  export interface Form {
+  export interface FormView {
     answer_form: AnswerForm[]
   }
   
@@ -49,6 +50,7 @@ export interface UserActivities {
   
   export interface Question {
     content: string
+    type: string
     options: Option[]
     response_question: ResponseQuestion[]
   }

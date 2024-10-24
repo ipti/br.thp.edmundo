@@ -21,7 +21,7 @@ export interface PropsRating {
   createdAt: string
   updatedAt: string
   classesId: number
-  form: Form
+  form: any
   user_activities: UserActivity[]
 }
 

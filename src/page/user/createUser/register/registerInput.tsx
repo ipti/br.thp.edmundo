@@ -71,7 +71,6 @@ const Register = ({handleChange, values, errors, touched, setFieldValue, isMaior
                         name="birthday"
                         onChange={(e: any) => {
                             setFieldValue("birthday", e.target.value);
-                            console.log(values.birthday.length > 8)
                             if (values.birthday.length > 9) {
                                 setIsMaior(isMaiorDeIdade(values.birthday))
                             }

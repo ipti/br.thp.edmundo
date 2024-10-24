@@ -69,7 +69,6 @@ const ProfilePage = () => {
 
                 {({ errors, values, handleChange, touched, setFieldValue }) => {
 
-                    console.log(errors)
 
                     return (
                         <Form>
@@ -139,7 +138,6 @@ const ProfilePage = () => {
                                         name="birthday"
                                         onChange={(e) => {
                                             setFieldValue("birthday", e.target.value);
-                                            console.log(values.birthday.length > 8)
                                             if (values.birthday.length > 9) {
                                             }
                                         }}

@@ -60,7 +60,6 @@ export const UpdateUserState = () => {
     }, [userRequest, classroomUserChartRequest, classroomModuleNotasChart, classroomModuleMediaRequest])
 
 
-    console.log(moduleId)
 
     const initialValue: UpdateUser = {
         name: user?.name ?? "",

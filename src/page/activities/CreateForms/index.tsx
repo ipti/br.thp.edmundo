@@ -43,12 +43,12 @@ const CreateOrEditForms = () => {
           />{" "} */}
          {activitiesEdit.activitiesOne.form.question.length === 0 && <Button
             label="Criar"
-            icon="pi pi-save"
+            icon="pi pi-plus"
             onClick={() => CreateForm()}
           />}
         </Row>
       ) : null}
-      <Padding />
+      <Padding padding="16px" />
       <div className="card">
         <TabMenu model={items} />
       </div>

@@ -68,7 +68,6 @@ export const UpdateclasseClassroomRequest = async (body: {active: boolean}, id: 
 }
 
 export const AddAtivitiesClassroomRequest = async (body: AddAtivitiesClassroom) => {
-  console.log(body)
   return await http.post("/activities-bff/add-activities-classroom?idClassroom=" + body.idClassroom + "&idActivities=" + body.idActivities)
 }
 

@@ -1,3 +1,5 @@
+import { AnswerForm } from "../classroom/correctionOfActivitiesClassroom/service/types";
+
 export interface CreateActivities {
   name: string,
   description: string,
@@ -53,6 +55,7 @@ export interface Form {
   activitiesId: number
   createdAt: string
   question: Questions
+  answer_form?: AnswerForm[]
 }
 
 export type Questions = Question[]
