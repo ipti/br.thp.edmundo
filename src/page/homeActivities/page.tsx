@@ -167,7 +167,7 @@ const HomeActivitiesPage = () => {
                                                     <Form>
                                                         <FormComponent form={propsAplication?.activitiesOne?.form!} setFieldValue={setFieldValue} values={values} errors={errors} />
                                                         <Padding />
-                                                       {propsAplication?.activitiesOne?.user_activities[0].status && <Row id="end">
+                                                       {propsAplication?.activitiesOne?.user_activities![0]?.status && <Row id="end">
                                                             <Button label="Enviar" disabled={propsAplication?.activitiesOne?.user_activities[0].status === "COMPLETED"} />
                                                         </Row>}
                                                     </Form>

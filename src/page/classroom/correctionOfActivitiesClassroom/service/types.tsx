@@ -7,6 +7,7 @@ export interface UserActivities {
     user_classroomId: number
     user_avaliation: UserAvaliation
     activities: Activities
+    user_activities_rating: {rating: number}
     user_activities_archives: UserActivitiesArc[]
     user_classroom: UserClassroom
   }

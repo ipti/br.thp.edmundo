@@ -12,6 +12,7 @@ import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomCorrectionOfActivitiesProvider, { ClassroomCorrectionOfActivitiesContext } from "./context/context"
 import { NotasType } from "./context/types"
+import { Rating } from "primereact/rating"
 
 const ClassroomCorrectionOfActivities = () => {
     return (
@@ -134,6 +135,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 }
             </>
             <Padding padding="8px" />
+            {propsClassroomCorrectionOfActivities?.activities?.user_activities_rating && <Rating style={{marginBottom: 32}} cancel={false} value={propsClassroomCorrectionOfActivities?.activities?.user_activities_rating.rating} />}
             <div style={{ padding: 8, background: prazo ? color.green : color.colorThird, width: 256, borderRadius: 8 }}>
                 <h3 style={{ textAlign: "center", color: "white" }}>
                     {prazo ? "No prazo" : "Fora do prazo"}

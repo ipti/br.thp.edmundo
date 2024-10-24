@@ -6,7 +6,7 @@ export interface JoinTheActivitiesUser {
   }
   
 export interface PropsRating {
-    rating: number
+    rating: number | undefined
 }
 
   export interface Activities {

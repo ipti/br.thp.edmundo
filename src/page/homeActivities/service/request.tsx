@@ -1,6 +1,6 @@
 import http from "../../../service/axios";
 import { logout } from "../../../service/localstorage";
-import { CreateResponse, JoinTheActivitiesUser } from "../type";
+import { CreateResponse, JoinTheActivitiesUser, PropsRating } from "../type";
 
 
 export const AddActivitiesUserRequest = async (body: JoinTheActivitiesUser) => {
@@ -12,7 +12,7 @@ export const AddResponseActivitiesRequest = async (body: CreateResponse) => {
   return await http.post("/form-bff/response" ,body)
 }
 
-export const AddRatingActivitiesRequest = async (id: number,body: {rating: number}) => {
+export const AddRatingActivitiesRequest = async (id: number,body: PropsRating) => {
   return await http.post("/user-activities-bff/user-activities-rating?id=" +id ,body)
 }
 
