@@ -68,6 +68,7 @@ const ActivitiesSentPage = () => {
     return (
         <ContentPage title={propsActivitiesSent?.activities?.activities?.name!} description="Visualize as atividades enviadas pelos alunos">
             <Padding padding="16px" />
+           {propsActivitiesSent?.activities?.type_activities === "CODE" &&  <>
             {propsActivitiesSent?.activities?.activities && <Formik initialValues={initialForm} onSubmit={(values) => {
                 const select: CreateNotasAvaliationType = {
                     collaboration: values.selection.find(props => props.id === 4) ? true : false,
@@ -102,6 +103,8 @@ const ActivitiesSentPage = () => {
                     )
                 }}
             </Formik>}
+            </>}
+
             <Padding padding="16px" />
             <DataTable value={propsActivitiesSent?.activities?.activities?.user_activities} tableStyle={{ minWidth: '50rem' }}>
                 <Column field="user_classroom.users.name" header="Nome"></Column>

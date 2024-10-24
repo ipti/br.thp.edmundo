@@ -15,6 +15,7 @@ export interface Classroom {
 
 export interface ClassroomActivity {
   activities: Activities
+  id: number
 }
 
 export interface Activities {

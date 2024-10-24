@@ -2,10 +2,50 @@ import { useMutation } from "react-query";
 import styles from "../../../Styles";
 import queryClient from "../../../service/reactquery";
 import Swal from "sweetalert2";
-import { JoinTheActivitiesUser } from "../type";
-import { AddActivitiesUserRequest, FinishActivitiesUserRequest } from "./request";
+import { CreateResponse, JoinTheActivitiesUser, PropsRating } from "../type";
+import { AddActivitiesUserRequest, AddRatingActivitiesRequest, AddResponseActivitiesRequest, FinishActivitiesUserRequest } from "./request";
 
 export const HomeActivitiesController = () => {
+
+
+    
+    const AddResponseActivitiesMutation = useMutation(
+
+        (data: CreateResponse) => AddResponseActivitiesRequest(data),
+        {
+            onError: (error: any) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.message,
+                    confirmButtonColor: styles.colors.colorPrimary,
+                })
+            },
+            onSuccess: (data) => {
+                queryClient.refetchQueries("useRequestActivitiesOne")
+              
+            },
+
+        }
+    );
+
+    const AddRatingActivitiesMutation = useMutation(
+
+        ({data, id}:{data: PropsRating, id: number}) => AddRatingActivitiesRequest(id, data),
+        {
+            onError: (error: any) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.message,
+                    confirmButtonColor: styles.colors.colorPrimary,
+                })
+            },
+            onSuccess: (data) => {
+                queryClient.refetchQueries("useRequestActivitiesOne")
+              
+            },
+
+        }
+    );
 
     const JoinTheActivitiesUserMutation = useMutation(
 
@@ -20,7 +60,7 @@ export const HomeActivitiesController = () => {
             },
             onSuccess: (data) => {
                 queryClient.refetchQueries("useRequestActivitiesOne")
-              
+                window.location.reload()
             },
 
         }
@@ -45,6 +85,6 @@ export const HomeActivitiesController = () => {
     );
 
     return {
-        JoinTheActivitiesUserMutation, FinishActivitiesUserMutation
+        JoinTheActivitiesUserMutation, FinishActivitiesUserMutation, AddResponseActivitiesMutation, AddRatingActivitiesMutation
     }
 }

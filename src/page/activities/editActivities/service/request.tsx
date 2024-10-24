@@ -14,7 +14,7 @@ export const CreateFormRequest = async (body: PropsFormActivities) => {
 export const FindOneActivitiesRequest = async (id: string) => {
     if (id) {
         return await http
-            .get("/activities/" + id)
+            .get("/activities-bff/one?id=" + id)
             .then((response) => response.data)
             .catch((err) => {
                 if (err.response.status === 401) {

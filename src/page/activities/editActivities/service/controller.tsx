@@ -6,7 +6,6 @@ import { CreateFormRequest, EditActivitiesRequest } from "./request";
 
 export const EditActivitiesController = () => {
 
-
   const EditActivitiesMutation = useMutation(
     ({data, id}:{data: EditActivities, id: number}) => EditActivitiesRequest(data, id),
     {
@@ -43,6 +42,7 @@ export const EditActivitiesController = () => {
           icon: 'success',
           title: "Salvo com sucesso!",
           confirmButtonColor: styles.colors.colorPrimary,
+        
         })
       },
 

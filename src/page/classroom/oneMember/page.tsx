@@ -116,7 +116,6 @@ const MemberOnePage = () => {
     }, [props.moduleAtivities, props.classroomModuleMedia]);
 
 
-    console.log(props.moduleId)
 
     const schema = Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
@@ -276,7 +275,7 @@ const MemberOnePage = () => {
                             </label>
                             <Padding />
                             {props.moduleId &&
-                                <DropdownComponent options={props.classroomModule} value={props.moduleId} onChange={(e) => { props.setModuleId(e.value); console.log(e.value) }} />}
+                                <DropdownComponent options={props.classroomModule} value={props.moduleId} onChange={(e) => { props.setModuleId(e.value);}} />}
                         </div>
                         <Padding padding="16px" />
                         <Chart type="bar" data={chartData} options={chartOptions} />

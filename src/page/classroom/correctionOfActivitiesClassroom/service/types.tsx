@@ -7,6 +7,7 @@ export interface UserActivities {
     user_classroomId: number
     user_avaliation: UserAvaliation
     activities: Activities
+    user_activities_rating: {rating: number}
     user_activities_archives: UserActivitiesArc[]
     user_classroom: UserClassroom
   }
@@ -27,10 +28,56 @@ export interface UserActivities {
   
   export interface Activities {
     classroom_activities: ClassroomActivity[]
+    type_activities: string
     name: string
     points_activities: number
     time_activities: number
+    form: FormView
   }
+
+  export interface FormView {
+    answer_form: AnswerForm[]
+  }
+  
+  export interface AnswerForm {
+    answer_question: AnswerQuestion[]
+  }
+  
+  export interface AnswerQuestion {
+    question: Question
+    answer_option: AnswerOption[]
+  }
+  
+  export interface Question {
+    content: string
+    type: string
+    options: Option[]
+    response_question: ResponseQuestion[]
+  }
+  
+  export interface Option {
+    id: number
+    content: string
+    value: any
+    questionId: number
+    createdAt: string
+  }
+  
+  export interface ResponseQuestion {
+    id: number
+    option_fk: number
+    question_fk: number
+    createdAt: string
+  }
+  
+  export interface AnswerOption {
+    id: number
+    createdAt: string
+    updatedAt: string
+    answer_question_fk: number
+    options_fk: number
+  }
+  
   
   export interface ClassroomActivity {
     classroom_avaliation: ClassroomAvaliation

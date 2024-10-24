@@ -8,6 +8,7 @@ import { InputTextarea } from "primereact/inputtextarea"
 
 
 const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreated }: { errors: any, values: any, touched: any, handleChange: any, setFieldValue: any, isCreated?: boolean }) => {
+
     return (
         <div className="grid">
             <div className="col-12 md:col-6">
@@ -94,11 +95,11 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                     </div>
                 ) : null}
             </div>
-            <div className="col-12 md:col-6">
+            {values?.type_activities?.id === "CODE" && <div className="col-12 md:col-6">
                 <label>Resposta esperada</label>
                 <Padding />
                 <InputTextarea
-                    style={{width: "100%", height: "128px"}}
+                    style={{ width: "100%", height: "128px" }}
                     autoResize
                     rows={5}
                     value={values.expected_return}
@@ -111,7 +112,7 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                         {errors.expected_return}
                     </div>
                 ) : null}
-            </div>
+            </div>}
         </div>
     )
 }

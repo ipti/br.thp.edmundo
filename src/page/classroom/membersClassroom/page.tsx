@@ -34,7 +34,6 @@ const MembersClassroomPage = () => {
     };
 
 
-    console.log(props.classroomMembersList)
     return (
         <ContentPage title={"Membros " + props.classroomMembersList?.classroom?.name} description="Visualize os membros da sua turma">
             <Row id="end">

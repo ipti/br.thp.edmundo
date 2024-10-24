@@ -105,13 +105,13 @@ const ClassroomOnePage = () => {
                     <CardQuant quant={props.classroomChart?.completed_user_activities} title="Atividades finalizadas" color="third" />
                 </div>
                 <div className="col-12 md:col-4 lg:col-2">
-                    <CardQuant quant={props.classroomChart.code_activities} title="Atividades de código" color="secondary" />
+                    <CardQuant quant={props.classroomChart?.code_activities} title="Atividades de código" color="secondary" />
                 </div>
                 <div className="col-12 md:col-4 lg:col-2">
-                    <CardQuant quant={props.classroomChart.quiz_activities} title="Múltipla escolha" color="primary" />
+                    <CardQuant quant={props.classroomChart?.quiz_activities} title="Múltipla escolha" color="primary" />
                 </div>
                 <div className="col-12 md:col-4 lg:col-2">
-                    <CardQuant quant={props.classroomChart.media_notas.toFixed(2)} title="Média da turma" color="secondary" />
+                    <CardQuant quant={props.classroomChart?.media_notas?.toFixed(2)} title="Média da turma" color="secondary" />
                 </div>
             </div> : <ProgressSpinner />}
             <Padding padding="16px" />
@@ -120,7 +120,7 @@ const ClassroomOnePage = () => {
                     className="col-12 md:col-6"
                     onClick={() => { history('membros') }}
                 >
-                    <CardItensClassrooom title="Membros" description="Visualize os membros da turma" icon={pessoas} count={props.classroomOne?.classroom._count.user} />
+                    <CardItensClassrooom title="Membros" description="Visualize os membros da turma" icon={pessoas} count={props.classroomOne?.classroom?._count.user} />
                 </div>
                 <div className="col-12 md:col-6" onClick={() => { history('modulos') }}>
                     <CardItensClassrooom title="Módulos" description="Visualize os módulos adicionados a turma" icon={meeting} />
