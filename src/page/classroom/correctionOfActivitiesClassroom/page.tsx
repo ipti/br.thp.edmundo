@@ -169,7 +169,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
 
 
-            {propsClassroomCorrectionOfActivities?.activities?.activities.form.answer_form.length! > 0
+            {propsClassroomCorrectionOfActivities?.activities?.activities?.form?.answer_form?.length! > 0
                 &&
                 <Formik initialValues={{ total: handleNotaForm(propsClassroomCorrectionOfActivities?.activities?.activities.form!) }} onSubmit={(values) => {
 
