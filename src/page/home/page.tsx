@@ -105,7 +105,7 @@ const HomeClassroomPage = () => {
                 {classes?.classroom_module?.map((item, index) => {
                     return (
                         <div key={index} className="col-12 md:col-3" style={{ cursor: item.active ? "pointer" : "not-allowed" }} onClick={() => {
-                            if (item.active) history("/turma/" + propsHome?.classroomUser![0].id + "/modulo/" + item.module.id)
+                            if (item.active) history("/turma/" + classes.id + "/modulo/" + item.module.id)
                         }} >
                             <CardHome name={item.module.name} status={item.active} index={index} />
                         </div>

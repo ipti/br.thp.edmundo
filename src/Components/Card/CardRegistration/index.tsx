@@ -12,17 +12,20 @@ const CardRegistration = ({
   idRegistration,
   userId,
   status,
+  url_avatar
 }: {
   title: string;
   subtitle: string;
   idRegistration: number;
   status: string;
-  userId: number
+  userId: number;
+  url_avatar?: string
 }) => {
   const [visible, setVisible] = useState(false);
   const history = useNavigate()
 
 
+  console.log(url_avatar)
   return (
     <>
       <Container
@@ -55,6 +58,7 @@ const CardRegistration = ({
             <Column id="center">
               <img
                 src={
+                  url_avatar ? url_avatar :
                   avatar
                 }
                 alt=""
