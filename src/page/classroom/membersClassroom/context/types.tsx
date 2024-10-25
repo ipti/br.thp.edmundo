@@ -26,13 +26,22 @@ export interface ClassroomMembers {
     createdAt: string
     updatedAt: string
     classroomId: number
+    
     usersId: number
     users: Users
   }
+
+  export type RegistartionAvatar = Root2[]
+
+export interface Root2 {
+  avatar_url: string
+}
+
   
   export interface Users {
     name: string
     role: string
+    registration: RegistartionAvatar
   }
   
   export interface Owner {

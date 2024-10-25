@@ -1,13 +1,13 @@
-import { useContext, useState } from "react";
-import MembersClassroomProvider, { MembersClassroomContext } from "./context/context";
-import { MembersClassroomContextType } from "./context/types";
-import ContentPage from "../../../Components/ContentPage";
-import { InputText } from "primereact/inputtext";
-import { Padding, Row } from "../../../Styles/styles";
-import CardRegistration from "../../../Components/Card/CardRegistration";
-import Empty from "../../../Components/Empty";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
+import { InputText } from "primereact/inputtext";
+import { useContext, useState } from "react";
+import CardRegistration from "../../../Components/Card/CardRegistration";
+import ContentPage from "../../../Components/ContentPage";
+import Empty from "../../../Components/Empty";
+import { Padding, Row } from "../../../Styles/styles";
+import MembersClassroomProvider, { MembersClassroomContext } from "./context/context";
+import { MembersClassroomContextType } from "./context/types";
 
 
 const MembersClassroom = () => {
@@ -38,7 +38,7 @@ const MembersClassroomPage = () => {
         <ContentPage title={"Membros " + props.classroomMembersList?.classroom?.name} description="Visualize os membros da sua turma">
             <Row id="end">
                 <IconField iconPosition="left">
-                    <InputIcon  className="pi pi-search" />
+                    <InputIcon className="pi pi-search" />
                     <InputText
                         placeholder="Pesquise pelo nome"
                         onChange={(e) => {
@@ -52,6 +52,7 @@ const MembersClassroomPage = () => {
             {props.classroomMembersList?.classroom?.user?.length! > 0 ? (
                 <div className="grid">
                     {search()?.map((item, index) => {
+
                         return (
                             <div className="col-12 md:col-6 lg:col-4" key={index}>
                                 <CardRegistration
@@ -60,6 +61,7 @@ const MembersClassroomPage = () => {
                                     idRegistration={item?.id}
                                     status={item?.users?.role}
                                     userId={item.usersId}
+                                    url_avatar={item?.users?.registration[0]?.avatar_url }
                                 />
                             </div>
                         );
