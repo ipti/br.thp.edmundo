@@ -4,6 +4,7 @@ export interface ListModulesContextType {
   modulesList: ModulesList | undefined;
   isLoading: boolean;
   isError: boolean;
+
 }
 
 export type ModulesList = Modules[]
@@ -70,6 +71,8 @@ export interface OneModulesContextType {
   moduleOne: Modules | undefined;
   isLoading: boolean;
   isError: boolean;
+  DeleteActivities: (id: number) => void
+  DeleteClasses: (id: number) => void
 }
 
 export interface ModulesOneEdit {

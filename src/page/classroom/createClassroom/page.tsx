@@ -45,7 +45,7 @@ const ClassroomCreatePage = () => {
             <Form>
               <Column>
                 <Row id="end">
-                  <Button label="Criar" type="submit" />
+                  <Button label="Criar" type="submit" icon="pi pi-plus" />
                 </Row>
               </Column>
 

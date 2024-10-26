@@ -27,6 +27,7 @@ import ModulesEdit from "../page/module/editModule/page";
 import ActivitiesEdit from "../page/activities/editActivities/page";
 import ActivitiesSent from "../page/classroom/listUserActivitiesClassroom/page";
 import MemberOne from "../page/classroom/oneMember/page";
+import ClassesEdit from "../page/classes/createClasses copy/page";
 
 const RoutesApp = () => {
   return (
@@ -55,6 +56,7 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<ModuleOne />} />} path="/modulos/:id" />
         <Route element={<PrivateRoute Component={<ModulesEdit />} />} path="/modulos/:id/editar" />
         <Route element={<PrivateRoute Component={<ClassesCreate />} />} path="/aulas/:idModule/criar" />
+        <Route element={<PrivateRoute Component={<ClassesEdit />} />} path="/aulas/:idModule/editar/:idClasses" />
         <Route element={<PrivateRoute Component={<ActivitiesCreate />} />} path="/atividades/:idClasses/criar/:idModule" />
         <Route element={<PrivateRoute Component={<ActivitiesEdit />} />} path="/atividades/:id" />
 

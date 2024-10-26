@@ -1,13 +1,11 @@
 import { Form, Formik } from "formik";
+import { Button } from "primereact/button";
+import { useContext } from "react";
 import ContentPage from "../../../Components/ContentPage";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import { Button } from "primereact/button";
-import TextInput from "../../../Components/TextInput";
-import TextAreaComponent from "../../../Components/TextArea";
-import InputNumberComponent from "../../../Components/InputNumber";
-import CreateClassesProvider, { CreateClassesContext } from "./context/context";
-import { useContext } from "react";
+import Inputs from "../components/inputs";
 import { CreateClassesContextType } from "../type";
+import CreateClassesProvider, { CreateClassesContext } from "./context/context";
 
 const ClassesCreate = () => {
 
@@ -32,68 +30,8 @@ const ClassesCreatePage = () => {
                   <Button label="Criar" icon="pi pi-plus" type="submit" />
                 </Row>
               </Column>
-              <div className="col-12 md:col-6">
-                <label>Nome</label>
-                <Padding />
-                <TextInput
-                  value={values.name}
-                  placeholder="Nome"
-                  onChange={handleChange}
-                  name="name"
-                />
-                {errors.name && touched.name ? (
-                  <div style={{ color: "red", marginTop: "8px" }}>
-                    {errors.name}
-                  </div>
-                ) : null}
-              </div>
+              <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} />
 
-              <div className="col-12 md:col-6">
-                <label>Objetivo</label>
-                <Padding />
-                <TextAreaComponent
-                  value={values.objective}
-                  placeholder="Escreva o objetivo da aula"
-                  onChange={handleChange}
-                  name="objective"
-                />
-                {errors.objective && touched.objective ? (
-                  <div style={{ color: "red", marginTop: "8px" }}>
-                    {errors.objective}
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="col-12 md:col-6">
-                <label>Materias necessários </label>
-                <Padding />
-                <TextAreaComponent
-                  value={values.necessary_material}
-                  placeholder="Escreva os materiais necessários para a aula"
-                  onChange={handleChange}
-                  name="necessary_material"
-                />
-                {errors.necessary_material && touched.necessary_material ? (
-                  <div style={{ color: "red", marginTop: "8px" }}>
-                    {errors.necessary_material}
-                  </div>
-                ) : null}
-              </div>
-              <div className="col-12 md:col-6">
-                <label>Duração da aula (horas) </label>
-                <Padding />
-                <InputNumberComponent
-                  value={values.duration}
-                  placeholder="Escreva os materiais necessários para a aula"
-                  onChange={handleChange}
-                  name="duration"
-                />
-                {errors.duration && touched.duration ? (
-                  <div style={{ color: "red", marginTop: "8px" }}>
-                    {errors.duration}
-                  </div>
-                ) : null}
-              </div>
             </Form>
           );
         }}
