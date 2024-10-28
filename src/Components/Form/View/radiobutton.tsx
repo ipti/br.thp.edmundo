@@ -29,7 +29,10 @@ export default function RenderRadioButtonCard({ question, setFieldValue, values,
                                     ];
                                 }
 
-                                setFieldValue("question", updatedQuestions ?? []);
+                                if (setFieldValue) {
+
+                                    setFieldValue("question", updatedQuestions ?? []);
+                                }
                             }} />
                             <Column id="center">
                                 <p style={{ fontSize: 16, marginLeft: 8 }}>{category.content}</p>
