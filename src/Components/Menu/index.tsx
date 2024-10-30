@@ -139,10 +139,23 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             }}
             active={active === 6 ? true : false}
             path={"/perfil"}
-            icon={propsAplication.user?.registration![0]?.avatar_url ??avatar}
+            icon={propsAplication.user?.registration![0]?.avatar_url ?? avatar}
           />
           <Padding />
 
+          <>
+            <Item
+              text={"Tags"}
+              funcActiv={() => {
+                setActive(7);
+                menuItem("7");
+              }}
+              active={active === 7 ? true : false}
+              path={"/tags"}
+              icon={propsAplication.user?.registration![0]?.avatar_url ?? avatar}
+            />
+            <Padding />
+          </>
 
 
         </Padding>

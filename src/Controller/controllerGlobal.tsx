@@ -121,6 +121,16 @@ export const question = [
   { id: 5, name: "Compreensão sobre o conteúdo" },
 ];
 
+export enum Type_Tags {
+  ACTIVITIES,
+  USERS
+}
+
+export const type_tags = [
+  { id: "USERS", name: "Usuário"},
+  {id: "ACTIVITIES", name: "Atividades"}
+]
+
 export const Status = {
   APPROVED: "APPROVED",
   PENDING: "PENDING",
