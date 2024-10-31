@@ -1,9 +1,11 @@
 import { useNavigate, } from "react-router-dom";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import { Container, Text } from "./style";
+import Icon from "../../Icon";
 
 interface Propsitem {
     icon: string,
+    isIcon?: boolean,
     path: string,
     text: string,
     active: boolean,
@@ -11,7 +13,7 @@ interface Propsitem {
 }
 
 
-const Item = ({ icon, path, text, active, funcActiv }: Propsitem) => {
+const Item = ({ icon, path, text, active, funcActiv, isIcon }: Propsitem) => {
     const history = useNavigate();
 
     const Event = () => {
@@ -25,7 +27,11 @@ const Item = ({ icon, path, text, active, funcActiv }: Propsitem) => {
                 <Padding />
                 <Text active={active}>
                     <Column id="center">
-                        <img src={icon} alt="" style={{ height: 24, width: 24, borderRadius: 8 }} />
+                        {
+                            isIcon ? <Icon icon={icon} size={"24"} color={active ? "#2E62AC" : "#707A8D"} />
+                                : <img src={icon} alt="" style={{ height: 24, width: 24, borderRadius: 8 }} />
+
+                        }
                     </Column>
                     <Padding />
                     <Column id="center">

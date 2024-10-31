@@ -22,3 +22,11 @@ export interface User {
     role: string
     registration: any[]
   }
+
+  export type Tags = Tag[]
+
+export interface Tag {
+  id: number
+  content: string
+  type: string
+}

@@ -199,7 +199,6 @@ const MemberOnePage = () => {
                                         name="birthday"
                                         onChange={(e) => {
                                             setFieldValue("birthday", e.target.value);
-                                            console.log(values.birthday.length > 8)
                                             if (values.birthday.length > 9) {
                                             }
                                         }}

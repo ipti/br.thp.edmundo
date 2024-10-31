@@ -25,7 +25,6 @@ const CardRegistration = ({
   const history = useNavigate()
 
 
-  console.log(url_avatar)
   return (
     <>
       <Container

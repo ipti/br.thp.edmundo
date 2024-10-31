@@ -6,7 +6,6 @@ export const EditClassesRequest = async (body: EditClasses, id: number) => {
 }
 
 export const FindOneClassesRequest = async (id: string) => {
-    console.log(id)
     if (id) {
         return await http
             .get("/classes/" + id)

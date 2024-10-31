@@ -82,9 +82,7 @@ const TagListPage = () => {
                 <Column field="content" align={"center"} header="Nome"></Column>
                 <Column field="type" align={"center"} header="Tipo da Tag"></Column>
                 <Column field="actions" align={"center"} body={ActionsUserBody} header="Ações"></Column>
-
             </DataTable>
-
             <ModalInputs setOpen={setVisible} visible={visible} />
             <ConfirmDialog
                 visible={visibleDelete}

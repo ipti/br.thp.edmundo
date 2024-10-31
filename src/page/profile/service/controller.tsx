@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import styles from "../../../Styles";
 import queryClient from "../../../service/reactquery";
-import { requestUpdateAvatarRegistration, UpdateUserRequest } from "./request";
+import { AddTagUser, requestUpdateAvatarRegistration, UpdateUserRequest } from "./request";
 import { UpdateUser } from "./types";
 
 export const UpdateUserController = () => {
@@ -39,7 +39,22 @@ export const UpdateUserController = () => {
     }
   );
 
+  const requestAddTagUserMutation = useMutation(
+    (id: number) =>
+      AddTagUser(id),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Alteração realizada com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+        });
+      },
+    }
+  );
+
   return {
-    UpdateUserMutation, requestChangeAvatarRegistrationMutation
+    UpdateUserMutation, requestChangeAvatarRegistrationMutation, requestAddTagUserMutation
   }
 }

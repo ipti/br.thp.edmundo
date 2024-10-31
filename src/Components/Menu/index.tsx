@@ -82,12 +82,12 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Turmas"}
             funcActiv={() => {
-              setActive(4);
-              menuItem("4");
+              setActive(2);
+              menuItem("2");
             }}
-            active={active === 4 ? true : false}
+            active={active === 2 ? true : false}
             path={"/turmas"}
-            icon={active === 4 ? classroomHover : classroom}
+            icon={active === 2 ? classroomHover : classroom}
           />
           <Padding />
           {propsAplication.user?.role !== ROLE.STUDENT &&
@@ -95,12 +95,12 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               <Item
                 text={"Módulos"}
                 funcActiv={() => {
-                  setActive(5);
-                  menuItem("5");
+                  setActive(3);
+                  menuItem("3");
                 }}
-                active={active === 5 ? true : false}
+                active={active === 3 ? true : false}
                 path={"/modulos"}
-                icon={active === 5 ? moduleHover : module}
+                icon={active === 3 ? moduleHover : module}
               />
               <Padding />
             </>
@@ -121,12 +121,12 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             <Item
               text={"Usuários"}
               funcActiv={() => {
-                setActive(7);
-                menuItem("7");
+                setActive(4);
+                menuItem("4");
               }}
-              active={active === 7 ? true : false}
+              active={active === 4 ? true : false}
               path={"/usuarios"}
-              icon={active === 7 ? user_hover : user}
+              icon={active === 4 ? user_hover : user}
             />
 
             <Padding />
@@ -134,10 +134,10 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
           <Item
             text={"Meu Perfil"}
             funcActiv={() => {
-              setActive(6);
-              menuItem("6");
+              setActive(5);
+              menuItem("5");
             }}
-            active={active === 6 ? true : false}
+            active={active === 5 ? true : false}
             path={"/perfil"}
             icon={propsAplication.user?.registration![0]?.avatar_url ?? avatar}
           />
@@ -147,12 +147,13 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             <Item
               text={"Tags"}
               funcActiv={() => {
-                setActive(7);
-                menuItem("7");
+                setActive(6);
+                menuItem("6");
               }}
-              active={active === 7 ? true : false}
+              active={active === 6 ? true : false}
               path={"/tags"}
-              icon={propsAplication.user?.registration![0]?.avatar_url ?? avatar}
+              icon={"pi pi-tags"}
+              isIcon
             />
             <Padding />
           </>

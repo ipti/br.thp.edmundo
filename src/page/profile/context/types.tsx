@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { UpdateUser, User } from "../service/types";
+import { Tags, UpdateUser, User } from "../service/types";
 
 export interface UpdateUserContextType {
     initialValue: UpdateUser;
@@ -9,4 +9,6 @@ export interface UpdateUserContextType {
     isError: boolean;
     setFile: Dispatch<SetStateAction<File[] | undefined>>
     file: File[] | undefined
+    tags: Tags | undefined
+    AddUser: (idTag: number) => void
 }

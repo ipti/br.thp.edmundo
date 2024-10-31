@@ -22,7 +22,6 @@ const ModalInputs = ({ visible, setOpen }: { visible: any, setOpen: any }) => {
                 setOpen(!visible)
             }}>
                 {({ values, handleChange, errors, touched, setFieldValue }) => {
-                    console.log(values)
                     return (
                         <Form>
                             <div className="grid">
