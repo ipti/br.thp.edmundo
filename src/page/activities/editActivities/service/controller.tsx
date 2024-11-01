@@ -1,8 +1,9 @@
 import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import styles from "../../../../Styles";
-import { EditActivities, PropsFormActivities } from "../../type";
+import { CreateActivitiesTagsDto, EditActivities, PropsFormActivities } from "../../type";
 import { CreateFormRequest, EditActivitiesRequest } from "./request";
+import { AddTagActivities } from "../../createActivities/service/request";
 
 export const EditActivitiesController = () => {
 
@@ -49,7 +50,22 @@ export const EditActivitiesController = () => {
     }
   );
 
+  const requestAddTagActivitiesMutation = useMutation(
+    (id: CreateActivitiesTagsDto) =>
+      AddTagActivities(id),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Alteração realizada com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+        });
+      },
+    }
+  );
+
   return {
-    EditActivitiesMutation, CreateFormMutation
+    EditActivitiesMutation, CreateFormMutation, requestAddTagActivitiesMutation
   }
 }

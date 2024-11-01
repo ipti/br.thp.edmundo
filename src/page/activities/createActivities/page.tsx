@@ -28,7 +28,7 @@ const ActivitiesCreatePage = () => {
         // { label: 'Formulário', icon: ' pi pi-list' },
     ];
 
-   
+
 
 
     return (
@@ -49,7 +49,7 @@ const ActivitiesCreatePage = () => {
                                 </Row>
                             </Column>
                             <Padding />
-                            <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} isCreated />
+                            <Inputs errors={errors} tagsAll={activitiesCreate.tags} tags={activitiesCreate.tagsActivities} setTags={activitiesCreate.setTagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} isCreated />
                         </Form>
                     );
                 }}

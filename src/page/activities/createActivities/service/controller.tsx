@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
-import { CreateActivities } from "../../type";
-import { CreateActivitiesRequest } from "./request";
+import { CreateActivities, CreateActivitiesTagsDto } from "../../type";
+import { AddTagActivities, CreateActivitiesRequest } from "./request";
 
 export const CreateActivitiesController = () => {
   const history = useNavigate();
@@ -28,7 +28,22 @@ export const CreateActivitiesController = () => {
     }
   );
 
+  const requestAddTagActivitiesMutation = useMutation(
+    (id: CreateActivitiesTagsDto) =>
+      AddTagActivities(id),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+        Swal.fire({
+          icon: "success",
+          title: "Alteração realizada com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+        });
+      },
+    }
+  );
+
   return {
-    CreateActivitiesMutation
+    CreateActivitiesMutation, requestAddTagActivitiesMutation
   }
 }

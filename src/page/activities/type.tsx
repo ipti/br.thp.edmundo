@@ -1,4 +1,6 @@
+import { Dispatch, SetStateAction } from "react";
 import { AnswerForm } from "../classroom/correctionOfActivitiesClassroom/service/types";
+import { Tags } from "../profile/service/types";
 
 export interface CreateActivities {
   name: string,
@@ -14,6 +16,9 @@ export interface CreateActivities {
 export interface CreateActivitiesType {
   initialValue: CreateActivities;
   CreateActivities: (body: CreateActivities) => void;
+  setTagsActivities: Dispatch<SetStateAction<any[]>>
+  tagsActivities: any
+  tags: Tags | undefined
 }
 
 export interface EditActivities {
@@ -32,7 +37,9 @@ export interface EditActivitiesType {
   isLoading: boolean;
   isError: boolean;
   activitiesOne: ActivitiesOne;
-
+  tags: Tags | undefined
+  tagsActivities: any
+  setTagsActivities: Dispatch<any>
 }
 
 export interface ActivitiesOne {
@@ -48,7 +55,24 @@ export interface ActivitiesOne {
   updatedAt: string
   classesId: number
   form: Form
+  tags_activities: Tag_Activities
 }
+
+export type Tag_Activities = Tag_Activitie[]
+
+export interface Tag_Activitie {
+  id: number
+  activities_fk: number
+  tag_fk: number
+  tag: Tag
+}
+
+export interface Tag {
+  id: number
+  content: string
+  type: string
+}
+
 
 export interface Form {
   id: number
@@ -97,4 +121,13 @@ export interface Option {
   content: string
   value: any
   isResponse: boolean
+}
+
+interface TagDto {
+  idTag: number;
+}
+
+export interface CreateActivitiesTagsDto {
+  items: TagDto[];
+  idActivitie: number
 }

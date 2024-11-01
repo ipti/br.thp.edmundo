@@ -26,11 +26,12 @@ export default function RenderCheckBoxCard({ question, setFieldValue, values, in
                                     updatedQuestions[indexQuestion].options = updatedQuestions[indexQuestion].options.filter(props => props.options_fk !== category.id);
                                 } else {
                                     updatedQuestions[indexQuestion].options = [...updatedQuestions[indexQuestion].options,
-                                        { options_fk: category.id }
+                                    { options_fk: category.id }
                                     ];
                                 }
-
-                                setFieldValue("question", updatedQuestions ?? []);
+                                if (setFieldValue) {
+                                    setFieldValue("question", updatedQuestions ?? []);
+                                }
                             }} />
                             <Column id="center">
                                 <p style={{ fontSize: 16, marginLeft: 8 }}>{category.content}</p>

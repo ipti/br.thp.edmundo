@@ -1,5 +1,7 @@
 import { Form, Formik } from "formik"
 import { Button } from "primereact/button"
+import { Chip } from "primereact/chip"
+import { MultiSelect } from "primereact/multiselect"
 import { useContext } from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
@@ -40,6 +42,8 @@ const ProfilePage = () => {
 
 
 
+
+
     const schema = Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
         email: Yup.string().required("Nome de usuário é obrigatório"),
@@ -48,6 +52,7 @@ const ProfilePage = () => {
             .nullable()
             .required("Data de nascimento é obrigatória"),
     });
+
 
 
     const date = new Date(props.user?.registration[0]?.birthday);
@@ -165,8 +170,23 @@ const ProfilePage = () => {
                                         </div>
                                     ) : null}
                                 </div>
+                                <div className="col-12 md:col-6">
+                                    <label>Tags </label>
+                                    <Padding />
+                                    <MultiSelect value={props.tagsUser} onChange={(e) => { props.settagsUser(e.value); }} options={props.tags} optionLabel="content"
+                                        placeholder="Tags" maxSelectedLabels={3} className="w-full" />
+                                    <Padding padding="16px" />
+                                    <Row className="grid" style={{ gap: "8px" }}>
+                                        {props.tagsUser?.map((item: any) => {
+                                            return (
+                                                <Chip label={item.content} />
+                                            )
+                                        })}
+                                    </Row>
+                                </div>
                             </div>
-                            <Padding padding="8px" />
+
+
                             {/* {values.deficiency && (
                                     <div className="col-12 md:col-6">
                                         <label>Qual deficiência?</label>

@@ -3,11 +3,14 @@ import DropdownComponent from "../../../Components/Dropdown"
 import InputNumberComponent from "../../../Components/InputNumber"
 import TextInput from "../../../Components/TextInput"
 import { difficult, type_activities } from "../../../Controller/controllerGlobal"
-import { Padding } from "../../../Styles/styles"
+import { Padding, Row } from "../../../Styles/styles"
 import { InputTextarea } from "primereact/inputtextarea"
+import { MultiSelect } from "primereact/multiselect"
+import { Chip } from "primereact/chip"
 
 
-const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreated }: { errors: any, values: any, touched: any, handleChange: any, setFieldValue: any, isCreated?: boolean }) => {
+const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreated, tags, setTags, tagsAll }: { tagsAll: any, errors: any, values: any, touched: any, handleChange: any, setFieldValue: any, isCreated?: boolean, tags: any, setTags: any }) => {
+
 
     return (
         <div className="grid">
@@ -95,6 +98,21 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                     </div>
                 ) : null}
             </div>
+
+            {!isCreated && <div className="col-12 md:col-6">
+                <label>Tags </label>
+                <Padding />
+                <MultiSelect value={tags} onChange={(e) => { setTags(e.value); }} options={tagsAll} optionLabel="content"
+                    placeholder="Tags" maxSelectedLabels={3} className="w-full" />
+                <Padding padding="16px" />
+                <Row className="grid" style={{ gap: "8px" }}>
+                    {tags?.map((item: any) => {
+                        return (
+                            <Chip label={item.content} />
+                        )
+                    })}
+                </Row>
+            </div>}
             {values?.type_activities?.id === "CODE" && <div className="col-12 md:col-6">
                 <label>Resposta esperada</label>
                 <Padding />

@@ -1,17 +1,17 @@
 import { Form, Formik } from "formik"
 import { Button } from "primereact/button"
-import { useContext, useState } from "react"
-import ContentPage from "../../../Components/ContentPage"
-import { Column, Padding, Row } from "../../../Styles/styles"
-import Inputs from "../components/inputs"
-import { EditActivitiesType } from "../type"
-import EditActivitiesProvider, { EditActivitiesContext } from "./context/context"
-import { useParams } from "react-router-dom"
 import { ProgressSpinner } from "primereact/progressspinner"
 import { TabMenu } from "primereact/tabmenu"
+import { useContext, useState } from "react"
+import { useParams } from "react-router-dom"
+import ContentPage from "../../../Components/ContentPage"
+import FormComponent from "../../../Components/Form"
+import { Column, Padding, Row } from "../../../Styles/styles"
+import Inputs from "../components/inputs"
 import CreateOrEditForm from "../CreateForms"
 import CreateOrEditFormProvider from "../CreateForms/context/context"
-import FormComponent from "../../../Components/Form"
+import { EditActivitiesType } from "../type"
+import EditActivitiesProvider, { EditActivitiesContext } from "./context/context"
 
 const ActivitiesEdit = () => {
     return (
@@ -27,6 +27,8 @@ const ActivitiesEdit = () => {
 const ActivitiesEditPage = () => {
     const activitiesEdit = useContext(EditActivitiesContext) as EditActivitiesType
     const [activeIndex, setActiveIndex] = useState(0);
+    const [createdQuestion, setCreatedQuestion] = useState(false);
+
     const { id } = useParams()
 
     const items = [
@@ -60,7 +62,7 @@ const ActivitiesEditPage = () => {
                                     <Button label="Salvar" icon={"pi pi-save"} type="submit" />
                                 </Row>
                             </Column>
-                            <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
+                            <Inputs errors={errors} tagsAll={activitiesEdit.tags} setTags={activitiesEdit.setTagsActivities} tags={activitiesEdit.tagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
                         </Form>
                     );
                 }}
@@ -68,11 +70,19 @@ const ActivitiesEditPage = () => {
 
             {activeIndex === 1 &&
                 <>
-                    {activitiesEdit.activitiesOne.form.question.length > 0
+                    {activitiesEdit.activitiesOne.form.question.length === 0 || createdQuestion
                         ?
-                        <FormComponent form={activitiesEdit.activitiesOne.form} />
-                        :
                         <CreateOrEditForm />
+                        :
+                        <>
+                            <h3>Lista de questões</h3>
+                            <Padding padding="16px" />
+                            <FormComponent form={activitiesEdit.activitiesOne.form} />
+                            <Padding />
+                            <Row id="end">
+                                <Button label="Criar novas questões" onClick={() => { setCreatedQuestion(true) }} icon={"pi pi-plus"} />
+                            </Row>
+                        </>
                     }
                 </>
             }
