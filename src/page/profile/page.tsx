@@ -1,6 +1,8 @@
 import { Form, Formik } from "formik"
 import { Button } from "primereact/button"
-import { useContext, useState } from "react"
+import { Chip } from "primereact/chip"
+import { MultiSelect } from "primereact/multiselect"
+import { useContext } from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
 import ContentPage from "../../Components/ContentPage"
@@ -12,8 +14,6 @@ import { Column, Padding, Row } from "../../Styles/styles"
 import avatar from "../../assets/image/avatar.svg"
 import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
-import { MultiSelect } from "primereact/multiselect"
-import { Chip } from "primereact/chip"
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -39,7 +39,9 @@ const Profile = () => {
 const ProfilePage = () => {
 
     const props = useContext(UpdateUserContext) as UpdateUserContextType
-    const [selectedCities, setSelectedCities] = useState<any>(null);
+
+
+
 
 
     const schema = Yup.object().shape({
@@ -168,22 +170,22 @@ const ProfilePage = () => {
                                         </div>
                                     ) : null}
                                 </div>
+                                <div className="col-12 md:col-6">
+                                    <label>Tags </label>
+                                    <Padding />
+                                    <MultiSelect value={props.tagsUser} onChange={(e) => { props.settagsUser(e.value); }} options={props.tags} optionLabel="content"
+                                        placeholder="Tags" maxSelectedLabels={3} className="w-full" />
+                                    <Padding padding="16px" />
+                                    <Row className="grid" style={{ gap: "8px" }}>
+                                        {props.tagsUser?.map((item: any) => {
+                                            return (
+                                                <Chip label={item.content} />
+                                            )
+                                        })}
+                                    </Row>
+                                </div>
                             </div>
 
-                            <div className="col-12 md:col-6">
-                                <label>Tags </label>
-                                <Padding />
-                                <MultiSelect value={selectedCities} onChange={(e) => { setSelectedCities(e.value); props.AddUser(e.value[e.value.length - 1].id); console.log(e.value) }} options={props.tags} optionLabel="content"
-                                    placeholder="Tags" maxSelectedLabels={3} className="w-full" />
-                                <Padding padding="16px" />
-                                <Row className="grid" style={{ gap: "8px" }}>
-                                    {selectedCities?.map((item: any) => {
-                                        return (
-                                            <Chip label={item.content} />
-                                        )
-                                    })}
-                                </Row>
-                            </div>
 
                             {/* {values.deficiency && (
                                     <div className="col-12 md:col-6">

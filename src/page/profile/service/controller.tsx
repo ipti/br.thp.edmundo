@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import styles from "../../../Styles";
 import queryClient from "../../../service/reactquery";
 import { AddTagUser, requestUpdateAvatarRegistration, UpdateUserRequest } from "./request";
-import { UpdateUser } from "./types";
+import { CreateUserTagsDto, UpdateUser } from "./types";
 
 export const UpdateUserController = () => {
 
@@ -40,7 +40,7 @@ export const UpdateUserController = () => {
   );
 
   const requestAddTagUserMutation = useMutation(
-    (id: number) =>
+    (id: CreateUserTagsDto) =>
       AddTagUser(id),
     {
       onError: (error) => { },

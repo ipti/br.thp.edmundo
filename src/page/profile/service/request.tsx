@@ -1,6 +1,6 @@
 import http from "../../../service/axios"
 import { GetIdUser, logout } from "../../../service/localstorage"
-import { UpdateUser } from "./types"
+import { CreateUserTagsDto, UpdateUser } from "./types"
 
 export const UpdateUserRequest = async (body: UpdateUser) => {
     if (GetIdUser()) {
@@ -11,8 +11,8 @@ export const UpdateUserRequest = async (body: UpdateUser) => {
     }
 }
 
-export const AddTagUser = async (idUser: number) => {
-    return await http.post("/tags-bff/users?idTag=" + idUser)
+export const AddTagUser = async (body: CreateUserTagsDto) => {
+    return await http.post("/tags-bff/users", body)
 }
 
 export const FindOneUserRequest = async (id: string) => {

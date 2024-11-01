@@ -62,7 +62,7 @@ const ActivitiesEditPage = () => {
                                     <Button label="Salvar" icon={"pi pi-save"} type="submit" />
                                 </Row>
                             </Column>
-                            <Inputs errors={errors} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
+                            <Inputs errors={errors} tagsAll={activitiesEdit.tags} setTags={activitiesEdit.setTagsActivities} tags={activitiesEdit.tagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
                         </Form>
                     );
                 }}

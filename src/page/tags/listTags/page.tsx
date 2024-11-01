@@ -7,6 +7,7 @@ import ModalInputs from "./modalInputs";
 import TagsProvider, { TagsContext } from "./context/context";
 import { Row } from "../../../Styles/styles";
 import { ConfirmDialog } from "primereact/confirmdialog";
+import { type_tags } from "../../../Controller/controllerGlobal";
 
 const TagList = () => {
     return (
@@ -80,7 +81,7 @@ const TagListPage = () => {
         <ContentPage title="Tags" description="Gerencie as Tags do sistema">
             <DataTable value={propsTags?.tags} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
                 <Column field="content" align={"center"} header="Nome"></Column>
-                <Column field="type" align={"center"} header="Tipo da Tag"></Column>
+                <Column field="type" body={(item) => <>{type_tags.find(props => props.id === item.type)?.name}</>} align={"center"} header="Tipo da Tag"></Column>
                 <Column field="actions" align={"center"} body={ActionsUserBody} header="Ações"></Column>
             </DataTable>
             <ModalInputs setOpen={setVisible} visible={visible} />

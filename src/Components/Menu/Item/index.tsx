@@ -28,7 +28,7 @@ const Item = ({ icon, path, text, active, funcActiv, isIcon }: Propsitem) => {
                 <Text active={active}>
                     <Column id="center">
                         {
-                            isIcon ? <Icon icon={icon} size={"24"} color={active ? "#2E62AC" : "#707A8D"} />
+                            isIcon ? <Row><Padding padding="2px" /><Icon icon={icon} size={"32"} fontWeight="bold" color={active ? "#2E62AC" : "#707A8D"} /></Row>
                                 : <img src={icon} alt="" style={{ height: 24, width: 24, borderRadius: 8 }} />
 
                         }

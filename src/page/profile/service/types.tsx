@@ -21,7 +21,19 @@ export interface User {
     active: boolean
     role: string
     registration: any[]
+    tags_users: TagUsers
   }
+
+  export type TagUsers = TagUser[]
+
+export interface TagUser {
+  id: number
+  user_fk: number
+  tag_fk: number
+  tag: Tag
+}
+
+
 
   export type Tags = Tag[]
 
@@ -29,4 +41,12 @@ export interface Tag {
   id: number
   content: string
   type: string
+}
+
+interface TagDto {
+  idTag: number;
+}
+
+export interface CreateUserTagsDto {
+  items: TagDto[];
 }

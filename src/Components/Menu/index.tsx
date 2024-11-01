@@ -131,19 +131,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
 
             <Padding />
           </>}
-          <Item
-            text={"Meu Perfil"}
-            funcActiv={() => {
-              setActive(5);
-              menuItem("5");
-            }}
-            active={active === 5 ? true : false}
-            path={"/perfil"}
-            icon={propsAplication.user?.registration![0]?.avatar_url ?? avatar}
-          />
-          <Padding />
-
-          <>
+         {propsAplication.user?.role === ROLE.ADMIN && <>
             <Item
               text={"Tags"}
               funcActiv={() => {
@@ -156,7 +144,19 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               isIcon
             />
             <Padding />
-          </>
+          </>}
+          <Item
+            text={"Meu Perfil"}
+            funcActiv={() => {
+              setActive(5);
+              menuItem("5");
+            }}
+            active={active === 5 ? true : false}
+            path={"/perfil"}
+            icon={propsAplication.user?.registration![0]?.avatar_url ?? avatar}
+          />
+          <Padding />
+
 
 
         </Padding>

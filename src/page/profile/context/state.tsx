@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { UpdateUserController } from "../service/controller"
-import { Tags, UpdateUser, User } from "../service/types"
+import { CreateUserTagsDto, Tags, UpdateUser, User } from "../service/types"
 import { useFetchRequestFindOneUser, useFetchRequestFindTagsUser } from "../service/query"
 import { GetIdUser } from "../../../service/localstorage"
 
@@ -10,6 +10,8 @@ export const UpdateUserState = () => {
     const [user, setuser] = useState<User | undefined>()
     const [file, setFile] = useState<File[] | undefined>();
     const [tags, setTags] = useState<Tags | undefined>()
+    const [tagsUser, settagsUser] = useState<Tags>([]);
+
 
     const { data: userRequest, isLoading, isError } = useFetchRequestFindOneUser(GetIdUser()!);
 
@@ -18,11 +20,16 @@ export const UpdateUserState = () => {
     useEffect(() => {
         if (userRequest) {
             setuser(userRequest)
+            var tagsUser = userRequest?.tags_users.map((item: any) => { return item.tag })
+            settagsUser(tagsUser!)
         }
         if (tagsRequest) {
             setTags(tagsRequest)
         }
     }, [userRequest, tagsRequest])
+
+
+
 
     const initialValue: UpdateUser = {
         name: user?.name ?? "",
@@ -50,10 +57,21 @@ export const UpdateUserState = () => {
             });
         }
         UpdateUserMutation.mutate(body)
+        var tagsUserBody: CreateUserTagsDto = {
+            items: [
+
+            ]
+        }
+
+        for (const i of tagsUser) {
+            tagsUserBody.items.push({ idTag: i.id })
+        }
+        requestAddTagUserMutation.mutate(
+            tagsUserBody
+        )
     }
 
     const AddUser = (idTag: number) => {
-        requestAddTagUserMutation.mutate(idTag)
     }
-    return { initialValue, UpdateUser, user, isLoading, isError, file, setFile, tags, AddUser }
+    return { initialValue, UpdateUser, user, isLoading, isError, file, setFile, tags, AddUser, tagsUser, settagsUser }
 }

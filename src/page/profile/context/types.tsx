@@ -11,4 +11,6 @@ export interface UpdateUserContextType {
     file: File[] | undefined
     tags: Tags | undefined
     AddUser: (idTag: number) => void
+    tagsUser: Tags
+    settagsUser: Dispatch<SetStateAction<Tags>>
 }
