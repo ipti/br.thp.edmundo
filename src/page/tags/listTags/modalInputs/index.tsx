@@ -14,9 +14,9 @@ const ModalInputs = ({ visible, setOpen }: { visible: any, setOpen: any }) => {
 
     const initialValue: { content: string, type: any } = { content: visible?.content ?? "", type: type_tags.find(props => props.id === visible?.type) ?? undefined, }
     return (
-        <Dialog visible={visible} header={visible.id ? "Editar tag" : "Criar tag"} style={{ width: "50%" }} onHide={() => setOpen(!visible)}>
+        <Dialog visible={visible} header={visible?.id ? "Editar tag" : "Criar tag"} style={{ width: "50%" }} onHide={() => setOpen(!visible)}>
             <Formik initialValues={initialValue} onSubmit={(values) => {
-                if (visible.id) {
+                if (visible?.id) {
                     props?.UploadTags({ ...values, type: values.type?.id }, visible.id)
                 } else { props?.CreateTags({ ...values, type: values.type?.id }); }
                 setOpen(!visible)
