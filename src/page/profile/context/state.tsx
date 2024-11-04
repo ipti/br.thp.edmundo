@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import { UpdateUserController } from "../service/controller"
-import { CreateUserTagsDto, Tags, UpdateUser, User } from "../service/types"
-import { useFetchRequestFindOneUser, useFetchRequestFindTagsUser } from "../service/query"
+import { useQuery } from "../../../Controller/controllerGlobal"
 import { GetIdUser } from "../../../service/localstorage"
+import { UpdateUserController } from "../service/controller"
+import { useFetchRequestFindOneUser, useFetchRequestFindTagsUser } from "../service/query"
+import { CreateUserTagsDto, Tags, UpdateUser, User } from "../service/types"
+
 
 export const UpdateUserState = () => {
 
@@ -12,8 +14,12 @@ export const UpdateUserState = () => {
     const [tags, setTags] = useState<Tags | undefined>()
     const [tagsUser, settagsUser] = useState<Tags>([]);
 
+    const query = useQuery()
 
-    const { data: userRequest, isLoading, isError } = useFetchRequestFindOneUser(GetIdUser()!);
+   const id =  query.get("id")
+
+
+    const { data: userRequest, isLoading, isError } = useFetchRequestFindOneUser(id ?? GetIdUser()!);
 
     const { data: tagsRequest } = useFetchRequestFindTagsUser()
 

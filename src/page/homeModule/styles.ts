@@ -29,3 +29,27 @@ export const FormaRecover = styled.div`
   }
 `;
 
+export const ImagePessoa = styled.div`
+ img {
+    width: 100%;
+    /* margin-left: 30%; */
+  }
+  @media screen and (max-width: 600px) {
+    display: none;
+    img {
+      width: none;
+      /* margin-right: 50%; */
+    }
+  }
+
+
+  @media screen and (max-width: 1200px) {
+    width: 60%;
+    img {
+      width: 60%;
+      margin-right: 50%;
+
+    }
+  }
+`;
+

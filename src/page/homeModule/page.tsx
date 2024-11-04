@@ -10,6 +10,10 @@ import HomeModulesProvider, { HomeModulesContext } from "./context/context";
 import { Class } from "./type";
 import { useNavigate, useParams } from "react-router-dom";
 import { AplicationContext } from "../../context/context";
+import ListMembers from "../../Components/ListMembers";
+import pessoa from "../../assets/image/pessoa_visao.svg"
+import color from "../../Styles/colors";
+import { ImagePessoa } from "./styles";
 
 
 
@@ -58,7 +62,7 @@ const HomeModulePage = () => {
 
     return (
         <Container style={{
-            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px"
+            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px 64px 0 64px"
         }}>
             <Row>
                 <Avatar>
@@ -90,19 +94,41 @@ const HomeModulePage = () => {
             <Padding padding="16px" />
 
             <div className="grid">
-                {classes?.activities?.map((item, index) => {
-                    return (
-                        <div className="col-12 md:col-3"
-                            style={{ cursor: item?.classroom_activities[0]?.active ? "pointer" : "not-allowed" }}
-                            onClick={() =>
-                                item?.classroom_activities[0]?.active ? history("/turma/" + idClassroom + "/modulo/" + idModule + "/atividade/" + item.id) : null
-                            }>
-                            <CardHome name={item.name} status={item?.classroom_activities[0]?.active} index={index} />
-                        </div>
-                    )
-                })}
+                <div className="col-12 md:col-9">
+                    <div className="grid">
+                        {classes?.activities?.map((item, index) => {
+                            return (
+                                <div className="col-12 md:col-5"
+                                    style={{ cursor: item?.classroom_activities[0]?.active ? "pointer" : "not-allowed" }}
+                                    onClick={() =>
+                                        item?.classroom_activities[0]?.active ? history("/turma/" + idClassroom + "/modulo/" + idModule + "/atividade/" + item.id) : null
+                                    }>
+                                    <CardHome name={item.name} status={item?.classroom_activities[0]?.active} index={index} />
+                                </div>
+                            )
+                        })}
+                        {classes?.activities.length === 0 && <Column id="end">
+                            <Row id="space-between">
+                                <ImagePessoa>
+                                    <img src={pessoa} alt="Não existe atividades"
+                                    />
+                                </ImagePessoa>
+                                <Column id="center">
+                                    <div style={{ height: "100px", background: color.colorFourth }} className="card">
+                                        <Column id="center">
+                                            <h2>Não existe atividade!</h2>
+                                            <p>Não há material cadastrado no módulo.</p>
+                                        </Column>
+                                    </div>
+                                </Column>
+                            </Row>
+                        </Column>}
+                    </div>
+                </div>
+                <div className="col-12 md:col-3">
+                    <ListMembers users={propsHome.modules.classroom_module[0].classroom.user!} />
+                </div>
             </div>
-
             {propsHome?.modules?.classes.length === 0 && <h3>Sem atividades</h3>}
 
         </Container>

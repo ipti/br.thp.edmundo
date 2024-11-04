@@ -15,7 +15,29 @@ export interface Classroom {
   createdAt: string
   updatedAt: string
   classroom_module: ClassroomModule[]
+  user: UserArray
 }
+
+export type UserArray = User[]
+
+export interface User {
+  id: number
+  createdAt: string
+  updatedAt: string
+  classroomId: number
+  usersId: number
+  users: Users
+}
+
+export interface Users {
+  name: string
+  registration: Registration[]
+}
+
+export interface Registration {
+  avatar_url: any
+}
+
 
 export interface ClassroomModule {
   module: Module
