@@ -8,7 +8,7 @@ import * as Yup from "yup"
 import ContentPage from "../../Components/ContentPage"
 import MaskInput from "../../Components/InputMask"
 import TextInput from "../../Components/TextInput"
-import { formatarData } from "../../Controller/controllerGlobal"
+import { formatarData, useQuery } from "../../Controller/controllerGlobal"
 import styles from "../../Styles"
 import { Column, Padding, Row } from "../../Styles/styles"
 import avatar from "../../assets/image/avatar.svg"
@@ -40,6 +40,9 @@ const ProfilePage = () => {
 
     const props = useContext(UpdateUserContext) as UpdateUserContextType
 
+    const query = useQuery()
+
+    const id = query.get("id")
 
 
 
@@ -57,7 +60,7 @@ const ProfilePage = () => {
 
     const date = new Date(props.user?.registration[0]?.birthday);
     return (
-        <ContentPage title="Perfil" description="Visualize ou edite os dados do seu perfil.">
+        <ContentPage title={"Perfil"} description={id ? "Visualize o seu amigo" : "Visualize ou edite os dados do seu perfil."}>
             {props.user && <Formik validationSchema={schema} initialValues={{
                 name: props.user?.name ?? "",
                 birthday: !isNaN(date.getTime())
@@ -77,17 +80,17 @@ const ProfilePage = () => {
 
                     return (
                         <Form>
-                            <Column>
+                            {!id && <Column>
                                 <Row id="end">
                                     <Button label="Salvar" icon="pi pi-save" type="submit" />
                                 </Row>
-                            </Column>
+                            </Column>}
                             <Padding />
                             <Avatar>
                                 <img alt="" src={props.file ? (URL.createObjectURL(props.file![0]) ?? undefined) : props.user?.registration![0]?.avatar_url ? props.user?.registration![0]?.avatar_url : avatar} />
                             </Avatar>
                             <Padding padding="8px" />
-                            <div className="grid">
+                            {!id && <div className="grid">
                                 <div className="col-12 md:col-6">
                                     <label>Avatar </label>
                                     <Padding />
@@ -99,7 +102,7 @@ const ProfilePage = () => {
                                         name="name"
                                     />
                                 </div>
-                            </div>
+                            </div>}
                             <Padding padding="16px" />
 
                             <div className="grid">
@@ -107,7 +110,9 @@ const ProfilePage = () => {
                                     <label>Nome *</label>
                                     <Padding />
                                     <TextInput
+
                                         value={values.name}
+                                        disabled={!!id}
                                         placeholder="Nome"
                                         onChange={handleChange}
                                         name="name"
@@ -126,6 +131,8 @@ const ProfilePage = () => {
                                         placeholder="Nome usuário"
                                         onChange={handleChange}
                                         name="email"
+                                        disabled={!!id}
+
                                     />
                                     {errors.email && touched.email ? (
                                         <div style={{ color: "red", marginTop: "8px" }}>
@@ -141,6 +148,8 @@ const ProfilePage = () => {
                                         mask="99/99/9999"
                                         placeholder="Data de Nascimento"
                                         name="birthday"
+                                        disabled={!!id}
+
                                         onChange={(e) => {
                                             setFieldValue("birthday", e.target.value);
                                             if (values.birthday.length > 9) {
@@ -160,6 +169,7 @@ const ProfilePage = () => {
                                         value={values.responsable_telephone}
                                         mask="(99) 9 9999-9999"
                                         name="responsable_telephone"
+                                        disabled={!!id}
                                         onChange={handleChange}
                                         placeholder="Telefone para contato"
                                     />
@@ -173,7 +183,8 @@ const ProfilePage = () => {
                                 <div className="col-12 md:col-6">
                                     <label>Tags </label>
                                     <Padding />
-                                    <MultiSelect value={props.tagsUser} onChange={(e) => { props.settagsUser(e.value); }} options={props.tags} optionLabel="content"
+                                    <MultiSelect value={props.tagsUser} disabled={!!id}
+                                        onChange={(e) => { props.settagsUser(e.value); }} options={props.tags} optionLabel="content"
                                         placeholder="Tags" maxSelectedLabels={3} className="w-full" />
                                     <Padding padding="16px" />
                                     <Row className="grid" style={{ gap: "8px" }}>
@@ -186,7 +197,16 @@ const ProfilePage = () => {
                                 </div>
                             </div>
 
-
+                            {/* {id && <>
+                                <label>Tags</label>
+                                <Padding padding="8px" />
+                                <Row className="grid" style={{ gap: "8px" }}>
+                                    {props.tagsUser?.map((item: any) => {
+                                        return (
+                                            <Chip label={item.content} />
+                                        )
+                                    })}
+                                </Row></>} */}
                             {/* {values.deficiency && (
                                     <div className="col-12 md:col-6">
                                         <label>Qual deficiência?</label>

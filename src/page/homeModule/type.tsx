@@ -10,7 +10,36 @@ export interface JoinTheClassroom {
     createdAt: string
     updatedAt: string
     classes: Class[]
+    classroom_module: ClassroomModuleArray
   }
+
+  export type ClassroomModuleArray = ClassroomModule[]
+
+export interface ClassroomModule {
+  classroom: Classroom
+}
+
+export interface Classroom {
+  user: User[]
+}
+
+export interface User {
+  id: number
+  createdAt: string
+  updatedAt: string
+  classroomId: number
+  usersId: number
+  users: Users
+}
+
+export interface Users {
+  name: string
+  registration: Registration[]
+}
+
+export interface Registration {
+  avatar_url: any
+}
   
   export interface Class {
     id: number

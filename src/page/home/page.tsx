@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import IconClassroom from "./../../assets/image/cardturmas.svg";
 import DropdownComponent from "../../Components/Dropdown";
 import { Classroom } from "./type";
+import ListMembers from "../../Components/ListMembers";
 
 
 
@@ -102,15 +103,23 @@ const HomeClassroomPage = () => {
             <Padding padding="16px" />
 
             <div className="grid">
+                <div className="col-12 md:col-9">
+                    <div className="grid">
+
                 {classes?.classroom_module?.map((item, index) => {
                     return (
-                        <div key={index} className="col-12 md:col-3" style={{ cursor: item.active ? "pointer" : "not-allowed" }} onClick={() => {
+                        <div key={index} className="col-12 md:col-5" style={{ cursor: item.active ? "pointer" : "not-allowed" }} onClick={() => {
                             if (item.active) history("/turma/" + classes.id + "/modulo/" + item.module.id)
-                        }} >
+                            }} >
                             <CardHome name={item.module.name} status={item.active} index={index} />
                         </div>
                     )
                 })}
+                </div>
+                </div>
+                <div className="col-12 md:col-3">
+                    <ListMembers users={classes?.user!} />
+                </div>
             </div>
 
             {propsHome?.classroomUser.length === 0 && <h3>

@@ -1,5 +1,7 @@
+import { useLocation } from "react-router-dom"
 import axios from "axios";
 import { Buffer } from 'buffer';
+import React from "react";
 
 
 export const gerarIdAleatorio = (tamanho: number) => {
@@ -165,6 +167,12 @@ export function getDifficulte(key: DifficulteKeys): string {
   return difficulte[key];
 }
 
+
+export function useQuery() {
+    const { search } = useLocation();
+  
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
 
 export const difficulte = {
   BAIXO: "Baixo",
