@@ -16,23 +16,24 @@ import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 import ModalRating from "./modalRating";
 import FormViewComponent from "../../Components/FormView";
+import color from "../../Styles/colors";
 
 const optionSchema = Yup.object().shape({
-  options_fk: Yup.number().required("Option is required")
+    options_fk: Yup.number().required("Option is required")
 });
 
 const questionSchema = Yup.object().shape({
-  question_fk: Yup.number().required("Question ID is required"),
-  options: Yup.array()
-    .of(optionSchema)
-    .min(1, "Marque uma opção")
+    question_fk: Yup.number().required("Question ID is required"),
+    options: Yup.array()
+        .of(optionSchema)
+        .min(1, "Marque uma opção")
 });
 
 const createResponseSchema = Yup.object().shape({
-  form_fk: Yup.number().required("Form ID is required"),
-  question: Yup.array()
-    .of(questionSchema)
-    .required("At least one question is required")
+    form_fk: Yup.number().required("Form ID is required"),
+    question: Yup.array()
+        .of(questionSchema)
+        .required("At least one question is required")
 });
 
 
@@ -66,7 +67,7 @@ const HomeActivitiesPage = () => {
                 <div className="col-12 md:col-4 lg:col:6">
                     <Row id="center">
                         <Column style={{ width: "100%" }}>
-                            {propsAplication?.activitiesOne?.user_activities.length === 0 ? <ButtonStart style={{marginBottom: 16}} onClick={() => {
+                            {propsAplication?.activitiesOne?.user_activities.length === 0 ? <ButtonStart style={{ marginBottom: 16 }} onClick={() => {
                                 propsAplication?.JoinTheActivitiesUser({ idActivities: propsAplication.activitiesOne?.id!, idClassroom: parseInt(idClassroom!) })
                             }}>
                                 <Row id="space-around"><div></div><Column id="center">Iniciar atividade</Column> <img style={{ width: 48 }} src={sound} alt="" /></Row></ButtonStart>
@@ -143,9 +144,25 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
                 <div className="card col-12 md:col-7 lg:col:6">
+
+
                     <Row >
                         <Column style={{ width: "100%" }}>
                             <Padding padding="32px">
+                                <div className="grid">
+
+                                    {propsAplication?.activitiesOne?.tags_activities?.map((item) => {
+                                        return (
+                                            <>
+                                                <h4 style={{ color: color.colorPrimary }}>
+                                                    #{item.tag.content}
+                                                </h4>
+                                                <Padding />
+                                            </>
+                                        )
+                                    })}
+                                </div>
+                                <Padding />
                                 <TextActivities>{propsAplication?.activitiesOne?.name}</TextActivities>
                                 <Padding padding="16px" />
                                 <TextActivities>
@@ -161,14 +178,14 @@ const HomeActivitiesPage = () => {
                                         Formulário
                                     </TextActivities>
                                     <Padding padding="16px" />
-                                    {propsAplication?.activitiesOne?.form.answer_form?.length! > 0  ? <FormViewComponent form={propsAplication?.activitiesOne?.form} />  :<TextActivities>
-                                        <Formik validationSchema={createResponseSchema} initialValues={propsAplication.initialValueForm} onSubmit={(values) => {  propsAplication.ResponseActivities(values); setVisibleRating(true)}}>
+                                    {propsAplication?.activitiesOne?.form.answer_form?.length! > 0 ? <FormViewComponent form={propsAplication?.activitiesOne?.form} /> : <TextActivities>
+                                        <Formik validationSchema={createResponseSchema} initialValues={propsAplication.initialValueForm} onSubmit={(values) => { propsAplication.ResponseActivities(values); setVisibleRating(true) }}>
                                             {({ values, errors, setFieldValue }) => {
                                                 return (
                                                     <Form>
                                                         <FormComponent form={propsAplication?.activitiesOne?.form!} setFieldValue={setFieldValue} values={values} errors={errors} />
                                                         <Padding />
-                                                       {propsAplication?.activitiesOne?.user_activities![0]?.status && <Row id="end">
+                                                        {propsAplication?.activitiesOne?.user_activities![0]?.status && <Row id="end">
                                                             <Button label="Enviar" disabled={propsAplication?.activitiesOne?.user_activities[0].status === "COMPLETED"} />
                                                         </Row>}
                                                     </Form>
@@ -182,7 +199,7 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
             </Row>
-            <ModalRating  setVisible={setVisibleRating} visible={visibleRating} />
+            <ModalRating setVisible={setVisibleRating} visible={visibleRating} />
         </Container>
     )
 

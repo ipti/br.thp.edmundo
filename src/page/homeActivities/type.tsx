@@ -1,4 +1,4 @@
-import { Form } from "../activities/type"
+import { Tag_Activitie } from "../activities/type"
 
 export interface JoinTheActivitiesUser {
     idActivities : number
@@ -23,6 +23,7 @@ export interface PropsRating {
   classesId: number
   form: any
   user_activities: UserActivity[]
+  tags_activities: Tag_Activitie[]
 }
 
 export interface UserActivity {

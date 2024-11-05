@@ -55,7 +55,7 @@ const Form = () => {
                                                     setopenInput(true);
                                                 }}
                                             >
-                                                {item.content}
+                                                {item.content.length === 0 ? "Escreva aqui" : item.content}
                                             </p>
                                         ) : (
                                             <Column style={{ width: "100%" }}>

@@ -5,6 +5,10 @@ export const Container = styled.div`
   font-size: ${styles.typography.font.extraSmall};
   justify-content: space-between;
   cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   border: 1.22px solid rgba(219, 230, 255, 1);
   background: ${styles.colors.colorCard};
