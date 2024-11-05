@@ -58,7 +58,7 @@ const Inputs = ({ errors, handleChange, touched, values }: { errors: any, values
                 <Padding />
                 <InputNumberComponent
                   value={values.duration}
-                  placeholder="Escreva os materiais necessários para a aula"
+                  placeholder="Escreva a duração da aula"
                   onChange={handleChange}
                   name="duration"
                 />

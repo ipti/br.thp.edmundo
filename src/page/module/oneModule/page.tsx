@@ -1,15 +1,15 @@
 import { Accordion, AccordionTab } from "primereact/accordion"
 import { Button } from "primereact/button"
+import { ConfirmDialog } from "primereact/confirmdialog"
+import { Divider } from "primereact/divider"
 import { useContext, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import activitiesIcon from "../../../assets/image/activities.svg"
 import ContentPage from "../../../Components/ContentPage"
+import Icon from "../../../Components/Icon"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import { Activity, OneModulesContextType } from "../type"
 import OneModuleProvider, { OneModuleContext } from "./context/context"
-import Icon from "../../../Components/Icon"
-import { Divider } from "primereact/divider"
-import activitiesIcon from "../../../assets/image/activities.svg";
-import { ConfirmDialog } from "primereact/confirmdialog"
 
 
 const ModuleOne = () => {
@@ -109,7 +109,7 @@ const ModuleOnePage = () => {
                                             <Row style={{ gap: 8 }}>
                                                 <img src={activitiesIcon} alt={activities.name} />
                                                 <Column id="center">
-                                                    <Link style={{ fontWeight: "bold" }} to={"/atividades/" + activities.id}>{activities.name}</Link>
+                                                    <h3 style={{ fontWeight: "bold", cursor: "pointer" }} onClick={() => history("/atividades/" + activities.id)}>{activities.name}</h3>
                                                 </Column>
                                             </Row>
                                             <div style={{ cursor: "pointer" }} onClick={() => setVisibleActivities(activities)}>

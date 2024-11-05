@@ -123,7 +123,7 @@ const ProfilePage = () => {
                                         </div>
                                     ) : null}
                                 </div>
-                                <div className="col-12 md:col-6">
+                                {!id && <div className="col-12 md:col-6">
                                     <label>Nome usuário *</label>
                                     <Padding />
                                     <TextInput
@@ -139,7 +139,7 @@ const ProfilePage = () => {
                                             {errors.email}
                                         </div>
                                     ) : null}
-                                </div>
+                                </div>}
                                 <div className="col-12 md:col-6">
                                     <label>Data de Nascimento *</label>
                                     <Padding />
@@ -162,7 +162,7 @@ const ProfilePage = () => {
                                         </div>
                                     ) : null}
                                 </div>
-                                <div className="col-12 md:col-6">
+                                {!id && <div className="col-12 md:col-6">
                                     <label>Telefone para contato *</label>
                                     <Padding />
                                     <MaskInput
@@ -179,7 +179,7 @@ const ProfilePage = () => {
                                             {errors.responsable_telephone.toString()}
                                         </div>
                                     ) : null}
-                                </div>
+                                </div>}
                                 <div className="col-12 md:col-6">
                                     <label>Tags </label>
                                     <Padding />

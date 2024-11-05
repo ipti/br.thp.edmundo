@@ -26,7 +26,7 @@ const editType = (index: number, novoAtributo: any, set: any, form: PropsFormAct
       newData.questions![index] = {
         ...newData.questions![index],
         type: novoAtributo,
-        options: [{isResponse: false, value: 1, content: "Options 1" }],
+        options: newData.questions![index].options,
       };
 
       set(newData);
@@ -35,7 +35,7 @@ const editType = (index: number, novoAtributo: any, set: any, form: PropsFormAct
       newData.questions![index] = {
         ...newData.questions![index],
         type: novoAtributo,
-        options: [{isResponse: false, value: 1, content: "Options 1" }],
+        options: newData.questions![index].options,
       };
       set(newData);
     }
