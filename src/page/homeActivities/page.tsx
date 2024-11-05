@@ -151,7 +151,7 @@ const HomeActivitiesPage = () => {
                             <Padding padding="32px">
                                 <div className="grid">
 
-                                    {propsAplication.activitiesOne.tags_activities.map((item) => {
+                                    {propsAplication?.activitiesOne?.tags_activities?.map((item) => {
                                         return (
                                             <>
                                                 <h4 style={{ color: color.colorPrimary }}>
