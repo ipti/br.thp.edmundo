@@ -29,6 +29,8 @@ import ActivitiesSent from "../page/classroom/listUserActivitiesClassroom/page";
 import MemberOne from "../page/classroom/oneMember/page";
 import ClassesEdit from "../page/classes/createClasses copy/page";
 import TagList from "../page/tags/listTags/page";
+import SelosList from "../page/selos/listSelos/page";
+import CreateSeal from "../page/selos/createSelos/page";
 
 const RoutesApp = () => {
   return (
@@ -43,6 +45,10 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<TagList />} />} path="/tags" />
 
         <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
+        <Route element={<PrivateRoute Component={<SelosList />} />} path="/selos" />
+        <Route element={<PrivateRoute Component={<CreateSeal />} />} path="/selos/criar" />
+
+
         <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
         <Route element={<PrivateRoute Component={<MembersClassroom />} />} path="/turma/:id/membros" />
         <Route element={<PrivateRoute Component={<MemberOne />} />} path="/turma/:id/membros/:idMember" />

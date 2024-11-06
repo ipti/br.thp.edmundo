@@ -47,7 +47,8 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
       <Padding padding="8px" />
       {true ? (
         <Padding padding="8px">
-          {/* <Item
+          {/*
+           <Item
             text={"Cronograma"}
             funcActiv={() => {
               setActive(1);
@@ -56,7 +57,8 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             active={active === 1 ? true : false}
             path={"/cronograma"}
             icon={"pi pi-calendar"}
-          /> */}
+          /> 
+          */}
           {/* <Item
             text={"Pagina Inicial"}
             funcActiv={() => {
@@ -131,7 +133,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
 
             <Padding />
           </>}
-         {propsAplication.user?.role === ROLE.ADMIN && <>
+          {propsAplication.user?.role === ROLE.ADMIN && <>
             <Item
               text={"Tags"}
               funcActiv={() => {
@@ -141,6 +143,20 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               active={active === 6 ? true : false}
               path={"/tags"}
               icon={"pi pi-tags"}
+              isIcon
+            />
+            <Padding />
+          </>}
+          {propsAplication.user?.role === ROLE.ADMIN && <>
+            <Item
+              text={"Selos"}
+              funcActiv={() => {
+                setActive(7);
+                menuItem("7");
+              }}
+              active={active === 7 ? true : false}
+              path={"/selos"}
+              icon={"pi pi-crown"}
               isIcon
             />
             <Padding />

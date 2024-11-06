@@ -72,7 +72,12 @@ const ActivitiesEditPage = () => {
                 <>
                     {activitiesEdit.activitiesOne.form.question.length === 0 || createdQuestion
                         ?
-                        <CreateOrEditForm />
+                        <>
+                            {activitiesEdit.activitiesOne.form.question.length > 0 && <div>
+                                <Button severity="danger" label="Cancelar" onClick={() => { setCreatedQuestion(false) }} />
+                            </div>}
+                            <CreateOrEditForm />
+                        </>
                         :
                         <>
                             <h3>Lista de questões</h3>
