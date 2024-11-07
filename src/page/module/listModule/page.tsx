@@ -33,7 +33,7 @@ const ModuleListPage = () => {
           }}
         />
       </Row>
-      <Padding />
+      <Padding padding="16px" />
       <div className="grid">
         {modulesListContext.modulesList?.map((item) => {
           return (
