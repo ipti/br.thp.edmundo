@@ -18,7 +18,9 @@ export const FindTagsActivitiesRequest = async () => {
         });
 }
 
-export const AddEditorImage = (body: FormData) => {
+export const AddEditorImage = (body: any) => { 
+
+    console.log(body)
     return http.post("/activities-bff/editor-image", body)
 }
 

@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
 import { CreateActivities, CreateActivitiesTagsDto } from "../../type";
-import { AddTagActivities, CreateActivitiesRequest } from "./request";
+import { AddEditorImage, AddTagActivities, CreateActivitiesRequest } from "./request";
 
 export const CreateActivitiesController = () => {
   const history = useNavigate();
@@ -34,6 +34,7 @@ export const CreateActivitiesController = () => {
     {
       onError: (error) => { },
       onSuccess: (data) => {
+        
         Swal.fire({
           icon: "success",
           title: "Alteração realizada com sucesso!",
@@ -43,7 +44,26 @@ export const CreateActivitiesController = () => {
     }
   );
 
+  const AddEditorImageMutation = useMutation(
+    (body: FormData) =>
+      AddEditorImage(body),
+    {
+      onError: (error) => { },
+      onSuccess: (data) => {
+
+        console.log(data)
+        Swal.fire({
+          icon: "success",
+          title: "Alteração realizada com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+        });
+      },
+    }
+  );
+
+
+
   return {
-    CreateActivitiesMutation, requestAddTagActivitiesMutation
+    CreateActivitiesMutation, requestAddTagActivitiesMutation, AddEditorImageMutation
   }
 }

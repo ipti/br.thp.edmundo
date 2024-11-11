@@ -1,15 +1,14 @@
-import { Editor } from "primereact/editor"
+import { Chip } from "primereact/chip"
+import { InputTextarea } from "primereact/inputtextarea"
+import { MultiSelect } from "primereact/multiselect"
+import { useCallback, useRef } from "react"
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
 import DropdownComponent from "../../../Components/Dropdown"
 import InputNumberComponent from "../../../Components/InputNumber"
 import TextInput from "../../../Components/TextInput"
 import { difficult, type_activities } from "../../../Controller/controllerGlobal"
 import { Padding, Row } from "../../../Styles/styles"
-import { InputTextarea } from "primereact/inputtextarea"
-import { MultiSelect } from "primereact/multiselect"
-import { Chip } from "primereact/chip"
-import { useCallback, useRef } from "react"
-import ReactQuill from "react-quill"
-import 'react-quill/dist/quill.snow.css';
 import { AddEditorImage } from "../createActivities/service/request"
 
 
@@ -18,13 +17,16 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
 
     const uploadImage = async (file: any) => {
         const formData = new FormData()
+        console.log(file)
         formData.append("file", file);
-        const url = await AddEditorImage(file).then((data: any) => {
-            console.log(data)
-            return data.data
-        })
+        const url =
+            await AddEditorImage(formData).then((data: any) => {
+                return data.data
+            })
         return url
     }
+
+    console.log(values)
 
     const imageHandler = useCallback(() => {
         const input = document.createElement("input");
@@ -34,8 +36,13 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
         input.onchange = async () => {
             if (input !== null && input.files !== null) {
                 const file = input.files[0];
-               const url = uploadImage(file)
-                console.log(url)
+                const url = await uploadImage(file)
+
+                const quill = reactQuillRef.current;
+                if (quill) {
+                    const range = quill.getEditorSelection();
+                    range && quill.getEditor().insertEmbed(range.index, "image", url);
+                }
             }
         };
     }, []);
@@ -115,7 +122,6 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                 <Padding />
                 <ReactQuill
                     ref={reactQuillRef}
-
                     theme="snow"
                     placeholder="Start writing..."
                     modules={{
@@ -130,13 +136,13 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                                     { indent: "-1" },
                                     { indent: "+1" },
                                 ],
-                                ["link", "image", "video"],
+                                ["link", "image"],
                                 ["code-block"],
                                 ["clean"],
                             ],
                             handlers: {
                                 image: imageHandler,   // <- 
-                              },
+                            },
                         },
                         clipboard: {
                             matchVisual: false,
@@ -156,16 +162,13 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                         "indent",
                         "link",
                         "image",
-                        "video",
                         "code-block",
                     ]}
                     value={values.description}
                     onChange={(e: any) => {
                         console.log(e);
-                        // setFieldValue("description", e.htmlValue)
+                        setFieldValue("description", e)
                     }}
-                //   value={value}
-                //   onChange={onChange}
                 />
                 {/* <Editor 
                 

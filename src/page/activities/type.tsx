@@ -19,6 +19,7 @@ export interface CreateActivitiesType {
   setTagsActivities: Dispatch<SetStateAction<any[]>>
   tagsActivities: any
   tags: Tags | undefined
+  AddEditorImage: (file: any) => void
 }
 
 export interface EditActivities {

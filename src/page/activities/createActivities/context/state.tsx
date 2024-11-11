@@ -36,11 +36,21 @@ export const CreateActivitiesState = () => {
 
 
 
-    const { CreateActivitiesMutation } = CreateActivitiesController();
+    const { CreateActivitiesMutation, AddEditorImageMutation } = CreateActivitiesController();
 
     const CreateActivities = (body: CreateActivities) => {
         CreateActivitiesMutation.mutate({...body});
     }
     
-    return { initialValue, CreateActivities, tagsActivities, setTagsActivities, tags }
+const AddEditorImage = (file: any) => {
+    const formData = new FormData()
+        console.log(file)
+        formData.append("file", file);
+
+        AddEditorImageMutation.mutate(formData)
+        
+        // return url
+}
+
+    return { initialValue, CreateActivities, tagsActivities, setTagsActivities, tags, AddEditorImage }
 }
