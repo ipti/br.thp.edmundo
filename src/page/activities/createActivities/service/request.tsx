@@ -16,7 +16,12 @@ export const FindTagsActivitiesRequest = async () => {
             }
             throw err;
         });
+}
 
+export const AddEditorImage = (body: any) => { 
+
+    console.log(body)
+    return http.post("/activities-bff/editor-image", body)
 }
 
 export const AddTagActivities = async (body: CreateActivitiesTagsDto) => {

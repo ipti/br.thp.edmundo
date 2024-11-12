@@ -6,10 +6,10 @@ export const CreateActivitiesContext = createContext<CreateActivitiesType | null
 
 const CreateActivitiesProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { CreateActivities, initialValue, setTagsActivities, tagsActivities, tags } = CreateActivitiesState()
+    const { CreateActivities, initialValue, setTagsActivities, tagsActivities, tags, AddEditorImage } = CreateActivitiesState()
 
     return (
-        <CreateActivitiesContext.Provider value={{ CreateActivities, initialValue, setTagsActivities, tagsActivities, tags }}>
+        <CreateActivitiesContext.Provider value={{ CreateActivities, initialValue, setTagsActivities, tagsActivities, tags, AddEditorImage }}>
             {children}
         </CreateActivitiesContext.Provider>
     )

@@ -1,16 +1,51 @@
-import { Editor } from "primereact/editor"
+import { Chip } from "primereact/chip"
+import { InputTextarea } from "primereact/inputtextarea"
+import { MultiSelect } from "primereact/multiselect"
+import { useCallback, useRef } from "react"
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
 import DropdownComponent from "../../../Components/Dropdown"
 import InputNumberComponent from "../../../Components/InputNumber"
 import TextInput from "../../../Components/TextInput"
 import { difficult, type_activities } from "../../../Controller/controllerGlobal"
 import { Padding, Row } from "../../../Styles/styles"
-import { InputTextarea } from "primereact/inputtextarea"
-import { MultiSelect } from "primereact/multiselect"
-import { Chip } from "primereact/chip"
+import { AddEditorImage } from "../createActivities/service/request"
 
 
 const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreated, tags, setTags, tagsAll }: { tagsAll: any, errors: any, values: any, touched: any, handleChange: any, setFieldValue: any, isCreated?: boolean, tags: any, setTags: any }) => {
+    const reactQuillRef = useRef<ReactQuill>(null);
 
+    const uploadImage = async (file: any) => {
+        const formData = new FormData()
+        console.log(file)
+        formData.append("file", file);
+        const url =
+            await AddEditorImage(formData).then((data: any) => {
+                return data.data
+            })
+        return url
+    }
+
+    console.log(values)
+
+    const imageHandler = useCallback(() => {
+        const input = document.createElement("input");
+        input.setAttribute("type", "file");
+        input.setAttribute("accept", "image/*");
+        input.click();
+        input.onchange = async () => {
+            if (input !== null && input.files !== null) {
+                const file = input.files[0];
+                const url = await uploadImage(file)
+
+                const quill = reactQuillRef.current;
+                if (quill) {
+                    const range = quill.getEditorSelection();
+                    range && quill.getEditor().insertEmbed(range.index, "image", url);
+                }
+            }
+        };
+    }, []);
 
     return (
         <div className="grid">
@@ -85,7 +120,82 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
             <div className="col-12 md:col-6">
                 <label>Descrição</label>
                 <Padding />
-                <Editor value={values.description} onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} />
+                <ReactQuill
+                    ref={reactQuillRef}
+                    theme="snow"
+                    placeholder="Start writing..."
+                    modules={{
+                        toolbar: {
+                            container: [
+                                [{ header: "1" }, { header: "2" }, { font: [] }],
+                                [{ size: [] }],
+                                ["bold", "italic", "underline", "strike", "blockquote"],
+                                [
+                                    { list: "ordered" },
+                                    { list: "bullet" },
+                                    { indent: "-1" },
+                                    { indent: "+1" },
+                                ],
+                                ["link", "image"],
+                                ["code-block"],
+                                ["clean"],
+                            ],
+                            handlers: {
+                                image: imageHandler,   // <- 
+                            },
+                        },
+                        clipboard: {
+                            matchVisual: false,
+                        },
+                    }}
+                    formats={[
+                        "header",
+                        "font",
+                        "size",
+                        "bold",
+                        "italic",
+                        "underline",
+                        "strike",
+                        "blockquote",
+                        "list",
+                        "bullet",
+                        "indent",
+                        "link",
+                        "image",
+                        "code-block",
+                    ]}
+                    value={values.description}
+                    onChange={(e: any) => {
+                        console.log(e);
+                        setFieldValue("description", e)
+                    }}
+                />
+                {/* <Editor 
+                
+                modules={{
+                    toolbar: {
+                        container: [
+                            [{ header: "1" }, { header: "2" }, { font: [] }],
+                            [{ size: [] }],
+                            ["bold", "italic", "underline", "strike", "blockquote"],
+                            [
+                                { list: "ordered" },
+                                { list: "bullet" },
+                                { indent: "-1" },
+                                { indent: "+1" },
+                            ],
+                            ["link", "image", "video"],
+                            ["code-block"],
+                            ["clean"],
+                        ],
+                    },
+                    handlers: {
+                        image: imageHandler,   // <- 
+                      },
+                    clipboard: {
+                        matchVisual: false,
+                    },
+                }}  onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} /> */}
                 {/* <TextAreaComponent
                                     value={values.description}
                                     placeholder="Escreva a descrição da atividades"
