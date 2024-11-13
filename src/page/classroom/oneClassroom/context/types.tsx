@@ -1,4 +1,4 @@
-import { ChartType, ClassroomOne, UpdateClassroom } from "../service/type";
+import { ChartType, ClassroomOne, StampsType, UpdateClassroom } from "../service/type";
 
 export interface OneClassroomContextType {
     classroomOne: ClassroomOne | undefined;
@@ -6,4 +6,5 @@ export interface OneClassroomContextType {
     isError: boolean;
     UpdateClassroom: (id: string, body: UpdateClassroom) => void
     classroomChart: ChartType | undefined
+    stamps: StampsType[] | undefined
 }

@@ -17,6 +17,20 @@ export const FindOneClassroomRequest = async (id: string) => {
     }
 }
 
+
+export const FindStampsRequest = async () => {
+      return await http
+          .get("/stamps")
+          .then((response) => response.data)
+          .catch((err) => {
+              if (err.response.status === 401) {
+                  logout()
+                  window.location.reload()
+              }
+              throw err;
+          });
+  
+}
 export const FindChartClassroomRequest = async (id: string) => {
   if (id) {
       return await http
