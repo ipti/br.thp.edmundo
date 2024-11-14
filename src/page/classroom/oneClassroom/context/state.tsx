@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useFetchRequestFindChartClassroomBff, useFetchRequestFindOneClassroomBff, useFetchRequestFindStamps } from "../service/query";
 import { ChartType, ClassroomOne, StampsType, UpdateClassroom } from "../service/type";
 import { OneClassroomController } from "../service/controller";
+import { ClassroomMembers } from "../../membersClassroom/context/types";
+import { useFetchRequestMembersClassroom } from "../../membersClassroom/service/query";
 
 export const OneClassroomState = () => {
     const { id } = useParams()
@@ -18,8 +20,20 @@ export const OneClassroomState = () => {
 
     const { data: stampsRequest } = useFetchRequestFindStamps();
 
-    console.log(stampsRequest)
+    const [classroomMembersList, setClassroomList] = useState<ClassroomMembers | undefined>()
 
+
+    const { data: classroomRequest } = useFetchRequestMembersClassroom(id!);
+
+
+    // const {  } = MembersClassroomController();
+
+  
+    useEffect(() => {
+        if (classroomRequest) {
+            setClassroomList(classroomRequest)
+        }
+    }, [classroomRequest])
 
     useEffect(() => {
      if(stampsRequest){
@@ -44,5 +58,5 @@ export const OneClassroomState = () => {
     }, [classroomOneRequest, classroomChartRequest])
 
 
-    return { classroomOne, isLoading, isError, UpdateClassroom, classroomChart, stamps }
+    return { classroomOne, isLoading, isError, UpdateClassroom, classroomChart, stamps, classroomMembersList }
 }
