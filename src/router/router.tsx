@@ -31,6 +31,7 @@ import ClassesEdit from "../page/classes/createClasses copy/page";
 import TagList from "../page/tags/listTags/page";
 import StrampsList from "../page/stramps/listStramps/page";
 import StrampsCreate from "../page/stramps/createStramps/page";
+import ViewdProfile from "../page/viewdProfile/page";
 
 const RoutesApp = () => {
   return (
@@ -42,6 +43,8 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<HomeModules />} />} path="/turma/:idClassroom/modulo/:idModule" />
         <Route element={<PrivateRoute Component={<HomeActivities />} />} path="/turma/:idClassroom/modulo/:idModule/atividade/:idActivities" />
         <Route element={<PrivateRoute Component={<Profile />} />} path="/perfil" />
+        <Route element={<PrivateRoute Component={<ViewdProfile />} />} path="/perfil/visualizar" />
+
         <Route element={<PrivateRoute Component={<TagList />} />} path="/tags" />
 
         <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />

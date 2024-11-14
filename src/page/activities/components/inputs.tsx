@@ -10,6 +10,7 @@ import TextInput from "../../../Components/TextInput"
 import { difficult, type_activities } from "../../../Controller/controllerGlobal"
 import { Padding, Row } from "../../../Styles/styles"
 import { AddEditorImage } from "../createActivities/service/request"
+import color from "../../../Styles/colors"
 
 
 const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreated, tags, setTags, tagsAll }: { tagsAll: any, errors: any, values: any, touched: any, handleChange: any, setFieldValue: any, isCreated?: boolean, tags: any, setTags: any }) => {
@@ -26,7 +27,6 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
         return url
     }
 
-    console.log(values)
 
     const imageHandler = useCallback(() => {
         const input = document.createElement("input");
@@ -218,7 +218,8 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                 <Row className="grid" style={{ gap: "8px" }}>
                     {tags?.map((item: any) => {
                         return (
-                            <Chip label={item.content} />
+                            <Chip style={{ background: color.colorBlueClean, color: "black" }} label={"#" + item.content} />
+
                         )
                     })}
                 </Row>
@@ -227,8 +228,8 @@ const Inputs = ({ errors, handleChange, touched, values, setFieldValue, isCreate
                 <label>Resposta esperada</label>
                 <Padding />
                 <InputTextarea
-                    style={{ width: "100%", height: "128px" }}
-                    autoResize
+                    style={{ width: "100%", height: "128px", resize: "none" }}
+                    
                     rows={5}
                     value={values.expected_return}
                     placeholder="Escreva a resposta esperada pela atividade"

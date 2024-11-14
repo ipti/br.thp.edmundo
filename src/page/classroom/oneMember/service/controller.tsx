@@ -51,7 +51,7 @@ export const UpdateUserController = () => {
             })
         },
         onSuccess: (data) => {
-            queryClient.refetchQueries("useRequestsFindOneClassroom")
+            queryClient.refetchQueries("useRequestsFindOneUser")
             Swal.fire({
                 icon: 'success',
                 title: "Selas distribuídos com sucesso!",

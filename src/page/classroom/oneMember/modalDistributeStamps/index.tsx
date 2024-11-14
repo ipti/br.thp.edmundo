@@ -9,14 +9,16 @@ import color from "../../../../Styles/colors";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { UpdateUserContext } from "../context/context";
 import { UpdateUserContextType } from "../context/types";
+import { useParams } from "react-router-dom";
 
 const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide(): void }) => {
     const stepperRef = useRef<any>(null);
 
+    const { idMember } = useParams()
+
     const props = useContext(UpdateUserContext) as UpdateUserContextType
 
     const schema = yup.object().shape({
-        items: yup.array().min(1, 'É obrigatório selecionar um aluno').required('items é obrigatório'),
         idStamps: yup.number().required('É obrigatório selecionar um selo').integer('idStamps deve ser um número inteiro'),
     });
 
@@ -24,53 +26,53 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
         <Dialog header={"Adicionar selos"} visible={visible} style={{ width: "60vw" }} onHide={onHide} >
             <Formik validationSchema={schema} initialValues={{
                 idStamps: undefined,
-                items: []
             }} onSubmit={(values) => {
-              
 
-                // props.handleDistributeStamps({ ...values, items: users })
+
+                props.handleAddStampsUser({ idStamp: values.idStamps!, idUser: parseInt(idMember!) })
+                onHide()
             }}>
                 {({ values, errors, handleChange, setFieldValue, touched }) => {
                     return (
                         <Form>
 
-                            <Column>{(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}{(errors.items && touched.items) && <label style={{ color: color.red }}>{errors.items}</label>}</Column>
-                         
-                                    <label>
-                                        Selecione o selo
-                                    </label>
-                                    <Padding padding="16px" />
-                                    <div className="flex flex-column h-20rem" style={{ overflowY: "auto", overflowX: "hidden" }}>
-                                        <Padding />
-                                        <div className="grid gap-2" style={{ paddingTop: 8, paddingLeft: 16 }}>
+                            <Column>{(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}</Column>
 
-                                            {props.stamps?.map((item) => {
-                                                return (
-                                                    <div key={item.id} onClick={(e) => { setFieldValue("idStamps", item.id) }} className="col-12 md:col-3 lg:col-2 sm:col-4  card" style={{ background: values.idStamps === item.id ? color.colorCard : "", cursor: "pointer" }} >
+                            <label>
+                                Selecione o selo
+                            </label>
+                            <Padding padding="16px" />
+                            <div className="flex flex-column h-20rem" style={{ overflowY: "auto", overflowX: "hidden" }}>
+                                <Padding />
+                                <div className="grid gap-2" style={{ paddingTop: 8, paddingLeft: 16 }}>
+
+                                    {props.stamps?.map((item) => {
+                                        return (
+                                            <div key={item.id} onClick={(e) => { setFieldValue("idStamps", item.id) }} className="col-12 md:col-3 lg:col-2 sm:col-4  card" style={{ background: values.idStamps === item.id ? color.colorCard : "", cursor: "pointer" }} >
+                                                <Column>
+                                                    <Row id="center">
                                                         <Column>
                                                             <Row id="center">
-                                                                <Column>
-                                                                    <Row id="center">
 
-                                                                        <Stamp url={item?.img_url} />
-                                                                    </Row>
-                                                                    <Padding />
-                                                                    <Row>
-                                                                        <RadioButtonComponent label={item.name} checked={values.idStamps === item.id} name="idStamps" value={values} onChange={(e) => { setFieldValue("idStamps", item.id) }} />
-                                                                    </Row>
-                                                                </Column>
+                                                                <Stamp url={item?.img_url} />
+                                                            </Row>
+                                                            <Padding />
+                                                            <Row>
+                                                                <RadioButtonComponent label={item.name} checked={values.idStamps === item.id} name="idStamps" value={values} onChange={(e) => { setFieldValue("idStamps", item.id) }} />
                                                             </Row>
                                                         </Column>
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                        <Padding />
-                                        {(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}
-                                    </div>
-                                    <div className="flex pt-4 justify-content-end">
-                                        <Button label="Finalizar" disabled={!values.idStamps} icon="pi pi-save" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
-                                    </div>
+                                                    </Row>
+                                                </Column>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <Padding />
+                                {(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}
+                            </div>
+                            <div className="flex pt-4 justify-content-end">
+                                <Button label="Finalizar" disabled={!values.idStamps} icon="pi pi-save" iconPos="right" type="submit" />
+                            </div>
                         </Form>
 
                     )

@@ -36,9 +36,8 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                 for (const idUser of values.items!) {
                     users.push({ idUser: idUser })
                 }
-
-
-                // props.handleDistributeStamps({ ...values, items: users })
+                props.handleDistributeStamps({ ...values, items: users })
+                onHide()
             }}>
                 {({ values, errors, handleChange, setFieldValue, touched }) => {
                     return (

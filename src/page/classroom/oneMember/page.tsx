@@ -8,7 +8,7 @@ import MaskInput from "../../../Components/InputMask"
 import TextInput from "../../../Components/TextInput"
 import { formatarData } from "../../../Controller/controllerGlobal"
 import styles from "../../../Styles"
-import { Padding } from "../../../Styles/styles"
+import { Column, Padding, Row } from "../../../Styles/styles"
 import avatar from "../../../assets/image/avatar.svg"
 import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
@@ -18,6 +18,7 @@ import color from "../../../Styles/colors"
 import DropdownComponent from "../../../Components/Dropdown"
 import { Button } from "primereact/button"
 import ModalDistributeStamps from "./modalDistributeStamps"
+import Stamp from "../../../Components/Stamp"
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -246,9 +247,28 @@ const MemberOnePage = () => {
                     )
                 }}
             </Formik>}
-            <Button label="Distribuir selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
+            <Padding padding="8px" />
+
+            <Button label="Adicionar selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
                 setVisible(!visible)
             }} />
+            <Padding padding="8px" />
+            <div className="grid">
+
+                {props.user.stamps_user.map((item) => {
+                    return (
+
+                         <Column>
+                            <Stamp url={item?.stamps.img_url} />
+                            <Row id="center">
+                                <p style={{ color: color.colorPrimary }}>{item.stamps.name}</p>
+                            </Row>
+                        </Column>
+                    )
+                })}
+            </div>
+
+            <Padding padding="8px" />
 
             <h3>Dashboard</h3>
             <Padding padding="8px" />
