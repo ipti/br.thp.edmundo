@@ -2,8 +2,8 @@ import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import styles from "../../../../Styles";
 import queryClient from "../../../../service/reactquery";
-import { requestUpdateAvatarRegistration, UpdateUserRequest } from "./request";
-import { UpdateUser } from "./types";
+import { AddStampsUserRequest, requestUpdateAvatarRegistration, UpdateUserRequest } from "./request";
+import { AddStampsUser, UpdateUser } from "./types";
 
 export const UpdateUserController = () => {
 
@@ -39,7 +39,30 @@ export const UpdateUserController = () => {
     }
   );
 
+  const AddStampsUserMutation = useMutation(
+
+    (data: AddStampsUser) => AddStampsUserRequest(data),
+    {
+        onError: (error: any) => {
+            Swal.fire({
+                icon: 'error',
+                title: error.response.data.message,
+                confirmButtonColor: styles.colors.colorPrimary,
+            })
+        },
+        onSuccess: (data) => {
+            queryClient.refetchQueries("useRequestsFindOneClassroom")
+            Swal.fire({
+                icon: 'success',
+                title: "Selas distribuídos com sucesso!",
+                confirmButtonColor: styles.colors.colorPrimary,
+            })
+        },
+
+    }
+);
+
   return {
-    UpdateUserMutation, requestChangeAvatarRegistrationMutation
+    UpdateUserMutation, requestChangeAvatarRegistrationMutation, AddStampsUserMutation
   }
 }

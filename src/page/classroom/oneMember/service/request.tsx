@@ -1,6 +1,6 @@
 import http from "../../../../service/axios"
 import { GetIdUser, logout } from "../../../../service/localstorage"
-import { UpdateUser } from "./types"
+import { AddStampsUser, UpdateUser } from "./types"
 
 export const UpdateUserRequest = async (body: UpdateUser) => {
     if (GetIdUser()) {
@@ -95,3 +95,19 @@ export const requestUpdateAvatarRegistration = ( id: number, file: File) => {
         throw err;
       });
   };
+
+
+  export const AddStampsUserRequest = async (body: AddStampsUser) => {
+
+    return await http
+      .post("/stamp-bff/user-one", body)
+      .then((response) => response.data)
+      .catch((err) => {
+        if (err.response.status === 401) {
+          logout()
+          window.location.reload()
+        }
+        throw err;
+      });
+  
+}

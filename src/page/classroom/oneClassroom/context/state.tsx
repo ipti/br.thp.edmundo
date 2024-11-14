@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetchRequestFindChartClassroomBff, useFetchRequestFindOneClassroomBff, useFetchRequestFindStamps } from "../service/query";
-import { ChartType, ClassroomOne, StampsType, UpdateClassroom } from "../service/type";
+import { ChartType, ClassroomOne, DistributeStamps, StampsType, UpdateClassroom } from "../service/type";
 import { OneClassroomController } from "../service/controller";
 import { ClassroomMembers } from "../../membersClassroom/context/types";
 import { useFetchRequestMembersClassroom } from "../../membersClassroom/service/query";
@@ -12,7 +12,7 @@ export const OneClassroomState = () => {
     const [classroomChart, setClassroomChart] = useState<ChartType | undefined>()
     const [stamps, setStamps] = useState<StampsType[] | undefined>()
 
-    const { PutClassroomMutation } = OneClassroomController()
+    const { PutClassroomMutation, DistributeStampsMutation } = OneClassroomController()
 
 
     const { data: classroomOneRequest, isLoading, isError } = useFetchRequestFindOneClassroomBff(id!);
@@ -57,6 +57,10 @@ export const OneClassroomState = () => {
         }
     }, [classroomOneRequest, classroomChartRequest])
 
+    const handleDistributeStamps = (body: DistributeStamps) => {
+        DistributeStampsMutation.mutate(body)
+    }
 
-    return { classroomOne, isLoading, isError, UpdateClassroom, classroomChart, stamps, classroomMembersList }
+
+    return { classroomOne, isLoading, isError, UpdateClassroom, classroomChart, stamps, classroomMembersList,handleDistributeStamps }
 }

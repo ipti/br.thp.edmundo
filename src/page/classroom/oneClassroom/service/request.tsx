@@ -1,6 +1,6 @@
 import http from "../../../../service/axios";
 import { logout } from "../../../../service/localstorage";
-import { UpdateClassroom } from "./type";
+import { DistributeStamps, UpdateClassroom } from "./type";
 
 export const FindOneClassroomRequest = async (id: string) => {
     if (id) {
@@ -29,8 +29,9 @@ export const FindStampsRequest = async () => {
               }
               throw err;
           });
-  
 }
+
+
 export const FindChartClassroomRequest = async (id: string) => {
   if (id) {
       return await http
@@ -62,4 +63,20 @@ export const PutClassroomRequest = async (id: string, body: UpdateClassroom) => 
           throw err;
         });
     }
+  }
+
+
+  export const DitributeStampsRequest = async (body: DistributeStamps) => {
+
+      return await http
+        .post("/stamp-bff/users", body)
+        .then((response) => response.data)
+        .catch((err) => {
+          if (err.response.status === 401) {
+            logout()
+            window.location.reload()
+          }
+          throw err;
+        });
+    
   }

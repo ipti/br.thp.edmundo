@@ -62,10 +62,8 @@ const ClassroomOnePage = () => {
                             <Padding />
                             <div className="grid">
                                 <div className="col-12 md:col-6">
-
                                     <label>Nome da turma</label>
                                     <Padding />
-
                                     <TextInput value={values.name} onChange={handleChange} name="name" />
                                 </div>
                             </div>

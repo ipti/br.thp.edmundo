@@ -48,3 +48,13 @@ export interface ClassroomOne {
     updatedAt: string
   }
   
+
+  export interface DistributeStamps {
+    items?: Item[]
+    idStamps?: number
+  }
+  
+  export interface Item {
+    idUser: number
+  }
+  

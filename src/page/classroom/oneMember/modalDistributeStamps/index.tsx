@@ -1,24 +1,19 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { MultiSelect } from "primereact/multiselect";
-import { Stepper } from 'primereact/stepper';
-import { StepperPanel } from 'primereact/stepperpanel';
 import { useContext, useRef } from "react";
+import * as yup from 'yup';
 import RadioButtonComponent from "../../../../Components/RadioButton";
 import Stamp from "../../../../Components/Stamp";
-import { ROLE } from "../../../../Controller/controllerGlobal";
 import color from "../../../../Styles/colors";
 import { Column, Padding, Row } from "../../../../Styles/styles";
-import { OneClassroomContext } from "../context/context";
-import { OneClassroomContextType } from "../context/types";
-import { Item } from "../service/type";
-import * as yup from 'yup';
+import { UpdateUserContext } from "../context/context";
+import { UpdateUserContextType } from "../context/types";
 
 const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide(): void }) => {
     const stepperRef = useRef<any>(null);
 
-    const props = useContext(OneClassroomContext) as OneClassroomContextType
+    const props = useContext(UpdateUserContext) as UpdateUserContextType
 
     const schema = yup.object().shape({
         items: yup.array().min(1, 'É obrigatório selecionar um aluno').required('items é obrigatório'),
@@ -26,17 +21,12 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
     });
 
     return (
-        <Dialog header={"Distribuir selos"} visible={visible} style={{ width: "60vw" }} onHide={onHide} >
+        <Dialog header={"Adicionar selos"} visible={visible} style={{ width: "60vw" }} onHide={onHide} >
             <Formik validationSchema={schema} initialValues={{
                 idStamps: undefined,
                 items: []
             }} onSubmit={(values) => {
-                var users: Item[] = []
-
-                for (const idUser of values.items!) {
-                    users.push({ idUser: idUser })
-                }
-
+              
 
                 // props.handleDistributeStamps({ ...values, items: users })
             }}>
@@ -45,9 +35,7 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                         <Form>
 
                             <Column>{(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}{(errors.items && touched.items) && <label style={{ color: color.red }}>{errors.items}</label>}</Column>
-                            <Stepper ref={stepperRef} >
-
-                                <StepperPanel header="Selos">
+                         
                                     <label>
                                         Selecione o selo
                                     </label>
@@ -81,24 +69,8 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                         {(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}
                                     </div>
                                     <div className="flex pt-4 justify-content-end">
-                                        <Button label="Continuar" disabled={!values.idStamps} icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+                                        <Button label="Finalizar" disabled={!values.idStamps} icon="pi pi-save" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
                                     </div>
-                                </StepperPanel>
-                                <StepperPanel header="Alunos">
-                                    <div className="flex flex-column h-12rem">
-                                        <Column id="center" style={{ height: "100%" }}>
-                                            <MultiSelect placeholder="Escolha os membros" options={props.classroomMembersList!.classroom.user.filter((item) => item.users.role === ROLE.STUDENT)} value={values.items} name="items" onChange={handleChange} optionLabel="users.name" optionValue="usersId" />
-                                            <Padding />
-                                            {(errors.items && touched.items) && <label style={{ color: color.red }}>{errors.items}</label>}
-                                        </Column>
-                                    </div>
-                                    <div className="flex pt-4 justify-content-between">
-                                        <Button label="Voltar" severity="info" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
-                                        <Button label="Finalizar" icon="pi pi-save" iconPos="right" type="submit" />
-                                    </div>
-                                </StepperPanel>
-
-                            </Stepper>
                         </Form>
 
                     )

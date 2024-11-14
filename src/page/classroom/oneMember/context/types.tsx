@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
-import { ChartUserType, UpdateUser, User } from "../service/types";
+import { AddStampsUser, ChartUserType, UpdateUser, User } from "../service/types";
 import { ModuleList } from "../../modulesClassroom/context/type";
+import { StampsType } from "../../oneClassroom/service/type";
 
 export interface UpdateUserContextType {
     initialValue: UpdateUser;
@@ -16,4 +17,6 @@ export interface UpdateUserContextType {
     classroomModule: ModuleList | undefined
     moduleId: any
     setModuleId: Dispatch<any>
+    handleAddStampsUser: (body: AddStampsUser) => void
+    stamps: StampsType[] | undefined
 }

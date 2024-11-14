@@ -30,3 +30,8 @@ export interface User {
     quiz_activities: number
   }
   
+
+  export interface AddStampsUser {
+    idStamp: number
+    idUser: number
+  }
