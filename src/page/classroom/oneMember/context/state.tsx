@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { UpdateUserController } from "../service/controller"
 import { useFetchRequestFindChartUserClassroomBff, useFetchRequestFindChartUserModuleClassroomBff, useFetchRequestFindChartUserModuleMediaClassroomBff, useFetchRequestFindOneUser } from "../service/query"
-import { ChartUserType, UpdateUser, User } from "../service/types"
+import { AddStampsUser, ChartUserType, UpdateUser, User } from "../service/types"
 import { useFetchRequestAllModule } from "../../modulesClassroom/service/query"
 import { ModuleList } from "../../modulesClassroom/context/type"
+import { useFetchRequestFindStamps } from "../../oneClassroom/service/query"
+import { StampsType } from "../../oneClassroom/service/type"
 
 export const UpdateUserState = () => {
 
@@ -35,6 +37,9 @@ export const UpdateUserState = () => {
 
     const {data: classroomModuleRequest} = useFetchRequestAllModule(parseInt(id!))
 
+    const [stamps, setStamps] = useState<StampsType[] | undefined>()
+    const { data: stampsRequest } = useFetchRequestFindStamps();
+
     useEffect(() => {
         if(classroomModuleRequest){
             setClassroomModule(classroomModuleRequest)
@@ -42,6 +47,11 @@ export const UpdateUserState = () => {
         }
     }, [classroomModuleRequest])
     
+    useEffect(() => {
+        if(stampsRequest){
+           setStamps(stampsRequest)
+        }
+       }, [stampsRequest])
 
     useEffect(() => {
         if (userRequest) {
@@ -76,7 +86,7 @@ export const UpdateUserState = () => {
         responsable_name: user?.registration[0]?.responsable_name ?? ""
     }
 
-    const { UpdateUserMutation, requestChangeAvatarRegistrationMutation } = UpdateUserController();
+    const { UpdateUserMutation, requestChangeAvatarRegistrationMutation, AddStampsUserMutation } = UpdateUserController();
 
     const UpdateUser = (body: UpdateUser) => {
         if (file) {
@@ -86,6 +96,10 @@ export const UpdateUserState = () => {
             });
         }
         UpdateUserMutation.mutate(body)
+
     }
-    return { initialValue, UpdateUser, user, isLoading, isError, file, setFile, classroomUserChart, moduleAtivities, classroomModuleMedia, classroomModule, moduleId, setModuleId }
+    const handleAddStampsUser = (body: AddStampsUser) => {
+        AddStampsUserMutation.mutate(body)
+    }
+    return { initialValue, UpdateUser, user, isLoading, isError, file, setFile, classroomUserChart, moduleAtivities, classroomModuleMedia, classroomModule, moduleId, setModuleId, handleAddStampsUser, stamps }
 }

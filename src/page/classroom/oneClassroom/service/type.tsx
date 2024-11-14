@@ -40,3 +40,21 @@ export interface ClassroomOne {
     media_notas: number
   }
   
+  export interface StampsType {
+    id: number
+    name: string
+    img_url: string
+    createdAt: string
+    updatedAt: string
+  }
+  
+
+  export interface DistributeStamps {
+    items?: Item[]
+    idStamps?: number
+  }
+  
+  export interface Item {
+    idUser: number
+  }
+  

@@ -13,6 +13,7 @@ const color = {
   blueClear: "#dcefed",
   colorCard: "#F5F8FF",
   colorsBaseProductNormalActive: "#336AE9",
+  colorBlueClean: "#A3C8FC",
   colorPrimary: "#2E62AC",
   colorSecondary: "#EA553C",
   colorThird: "#FCBF52",

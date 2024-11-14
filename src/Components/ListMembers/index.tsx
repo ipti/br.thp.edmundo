@@ -22,8 +22,8 @@ const ListMembers = ({ users }: { users: UserArray }) => {
             <Column style={{gap: 16}}>
             {users?.map((item) => {
                 return (
-                    <UserStyled onClick={() => { history("/perfil?id=" + item.usersId) }} style={{ gap: 8, cursor: "pointer" }}>
-                        <Avatar size="large" image={item.users.registration[0].avatar_url ?? avatar} />
+                    <UserStyled onClick={() => { history("/perfil/visualizar?id=" + item.usersId) }} style={{ gap: 8, cursor: "pointer" }}>
+                        <Avatar size="large" shape="circle" image={item.users.registration[0].avatar_url ?? avatar} />
                         <Column id="center">
                             <h3>
                                 {item.users.name}

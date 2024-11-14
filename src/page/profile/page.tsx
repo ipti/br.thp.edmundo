@@ -14,6 +14,9 @@ import { Column, Padding, Row } from "../../Styles/styles"
 import avatar from "../../assets/image/avatar.svg"
 import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
+import Stamp from "../../Components/Stamp"
+import color from "../../Styles/colors"
+import { InputTextarea } from "primereact/inputtextarea"
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -63,6 +66,7 @@ const ProfilePage = () => {
         <ContentPage title={"Perfil"} description={id ? "Visualize o seu amigo" : "Visualize ou edite os dados do seu perfil."}>
             {props.user && <Formik validationSchema={schema} initialValues={{
                 name: props.user?.name ?? "",
+                description: props.user.registration[0].description ?? "",
                 birthday: !isNaN(date.getTime())
                     ? formatarData(props.user?.registration[0]?.birthday!)
                     : "",
@@ -103,6 +107,24 @@ const ProfilePage = () => {
                                     />
                                 </div>
                             </div>}
+
+                            <Padding padding="8px" />
+                            <div className="grid">
+
+                                {props.user?.stamps_user.map((item) => {
+                                    return (
+
+                                        <Column>
+                                            <Stamp url={item?.stamps.img_url} />
+                                            <Row id="center">
+                                                <p style={{ color: color.colorPrimary }}>{item.stamps.name}</p>
+                                            </Row>
+                                        </Column>
+                                    )
+                                })}
+                            </div>
+
+                            <Padding padding="8px" />
                             <Padding padding="16px" />
 
                             <div className="grid">
@@ -190,10 +212,15 @@ const ProfilePage = () => {
                                     <Row className="grid" style={{ gap: "8px" }}>
                                         {props.tagsUser?.map((item: any) => {
                                             return (
-                                                <Chip label={item.content} />
+                                                <Chip style={{ background: color.colorBlueClean, color: "black" }} label={"#" + item.content} />
                                             )
                                         })}
                                     </Row>
+                                </div>
+                                <div className="col-12 md:col-6">
+                                    <label>Sobre você</label>
+                                    <Padding />
+                                    <InputTextarea placeholder="Escreva um pouco sobre você" style={{ width: "100%", height: 128, resize: "none" }} value={values.description} name="description" onChange={handleChange} />
                                 </div>
                             </div>
 

@@ -8,7 +8,7 @@ import MaskInput from "../../../Components/InputMask"
 import TextInput from "../../../Components/TextInput"
 import { formatarData } from "../../../Controller/controllerGlobal"
 import styles from "../../../Styles"
-import { Padding } from "../../../Styles/styles"
+import { Column, Padding, Row } from "../../../Styles/styles"
 import avatar from "../../../assets/image/avatar.svg"
 import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
@@ -16,6 +16,9 @@ import CardQuant from "../../../Components/Chart/CardQuant"
 import { Chart } from 'primereact/chart';
 import color from "../../../Styles/colors"
 import DropdownComponent from "../../../Components/Dropdown"
+import { Button } from "primereact/button"
+import ModalDistributeStamps from "./modalDistributeStamps"
+import Stamp from "../../../Components/Stamp"
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -39,6 +42,7 @@ const MemberOne = () => {
 }
 
 const MemberOnePage = () => {
+    const [visible, setVisible] = useState(false)
 
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
@@ -151,10 +155,8 @@ const MemberOnePage = () => {
                             <Avatar>
                                 <img alt="" src={props.file ? (URL.createObjectURL(props.file![0]) ?? undefined) : props.user?.registration![0]?.avatar_url ? props.user?.registration![0]?.avatar_url : avatar} />
                             </Avatar>
-                            <Padding padding="8px" />
 
-                            <Padding padding="16px" />
-
+                            <Padding padding="32px" />
                             <div className="grid">
                                 <div className="col-12 md:col-6">
                                     <label>Nome *</label>
@@ -245,6 +247,29 @@ const MemberOnePage = () => {
                     )
                 }}
             </Formik>}
+            <Padding padding="8px" />
+
+            <Button label="Adicionar selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
+                setVisible(!visible)
+            }} />
+            <Padding padding="8px" />
+            <div className="grid">
+
+                {props.user.stamps_user.map((item) => {
+                    return (
+
+                         <Column>
+                            <Stamp url={item?.stamps.img_url} />
+                            <Row id="center">
+                                <p style={{ color: color.colorPrimary }}>{item.stamps.name}</p>
+                            </Row>
+                        </Column>
+                    )
+                })}
+            </div>
+
+            <Padding padding="8px" />
+
             <h3>Dashboard</h3>
             <Padding padding="8px" />
             {props.classroomUserChart ? <div className="grid">
@@ -266,7 +291,7 @@ const MemberOnePage = () => {
                 <div className=" col-12 md:col-6">
 
                     <Padding className="card" padding="32px">
-                        {props.moduleId&& <h2>Notas do módulo {props.moduleId.name}</h2>}
+                        {props.moduleId && <h2>Notas do módulo {props.moduleId.name}</h2>}
                         <Padding padding="8px" />
                         <div>
                             <label>
@@ -274,7 +299,7 @@ const MemberOnePage = () => {
                             </label>
                             <Padding />
                             {props.moduleId &&
-                                <DropdownComponent options={props.classroomModule} value={props.moduleId} onChange={(e) => { props.setModuleId(e.value);}} />}
+                                <DropdownComponent options={props.classroomModule} value={props.moduleId} onChange={(e) => { props.setModuleId(e.value); }} />}
                         </div>
                         <Padding padding="16px" />
                         <Chart type="bar" data={chartData} options={chartOptions} />
@@ -288,6 +313,8 @@ const MemberOnePage = () => {
                     </Padding>
                 </div>
             </div>
+            <ModalDistributeStamps visible={visible} onHide={() => { setVisible(!visible) }} />
+
         </ContentPage>
     )
 }
