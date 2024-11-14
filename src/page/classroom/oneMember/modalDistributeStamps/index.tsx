@@ -1,7 +1,8 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import * as yup from 'yup';
 import RadioButtonComponent from "../../../../Components/RadioButton";
 import Stamp from "../../../../Components/Stamp";
@@ -9,10 +10,8 @@ import color from "../../../../Styles/colors";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { UpdateUserContext } from "../context/context";
 import { UpdateUserContextType } from "../context/types";
-import { useParams } from "react-router-dom";
 
 const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide(): void }) => {
-    const stepperRef = useRef<any>(null);
 
     const { idMember } = useParams()
 
