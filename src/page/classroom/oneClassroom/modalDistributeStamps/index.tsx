@@ -63,7 +63,7 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                                                 <Column>
                                                                     <Row id="center">
 
-                                                                        <Stamp url={item?.img_url} />
+                                                                        <Stamp url={item?.img_url} description={item?.description} type={item.type} />
                                                                     </Row>
                                                                     <Padding />
                                                                     <Row>

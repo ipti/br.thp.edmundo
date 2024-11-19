@@ -21,8 +21,12 @@ export interface ClassroomActivity {
 export interface Activities {
   name: string
   id: number
+  classes: {
+    moduleId: number
+  }
 }
 
 export interface Module {
   name: string
+  id: number
 }

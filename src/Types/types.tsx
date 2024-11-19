@@ -15,6 +15,7 @@ export interface PropsInputText {
     name?: string
     type?: HTMLInputTypeAttribute | undefined
     required?: boolean
+    accept?: string | undefined
 }
 
 export interface PropsInputMask {

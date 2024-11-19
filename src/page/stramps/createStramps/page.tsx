@@ -20,7 +20,8 @@ const StampsCreatePage = () => {
 
     return (
         <ContentPage title="Criar Selos" description="Crie selos para distribuir aos alunos.">
-            <Formik initialValues={{ name: "", description: "",}} onSubmit={(values) => {
+            <Formik initialValues={{ name: "", description: "",type: "",}} onSubmit={(values) => {
+                console.log(values)
                 propsStamps?.CreateStamps(values)
             }}>
                 {({ values, errors, handleChange, touched }) => {

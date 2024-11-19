@@ -11,13 +11,19 @@ export const CreateStampsState = () => {
 
         const formData = new FormData()
         formData.append("name", body.name)
+        formData.append("description", body.description)
+        formData.append("type", body.type.id)
 
-        if(file){
+
+        if (file) {
             formData.append("file", file[0])
         }
+
+        console.log(formData)
+
         CreateStampsRequestMutation.mutate(formData)
     }
 
-   
+
     return { CreateStamps, file, setFile }
 }

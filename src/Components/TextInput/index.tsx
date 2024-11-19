@@ -10,7 +10,8 @@ const TextInput = ({
   onBlur,
   name,
   type,
-  required
+  required,
+  accept
 }: PropsInputText) => {
   return (
     <div>
@@ -23,6 +24,7 @@ const TextInput = ({
         name={name}
         required={required}
         onChange={onChange}
+        accept={accept}
         placeholder={placeholder}
       />
     </div>

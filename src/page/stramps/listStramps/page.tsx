@@ -77,7 +77,7 @@ const StampsListPage = () => {
         <ContentPage title="Selos" description="Gerencie os selos.">
             <div>
                 <DataTable value={propsListStamps?.stamps} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
-                    <Column body={(body) => <Stamp url={body?.img_url} />} header="Selo"></Column>
+                    <Column body={(body) => <Stamp url={body?.img_url} type={body.type} />} header="Selo"></Column>
                     <Column field="name" header="Nome"></Column>
                     <Column field="description" header="Descrição"></Column>
                     <Column field="actions" align={"center"} body={ActionsUserBody} header="Ações"></Column>

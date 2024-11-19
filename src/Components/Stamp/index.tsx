@@ -1,10 +1,15 @@
-import { StampStyle } from "./style"
+import { HoverContainer, StampStyle } from "./style"
 
 
-const Stamp = ({url}:{url: string}) => {
-    return(
-        <StampStyle>
-            <img src={url}  alt="stamp" />
+const Stamp = ({ url, description, type }: { url: string, description?: string, type: string }) => {
+    console.log(type)
+    return (
+        <StampStyle type={type} >
+            {/* <HoverDiv /> */}
+            {description && <HoverContainer>
+                <p>{description}</p>
+            </HoverContainer>}
+            <img src={url} alt="stamp" />
         </StampStyle>
     )
 }

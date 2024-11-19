@@ -3,7 +3,7 @@ import { logout } from "../../../../service/localstorage";
 
 
 export const UpdateStampsRequest = async (body: any, id: number) => {
-    return await http.put("/stamps/"+ id, body)
+    return await http.put("/stamps/"+ id, {...body, type: body?.type?.id})
 }
 
 export const FindOneStampsRequest = async (id: string) => {

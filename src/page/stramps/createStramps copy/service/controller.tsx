@@ -20,6 +20,11 @@ export const UpdateStampsController = () => {
       },
       onSuccess: (data) => {
         queryClient.refetchQueries("useRequestsFindStamps")
+        Swal.fire({
+          icon: 'success',
+          title: "Turma alterada com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+      })
       },
 
     }

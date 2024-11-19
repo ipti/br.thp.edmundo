@@ -39,6 +39,8 @@ export interface Stamps {
   id: number
   name: string
   img_url: string
+  description: string
+  type: string
   createdAt: string
   updatedAt: string
 }

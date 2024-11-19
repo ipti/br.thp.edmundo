@@ -115,7 +115,7 @@ const ProfilePage = () => {
                                     return (
 
                                         <Column>
-                                            <Stamp url={item?.stamps.img_url} />
+                                            <Stamp url={item?.stamps?.img_url} description={item?.stamps?.description} type={item.stamps.type} />
                                             <Row id="center">
                                                 <p style={{ color: color.colorPrimary }}>{item.stamps.name}</p>
                                             </Row>

@@ -133,6 +133,10 @@ export const type_tags = [
   {id: "ACTIVITIES", name: "Atividades"}
 ]
 
+export const type_stamp = [
+  { id: "GOLD", name: "Ouro"},
+  {id: "STANDARD", name: "Padrão"}
+]
 export const Status = {
   APPROVED: "APPROVED",
   PENDING: "PENDING",
