@@ -2,12 +2,14 @@ import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import styles from "../../../../Styles";
 import queryClient from "../../../../service/reactquery";
-import { CreateStampsRequest} from "./request";
+import { UpdateStampsRequest} from "./request";
 
-export const CreateStampsController = () => {
 
-  const CreateStampsRequestMutation = useMutation(
-    (data: any) => CreateStampsRequest(data),
+
+export const UpdateStampsController = () => {
+
+  const UpdateStampsRequestMutation = useMutation(
+    ({data, id}:{data: any, id: number}) => UpdateStampsRequest(data, id),
     {
       onError: (error: any) => {
         Swal.fire({
@@ -25,6 +27,6 @@ export const CreateStampsController = () => {
 
 
   return {
-    CreateStampsRequestMutation
+    UpdateStampsRequestMutation
   }
 }

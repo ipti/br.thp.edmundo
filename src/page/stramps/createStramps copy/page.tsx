@@ -5,38 +5,43 @@ import ContentPage from "../../../Components/ContentPage"
 import { Padding, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
 import StampsProvider, { StampsContext } from "./context/context"
+import { ProgressSpinner } from "primereact/progressspinner"
 
-const StampsCreate = () => {
+const StampsUpdate = () => {
     return (
         <StampsProvider>
-            <StampsCreatePage />
+            <StampsUpdatePage />
         </StampsProvider>
     )
 }
 
-const StampsCreatePage = () => {
+const StampsUpdatePage = () => {
 
     const propsStamps = useContext(StampsContext)
 
+    if(propsStamps?.isLoading) return <ProgressSpinner />
+
     return (
-        <ContentPage title="Criar Selos" description="Crie selos para distribuir aos alunos.">
-            <Formik initialValues={{ name: "", description: "",}} onSubmit={(values) => {
-                propsStamps?.CreateStamps(values)
+        <ContentPage title="Editar Selo" description="Edite selos para distribuir aos alunos.">
+            {propsStamps?.StampsOne && <Formik initialValues={{ name: propsStamps?.StampsOne?.name ??  "", description: propsStamps?.StampsOne?.description ?? "",}} onSubmit={(values) => {
+                propsStamps?.UpdateStamps(values)
             }}>
                 {({ values, errors, handleChange, touched }) => {
                     return (
                         <Form>
                             <Row id="end">
-                                <Button label="Criar" icon={"pi pi-plus"} />
+                                <Button label="Salvar" icon={"pi pi-save"} />
                             </Row>
                             <Padding />
-                            <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} isCreated />
+                            <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} />
+                     
+
                         </Form>
                     )
                 }}
-            </Formik>
+            </Formik>}
         </ContentPage>
     )
 }
 
-export default StampsCreate
+export default StampsUpdate

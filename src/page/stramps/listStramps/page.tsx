@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ListStampsProvider, { ListStampsContext } from "./context/context";
 import { useContext } from "react";
 import Stamp from "../../../Components/Stamp";
+import { Row } from "../../../Styles/styles";
 
 const StampsList = () => {
     return (
@@ -20,6 +21,29 @@ const StampsListPage = () => {
     const history = useNavigate()
 
     const propsListStamps = useContext(ListStampsContext)
+
+    const ActionsUserBody = (rowData: any) => {
+        return (
+            <Row id="center">
+                <Button
+                    icon="pi pi-pencil"
+                    rounded
+                    className="mr-2"
+                    onClick={() => {
+                        history("/selos/" + rowData.id)
+                    }}
+                />
+                {/* <Button
+                    severity="danger"
+                    rounded
+                    icon={"pi pi-trash"}
+                    onClick={() => {
+
+                    }}
+                /> */}
+            </Row>
+        );
+    };
 
     const renderHeader = () => {
         return (
@@ -55,6 +79,8 @@ const StampsListPage = () => {
                 <DataTable value={propsListStamps?.stamps} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
                     <Column body={(body) => <Stamp url={body?.img_url} />} header="Selo"></Column>
                     <Column field="name" header="Nome"></Column>
+                    <Column field="description" header="Descrição"></Column>
+                    <Column field="actions" align={"center"} body={ActionsUserBody} header="Ações"></Column>
                 </DataTable>
             </div>
         </ContentPage>

@@ -32,6 +32,7 @@ import TagList from "../page/tags/listTags/page";
 import StrampsList from "../page/stramps/listStramps/page";
 import StrampsCreate from "../page/stramps/createStramps/page";
 import ViewdProfile from "../page/viewdProfile/page";
+import StampsUpdate from "../page/stramps/createStramps copy/page";
 
 const RoutesApp = () => {
   return (
@@ -50,6 +51,7 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<ClassroomList />} />} path="/turmas" />
         <Route element={<PrivateRoute Component={<StrampsList />} />} path="/selos" />
         <Route element={<PrivateRoute Component={<StrampsCreate />} />} path="/selos/criar" />
+        <Route element={<PrivateRoute Component={<StampsUpdate />} />} path="/selos/:id" />
 
 
         <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
