@@ -57,7 +57,7 @@ const ModuleOnePage = () => {
                             headerTemplate={<Column style={{ height: "36px", width: "100%" }} id="center">
                                     <Row style={{ width: "100%" }} id="space-between">
                                         <div>
-                                            <h2>{item.name}</h2>
+                                            <h3>{item.name}</h3>
                                         </div>
                                         <Row style={{ gap: 16 }}><div onClick={(e) => { 
                                             history("/aulas/" + id + "/editar/" + item.id) }}>

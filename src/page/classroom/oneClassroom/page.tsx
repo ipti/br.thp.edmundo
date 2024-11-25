@@ -23,6 +23,7 @@ import color from "../../../Styles/colors";
 import CardQuant from "../../../Components/Chart/CardQuant";
 import { ProgressSpinner } from "primereact/progressspinner";
 import ModalDistributeStamps from "./modalDistributeStamps";
+import ModalMigrationMeuBen from "./modalMigrationMeuBen";
 
 
 const ClassroomOne = () => {
@@ -36,6 +37,7 @@ const ClassroomOne = () => {
 const ClassroomOnePage = () => {
     const history = useNavigate()
     const [edit, setEdit] = useState<boolean | undefined>()
+    const [visibleMigration, setVisibleMigration] = useState(false)
     const [visible, setVisible] = useState(false)
     const { id } = useParams()
     const propsAplication = useContext(AplicationContext) as PropsAplicationContext
@@ -92,11 +94,16 @@ const ClassroomOnePage = () => {
             <Padding padding="8px" />
             <h3>Código da turma: {generateCode(props.classroomOne?.classroom?.id!)}</h3>
             <Padding padding="8px" />
-
-            <Button label="Distribuir selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
-                setVisible(!visible)
-            }} />
-            <Padding padding="16px" />
+            <Row>
+                <Button label="Distribuir selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
+                    setVisible(!visible)
+                }} />
+                    <Padding padding="8px" />
+                    <Button label="Migrar turma" icon={"pi pi-upload"} style={{display: 'none'}} iconPos="right" onClick={() => {
+                        setVisibleMigration(!visibleMigration)
+                    }} />
+            </Row>
+            <Padding padding="8px" />
             <h2>
                 Informações
             </h2>
@@ -135,6 +142,8 @@ const ClassroomOnePage = () => {
             </div>
 
             <ModalDistributeStamps visible={visible} onHide={() => { setVisible(!visible) }} />
+
+            <ModalMigrationMeuBen visible={visibleMigration} onHide={() => { setVisibleMigration(!visibleMigration) }} />
         </ContentPage>
     )
 }

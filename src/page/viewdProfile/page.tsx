@@ -1,7 +1,9 @@
+import { Chip } from "primereact/chip"
 import { useContext } from "react"
 import styled from "styled-components"
 import ContentPage from "../../Components/ContentPage"
 import Stamp from "../../Components/Stamp"
+import { StampComponentStyle } from "../../Components/Stamp/style"
 import { useQuery } from "../../Controller/controllerGlobal"
 import styles from "../../Styles"
 import color from "../../Styles/colors"
@@ -9,7 +11,6 @@ import { Column, Padding, Row } from "../../Styles/styles"
 import avatar from "../../assets/image/avatar.svg"
 import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
-import { Chip } from "primereact/chip"
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -56,12 +57,12 @@ const ProfilePage = () => {
             <div className="grid gap-4">
                 {props.user?.stamps_user.map((item) => {
                     return (
-                        <Column>
+                        <StampComponentStyle>
                             <Stamp url={item?.stamps.img_url} description={item?.stamps?.description} type={item?.stamps?.type} />
                             <Row id="center">
                                 <p style={{ color: color.colorPrimary }}>{item.stamps.name}</p>
                             </Row>
-                        </Column>
+                        </StampComponentStyle>
                     )
                 })}
             </div>

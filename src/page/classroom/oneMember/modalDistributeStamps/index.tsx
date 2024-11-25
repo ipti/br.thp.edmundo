@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import * as yup from 'yup';
 import RadioButtonComponent from "../../../../Components/RadioButton";
 import Stamp from "../../../../Components/Stamp";
+import { StampComponentStyle } from "../../../../Components/Stamp/style";
 import color from "../../../../Styles/colors";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { UpdateUserContext } from "../context/context";
@@ -48,7 +49,7 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                     {props.stamps?.map((item) => {
                                         return (
                                             <div key={item.id} onClick={(e) => { setFieldValue("idStamps", item.id) }} className="col-12 md:col-3 lg:col-2 sm:col-4  card" style={{ background: values.idStamps === item.id ? color.colorCard : "", cursor: "pointer" }} >
-                                                <Column>
+                                                <StampComponentStyle>
                                                     <Row id="center">
                                                         <Column>
                                                             <Row id="center">
@@ -61,7 +62,7 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                                             </Row>
                                                         </Column>
                                                     </Row>
-                                                </Column>
+                                                </StampComponentStyle>
                                             </div>
                                         )
                                     })}

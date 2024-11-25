@@ -5,15 +5,16 @@ import { MultiSelect } from "primereact/multiselect";
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { useContext, useRef } from "react";
+import * as yup from 'yup';
 import RadioButtonComponent from "../../../../Components/RadioButton";
 import Stamp from "../../../../Components/Stamp";
+import { StampComponentStyle } from "../../../../Components/Stamp/style";
 import { ROLE } from "../../../../Controller/controllerGlobal";
 import color from "../../../../Styles/colors";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { OneClassroomContext } from "../context/context";
 import { OneClassroomContextType } from "../context/types";
 import { Item } from "../service/type";
-import * as yup from 'yup';
 
 const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide(): void }) => {
     const stepperRef = useRef<any>(null);
@@ -58,11 +59,10 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                             {props.stamps?.map((item) => {
                                                 return (
                                                     <div key={item.id} onClick={(e) => { setFieldValue("idStamps", item.id) }} className="col-12 md:col-3 lg:col-2 sm:col-4  card" style={{ background: values.idStamps === item.id ? color.colorCard : "", cursor: "pointer" }} >
-                                                        <Column>
+                                                        <StampComponentStyle>
                                                             <Row id="center">
                                                                 <Column>
                                                                     <Row id="center">
-
                                                                         <Stamp url={item?.img_url} description={item?.description} type={item.type} />
                                                                     </Row>
                                                                     <Padding />
@@ -71,7 +71,7 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                                                     </Row>
                                                                 </Column>
                                                             </Row>
-                                                        </Column>
+                                                        </StampComponentStyle>
                                                     </div>
                                                 )
                                             })}

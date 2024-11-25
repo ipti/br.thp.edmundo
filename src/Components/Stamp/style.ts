@@ -22,6 +22,7 @@ export const StampStyle = styled.div<StampStyleType>`
 
 
 
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,4 +65,9 @@ export const HoverContainer = styled.div`
     visibility: visible;
     transform: translateY(0);
   }
+`;
+
+export const StampComponentStyle = styled.div`
+    max-width: 90px;
+    text-align: center;
 `;
