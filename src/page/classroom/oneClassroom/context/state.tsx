@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFetchRequestFindChartClassroomBff, useFetchRequestFindOneClassroomBff, useFetchRequestFindStamps } from "../service/query";
-import { ChartType, ClassroomOne, DistributeStamps, StampsType, UpdateClassroom } from "../service/type";
+import { useFetchRequestFindChartClassroomBff, useFetchRequestFindMigrationProject, useFetchRequestFindOneClassroomBff, useFetchRequestFindStamps } from "../service/query";
+import { ChartType, ClassroomOne, DistributeStamps, MigrateMeuBen, ProjectsTsArray, StampsType, UpdateClassroom } from "../service/type";
 import { OneClassroomController } from "../service/controller";
 import { ClassroomMembers } from "../../membersClassroom/context/types";
 import { useFetchRequestMembersClassroom } from "../../membersClassroom/service/query";
@@ -11,12 +11,15 @@ export const OneClassroomState = () => {
     const [classroomOne, setClassroomOne] = useState<ClassroomOne | undefined>()
     const [classroomChart, setClassroomChart] = useState<ChartType | undefined>()
     const [stamps, setStamps] = useState<StampsType[] | undefined>()
+    const [projectMigration, setProjectMigration] = useState<ProjectsTsArray | undefined>()
 
-    const { PutClassroomMutation, DistributeStampsMutation } = OneClassroomController()
+    const { PutClassroomMutation, DistributeStampsMutation, MigrationMeuBenMutation } = OneClassroomController()
 
 
     const { data: classroomOneRequest, isLoading, isError } = useFetchRequestFindOneClassroomBff(id!);
     const { data: classroomChartRequest } = useFetchRequestFindChartClassroomBff(id!);
+
+    const { data: projectMigrationRequest } = useFetchRequestFindMigrationProject()
 
     const { data: stampsRequest } = useFetchRequestFindStamps();
 
@@ -28,7 +31,7 @@ export const OneClassroomState = () => {
 
     // const {  } = MembersClassroomController();
 
-  
+
     useEffect(() => {
         if (classroomRequest) {
             setClassroomList(classroomRequest)
@@ -36,11 +39,18 @@ export const OneClassroomState = () => {
     }, [classroomRequest])
 
     useEffect(() => {
-     if(stampsRequest){
-        setStamps(stampsRequest)
-     }
+        if (stampsRequest) {
+            setStamps(stampsRequest)
+        }
     }, [stampsRequest])
-    
+
+    useEffect(() => {
+        if (projectMigrationRequest) {
+            setProjectMigration(projectMigrationRequest)
+        }
+    }, [projectMigrationRequest])
+
+
 
     const UpdateClassroom = (id: string, body: UpdateClassroom) => {
         PutClassroomMutation.mutate({ data: body, id: id })
@@ -61,6 +71,10 @@ export const OneClassroomState = () => {
         DistributeStampsMutation.mutate(body)
     }
 
+    const handleMigrateMeuben = (body: MigrateMeuBen) => {
+        MigrationMeuBenMutation.mutate({ data: body })
+    }
 
-    return { classroomOne, isLoading, isError, UpdateClassroom, classroomChart, stamps, classroomMembersList,handleDistributeStamps }
+
+    return { handleMigrateMeuben,classroomOne, isLoading, isError, UpdateClassroom, classroomChart, stamps, classroomMembersList, handleDistributeStamps, projectMigration }
 }

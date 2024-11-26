@@ -55,8 +55,35 @@ export interface ClassroomOne {
     items?: Item[]
     idStamps?: number
   }
+
+  export interface MigrateMeuBen {
+    year?: number
+    idClassroom?: number,
+    project?: number
+    name?: string
+  }
   
   export interface Item {
     idUser: number
   }
   
+
+  export type ProjectsTsArray = ProjectsTs[]
+
+export interface ProjectsTs {
+  name: string
+  id: number
+  project: Project[]
+}
+
+export interface Project {
+  id: number
+  name: string
+  active: boolean
+  approval_percentage: number
+  ruler_url?: string
+  avartar_url: any
+  social_technology_id: number
+  createdAt: string
+  updatedAt: string
+}

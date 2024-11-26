@@ -1,5 +1,5 @@
 import { ClassroomMembers } from "../../membersClassroom/context/types";
-import { ChartType, ClassroomOne, DistributeStamps, StampsType, UpdateClassroom } from "../service/type";
+import { ChartType, ClassroomOne, DistributeStamps, MigrateMeuBen, ProjectsTsArray, StampsType, UpdateClassroom } from "../service/type";
 
 export interface OneClassroomContextType {
     classroomOne: ClassroomOne | undefined;
@@ -10,4 +10,6 @@ export interface OneClassroomContextType {
     stamps: StampsType[] | undefined
     classroomMembersList: ClassroomMembers | undefined
     handleDistributeStamps: (body: DistributeStamps) => void
+    projectMigration: ProjectsTsArray | undefined
+    handleMigrateMeuben: (body: MigrateMeuBen) => void
 }

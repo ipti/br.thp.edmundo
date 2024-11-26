@@ -2,8 +2,8 @@ import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import queryClient from "../../../../service/reactquery";
 import styles from "../../../../Styles";
-import {  DitributeStampsRequest, PutClassroomRequest } from "./request";
-import { UpdateClassroom, DistributeStamps } from "./type";
+import {  DitributeStampsRequest, MigrationMeuBenRequest, PutClassroomRequest } from "./request";
+import { UpdateClassroom, DistributeStamps, MigrateMeuBen } from "./type";
 
 export const OneClassroomController = () => {
 
@@ -24,6 +24,29 @@ export const OneClassroomController = () => {
                 Swal.fire({
                     icon: 'success',
                     title: "Turma alterada com sucesso!",
+                    confirmButtonColor: styles.colors.colorPrimary,
+                })
+            },
+
+        }
+    );
+
+    const MigrationMeuBenMutation = useMutation(
+
+        ({data}:{data: MigrateMeuBen}) => MigrationMeuBenRequest(data),
+        {
+            onError: (error: any) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: error.response.data.message,
+                    confirmButtonColor: styles.colors.colorPrimary,
+                })
+            },
+            onSuccess: (data) => {
+                queryClient.refetchQueries("useRequestsFindOneClassroom")
+                Swal.fire({
+                    icon: 'success',
+                    title: "Migração feita com sucesso!",
                     confirmButtonColor: styles.colors.colorPrimary,
                 })
             },
@@ -56,6 +79,6 @@ export const OneClassroomController = () => {
     );
 
     return {
-        PutClassroomMutation, DistributeStampsMutation
+        PutClassroomMutation, DistributeStampsMutation, MigrationMeuBenMutation
     }
 }
