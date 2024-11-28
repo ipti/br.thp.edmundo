@@ -98,10 +98,10 @@ const ClassroomOnePage = () => {
                 <Button label="Distribuir selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
                     setVisible(!visible)
                 }} />
-                    <Padding padding="8px" />
-                    <Button label="Migrar turma" icon={"pi pi-upload"} style={{display: 'none'}} iconPos="right" onClick={() => {
-                        setVisibleMigration(!visibleMigration)
-                    }} />
+                <Padding padding="8px" />
+                <Button label="Migrar turma" icon={"pi pi-upload"} iconPos="right" onClick={() => {
+                    setVisibleMigration(!visibleMigration)
+                }} />
             </Row>
             <Padding padding="8px" />
             <h2>
