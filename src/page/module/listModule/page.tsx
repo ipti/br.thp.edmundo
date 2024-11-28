@@ -7,6 +7,7 @@ import Empty from "../../../Components/Empty";
 import { Padding, Row } from "../../../Styles/styles";
 import { ListModulesContextType } from "../type";
 import ListModulesProvider, { ListModulesContext } from "./context/context";
+import Loading from "../../../Components/Loading";
 
 const ModuleList = () => {
   return (
@@ -22,6 +23,7 @@ const ModuleListPage = () => {
   const modulesListContext = useContext(
     ListModulesContext
   ) as ListModulesContextType;
+
   return (
     <ContentPage title="Módulos adicionados" description="Listar módulos ">
       <Row id="end">
@@ -34,7 +36,7 @@ const ModuleListPage = () => {
         />
       </Row>
       <Padding padding="16px" />
-      <div className="grid">
+      {!modulesListContext.isLoading ? <div className="grid">
         {modulesListContext.modulesList?.map((item) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={item.id}>
@@ -42,7 +44,7 @@ const ModuleListPage = () => {
             </div>
           );
         })}
-      </div>
+      </div> : <Loading />}
       {modulesListContext.modulesList?.length === 0 && (
         <Empty title="Módulos" />
       )}

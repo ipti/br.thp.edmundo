@@ -10,6 +10,8 @@ import Icon from "../../../Components/Icon"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import { Activity, OneModulesContextType } from "../type"
 import OneModuleProvider, { OneModuleContext } from "./context/context"
+import Loading from "../../../Components/Loading"
+import Empty from "../../../Components/Empty"
 
 
 const ModuleOne = () => {
@@ -49,24 +51,26 @@ const ModuleOnePage = () => {
                 <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar") }} />
             </Row>
             <Padding padding="16px" />
-            <Accordion activeIndex={0}>
+            {!moduleOneContext.isLoading ? <Accordion activeIndex={0}>
                 {moduleOneContext.moduleOne?.classes.map((item, index) => {
                     return (
                         <AccordionTab
                             key={index}
                             headerTemplate={<Column style={{ height: "36px", width: "100%" }} id="center">
-                                    <Row style={{ width: "100%" }} id="space-between">
-                                        <div>
-                                            <h3>{item.name}</h3>
-                                        </div>
-                                        <Row style={{ gap: 16 }}><div onClick={(e) => { 
-                                            history("/aulas/" + id + "/editar/" + item.id) }}>
-                                            <Icon icon="pi pi-pencil" /></div><div onClick={(e) => { 
-                                                e.preventDefault()
-                                                e.isPropagationStopped()
-                                                e.stopPropagation(); setVisibleClasses(item) }}><Icon icon="pi pi-trash" /></div>
-                                        </Row>
+                                <Row style={{ width: "100%" }} id="space-between">
+                                    <div>
+                                        <h3>{item.name}</h3>
+                                    </div>
+                                    <Row style={{ gap: 16 }}><div onClick={(e) => {
+                                        history("/aulas/" + id + "/editar/" + item.id)
+                                    }}>
+                                        <Icon icon="pi pi-pencil" /></div><div onClick={(e) => {
+                                            e.preventDefault()
+                                            e.isPropagationStopped()
+                                            e.stopPropagation(); setVisibleClasses(item)
+                                        }}><Icon icon="pi pi-trash" /></div>
                                     </Row>
+                                </Row>
                             </Column>
                             }>
                             <Row>
@@ -127,7 +131,8 @@ const ModuleOnePage = () => {
                         </AccordionTab>
                     )
                 })}
-            </Accordion>
+            </Accordion> : <Loading />}
+            {moduleOneContext.moduleOne?.classes.length === 0 && <Empty title="aulas" />}
             <Padding padding="32px" />
             <ConfirmDialog
                 visible={!!visibleActivities}

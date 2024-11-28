@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik"
 import { Button } from "primereact/button"
-import { ProgressSpinner } from "primereact/progressspinner"
 import { TabMenu } from "primereact/tabmenu"
 import { useContext, useState } from "react"
 import { useParams } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
 import FormComponent from "../../../Components/Form"
+import Loading from "../../../Components/Loading"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
 import CreateOrEditForm from "../CreateForms"
@@ -42,7 +42,7 @@ const ActivitiesEditPage = () => {
     ];
 
 
-    if (!activitiesEdit.activitiesOne) return <ProgressSpinner />
+    if (!activitiesEdit.activitiesOne) return <Loading />
 
 
     return (

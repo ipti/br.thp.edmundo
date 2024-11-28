@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import ContentPage from "../../../Components/ContentPage";
+import Loading from "../../../Components/Loading";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import Inputs from "../components/inputs";
 import { EditClassesContextType } from "../type";
@@ -38,7 +38,7 @@ const ClassesEditPage = () => {
             </Form>
           );
         }}
-      </Formik> : <ProgressSpinner />}
+      </Formik> : <Loading />}
     </ContentPage>
   );
 };

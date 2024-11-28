@@ -1,23 +1,23 @@
 import { Button } from "primereact/button";
 import { InputOtp } from "primereact/inputotp";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import avatar from "../../assets/image/avatar.svg";
 import forma from "../../assets/image/person-recover.png";
+import CardHome from "../../Components/Card/CardsHome";
+import DropdownComponent from "../../Components/Dropdown";
+import ListMembers from "../../Components/ListMembers";
+import Loading from "../../Components/Loading";
 import { AplicationContext } from "../../context/context";
 import { generateCode, removeLeadingZeros, ROLE } from "../../Controller/controllerGlobal";
+import styles from "../../Styles";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import { useFetchRequestOneClassroom } from "../classroom/listclassroom/service/query";
+import IconClassroom from "./../../assets/image/cardturmas.svg";
 import HomeProvider, { HomeContext } from "./context/context";
 import { FormaRecover } from "./styles";
-import avatar from "../../assets/image/avatar.svg"
-import styled from "styled-components";
-import styles from "../../Styles";
-import CardHome from "../../Components/Card/CardsHome";
-import { useNavigate } from "react-router-dom";
-import IconClassroom from "./../../assets/image/cardturmas.svg";
-import DropdownComponent from "../../Components/Dropdown";
 import { Classroom } from "./type";
-import ListMembers from "../../Components/ListMembers";
 
 
 
@@ -59,7 +59,7 @@ const HomeClassroomPage = () => {
         }
     }, [propsHome?.classroomUser])
 
-    if (!propsHome?.classroomUser) return <ProgressSpinner />
+    if (!propsHome?.classroomUser) return <Loading />
 
 
     return (
@@ -209,7 +209,7 @@ const ClassroomFind = ({ idClassroom, onHide }: { idClassroom: string | number |
 
 
 
-    if (isLoading) return <ProgressSpinner />
+    if (isLoading) return <Loading />
     var classroom: Classroom = data
     return (
 

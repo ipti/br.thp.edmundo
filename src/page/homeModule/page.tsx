@@ -1,19 +1,19 @@
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import avatar from "../../assets/image/avatar.svg";
+import pessoa from "../../assets/image/pessoa_visao.svg";
 import CardHome from "../../Components/Card/CardsHome";
 import DropdownComponent from "../../Components/Dropdown";
+import ListMembers from "../../Components/ListMembers";
+import Loading from "../../Components/Loading";
+import { AplicationContext } from "../../context/context";
 import styles from "../../Styles";
+import color from "../../Styles/colors";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeModulesProvider, { HomeModulesContext } from "./context/context";
-import { Class } from "./type";
-import { useNavigate, useParams } from "react-router-dom";
-import { AplicationContext } from "../../context/context";
-import ListMembers from "../../Components/ListMembers";
-import pessoa from "../../assets/image/pessoa_visao.svg"
-import color from "../../Styles/colors";
 import { ImagePessoa } from "./styles";
+import { Class } from "./type";
 
 
 
@@ -57,7 +57,7 @@ const HomeModulePage = () => {
         }
     }, [propsHome?.modules?.classes])
 
-    if (!propsHome?.modules) return <ProgressSpinner />
+    if (!propsHome?.modules) return <Loading />
 
 
     return (

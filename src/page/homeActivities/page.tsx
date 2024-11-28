@@ -1,6 +1,6 @@
+import { Form, Formik } from "formik";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import sound from "../../assets/image/sound_sampler.svg";
@@ -11,12 +11,12 @@ import { getDifficulte } from "../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeActivitiesProvider, { HomeActivitiesContext } from "./context/context";
 import { ButtonStart, TextActivities, TextActivitiesCard, TextActivitiesParagraphCard } from "./styles";
-import { Form, Formik } from "formik";
 
 import * as Yup from 'yup';
-import ModalRating from "./modalRating";
 import FormViewComponent from "../../Components/FormView";
+import Loading from "../../Components/Loading";
 import color from "../../Styles/colors";
+import ModalRating from "./modalRating";
 
 const optionSchema = Yup.object().shape({
     options_fk: Yup.number().required("Option is required")
@@ -56,7 +56,7 @@ const HomeActivitiesPage = () => {
     const { idClassroom } = useParams()
 
 
-    if (!propsAplication?.activitiesOne?.user_activities) return <ProgressSpinner />
+    if (!propsAplication?.activitiesOne?.user_activities) return <Loading />
 
 
     return (

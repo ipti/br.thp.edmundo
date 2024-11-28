@@ -1,7 +1,6 @@
 import { Form, Formik } from "formik"
 import { Button } from "primereact/button"
 import { Chart } from 'primereact/chart'
-import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
@@ -9,6 +8,7 @@ import CardQuant from "../../../Components/Chart/CardQuant"
 import ContentPage from "../../../Components/ContentPage"
 import DropdownComponent from "../../../Components/Dropdown"
 import MaskInput from "../../../Components/InputMask"
+import Loading from "../../../Components/Loading"
 import Stamp from "../../../Components/Stamp"
 import { StampComponentStyle } from "../../../Components/Stamp/style"
 import TextInput from "../../../Components/TextInput"
@@ -131,7 +131,7 @@ const MemberOnePage = () => {
             .required("Data de nascimento é obrigatória"),
     });
 
-    if (!props.user) return <ProgressSpinner />
+    if (!props.user) return <Loading />
 
     const date = new Date(props.user?.registration[0]?.birthday);
     return (
@@ -286,7 +286,7 @@ const MemberOnePage = () => {
                 <div className="col-12 md:col-4 lg:col-2">
                     <CardQuant quant={props.classroomUserChart.quiz_activities} title="Múltipla escolha" color="third" />
                 </div>
-            </div> : <ProgressSpinner />}
+            </div> : <Loading />}
             <Padding padding="16px" />
             <div className="grid">
                 <div className=" col-12 md:col-6">

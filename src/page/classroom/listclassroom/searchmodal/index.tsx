@@ -1,16 +1,16 @@
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputOtp } from 'primereact/inputotp';
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useState } from "react";
 import { Container } from "../../../../Components/Card/CardClassroom/style";
-import { generateCode, removeLeadingZeros } from "../../../../Controller/controllerGlobal";
-import { Column, Padding, Row } from "../../../../Styles/styles";
-import { Classroom, ListClassroomContextType } from "../context/types";
-import { useFetchRequestOneClassroom } from "../service/query";
-import { ListClassroomContext } from "../context/context";
+import Loading from "../../../../Components/Loading";
 import { AplicationContext } from "../../../../context/context";
 import { PropsAplicationContext } from "../../../../context/type";
+import { generateCode, removeLeadingZeros } from "../../../../Controller/controllerGlobal";
+import { Column, Padding, Row } from "../../../../Styles/styles";
+import { ListClassroomContext } from "../context/context";
+import { Classroom, ListClassroomContextType } from "../context/types";
+import { useFetchRequestOneClassroom } from "../service/query";
 
 const SearchModal = ({ onHide, visible }: { onHide(): void, visible?: boolean | undefined }) => {
     const [token, setTokens] = useState<string | number | null | undefined>();
@@ -50,7 +50,7 @@ const ClassroomFind = ({ idClassroom, onHide }: { idClassroom: string | number |
     const { data, isLoading } = useFetchRequestOneClassroom(removeLeadingZeros(idClassroom?.toString()!).toString())
 
 
-    if (isLoading) return <ProgressSpinner />
+    if (isLoading) return <Loading />
     var classroom: Classroom = data
     return (
         <Container className="card">

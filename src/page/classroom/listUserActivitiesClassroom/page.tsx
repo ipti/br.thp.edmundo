@@ -3,11 +3,11 @@ import { Button } from "primereact/button"
 import { Column } from "primereact/column"
 import { DataTable } from "primereact/datatable"
 import { MultiSelect } from "primereact/multiselect"
-import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
 import Icon from "../../../Components/Icon"
+import Loading from "../../../Components/Loading"
 import { formatarDataHours, question } from "../../../Controller/controllerGlobal"
 import color from "../../../Styles/colors"
 import { Padding, Row } from "../../../Styles/styles"
@@ -61,7 +61,7 @@ const ActivitiesSentPage = () => {
     }
 
 
-    if (propsActivitiesSent?.isLoading) return <ProgressSpinner />
+    if (propsActivitiesSent?.isLoading) return <Loading />
 
 
 

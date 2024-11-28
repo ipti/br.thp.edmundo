@@ -2,10 +2,10 @@ import { Button } from "primereact/button"
 import { Column } from "primereact/column"
 import { ConfirmDialog } from "primereact/confirmdialog"
 import { DataTable } from "primereact/datatable"
-import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
+import Loading from "../../../Components/Loading"
 import { ROLE } from "../../../Controller/controllerGlobal"
 import { Padding, Row } from "../../../Styles/styles"
 import ListUserProvider, { ListUserContext } from "./context/context"
@@ -71,7 +71,7 @@ const UserListPage = () => {
         );
     };
 
-    if (props.isLoading) return <ProgressSpinner />;
+    if (props.isLoading) return <Loading />;
 
     const renderHeader = () => {
         return (

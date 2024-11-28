@@ -1,12 +1,12 @@
 import { Form, Formik } from "formik"
-import { ProgressSpinner } from "primereact/progressspinner"
+import { Button } from "primereact/button"
 import { useContext } from "react"
+import { useParams } from "react-router-dom"
 import ContentPage from "../../../Components/ContentPage"
+import Loading from "../../../Components/Loading"
+import { Column, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
 import EditModuleProvider, { EditModuleContext } from "./context/context"
-import { Column, Row } from "../../../Styles/styles"
-import { Button } from "primereact/button"
-import { useParams } from "react-router-dom"
 
 
 const ModulesEdit = () => {
@@ -37,7 +37,7 @@ const ModulesEditPage = () => {
                         </Form>
                     )
                 }}
-            </Formik> : <ProgressSpinner />}
+            </Formik> : <Loading />}
         </ContentPage>
     )
 }

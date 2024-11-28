@@ -7,6 +7,7 @@ import { useContext } from "react"
 import { ListReapplicationContextType } from "./context/types"
 import CardProject from "../../../Components/Card/CardProject"
 import Empty from "../../../Components/Empty"
+import Loading from "../../../Components/Loading"
 
 const ReapplicationList = () => {
     return (
@@ -23,6 +24,7 @@ const ReapplicationListPage = () => {
 
     return (
         <ContentPage title="Reaplicações" description="Visualize as seus locais de reaplicação">
+            {!props.isLoading ? <>
             <Column>
                 <Row id="end">
                     <Button label="Criar Reaplicação" icon="pi pi-plus" onClick={() => { history("/reaplicacoes/criar") }} />
@@ -41,6 +43,7 @@ const ReapplicationListPage = () => {
             </div>
 
             {props.reapplicationList?.length === 0 && <Empty title="Reaplicações"/>}
+                </> : <Loading />}
         </ContentPage>
     )
 }

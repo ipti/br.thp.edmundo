@@ -7,6 +7,7 @@ import ListStampsProvider, { ListStampsContext } from "./context/context";
 import { useContext } from "react";
 import Stamp from "../../../Components/Stamp";
 import { Row } from "../../../Styles/styles";
+import Loading from "../../../Components/Loading";
 
 const StampsList = () => {
     return (
@@ -75,14 +76,14 @@ const StampsListPage = () => {
 
     return (
         <ContentPage title="Selos" description="Gerencie os selos.">
-            <div>
+            {!propsListStamps?.isLoading ? <div>
                 <DataTable value={propsListStamps?.stamps} header={renderHeader} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
                     <Column body={(body) => <Stamp url={body?.img_url} type={body.type} />} header="Selo"></Column>
                     <Column field="name" header="Nome"></Column>
                     <Column field="description" header="Descrição"></Column>
                     <Column field="actions" align={"center"} body={ActionsUserBody} header="Ações"></Column>
                 </DataTable>
-            </div>
+            </div> : <Loading />}
         </ContentPage>
     )
 }

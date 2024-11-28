@@ -18,6 +18,7 @@ import { Column, Padding, Row } from "../../Styles/styles"
 import avatar from "../../assets/image/avatar.svg"
 import UpdateUserProvider, { UpdateUserContext } from "./context/context"
 import { UpdateUserContextType } from "./context/types"
+import Loading from "../../Components/Loading"
 
 const Avatar = styled.div`
   border: 1px solid ${styles.colors.colorBorderCard};
@@ -65,167 +66,168 @@ const ProfilePage = () => {
     const date = new Date(props.user?.registration[0]?.birthday);
     return (
         <ContentPage title={"Perfil"} description={id ? "Visualize o seu amigo" : "Visualize ou edite os dados do seu perfil."}>
-            {props.user && <Formik validationSchema={schema} initialValues={{
-                name: props.user?.name ?? "",
-                description: props.user.registration[0].description ?? "",
-                birthday: !isNaN(date.getTime())
-                    ? formatarData(props.user?.registration[0]?.birthday!)
-                    : "",
-                email: props.user?.email ?? "",
-                username: props.user?.username ?? "",
-                responsable_telephone: props.user?.registration[0]?.responsable_telephone ?? "",
-            }} onSubmit={(values) => {
-                const [dia, mes, ano] = values.birthday.split('/');
-                const data = new Date(`${mes}/${dia}/${ano}`);
-                props.UpdateUser({ ...values, birthday: data })
-            }}>
+            {props.isLoading ? <>
+                {props.user && <Formik validationSchema={schema} initialValues={{
+                    name: props.user?.name ?? "",
+                    description: props.user.registration[0].description ?? "",
+                    birthday: !isNaN(date.getTime())
+                        ? formatarData(props.user?.registration[0]?.birthday!)
+                        : "",
+                    email: props.user?.email ?? "",
+                    username: props.user?.username ?? "",
+                    responsable_telephone: props.user?.registration[0]?.responsable_telephone ?? "",
+                }} onSubmit={(values) => {
+                    const [dia, mes, ano] = values.birthday.split('/');
+                    const data = new Date(`${mes}/${dia}/${ano}`);
+                    props.UpdateUser({ ...values, birthday: data })
+                }}>
 
-                {({ errors, values, handleChange, touched, setFieldValue }) => {
+                    {({ errors, values, handleChange, touched, setFieldValue }) => {
 
 
-                    return (
-                        <Form>
-                            {!id && <Column>
-                                <Row id="end">
-                                    <Button label="Salvar" icon="pi pi-save" type="submit" />
-                                </Row>
-                            </Column>}
-                            <Padding />
-                            <Avatar>
-                                <img alt="" src={props.file ? (URL.createObjectURL(props.file![0]) ?? undefined) : props.user?.registration![0]?.avatar_url ? props.user?.registration![0]?.avatar_url : avatar} />
-                            </Avatar>
-                            <Padding padding="8px" />
-                            {!id && <div className="grid">
-                                <div className="col-12 md:col-6">
-                                    <label>Avatar </label>
-                                    <Padding />
-                                    <TextInput
-                                        // value={props.file}
-                                        type="file"
-                                        placeholder="Avatar"
-                                        onChange={(e: any) => props.setFile(e.target.files)}
-                                        name="name"
-                                    />
-                                </div>
-                            </div>}
-
-                            <Padding padding="8px" />
-                            <div className="grid">
-
-                                {props.user?.stamps_user.map((item) => {
-                                    return (
-
-                                        <StampComponentStyle>
-                                            <Stamp url={item?.stamps?.img_url} description={item?.stamps?.description} type={item.stamps.type} />
-                                            <Row id="center">
-                                                <p style={{ color: color.colorPrimary }}>{item.stamps.name}</p>
-                                            </Row>
-                                        </StampComponentStyle>
-                                    )
-                                })}
-                            </div>
-
-                            <Padding padding="8px" />
-                            <Padding padding="16px" />
-
-                            <div className="grid">
-                                <div className="col-12 md:col-6">
-                                    <label>Nome *</label>
-                                    <Padding />
-                                    <TextInput
-
-                                        value={values.name}
-                                        disabled={!!id}
-                                        placeholder="Nome"
-                                        onChange={handleChange}
-                                        name="name"
-                                    />
-                                    {errors.name && touched.name ? (
-                                        <div style={{ color: "red", marginTop: "8px" }}>
-                                            {errors.name}
-                                        </div>
-                                    ) : null}
-                                </div>
-                                {!id && <div className="col-12 md:col-6">
-                                    <label>Nome usuário *</label>
-                                    <Padding />
-                                    <TextInput
-                                        value={values.email}
-                                        placeholder="Nome usuário"
-                                        onChange={handleChange}
-                                        name="email"
-                                        disabled={!!id}
-
-                                    />
-                                    {errors.email && touched.email ? (
-                                        <div style={{ color: "red", marginTop: "8px" }}>
-                                            {errors.email}
-                                        </div>
-                                    ) : null}
-                                </div>}
-                                <div className="col-12 md:col-6">
-                                    <label>Data de Nascimento *</label>
-                                    <Padding />
-                                    <MaskInput
-                                        value={values.birthday?.toString()}
-                                        mask="99/99/9999"
-                                        placeholder="Data de Nascimento"
-                                        name="birthday"
-                                        disabled={!!id}
-
-                                        onChange={(e) => {
-                                            setFieldValue("birthday", e.target.value);
-                                            if (values.birthday.length > 9) {
-                                            }
-                                        }}
-                                    />
-                                    {errors.birthday && touched.birthday ? (
-                                        <div style={{ color: "red", marginTop: "8px" }}>
-                                            {errors.birthday.toString()}
-                                        </div>
-                                    ) : null}
-                                </div>
-                                {!id && <div className="col-12 md:col-6">
-                                    <label>Telefone para contato *</label>
-                                    <Padding />
-                                    <MaskInput
-                                        value={values.responsable_telephone}
-                                        mask="(99) 9 9999-9999"
-                                        name="responsable_telephone"
-                                        disabled={!!id}
-                                        onChange={handleChange}
-                                        placeholder="Telefone para contato"
-                                    />
-                                    {errors.responsable_telephone &&
-                                        touched.responsable_telephone ? (
-                                        <div style={{ color: "red", marginTop: "8px" }}>
-                                            {errors.responsable_telephone.toString()}
-                                        </div>
-                                    ) : null}
-                                </div>}
-                                <div className="col-12 md:col-6">
-                                    <label>Tags </label>
-                                    <Padding />
-                                    <MultiSelect value={props.tagsUser} disabled={!!id}
-                                        onChange={(e) => { props.settagsUser(e.value); }} options={props.tags} optionLabel="content"
-                                        placeholder="Tags" maxSelectedLabels={3} className="w-full" />
-                                    <Padding padding="16px" />
-                                    <Row className="grid" style={{ gap: "8px" }}>
-                                        {props.tagsUser?.map((item: any) => {
-                                            return (
-                                                <Chip style={{ background: color.colorBlueClean, color: "black" }} label={"#" + item.content} />
-                                            )
-                                        })}
+                        return (
+                            <Form>
+                                {!id && <Column>
+                                    <Row id="end">
+                                        <Button label="Salvar" icon="pi pi-save" type="submit" />
                                     </Row>
-                                </div>
-                                <div className="col-12 md:col-6">
-                                    <label>Sobre você</label>
-                                    <Padding />
-                                    <InputTextarea placeholder="Escreva um pouco sobre você" style={{ width: "100%", height: 128, resize: "none" }} value={values.description} name="description" onChange={handleChange} />
-                                </div>
-                            </div>
+                                </Column>}
+                                <Padding />
+                                <Avatar>
+                                    <img alt="" src={props.file ? (URL.createObjectURL(props.file![0]) ?? undefined) : props.user?.registration![0]?.avatar_url ? props.user?.registration![0]?.avatar_url : avatar} />
+                                </Avatar>
+                                <Padding padding="8px" />
+                                {!id && <div className="grid">
+                                    <div className="col-12 md:col-6">
+                                        <label>Avatar </label>
+                                        <Padding />
+                                        <TextInput
+                                            // value={props.file}
+                                            type="file"
+                                            placeholder="Avatar"
+                                            onChange={(e: any) => props.setFile(e.target.files)}
+                                            name="name"
+                                        />
+                                    </div>
+                                </div>}
 
-                            {/* {id && <>
+                                <Padding padding="8px" />
+                                <div className="grid">
+
+                                    {props.user?.stamps_user.map((item) => {
+                                        return (
+
+                                            <StampComponentStyle>
+                                                <Stamp url={item?.stamps?.img_url} description={item?.stamps?.description} type={item.stamps.type} />
+                                                <Row id="center">
+                                                    <p style={{ color: color.colorPrimary }}>{item.stamps.name}</p>
+                                                </Row>
+                                            </StampComponentStyle>
+                                        )
+                                    })}
+                                </div>
+
+                                <Padding padding="8px" />
+                                <Padding padding="16px" />
+
+                                <div className="grid">
+                                    <div className="col-12 md:col-6">
+                                        <label>Nome *</label>
+                                        <Padding />
+                                        <TextInput
+
+                                            value={values.name}
+                                            disabled={!!id}
+                                            placeholder="Nome"
+                                            onChange={handleChange}
+                                            name="name"
+                                        />
+                                        {errors.name && touched.name ? (
+                                            <div style={{ color: "red", marginTop: "8px" }}>
+                                                {errors.name}
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                    {!id && <div className="col-12 md:col-6">
+                                        <label>Nome usuário *</label>
+                                        <Padding />
+                                        <TextInput
+                                            value={values.email}
+                                            placeholder="Nome usuário"
+                                            onChange={handleChange}
+                                            name="email"
+                                            disabled={!!id}
+
+                                        />
+                                        {errors.email && touched.email ? (
+                                            <div style={{ color: "red", marginTop: "8px" }}>
+                                                {errors.email}
+                                            </div>
+                                        ) : null}
+                                    </div>}
+                                    <div className="col-12 md:col-6">
+                                        <label>Data de Nascimento *</label>
+                                        <Padding />
+                                        <MaskInput
+                                            value={values.birthday?.toString()}
+                                            mask="99/99/9999"
+                                            placeholder="Data de Nascimento"
+                                            name="birthday"
+                                            disabled={!!id}
+
+                                            onChange={(e) => {
+                                                setFieldValue("birthday", e.target.value);
+                                                if (values.birthday.length > 9) {
+                                                }
+                                            }}
+                                        />
+                                        {errors.birthday && touched.birthday ? (
+                                            <div style={{ color: "red", marginTop: "8px" }}>
+                                                {errors.birthday.toString()}
+                                            </div>
+                                        ) : null}
+                                    </div>
+                                    {!id && <div className="col-12 md:col-6">
+                                        <label>Telefone para contato *</label>
+                                        <Padding />
+                                        <MaskInput
+                                            value={values.responsable_telephone}
+                                            mask="(99) 9 9999-9999"
+                                            name="responsable_telephone"
+                                            disabled={!!id}
+                                            onChange={handleChange}
+                                            placeholder="Telefone para contato"
+                                        />
+                                        {errors.responsable_telephone &&
+                                            touched.responsable_telephone ? (
+                                            <div style={{ color: "red", marginTop: "8px" }}>
+                                                {errors.responsable_telephone.toString()}
+                                            </div>
+                                        ) : null}
+                                    </div>}
+                                    <div className="col-12 md:col-6">
+                                        <label>Tags </label>
+                                        <Padding />
+                                        <MultiSelect value={props.tagsUser} disabled={!!id}
+                                            onChange={(e) => { props.settagsUser(e.value); }} options={props.tags} optionLabel="content"
+                                            placeholder="Tags" maxSelectedLabels={3} className="w-full" />
+                                        <Padding padding="16px" />
+                                        <Row className="grid" style={{ gap: "8px" }}>
+                                            {props.tagsUser?.map((item: any) => {
+                                                return (
+                                                    <Chip style={{ background: color.colorBlueClean, color: "black" }} label={"#" + item.content} />
+                                                )
+                                            })}
+                                        </Row>
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label>Sobre você</label>
+                                        <Padding />
+                                        <InputTextarea placeholder="Escreva um pouco sobre você" style={{ width: "100%", height: 128, resize: "none" }} value={values.description} name="description" onChange={handleChange} />
+                                    </div>
+                                </div>
+
+                                {/* {id && <>
                                 <label>Tags</label>
                                 <Padding padding="8px" />
                                 <Row className="grid" style={{ gap: "8px" }}>
@@ -235,7 +237,7 @@ const ProfilePage = () => {
                                         )
                                     })}
                                 </Row></>} */}
-                            {/* {values.deficiency && (
+                                {/* {values.deficiency && (
                                     <div className="col-12 md:col-6">
                                         <label>Qual deficiência?</label>
                                         <Padding />
@@ -247,10 +249,12 @@ const ProfilePage = () => {
                                         />
                                     </div>
                                 )} */}
-                        </Form>
-                    )
-                }}
-            </Formik>}
+                            </Form>
+                        )
+                    }}
+                </Formik>}
+            </> : <Loading />}
+
         </ContentPage>
     )
 }
