@@ -103,6 +103,7 @@ export var difficult = [
 export var type_activities = [
   { id: "QUIZ", name: "Quiz" },
   { id: "CODE", name: "Código" },
+  { id: "IA", name: "Código IA" },
 ];
 
 export const color_race = [

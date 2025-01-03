@@ -38,7 +38,7 @@ const ModuleListPage = () => {
         {modulesListContext.modulesList?.map((item) => {
           return (
             <div className="col-12 md:col-6 lg:col-4" key={item.id}>
-              <CardModule id={item.id} title={item.name} handleDelete={() => { modulesListContext.DeleteModule(item.id) }} />
+              <CardModule id={item.id} title={item.name} handleDelete={() => { modulesListContext.DeleteModule(item.id) }} redirect={`/modulos/`+ item.id} />
             </div>
           );
         })}
