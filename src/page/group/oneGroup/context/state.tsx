@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import { useFetchRequestFindOneGroup } from "../service/query";
 import queryClient from "../../../../service/reactquery";
 import { Group } from "./types";
-import { CreateMetricGroup } from "../service/types";
+import { CreateMetricGroup, UpdateMetricGroup } from "../service/types";
 
 export const UpdateGroupState = () => {
     const [file, setFile] = useState<File[] | undefined>();
-    const {id} = useParams()
+    const { id } = useParams()
 
     const { data: GroupOneRequest, isLoading } = useFetchRequestFindOneGroup(id!);
 
@@ -20,7 +20,7 @@ export const UpdateGroupState = () => {
         }
     }, [GroupOneRequest, is])
 
-    
+
     useEffect(() => {
 
         queryClient.removeQueries("useRequestsOneGroup")
@@ -28,19 +28,26 @@ export const UpdateGroupState = () => {
     }, [])
 
 
-    const { UpdateGroupRequestMutation, CreateMetricGroupRequestMutation } = UpdateGroupController();
+    const { UpdateGroupRequestMutation, CreateMetricGroupRequestMutation, UpdateGroupMetricRequestMutation } = UpdateGroupController();
 
-    const UpdateGroup = (body: {name: string, description: string}) => {
+    const UpdateGroup = (body: { name: string, description: string }) => {
 
-      
-        UpdateGroupRequestMutation.mutate({data: body, id: parseInt(id!)})
+
+        UpdateGroupRequestMutation.mutate({ data: body, id: parseInt(id!) })
     }
+
+    const UpdateGroupMetric = (body: UpdateMetricGroup, id: number) => {
+
+
+        UpdateGroupMetricRequestMutation.mutate({ data: body, id: id })
+    }
+
 
     const CreateMetricGroup = (body: CreateMetricGroup) => {
 
-      
-        CreateMetricGroupRequestMutation.mutate({data: body})
+
+        CreateMetricGroupRequestMutation.mutate({ data: body })
     }
-   
-    return { UpdateGroup, file, setFile, GroupOne, isLoading, CreateMetricGroup }
+
+    return { UpdateGroup, file, setFile, GroupOne, isLoading, CreateMetricGroup, UpdateGroupMetric }
 }

@@ -1,11 +1,10 @@
+import { Button } from "primereact/button";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { useContext, useState } from "react";
 import ContentPage from "../../../Components/ContentPage";
-import GroupOneProvider, { GroupOneContext } from "./context/context";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { Button } from "primereact/button";
 import { Padding, Row } from "../../../Styles/styles";
-import { useNavigate } from "react-router-dom";
+import GroupOneProvider, { GroupOneContext } from "./context/context";
 import ModalInputs from "./modalCreateMetrics";
 
 const GroupOne = () => {
@@ -21,7 +20,6 @@ const GroupOnePage = () => {
 
   const props = useContext(GroupOneContext);
 
-  const history = useNavigate();
 
   const ActionsUserBody = (rowData: any) => {
     return (
@@ -31,7 +29,7 @@ const GroupOnePage = () => {
           rounded
           className="mr-2"
           onClick={() => {
-            history("/selos/" + rowData.id);
+            setVisible(rowData);
           }}
         />
         {/* <Button
@@ -65,7 +63,7 @@ const GroupOnePage = () => {
 
   return (
     <ContentPage title={props?.GroupOne?.name!} description="">
-      <h3>Métricas</h3>
+      <h3>Métricas de avaliação</h3>
       <Padding padding="8px" />
       <div>
         <DataTable
@@ -77,7 +75,7 @@ const GroupOnePage = () => {
           tableStyle={{ minWidth: "50rem" }}
         >
           <Column field="description" header="Descrição"></Column>
-          <Column field="metric_percentange" header="Porcetagem"></Column>
+          <Column header="Porcetagem da nota" align={"center"} body={(row) => <>{row.metric_percentange}%</>}></Column>
           <Column
             field="actions"
             align={"center"}

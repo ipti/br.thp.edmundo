@@ -1,11 +1,17 @@
 import http from "../../../../service/axios"
 import { logout } from "../../../../service/localstorage";
-import { CreateMetricGroup } from "./types";
+import { CreateMetricGroup, UpdateMetricGroup } from "./types";
 
 
 export const UpdateGroupRequest = async (body: any, id: number) => {
     return await http.put("/group/"+ id, {...body, type: body?.type?.id})
 }
+
+export const UpdateMetricGroupRequest = async (body: UpdateMetricGroup, id: number) => {
+    return await http.put("/metricgroup/"+ id, body)
+}
+
+
 
 export const FindOneGroupRequest = async (id: string) => {
     if (id) {

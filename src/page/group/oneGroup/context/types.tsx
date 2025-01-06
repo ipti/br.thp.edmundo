@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from "react"
-import { CreateMetricGroup } from "../service/types"
+import { CreateMetricGroup, UpdateMetricGroup } from "../service/types"
 
 export interface GroupOneContextTypes {
     UpdateGroup: (body: any) => void
     CreateMetricGroup: (body: CreateMetricGroup) => void
+    UpdateGroupMetric: (body: UpdateMetricGroup, id: number) => void
     setFile: Dispatch<SetStateAction<File[] | undefined>>
     file: File[] | undefined
     GroupOne: Group | undefined

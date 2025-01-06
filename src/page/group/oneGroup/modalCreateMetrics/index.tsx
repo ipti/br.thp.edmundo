@@ -11,9 +11,10 @@ import * as Yup from "yup";
 const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
   const props = useContext(GroupOneContext);
 
-  const initialValue: { description: string; metric_percentange: number } = {
+
+  const initialValue: { description: string; metric_percentange?: number | undefined } = {
     description: visible?.description ?? "",
-    metric_percentange: 0,
+    metric_percentange: visible?.metric_percentange ?? undefined,
   };
 
   const schema = Yup.object().shape({
@@ -24,7 +25,7 @@ const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
   return (
     <Dialog
       visible={visible}
-      header={visible?.id ? "Editar tag" : "Criar tag"}
+      header={visible?.description ? "Editar métrica" : "Criar métrica"}
       style={{ width: "50%" }}
       onHide={() => setOpen(!visible)}
     >
@@ -32,19 +33,24 @@ const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
         initialValues={initialValue}
         validationSchema={schema}
         onSubmit={(values) => {
-          if (visible.id) {
-            console.log(visible);
+          if (visible.name) {
             props?.CreateMetricGroup({
               description: values.description,
-              metric_percentange: values.metric_percentange,
+              metric_percentange: values.metric_percentange ?? 0,
               idGroup: visible.id,
             });
+          }
+
+          if(visible.description){
+            props?.UpdateGroupMetric({
+              description: values.description,
+              metric_percentange: values.metric_percentange
+            }, visible.id)
           }
           setOpen(!visible);
         }}
       >
         {({ values, handleChange, errors, touched, setFieldValue }) => {
-            console.log(errors)
           return (
             <Form>
               <div className="grid">
@@ -66,7 +72,7 @@ const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
                   ) : null}
                 </div>
                 <div className="col-12 md:col-6">
-                  <label>Porcetagem da métrica *</label>
+                  <label>Porcetagem de nota *</label>
                   <Padding />
                   <InputNumber
                     value={values.metric_percentange}
