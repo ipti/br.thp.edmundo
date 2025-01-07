@@ -14,6 +14,7 @@ import {
 import { Padding, Row } from "../../../Styles/styles";
 import { AddEditorImage } from "../createActivities/service/request";
 import color from "../../../Styles/colors";
+import { useFetchRequestGroupList } from "./service/request";
 
 const Inputs = ({
   errors,
@@ -37,6 +38,8 @@ const Inputs = ({
   setTags: any;
 }) => {
   const reactQuillRef = useRef<ReactQuill>(null);
+
+  const { data: group } = useFetchRequestGroupList()
 
   const uploadImage = async (file: any) => {
     const formData = new FormData();
@@ -135,13 +138,92 @@ const Inputs = ({
           </div>
         ) : null}
       </div>
+
+
+      {!isCreated && (
+        <div className="col-12 md:col-6">
+          <label>Tags </label>
+          <Padding />
+          <MultiSelect
+            value={tags}
+            onChange={(e) => {
+              setTags(e.value);
+            }}
+            options={tagsAll}
+            optionLabel="content"
+            placeholder="Tags"
+            maxSelectedLabels={3}
+            className="w-full"
+          />
+          <Padding padding="16px" />
+          <Row className="grid" style={{ gap: "8px" }}>
+            {tags?.map((item: any) => {
+              return (
+                <Chip
+                  style={{ background: color.colorBlueClean, color: "black" }}
+                  label={"#" + item.content}
+                />
+              );
+            })}
+          </Row>
+        </div>
+      )}
+      {values?.type_activities?.id === "IA" && (
+        <div className="col-12 md:col-6">
+          <label>Grupo de IA </label>
+          <Padding />
+          <MultiSelect
+            value={values.groups}
+            options={group}
+            onChange={(e) => setFieldValue("groups", e.target.value)}
+            name="groups"
+            optionLabel="name"
+            placeholder="Escolha os grupos para avaliação"
+            maxSelectedLabels={3}
+            className="w-full"
+          />
+          {errors.difficult && touched.difficult ? (
+            <div style={{ color: "red", marginTop: "8px" }}>
+              {errors.difficult.id}
+            </div>
+          ) : null}
+          <Row className="grid" style={{ gap: "8px", marginTop: 8 }}>
+            {values.groups?.map((item: any) => {
+              return (
+                <Chip style={{ background: color.colorBlueClean, color: "black" }} label={item.name} />
+              )
+            })}
+          </Row>
+        </div>
+      )}
+      {(values?.type_activities?.id === "CODE" ||
+        values?.type_activities?.id === "IA") && (
+          <div className="col-12 md:col-6">
+            <label>Resposta esperada</label>
+            <Padding />
+            <InputTextarea
+              style={{ width: "100%", height: "90px", resize: "none" }}
+              rows={5}
+              value={values.expected_return}
+              placeholder="Escreva com detalhes o que é esperado na resposta dos alunos"
+              onChange={handleChange}
+              name="expected_return"
+            />
+            {errors.expected_return && touched.expected_return ? (
+              <div style={{ color: "red", marginTop: "8px" }}>
+                {errors.expected_return}
+              </div>
+            ) : null}
+          </div>
+        )}
+
       <div className="col-12 md:col-6">
         <label>Descrição</label>
         <Padding />
         <ReactQuill
           ref={reactQuillRef}
           theme="snow"
-          placeholder="Start writing..."
+          placeholder="Escreva aqui..."
           modules={{
             toolbar: {
               container: [
@@ -226,76 +308,6 @@ const Inputs = ({
           </div>
         ) : null}
       </div>
-
-      {!isCreated && (
-        <div className="col-12 md:col-6">
-          <label>Tags </label>
-          <Padding />
-          <MultiSelect
-            value={tags}
-            onChange={(e) => {
-              setTags(e.value);
-            }}
-            options={tagsAll}
-            optionLabel="content"
-            placeholder="Tags"
-            maxSelectedLabels={3}
-            className="w-full"
-          />
-          <Padding padding="16px" />
-          <Row className="grid" style={{ gap: "8px" }}>
-            {tags?.map((item: any) => {
-              return (
-                <Chip
-                  style={{ background: color.colorBlueClean, color: "black" }}
-                  label={"#" + item.content}
-                />
-              );
-            })}
-          </Row>
-        </div>
-      )}
-      {(values?.type_activities?.id === "CODE" ||
-        values?.type_activities?.id === "IA") && (
-        <div className="col-12 md:col-6">
-          <label>Resposta esperada</label>
-          <Padding />
-          <InputTextarea
-            style={{ width: "100%", height: "128px", resize: "none" }}
-            rows={5}
-            value={values.expected_return}
-            placeholder="Escreva com detalhes o que é esperado na resposta dos alunos"
-            onChange={handleChange}
-            name="expected_return"
-          />
-          {errors.expected_return && touched.expected_return ? (
-            <div style={{ color: "red", marginTop: "8px" }}>
-              {errors.expected_return}
-            </div>
-          ) : null}
-        </div>
-      )}
-      {values?.type_activities?.id === "IA" && (
-        <div className="col-12 md:col-6">
-          <label>Grupo de IA </label>
-          <Padding />
-          <MultiSelect
-            value={[]}
-            options={difficult}
-            onChange={(e) => setFieldValue("difficult", e.target.value)}
-            name="difficult"
-            optionLabel="name"
-            placeholder="Escolha os grupos para avaliação"
-            maxSelectedLabels={3}
-            className="w-full"
-          />
-          {errors.difficult && touched.difficult ? (
-            <div style={{ color: "red", marginTop: "8px" }}>
-              {errors.difficult.id}
-            </div>
-          ) : null}
-        </div>
-      )}
     </div>
   );
 };

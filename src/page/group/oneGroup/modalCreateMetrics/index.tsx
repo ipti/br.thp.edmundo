@@ -7,8 +7,9 @@ import { useContext } from "react";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { GroupOneContext } from "../context/context";
 import * as Yup from "yup";
+import { Group } from "../../listGroup/service/types";
 
-const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
+const ModalInputs = ({ visible, setOpen, group }: { visible: any; setOpen: any, group?: Group }) => {
   const props = useContext(GroupOneContext);
 
 
@@ -17,10 +18,15 @@ const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
     metric_percentange: visible?.metric_percentange ?? undefined,
   };
 
+  const total = group?.metric_group?.reduce(function(total: number, item){
+      return total + item.metric_percentange;
+     }, 0)
   const schema = Yup.object().shape({
     description: Yup.string().required("Campo é obrigatório"),
-    metric_percentange: Yup.number().required("Campo é obrigatório"),
+    metric_percentange: Yup.number().required("Campo é obrigatório").moreThan(0, "Métricas ultrapassaram 100%").lessThan((visible?.metric_percentange ? 100 - (total - visible?.metric_percentange) : 100 - total)+1, `O valor deve ser menor ou igual que ${visible?.metric_percentange ? 100 - (total - visible?.metric_percentange) : 100 - total}%` ),
   });
+
+
 
   return (
     <Dialog
@@ -72,12 +78,13 @@ const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
                   ) : null}
                 </div>
                 <div className="col-12 md:col-6">
-                  <label>Porcetagem de nota *</label>
+                  <label>Porcetagem de nota (resta {visible.metric_percentange ? 100 - (total - visible.metric_percentange) : 100 - total}%)*</label>
                   <Padding />
                   <InputNumber
                     value={values.metric_percentange}
                     className="w-full"
-                    placeholder="Digite a porcetagem totalizando 100% em todas as métricas"
+                    placeholder="Digite a porcetagem da nota"
+                    suffix="%"
                     onValueChange={(e) => {
                       setFieldValue("metric_percentange", e.value);
                     }}
@@ -93,11 +100,14 @@ const ModalInputs = ({ visible, setOpen }: { visible: any; setOpen: any }) => {
                   ) : null}
                 </div>
               </div>
+              {(visible.metric_percentange ? 100 - (total - visible.metric_percentange) : 100 - total) <= 0 && <p style={{color: "red"}}>Limite de porcetagem de nota atingido</p>}
+
               <Padding padding="16px" />
               <Column>
                 <Row id="end">
                   <Button
                     type="submit"
+                    disabled={(visible.metric_percentange ? 100 - (total - visible.metric_percentange) : 100 - total) <= 0}
                     label={visible.description ? "Salvar" : "Criar"}
                     icon={visible.description ? "pi pi-save" : "pi pi-plus"}
                   />

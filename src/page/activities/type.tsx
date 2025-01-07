@@ -11,6 +11,11 @@ export interface CreateActivities {
   difficult: { id: string; name: string; },
   time_activities: number,
   id_classes: number
+  groups: any[]
+}
+
+export interface GroupsId {
+  idGroup: number
 }
 
 export interface CreateActivitiesType {
@@ -30,6 +35,7 @@ export interface EditActivities {
   difficult: { id: string; name: string; },
   type_activities: { id: string; name: string; }
   time_activities: number,
+  groups: any[]
 }
 
 export interface EditActivitiesType {

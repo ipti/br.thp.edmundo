@@ -38,7 +38,7 @@ const ActivitiesCreatePage = () => {
             <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesCreate.initialValue}
-                onSubmit={(values) => { activitiesCreate.CreateActivities(values) }}
+                onSubmit={(values) => { activitiesCreate.CreateActivities({ ...values, groups: values.groups.map(item => { return { idGroup: item.id } }) }) }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
                     return (

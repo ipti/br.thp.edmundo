@@ -48,7 +48,7 @@ const GroupOnePage = () => {
     return (
       <div
         className="flex justify-content-between"
-        // style={{ background: color.colorCard }}
+      // style={{ background: color.colorCard }}
       >
         <Button
           label="Criar métricas"
@@ -84,7 +84,7 @@ const GroupOnePage = () => {
           ></Column>
         </DataTable>
       </div>
-      <ModalInputs visible={visible} setOpen={() => setVisible(false)} />
+      <ModalInputs visible={visible} setOpen={() => setVisible(false)} group={props?.GroupOne} />
     </ContentPage>
   );
 };

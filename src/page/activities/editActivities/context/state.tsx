@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
-import { CreateActivitiesTagsDto, EditActivities } from "../../type";
-import { EditActivitiesController } from "../service/controller"
 import { useEffect, useState } from "react";
-import { useFetchRequestFindOneActivities, useFetchRequestFindTagsActitvities } from "../service/query";
+import { useParams } from "react-router-dom";
 import { difficult, type_activities } from "../../../../Controller/controllerGlobal";
 import queryClient from "../../../../service/reactquery";
 import { Tags } from "../../../profile/service/types";
+import { CreateActivitiesTagsDto, EditActivities } from "../../type";
+import { EditActivitiesController } from "../service/controller";
+import { useFetchRequestFindOneActivities, useFetchRequestFindTagsActitvities } from "../service/query";
 
 export const EditActivitiesState = () => {
 
@@ -44,6 +44,9 @@ export const EditActivitiesState = () => {
     }, [])
 
 
+    const findGroups = (array1: any) => {
+         return array1?.map((item: any) => {return item.groups});
+    }
 
     const initialValue: EditActivities = {
         name: activitiesOne?.name ?? "",
@@ -52,7 +55,8 @@ export const EditActivitiesState = () => {
         points_activities: activitiesOne?.points_activities ?? 0,
         time_activities: activitiesOne?.time_activities ?? 0,
         type_activities: type_activities?.find(props => props.id === activitiesOne?.type_activities) ?? { id: "", name: "" },
-        expected_return: activitiesOne?.expected_return ?? ""
+        expected_return: activitiesOne?.expected_return ?? "",
+        groups: findGroups(activitiesOne?.activities_group) ?? []
     }
 
 
