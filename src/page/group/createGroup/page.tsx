@@ -6,33 +6,34 @@ import { Column, Padding, Row } from "../../../Styles/styles";
 import CreateGroupProvider, { CreateGroupContext } from "./context/context";
 import { useContext } from "react";
 import * as Yup from "yup"
+import DropdownComponent from "../../../Components/Dropdown";
 
 
 
 const GroupCreate = () => {
-    return(
-        <CreateGroupProvider>
-            <GroupCreatePage />
-        </CreateGroupProvider>
-    )
+  return (
+    <CreateGroupProvider>
+      <GroupCreatePage />
+    </CreateGroupProvider>
+  )
 }
 
 const GroupCreatePage = () => {
 
-    const props = useContext(CreateGroupContext)
+  const props = useContext(CreateGroupContext)
 
-    
-        const schema = Yup.object().shape({
-            name: Yup.string().required("Nome é obrigatório")
-        });
-    
+
+  const schema = Yup.object().shape({
+    name: Yup.string().required("Nome é obrigatório")
+  });
+
   return (
     <ContentPage
       title="Criar Grupo"
       description="Crie um grupo para avaliar as atividades com IA"
     >
-      <Formik initialValues={{ name: "" }} validationSchema={schema} onSubmit={(values) => {props?.CreateGroup(values)}}>
-        {({ errors, values, touched, handleChange }) => {
+      <Formik initialValues={{ name: "", type: "", }} validationSchema={schema} onSubmit={(values) => { props?.CreateGroup(values) }}>
+        {({ errors, values, touched, handleChange, setFieldValue }) => {
           return (
             <Form>
               <Column>
@@ -54,6 +55,24 @@ const GroupCreatePage = () => {
                   {errors.name && touched.name ? (
                     <div style={{ color: "red", marginTop: "8px" }}>
                       {errors.name}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="col-12 md:col-6">
+                  <label>Tipo de grupo</label>
+                  <Padding />
+                  <DropdownComponent
+                    value={values.type}
+                    options={[]}
+                    optionsValue="id"
+                    optionsLabel="name"
+                    placerholder="Escolha o tipo de grupo"
+                    onChange={(e) => setFieldValue("type", e.target.value)}
+                    name="type"
+                  />
+                  {errors.type && touched.type ? (
+                    <div style={{ color: "red", marginTop: "8px" }}>
+                      {errors.type}
                     </div>
                   ) : null}
                 </div>

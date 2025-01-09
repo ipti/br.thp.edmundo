@@ -17,6 +17,7 @@ import * as Yup from 'yup';
 import ModalRating from "./modalRating";
 import FormViewComponent from "../../Components/FormView";
 import color from "../../Styles/colors";
+import { CodeiumEditor } from "@codeium/react-code-editor";
 
 const optionSchema = Yup.object().shape({
     options_fk: Yup.number().required("Option is required")
@@ -63,6 +64,7 @@ const HomeActivitiesPage = () => {
         <Container style={{
             height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px 128px"
         }}>
+
             <Row className="grid" id="space-between" style={{ width: "100%" }}>
                 <div className="col-12 md:col-4 lg:col:6">
                     <Row id="center">
@@ -122,7 +124,7 @@ const HomeActivitiesPage = () => {
                                         Tipo de atividade:
                                     </TextActivitiesParagraphCard>
                                     <TextActivitiesCard>
-                                        {propsAplication?.activitiesOne?.type_activities === "QUIZ" ? "Formulário" : propsAplication?.activitiesOne?.type_activities === "CODE" ? "Implementação" : ""} {`\n`}
+                                        {propsAplication?.activitiesOne?.type_activities === "QUIZ" ? "Formulário" : propsAplication?.activitiesOne?.type_activities === "CODE" ? "Implementação" : propsAplication?.activitiesOne?.type_activities === "IA" ? "Implementação" : ""} {`\n`}
                                     </TextActivitiesCard>
                                 </Row>
                                 {propsAplication.activitiesOne?.user_activities[0]?.user_avaliation?.total &&
@@ -199,6 +201,8 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
             </Row>
+            <CodeiumEditor language="html" theme="vs-dark" onChange={(e) => console.log(e)} />
+
             <ModalRating setVisible={setVisibleRating} visible={visibleRating} />
         </Container>
     )
