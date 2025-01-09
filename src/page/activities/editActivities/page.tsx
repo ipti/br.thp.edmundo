@@ -52,7 +52,7 @@ const ActivitiesEditPage = () => {
             <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesEdit.initialValue}
-                onSubmit={(values) => { activitiesEdit.EditActivities(values, +id!) }}
+                onSubmit={(values) => { activitiesEdit.EditActivities({...values, groups: values.groups.map(item => { return { idGroup: item.id } })}, +id!) }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
                     return (

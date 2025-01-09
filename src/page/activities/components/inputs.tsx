@@ -1,7 +1,7 @@
 import { Chip } from "primereact/chip";
 import { InputTextarea } from "primereact/inputtextarea";
 import { MultiSelect } from "primereact/multiselect";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DropdownComponent from "../../../Components/Dropdown";
@@ -40,6 +40,16 @@ const Inputs = ({
   const reactQuillRef = useRef<ReactQuill>(null);
 
   const { data: group } = useFetchRequestGroupList()
+
+  const [groupList, setGroups] = useState<any>([])
+
+  useEffect(() => {
+    if(group){
+      const groupFind = group.map((item: any) => {return {createdAt: item.createdAt, id: item.id, name: item.name, updatedAt: item.updatedAt}})
+      setGroups(groupFind)
+    }
+  }, [group])
+  
 
   const uploadImage = async (file: any) => {
     const formData = new FormData();
@@ -174,7 +184,7 @@ const Inputs = ({
           <Padding />
           <MultiSelect
             value={values.groups}
-            options={group}
+            options={groupList}
             onChange={(e) => setFieldValue("groups", e.target.value)}
             name="groups"
             optionLabel="name"
