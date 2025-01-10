@@ -6,10 +6,10 @@ export const CreateGroupContext = createContext<CreateGroupContextType | null>(n
 
 const CreateGroupProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { CreateGroup, initialValue } = CreateGroupState()
+    const { CreateGroup, typeGroupList } = CreateGroupState()
 
     return (
-        <CreateGroupContext.Provider value={{ CreateGroup, initialValue }}>
+        <CreateGroupContext.Provider value={{ CreateGroup, typeGroupList }}>
             {children}
         </CreateGroupContext.Provider>
     )

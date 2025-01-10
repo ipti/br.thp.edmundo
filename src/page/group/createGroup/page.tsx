@@ -24,15 +24,22 @@ const GroupCreatePage = () => {
 
 
   const schema = Yup.object().shape({
-    name: Yup.string().required("Nome é obrigatório")
+    name: Yup.string().required("Campo é obrigatório"),
+    idTypeGroup: Yup.object().required("Campo é obrigatório")
   });
+
+  const initialValue: { name: string, idTypeGroup: any } = {
+    name: "", idTypeGroup: "",
+  }
+
+  console.log(props?.typeGroupList)
 
   return (
     <ContentPage
       title="Criar Grupo"
       description="Crie um grupo para avaliar as atividades com IA"
     >
-      <Formik initialValues={{ name: "", type: "", }} validationSchema={schema} onSubmit={(values) => { props?.CreateGroup(values) }}>
+      <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(values) => { props?.CreateGroup({ ...values, idTypeGroup: values.idTypeGroup.id }) }}>
         {({ errors, values, touched, handleChange, setFieldValue }) => {
           return (
             <Form>
@@ -62,17 +69,29 @@ const GroupCreatePage = () => {
                   <label>Tipo de grupo</label>
                   <Padding />
                   <DropdownComponent
-                    value={values.type}
-                    options={[]}
-                    optionsValue="id"
+                    value={values.idTypeGroup}
+                    options={[
+                      {
+                          "id": 1,
+                          "name": "HTML",
+                      },
+                      {
+                          "id": 2,
+                          "name": "CSS",
+                      },
+                      {
+                          "id": 3,
+                          "name": "Java Script",
+                      }
+                  ]}
                     optionsLabel="name"
                     placerholder="Escolha o tipo de grupo"
-                    onChange={(e) => setFieldValue("type", e.target.value)}
-                    name="type"
+                    onChange={handleChange}
+                    name="idTypeGroup"
                   />
-                  {errors.type && touched.type ? (
+                  {errors.idTypeGroup && touched.idTypeGroup ? (
                     <div style={{ color: "red", marginTop: "8px" }}>
-                      {errors.type}
+                      {errors.idTypeGroup.toString()}
                     </div>
                   ) : null}
                 </div>
