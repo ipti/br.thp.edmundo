@@ -70,20 +70,7 @@ const GroupCreatePage = () => {
                   <Padding />
                   <DropdownComponent
                     value={values.idTypeGroup}
-                    options={[
-                      {
-                          "id": 1,
-                          "name": "HTML",
-                      },
-                      {
-                          "id": 2,
-                          "name": "CSS",
-                      },
-                      {
-                          "id": 3,
-                          "name": "Java Script",
-                      }
-                  ]}
+                    options={props?.typeGroupList}
                     optionsLabel="name"
                     placerholder="Escolha o tipo de grupo"
                     onChange={handleChange}

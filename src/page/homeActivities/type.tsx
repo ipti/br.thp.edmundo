@@ -9,6 +9,12 @@ export interface PropsRating {
     rating: number | undefined
 }
 
+export interface PropsCodeEditor {
+  id: number
+  content: string
+  
+}
+
   export interface Activities {
     id: number
   name: string
@@ -24,6 +30,8 @@ export interface PropsRating {
   form: any
   user_activities: UserActivity[]
   tags_activities: Tag_Activitie[]
+  activities_group: ActivitiesGroup[]
+
 }
 
 export interface UserActivity {
@@ -50,4 +58,37 @@ export interface CreateResponse {
   question: QuestionDto[];
   user_activities_id: number;
 
+}
+
+
+
+export interface ActivitiesGroup {
+  id: number
+  activitie_fk: number
+  group_fk: number
+  groups: Groups
+}
+
+export interface Groups {
+  id: number
+  name: string
+  createdAt: string
+  updatedAt: string
+  type_group_fk: number
+  metric_group: MetricGroup[]
+  type_group: TypeGroup
+
+}
+export interface TypeGroup {
+  id: number
+  name: string
+  value: string
+}
+
+
+export interface MetricGroup {
+  id: number
+  description: string
+  metric_percentange: number
+  group_fk: number
 }

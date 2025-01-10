@@ -18,6 +18,7 @@ import ModalRating from "./modalRating";
 import FormViewComponent from "../../Components/FormView";
 import color from "../../Styles/colors";
 import { CodeiumEditor } from "@codeium/react-code-editor";
+import { PropsCodeEditor } from "./type";
 
 const optionSchema = Yup.object().shape({
     options_fk: Yup.number().required("Option is required")
@@ -51,6 +52,9 @@ const HomeActivitiesPage = () => {
 
     const propsAplication = useContext(HomeActivitiesContext)
     const [visibleRating, setVisibleRating] = useState(false)
+    const [codeEditor, setCodeEditor] = useState<PropsCodeEditor[]>([])
+
+    console.log(codeEditor)
 
     const dif = getDifficulte(propsAplication?.activitiesOne?.difficult)
 
@@ -83,12 +87,13 @@ const HomeActivitiesPage = () => {
                                             <Button label="Enviar Atividade" onClick={() => propsAplication?.FinishActivitiesUser(propsAplication?.activitiesOne?.user_activities[0].id!)} />
                                             <Padding padding="16px" />
                                         </>
-
-                                        : <>
+                                        : propsAplication?.activitiesOne.type_activities === "IA" ? <>
+                                            <Padding padding="8px" />
+                                            <Button label="Enviar Atividade" onClick={() => { }} />
+                                            <Padding padding="16px" />
+                                        </> : <>
                                         </>
                             }
-
-
                             <div className="card">
                                 {/* <Row style={{ gap: "4px" }}>
                                     <TextActivitiesParagraph>
@@ -141,18 +146,14 @@ const HomeActivitiesPage = () => {
                                     </>
                                 }
                             </div>
-
                         </Column>
                     </Row>
                 </div>
                 <div className="card col-12 md:col-7 lg:col:6">
-
-
                     <Row >
                         <Column style={{ width: "100%" }}>
                             <Padding padding="32px">
                                 <div className="grid">
-
                                     {propsAplication?.activitiesOne?.tags_activities?.map((item) => {
                                         return (
                                             <>
@@ -201,7 +202,26 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
             </Row>
-            <CodeiumEditor language="html" theme="vs-dark" onChange={(e) => console.log(e)} />
+            {propsAplication.activitiesOne.activities_group.map((item, index) => {
+
+                return (
+                    <Column key={index}>
+                        <h3>{item.groups.name}</h3>
+                        <Padding />
+                        <CodeiumEditor value={codeEditor[index]?.content ?? ""} language={item.groups.type_group.value} theme="vs-dark" onChange={(e) => {
+                            if (codeEditor.find(item => item.id === index)) {
+                                setCodeEditor((prevItems) =>
+                                    prevItems.map((item) =>
+                                      item.id === index ? { ...item, content: e?.toString() ?? "" } : item
+                                    )
+                                  );
+                            } else {
+                                setCodeEditor(prevt => [...prevt, { content: e?.toString() ?? "", id: index }])
+                            }
+                        }} />
+                    </Column>
+                )
+            })}
 
             <ModalRating setVisible={setVisibleRating} visible={visibleRating} />
         </Container>
