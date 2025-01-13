@@ -66,7 +66,7 @@ const HomeActivitiesPage = () => {
 
     return (
         <Container style={{
-            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px 128px"
+            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px 64px"
         }}>
 
             <Row className="grid" id="space-between" style={{ width: "100%" }}>
@@ -89,7 +89,15 @@ const HomeActivitiesPage = () => {
                                         </>
                                         : propsAplication?.activitiesOne.type_activities === "IA" ? <>
                                             <Padding padding="8px" />
-                                            <Button label="Enviar Atividade" onClick={() => { }} />
+                                            <Button label="Enviar Atividade" onClick={() => { console.log({
+                                                tasksDescription: propsAplication.activitiesOne?.description, 
+                                                correctAnswer: propsAplication.activitiesOne?.expected_return,
+                                                performanceMetrics: propsAplication.activitiesOne?.activities_group.map((item) => {
+                                                    return { gruop: item.groups.name, metricPercentage: item.groups.metric_group.map((metric)=> {return{description: metric.description, metricPercentage: metric.metric_percentange}})}}),
+                                                student_answer: codeEditor.map((item) => {
+                                                    return item.content
+                                                })
+                                            }) }} />
                                             <Padding padding="16px" />
                                         </> : <>
                                         </>
@@ -202,13 +210,14 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
             </Row>
+            {propsAplication.activitiesOne?.user_activities[0] && <>
             {propsAplication.activitiesOne.activities_group.map((item, index) => {
 
                 return (
                     <Column key={index}>
                         <h3>{item.groups.name}</h3>
                         <Padding />
-                        <CodeiumEditor value={codeEditor[index]?.content ?? ""} language={item.groups.type_group.value} theme="vs-dark" onChange={(e) => {
+                        <CodeiumEditor value={codeEditor![index]?.content ?? ""} language={item?.groups?.type_group?.value ?? 'javascript'} theme="vs-dark" onChange={(e) => {
                             if (codeEditor.find(item => item.id === index)) {
                                 setCodeEditor((prevItems) =>
                                     prevItems.map((item) =>
@@ -222,6 +231,7 @@ const HomeActivitiesPage = () => {
                     </Column>
                 )
             })}
+            </>}
 
             <ModalRating setVisible={setVisibleRating} visible={visibleRating} />
         </Container>
