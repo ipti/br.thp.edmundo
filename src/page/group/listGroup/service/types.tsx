@@ -6,7 +6,7 @@ export interface Group {
   createdAt: string
   updatedAt: string
   activities_fk: any
-  metric_group: any[]
+  metric_group_avaliation: any[]
 }
 
 

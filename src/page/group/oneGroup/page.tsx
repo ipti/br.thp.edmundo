@@ -67,7 +67,7 @@ const GroupOnePage = () => {
       <Padding padding="8px" />
       <div>
         <DataTable
-          value={props?.GroupOne?.metric_group}
+          value={props?.GroupOne?.metric_group_avaliation}
           header={renderHeader}
           paginator
           rows={10}

@@ -44,12 +44,20 @@ const Inputs = ({
   const [groupList, setGroups] = useState<any>([])
 
   useEffect(() => {
-    if(group){
-      const groupFind = group.map((item: any) => {return {createdAt: item.createdAt, id: item.id, name: item.name, updatedAt: item.updatedAt}})
+    if (group) {
+      const groupFind = group?.map((gr: any) => {
+        const soma = gr?.metric_group_avaliation?.reduce(function (total: number, item: any) {
+          return total + item.metric_percentange;
+        }, 0) ?? 0
+        if (soma >= 100) {
+          return { createdAt: gr.createdAt, id: gr.id, name: gr.name, updatedAt: gr.updatedAt }
+        }
+      }).filter(Boolean)
       setGroups(groupFind)
     }
   }, [group])
-  
+
+  console.log(groupList);
 
   const uploadImage = async (file: any) => {
     const formData = new FormData();

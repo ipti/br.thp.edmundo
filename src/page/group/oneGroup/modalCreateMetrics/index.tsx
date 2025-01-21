@@ -18,9 +18,9 @@ const ModalInputs = ({ visible, setOpen, group }: { visible: any; setOpen: any, 
     metric_percentange: visible?.metric_percentange ?? undefined,
   };
 
-  const total = group?.metric_group?.reduce(function(total: number, item){
+  const total = group?.metric_group_avaliation?.reduce(function(total: number, item){
       return total + item.metric_percentange;
-     }, 0)
+     }, 0) ?? 0
   const schema = Yup.object().shape({
     description: Yup.string().required("Campo é obrigatório"),
     metric_percentange: Yup.number().required("Campo é obrigatório").moreThan(0, "Métricas ultrapassaram 100%").lessThan((visible?.metric_percentange ? 100 - (total - visible?.metric_percentange) : 100 - total)+1, `O valor deve ser menor ou igual que ${visible?.metric_percentange ? 100 - (total - visible?.metric_percentange) : 100 - total}%` ),
