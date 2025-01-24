@@ -15,6 +15,8 @@ import { Padding, Row } from "../../../Styles/styles";
 import { AddEditorImage } from "../createActivities/service/request";
 import color from "../../../Styles/colors";
 import { useFetchRequestGroupList } from "./service/request";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 const Inputs = ({
   errors,
@@ -39,26 +41,31 @@ const Inputs = ({
 }) => {
   const reactQuillRef = useRef<ReactQuill>(null);
 
+  const [expandedRows, setExpandedRows] = useState<any>([]);
+
   const { data: group } = useFetchRequestGroupList()
 
   const [groupList, setGroups] = useState<any>([])
 
+
+  // gerencia grupos
   useEffect(() => {
     if (group) {
+      // eslint-disable-next-line array-callback-return
       const groupFind = group?.map((gr: any) => {
         const soma = gr?.metric_group_avaliation?.reduce(function (total: number, item: any) {
           return total + item.metric_percentange;
         }, 0) ?? 0
         if (soma >= 100) {
-          return { createdAt: gr.createdAt, id: gr.id, name: gr.name, updatedAt: gr.updatedAt }
+          return { createdAt: gr.createdAt, id: gr.id, name: gr.name, updatedAt: gr.updatedAt, type_group_avaliation_fk: gr.type_group_avaliation_fk }
         }
       }).filter(Boolean)
       setGroups(groupFind)
     }
   }, [group])
 
-  console.log(groupList);
 
+  // upload imagem azure
   const uploadImage = async (file: any) => {
     const formData = new FormData();
     console.log(file);
@@ -69,6 +76,8 @@ const Inputs = ({
     return url;
   };
 
+
+  // SetImagemUrl Editor
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
@@ -87,6 +96,34 @@ const Inputs = ({
       }
     };
   }, []);
+
+  const MetricCorrect_Answer = (row: any) => {
+    return (
+      <div>
+        <TextInput value="" />
+      </div>
+    )
+  }
+
+  const expansionTemplate = (data: any) => {
+
+    return (
+      <>
+        <div className="flex">
+          <div className="ml-3 w-8">
+            <div className="p-3">
+              <h4 className="font-medium m-0 mb-2">{data?.name}</h4>
+              <p className="p-0 m-0">{data?.description}</p>
+            </div>
+          </div>
+        </div>
+        <div className="p-3" />
+      </>
+    );
+  };
+
+
+  console.log(expandedRows)
 
   return (
     <div className="grid">
@@ -216,17 +253,17 @@ const Inputs = ({
       )}
       {(values?.type_activities?.id === "CODE" ||
         values?.type_activities?.id === "IA") && (
-          <div className="col-12 md:col-6">
+          <div className="col-12">
             <label>Resposta esperada</label>
             <Padding />
-            <InputTextarea
-              style={{ width: "100%", height: "90px", resize: "none" }}
-              rows={5}
-              value={values.expected_return}
-              placeholder="Escreva com detalhes o que é esperado na resposta dos alunos"
-              onChange={handleChange}
-              name="expected_return"
-            />
+            <DataTable value={values.groups} groupRowsBy="name"
+              sortMode="single" sortField="id" sortOrder={1}
+              rowExpansionTemplate={expansionTemplate} rowGroupHeaderTemplate={(e) => { return <>{e.name}</> }} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+              tableStyle={{ minWidth: '50rem' }}>
+              <Column expander style={{ width: '2%' }} />
+              <Column  align={"left"} alignHeader={"left"} field="name" header="Name"  style={{ width: '100%' }}></Column>
+              {/* <Column field="country" header="Resposta esperada" body={MetricCorrect_Answer} style={{ width: '20%' }}></Column> */}
+            </DataTable>
             {errors.expected_return && touched.expected_return ? (
               <div style={{ color: "red", marginTop: "8px" }}>
                 {errors.expected_return}

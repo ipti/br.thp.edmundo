@@ -45,7 +45,7 @@ export const EditActivitiesState = () => {
 
 
     const findGroups = (array1: any) => {
-         return array1?.map((item: any) => {return item.groups});
+        return array1?.map((item: any) => { return item.group_avaliations });
     }
 
     const initialValue: EditActivities = {
@@ -56,9 +56,8 @@ export const EditActivitiesState = () => {
         time_activities: activitiesOne?.time_activities ?? 0,
         type_activities: type_activities?.find(props => props.id === activitiesOne?.type_activities) ?? { id: "", name: "" },
         expected_return: activitiesOne?.expected_return ?? "",
-        groups: findGroups(activitiesOne?.activities_group) ?? []
+        groups: findGroups(activitiesOne?.activities_group_avaliation) ?? []
     }
-
 
 
     const { EditActivitiesMutation, requestAddTagActivitiesMutation } = EditActivitiesController();

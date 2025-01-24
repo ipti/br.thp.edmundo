@@ -55,6 +55,7 @@ const ActivitiesEditPage = () => {
                 onSubmit={(values) => { activitiesEdit.EditActivities({...values, groups: values.groups.map(item => { return { idGroup: item.id } })}, +id!) }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
+                    console.log(values)
                     return (
                         <Form>
                             <Column>
