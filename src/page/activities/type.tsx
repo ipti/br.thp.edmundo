@@ -35,7 +35,8 @@ export interface EditActivities {
   difficult: { id: string; name: string; },
   type_activities: { id: string; name: string; }
   time_activities: number,
-  groups: any[]
+  groups: any[],
+  
 }
 
 export interface EditActivitiesType {
@@ -47,6 +48,7 @@ export interface EditActivitiesType {
   tags: Tags | undefined
   tagsActivities: any
   setTagsActivities: Dispatch<any>
+  CorrectAnswerMetricActivities: (id: number, body: PropsCorrectAnswerMetricActivities[]) => void
 }
 
 export interface ActivitiesOne {
@@ -111,7 +113,10 @@ export interface Option {
 
 
 
-
+export interface PropsCorrectAnswerMetricActivities {
+  idMetric: number,
+  correctAnswer: string
+}
 
 export interface PropsFormActivities {
   questions: Question[]

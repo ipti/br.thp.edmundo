@@ -1,5 +1,6 @@
 import { Chip } from "primereact/chip";
-import { InputTextarea } from "primereact/inputtextarea";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { MultiSelect } from "primereact/multiselect";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
@@ -11,12 +12,10 @@ import {
   difficult,
   type_activities,
 } from "../../../Controller/controllerGlobal";
+import color from "../../../Styles/colors";
 import { Padding, Row } from "../../../Styles/styles";
 import { AddEditorImage } from "../createActivities/service/request";
-import color from "../../../Styles/colors";
 import { useFetchRequestGroupList } from "./service/request";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
 
 const Inputs = ({
   errors,
@@ -68,7 +67,6 @@ const Inputs = ({
   // upload imagem azure
   const uploadImage = async (file: any) => {
     const formData = new FormData();
-    console.log(file);
     formData.append("file", file);
     const url = await AddEditorImage(formData).then((data: any) => {
       return data.data;
@@ -97,33 +95,21 @@ const Inputs = ({
     };
   }, []);
 
-  const MetricCorrect_Answer = (row: any) => {
-    return (
-      <div>
-        <TextInput value="" />
-      </div>
-    )
-  }
-
   const expansionTemplate = (data: any) => {
 
     return (
       <>
-        <div className="flex">
-          <div className="ml-3 w-8">
-            <div className="p-3">
-              <h4 className="font-medium m-0 mb-2">{data?.name}</h4>
-              <p className="p-0 m-0">{data?.description}</p>
-            </div>
-          </div>
-        </div>
-        <div className="p-3" />
+        <DataTable value={data?.metric_group_avaliation} tableStyle={{ minWidth: '50rem' }}>
+          <Column field="description" headerStyle={{ width: "40%" }} header="Nome"></Column>
+          <Column body={() => {
+            return (
+              <TextInput value="" />
+            )
+          }} header="Detalhes de correção"></Column>
+        </DataTable>
       </>
     );
   };
-
-
-  console.log(expandedRows)
 
   return (
     <div className="grid">
@@ -193,86 +179,7 @@ const Inputs = ({
           </div>
         ) : null}
       </div>
-
-
-      {!isCreated && (
-        <div className="col-12 md:col-6">
-          <label>Tags </label>
-          <Padding />
-          <MultiSelect
-            value={tags}
-            onChange={(e) => {
-              setTags(e.value);
-            }}
-            options={tagsAll}
-            optionLabel="content"
-            placeholder="Tags"
-            maxSelectedLabels={3}
-            className="w-full"
-          />
-          <Padding padding="16px" />
-          <Row className="grid" style={{ gap: "8px" }}>
-            {tags?.map((item: any) => {
-              return (
-                <Chip
-                  style={{ background: color.colorBlueClean, color: "black" }}
-                  label={"#" + item.content}
-                />
-              );
-            })}
-          </Row>
-        </div>
-      )}
-      {values?.type_activities?.id === "IA" && (
-        <div className="col-12 md:col-6">
-          <label>Grupo de IA </label>
-          <Padding />
-          <MultiSelect
-            value={values.groups}
-            options={groupList}
-            onChange={(e) => setFieldValue("groups", e.target.value)}
-            name="groups"
-            optionLabel="name"
-            placeholder="Escolha os grupos para avaliação"
-            maxSelectedLabels={3}
-            className="w-full"
-          />
-          {errors.difficult && touched.difficult ? (
-            <div style={{ color: "red", marginTop: "8px" }}>
-              {errors.difficult.id}
-            </div>
-          ) : null}
-          <Row className="grid" style={{ gap: "8px", marginTop: 8 }}>
-            {values.groups?.map((item: any) => {
-              return (
-                <Chip style={{ background: color.colorBlueClean, color: "black" }} label={item.name} />
-              )
-            })}
-          </Row>
-        </div>
-      )}
-      {(values?.type_activities?.id === "CODE" ||
-        values?.type_activities?.id === "IA") && (
-          <div className="col-12">
-            <label>Resposta esperada</label>
-            <Padding />
-            <DataTable value={values.groups} groupRowsBy="name"
-              sortMode="single" sortField="id" sortOrder={1}
-              rowExpansionTemplate={expansionTemplate} rowGroupHeaderTemplate={(e) => { return <>{e.name}</> }} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-              tableStyle={{ minWidth: '50rem' }}>
-              <Column expander style={{ width: '2%' }} />
-              <Column  align={"left"} alignHeader={"left"} field="name" header="Name"  style={{ width: '100%' }}></Column>
-              {/* <Column field="country" header="Resposta esperada" body={MetricCorrect_Answer} style={{ width: '20%' }}></Column> */}
-            </DataTable>
-            {errors.expected_return && touched.expected_return ? (
-              <div style={{ color: "red", marginTop: "8px" }}>
-                {errors.expected_return}
-              </div>
-            ) : null}
-          </div>
-        )}
-
-      <div className="col-12 md:col-6">
+      <div className="col-12 md:col-12">
         <label>Descrição</label>
         <Padding />
         <ReactQuill
@@ -363,6 +270,86 @@ const Inputs = ({
           </div>
         ) : null}
       </div>
+
+      {!isCreated && (
+        <div className="col-12 md:col-6">
+          <label>Tags </label>
+          <Padding />
+          <MultiSelect
+            value={tags}
+            onChange={(e) => {
+              setTags(e.value);
+            }}
+            options={tagsAll}
+            optionLabel="content"
+            placeholder="Tags"
+            maxSelectedLabels={3}
+            className="w-full"
+          />
+          <Padding padding="8px" />
+          <Row className="grid" style={{ gap: "8px" }}>
+            {tags?.map((item: any) => {
+              return (
+                <Chip
+                  style={{ background: color.colorBlueClean, color: "black" }}
+                  label={"#" + item.content}
+                />
+              );
+            })}
+          </Row>
+        </div>
+      )}
+
+      {values?.type_activities?.id === "IA" && (
+        <div className="col-12 md:col-6">
+          <label>Grupo de IA </label>
+          <Padding />
+          <MultiSelect
+            value={values.groups}
+            options={groupList}
+            onChange={(e) => setFieldValue("groups", e.target.value)}
+            name="groups"
+            optionLabel="name"
+            placeholder="Escolha os grupos para avaliação"
+            maxSelectedLabels={3}
+            className="w-full"
+          />
+          {errors.difficult && touched.difficult ? (
+            <div style={{ color: "red", marginTop: "8px" }}>
+              {errors.difficult.id}
+            </div>
+          ) : null}
+          <Row className="grid" style={{ gap: "8px", marginTop: 8 }}>
+            {values.groups?.map((item: any) => {
+              return (
+                <Chip style={{ background: color.colorBlueClean, color: "black" }} label={item.name} />
+              )
+            })}
+          </Row>
+        </div>
+      )}
+      {(values?.type_activities?.id === "CODE" ||
+        values?.type_activities?.id === "IA") && (
+          <div className="col-12">
+            <label>Resposta esperada</label>
+            <Padding />
+            <DataTable value={values.groups} groupRowsBy="name"
+              sortMode="single" sortField="id" sortOrder={1}
+              rowExpansionTemplate={expansionTemplate} rowGroupHeaderTemplate={(e) => { return <>{e.name}</> }} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
+              tableStyle={{ minWidth: '50rem' }}>
+              <Column expander style={{ width: '2%' }} />
+              <Column align={"left"} alignHeader={"left"} field="name" header="Nome" style={{ width: '100%' }}></Column>
+              {/* <Column field="country" header="Resposta esperada" body={MetricCorrect_Answer} style={{ width: '20%' }}></Column> */}
+            </DataTable>
+            {errors.expected_return && touched.expected_return ? (
+              <div style={{ color: "red", marginTop: "8px" }}>
+                {errors.expected_return}
+              </div>
+            ) : null}
+          </div>
+        )}
+
+
     </div>
   );
 };
