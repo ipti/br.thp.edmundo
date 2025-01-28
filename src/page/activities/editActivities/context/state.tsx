@@ -9,6 +9,8 @@ import { useFetchRequestFindOneActivities, useFetchRequestFindTagsActitvities } 
 
 export const EditActivitiesState = () => {
 
+    const [isLoadingMetric, setIsLoadingMetric] = useState(true)
+
     const [is, setIs] = useState(false)
 
     const { id } = useParams()
@@ -19,8 +21,9 @@ export const EditActivitiesState = () => {
 
 
     const { data: tagsRequest } = useFetchRequestFindTagsActitvities()
-    
-    const [metricCorrectAnswer, setMetricCorrectAnswer] = useState<{idMetric: number, correctAnswer: string}[]>()
+
+    const [metricCorrectAnswer, setMetricCorrectAnswer] = useState<{ idMetric: number, correctAnswer: string }[]>([])
+
 
     useEffect(() => {
         if (tagsRequest) {
@@ -37,13 +40,20 @@ export const EditActivitiesState = () => {
             var tagsActivities = activitiesOneRequest?.tags_activities?.map((item: any) => { return item.tag })
             setTagsActivities(tagsActivities!)
 
-            activitiesOne?.activities_group_avaliation.map((item) => {
-                item.group_avaliations.metric_group_avaliation.map((metric) => {
-                    
+        }
+    }, [activitiesOneRequest, is, metricCorrectAnswer])
+
+    useEffect(() => {
+        if (activitiesOneRequest && isLoadingMetric) {
+            activitiesOneRequest?.activities_group_avaliation?.forEach((item: any) => {
+                item?.group_avaliations?.metric_group_avaliation?.forEach((metric: any) => {
+                    setMetricCorrectAnswer(prevItems => [...prevItems, { correctAnswer: metric.metric_group_avaliation_correct_answer[0]?.correct_answer ?? "", idMetric: metric.id }])
                 })
             })
+            setIsLoadingMetric(false)
         }
-    }, [activitiesOneRequest, is])
+    }, [activitiesOneRequest, isLoadingMetric, metricCorrectAnswer])
+
 
     useEffect(() => {
 
@@ -58,7 +68,7 @@ export const EditActivitiesState = () => {
 
 
 
-    
+
 
     const initialValue: EditActivities = {
         name: activitiesOne?.name ?? "",
@@ -69,7 +79,7 @@ export const EditActivitiesState = () => {
         type_activities: type_activities?.find(props => props.id === activitiesOne?.type_activities) ?? { id: "", name: "" },
         expected_return: activitiesOne?.expected_return ?? "",
         groups: findGroups(activitiesOne?.activities_group_avaliation) ?? [],
-        
+
     }
 
 

@@ -110,11 +110,6 @@ const Inputs = ({
                 value={correctAnswer?.correct_answer || ""}
                 onChange={(e) => {
                   if (correctAnswer) {
-                    data.metric_group_avaliation?.map((item: any) => {
-                      if(item.id === row.id){
-                        item.
-                      }
-                    })
                     setFieldValue("groups", )
                   }
                 }}

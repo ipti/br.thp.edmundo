@@ -89,15 +89,18 @@ const HomeActivitiesPage = () => {
                                         </>
                                         : propsAplication?.activitiesOne.type_activities === "IA" ? <>
                                             <Padding padding="8px" />
-                                            <Button label="Enviar Atividade" onClick={() => { console.log({
-                                                tasksDescription: propsAplication.activitiesOne?.description, 
-                                                correctAnswer: propsAplication.activitiesOne?.expected_return,
-                                                performanceMetrics: propsAplication.activitiesOne?.activities_group.map((item) => {
-                                                    return { gruop: item.groups.name, metricPercentage: item.groups.metric_group.map((metric)=> {return{description: metric.description, metricPercentage: metric.metric_percentange}})}}),
-                                                student_answer: codeEditor.map((item) => {
-                                                    return item.content
+                                            <Button label="Enviar Atividade" onClick={() => {
+                                                console.log({
+                                                    tasksDescription: propsAplication.activitiesOne?.description,
+                                                    correctAnswer: propsAplication.activitiesOne?.expected_return,
+                                                    performanceMetrics: propsAplication.activitiesOne?.activities_group.map((item) => {
+                                                        return { gruop: item.groups.name, metricPercentage: item.groups.metric_group.map((metric) => { return { description: metric.description, metricPercentage: metric.metric_percentange } }) }
+                                                    }),
+                                                    student_answer: codeEditor.map((item) => {
+                                                        return item.content
+                                                    })
                                                 })
-                                            }) }} />
+                                            }} />
                                             <Padding padding="16px" />
                                         </> : <>
                                         </>
@@ -210,27 +213,27 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
             </Row>
-            {propsAplication.activitiesOne?.user_activities[0] && <>
-            {propsAplication.activitiesOne.activities_group.map((item, index) => {
+            {propsAplication?.activitiesOne?.user_activities![0] && <>
+                {propsAplication?.activitiesOne?.activities_group?.map((item, index) => {
 
-                return (
-                    <Column key={index}>
-                        <h3>{item.groups.name}</h3>
-                        <Padding />
-                        <CodeiumEditor value={codeEditor![index]?.content ?? ""} language={item?.groups?.type_group?.value ?? 'javascript'} theme="vs-dark" onChange={(e) => {
-                            if (codeEditor.find(item => item.id === index)) {
-                                setCodeEditor((prevItems) =>
-                                    prevItems.map((item) =>
-                                      item.id === index ? { ...item, content: e?.toString() ?? "" } : item
-                                    )
-                                  );
-                            } else {
-                                setCodeEditor(prevt => [...prevt, { content: e?.toString() ?? "", id: index }])
-                            }
-                        }} />
-                    </Column>
-                )
-            })}
+                    return (
+                        <Column key={index}>
+                            <h3>{item.groups.name}</h3>
+                            <Padding />
+                            <CodeiumEditor value={codeEditor![index]?.content ?? ""} language={item?.groups?.type_group?.value ?? 'javascript'} theme="vs-dark" onChange={(e) => {
+                                if (codeEditor.find(item => item.id === index)) {
+                                    setCodeEditor((prevItems) =>
+                                        prevItems.map((item) =>
+                                            item.id === index ? { ...item, content: e?.toString() ?? "" } : item
+                                        )
+                                    );
+                                } else {
+                                    setCodeEditor(prevt => [...prevt, { content: e?.toString() ?? "", id: index }])
+                                }
+                            }} />
+                        </Column>
+                    )
+                })}
             </>}
 
             <ModalRating setVisible={setVisibleRating} visible={visibleRating} />

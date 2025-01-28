@@ -36,7 +36,7 @@ export interface EditActivities {
   type_activities: { id: string; name: string; }
   time_activities: number,
   groups: any[],
-  
+
 }
 
 export interface EditActivitiesType {
@@ -44,7 +44,7 @@ export interface EditActivitiesType {
   EditActivities: (body: EditActivities, id: number) => void;
   isLoading: boolean;
   isError: boolean;
-  activitiesOne: ActivitiesOne;
+  activitiesOne: ActivitiesOne | undefined;
   tags: Tags | undefined
   tagsActivities: any
   setTagsActivities: Dispatch<any>
