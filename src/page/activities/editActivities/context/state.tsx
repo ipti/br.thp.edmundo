@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { difficult, type_activities } from "../../../../Controller/controllerGlobal";
 import queryClient from "../../../../service/reactquery";
 import { Tags } from "../../../profile/service/types";
-import { CreateActivitiesTagsDto, EditActivities, PropsCorrectAnswerMetricActivities } from "../../type";
+import { ActivitiesOne, CreateActivitiesTagsDto, EditActivities, PropsCorrectAnswerMetricActivities } from "../../type";
 import { EditActivitiesController } from "../service/controller";
 import { useFetchRequestFindOneActivities, useFetchRequestFindTagsActitvities } from "../service/query";
 
@@ -12,13 +12,15 @@ export const EditActivitiesState = () => {
     const [is, setIs] = useState(false)
 
     const { id } = useParams()
-    const [activitiesOne, setactivitiessOne] = useState<any | undefined>()
+    const [activitiesOne, setactivitiessOne] = useState<ActivitiesOne | undefined>()
 
     const [tags, setTags] = useState<Tags | undefined>()
     const [tagsActivities, setTagsActivities] = useState<any>([])
 
 
     const { data: tagsRequest } = useFetchRequestFindTagsActitvities()
+    
+    const [metricCorrectAnswer, setMetricCorrectAnswer] = useState<{idMetric: number, correctAnswer: string}[]>()
 
     useEffect(() => {
         if (tagsRequest) {
@@ -34,6 +36,12 @@ export const EditActivitiesState = () => {
             setactivitiessOne(activitiesOneRequest)
             var tagsActivities = activitiesOneRequest?.tags_activities?.map((item: any) => { return item.tag })
             setTagsActivities(tagsActivities!)
+
+            activitiesOne?.activities_group_avaliation.map((item) => {
+                item.group_avaliations.metric_group_avaliation.map((metric) => {
+                    
+                })
+            })
         }
     }, [activitiesOneRequest, is])
 
@@ -47,6 +55,10 @@ export const EditActivitiesState = () => {
     const findGroups = (array1: any) => {
         return array1?.map((item: any) => { return item.group_avaliations });
     }
+
+
+
+    
 
     const initialValue: EditActivities = {
         name: activitiesOne?.name ?? "",

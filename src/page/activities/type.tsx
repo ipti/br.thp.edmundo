@@ -143,3 +143,63 @@ export interface CreateActivitiesTagsDto {
   items: TagDto[];
   idActivitie: number
 }
+
+
+export interface ActivitiesOne {
+  id: number
+  name: string
+  description: string
+  expected_return: string
+  type_activities: string
+  points_activities: number
+  difficult: string
+  time_activities: number
+  createdAt: string
+  updatedAt: string
+  classesId: number
+  tags_activities: Tag_Activities
+  activities_group_avaliation: ActivitiesGroupAvaliation[]
+  form: Form
+}
+
+export interface Tag {
+  id: number
+  createdAt: string
+  content: string
+  type: string
+}
+
+export interface ActivitiesGroupAvaliation {
+  id: number
+  activitie_fk: number
+  group_avaliation_fk: number
+  group_avaliations: GroupAvaliations
+}
+
+export interface GroupAvaliations {
+  id: number
+  name: string
+  createdAt: string
+  updatedAt: string
+  type_group_avaliation_fk: number
+  metric_group_avaliation: MetricGroupAvaliation[]
+}
+
+export interface MetricGroupAvaliation {
+  id: number
+  description: string
+  metric_percentange: number
+  createdAt: string
+  updatedAt: string
+  group_avaliation_fk: number
+  metric_group_avaliation_correct_answer: MetricGroupAvaliationCorrectAnswer[]
+}
+
+export interface MetricGroupAvaliationCorrectAnswer {
+  id: number
+  createdAt: string
+  updatedAt: string
+  correct_answer: string
+  metric_group_avaliation_fk: number
+  activities_fk: number
+}

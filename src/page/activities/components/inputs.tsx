@@ -46,6 +46,8 @@ const Inputs = ({
 
   const [groupList, setGroups] = useState<any>([])
 
+  console.log(values)
+
 
   // gerencia grupos
   useEffect(() => {
@@ -56,7 +58,7 @@ const Inputs = ({
           return total + item.metric_percentange;
         }, 0) ?? 0
         if (soma >= 100) {
-          return { createdAt: gr.createdAt, id: gr.id, name: gr.name, updatedAt: gr.updatedAt, type_group_avaliation_fk: gr.type_group_avaliation_fk }
+          return { createdAt: gr.createdAt, id: gr.id, name: gr.name, updatedAt: gr.updatedAt, type_group_avaliation_fk: gr.type_group_avaliation_fk, metric_group_avaliation: gr.metric_group_avaliation }
         }
       }).filter(Boolean)
       setGroups(groupFind)
@@ -101,15 +103,30 @@ const Inputs = ({
       <>
         <DataTable value={data?.metric_group_avaliation} tableStyle={{ minWidth: '50rem' }}>
           <Column field="description" headerStyle={{ width: "40%" }} header="Nome"></Column>
-          <Column body={() => {
+          <Column body={(row) => {
+             const correctAnswer = row.metric_group_avaliation_correct_answer?.[0];
             return (
-              <TextInput value="" />
+              <TextInput
+                value={correctAnswer?.correct_answer || ""}
+                onChange={(e) => {
+                  if (correctAnswer) {
+                    data.metric_group_avaliation?.map((item: any) => {
+                      if(item.id === row.id){
+                        item.
+                      }
+                    })
+                    setFieldValue("groups", )
+                  }
+                }}
+              />
             )
           }} header="Detalhes de correção"></Column>
         </DataTable>
       </>
     );
   };
+
+
 
   return (
     <div className="grid">

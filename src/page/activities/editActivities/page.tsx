@@ -28,6 +28,7 @@ const ActivitiesEditPage = () => {
     const activitiesEdit = useContext(EditActivitiesContext) as EditActivitiesType
     const [activeIndex, setActiveIndex] = useState(0);
     const [createdQuestion, setCreatedQuestion] = useState(false);
+    
 
     const { id } = useParams()
 
@@ -55,7 +56,7 @@ const ActivitiesEditPage = () => {
                 onSubmit={(values) => { activitiesEdit.EditActivities({...values, groups: values.groups.map(item => { return { idGroup: item.id } })}, +id!) }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
-                    console.log(values)
+                    
                     return (
                         <Form>
                             <Column>
