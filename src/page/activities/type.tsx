@@ -49,6 +49,14 @@ export interface EditActivitiesType {
   tagsActivities: any
   setTagsActivities: Dispatch<any>
   CorrectAnswerMetricActivities: (id: number, body: PropsCorrectAnswerMetricActivities[]) => void
+  metricCorrectAnswer: {
+    idMetric: number;
+    correctAnswer: string;
+}[]
+setMetricCorrectAnswer: Dispatch<SetStateAction<{
+  idMetric: number;
+  correctAnswer: string;
+}[]>>
 }
 
 export interface ActivitiesOne {

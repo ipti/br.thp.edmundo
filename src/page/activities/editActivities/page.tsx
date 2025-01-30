@@ -53,7 +53,12 @@ const ActivitiesEditPage = () => {
             <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesEdit.initialValue}
-                onSubmit={(values) => { activitiesEdit.EditActivities({...values, groups: values.groups.map(item => { return { idGroup: item.id } })}, +id!) }}
+                onSubmit={(values) => { 
+                    activitiesEdit.EditActivities({...values, groups: values.groups.map(item => { return { idGroup: item.id } })}, +id!);
+                    if(activitiesEdit.metricCorrectAnswer.length > 0){
+                        activitiesEdit.CorrectAnswerMetricActivities(+id!, activitiesEdit.metricCorrectAnswer);
+                    }
+                }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
                     
@@ -64,7 +69,7 @@ const ActivitiesEditPage = () => {
                                     <Button label="Salvar" icon={"pi pi-save"} type="submit" />
                                 </Row>
                             </Column>
-                            <Inputs errors={errors} tagsAll={activitiesEdit.tags} setTags={activitiesEdit.setTagsActivities} tags={activitiesEdit.tagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
+                            <Inputs metricCorrectAnswer={activitiesEdit.metricCorrectAnswer} setMetricCorrectAnswer={activitiesEdit.setMetricCorrectAnswer} errors={errors} tagsAll={activitiesEdit.tags} setTags={activitiesEdit.setTagsActivities} tags={activitiesEdit.tagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
                         </Form>
                     );
                 }}

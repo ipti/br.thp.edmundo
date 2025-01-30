@@ -7,12 +7,12 @@ export const EditActivitiesRequest = async (body: EditActivities, id: number) =>
     return await http.put("/activities/" + id, { ...body, difficult: body.difficult.id, type_activities: body.type_activities.id })
 }
 
-export const CreateFormRequest = async ( body: PropsFormActivities) => {
+export const CreateFormRequest = async (body: PropsFormActivities) => {
     return await http.post("/form-bff", body)
 }
 
-export const CorrectAnswerRequest = async (id: number,body: PropsCorrectAnswerMetricActivities[]) => {
-    return await http.post("/activities-bff/correct-answer-metric-activities?id="+id, body)
+export const CorrectAnswerRequest = async (id: number, body: PropsCorrectAnswerMetricActivities[]) => {
+    return await http.put("/activities-bff/correct-answer-metric-activities?id=" + id, { metrics: body })
 }
 
 

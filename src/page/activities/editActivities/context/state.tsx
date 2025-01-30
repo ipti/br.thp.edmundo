@@ -45,18 +45,19 @@ export const EditActivitiesState = () => {
 
     useEffect(() => {
         if (activitiesOneRequest && isLoadingMetric) {
+            var array: any = []
             activitiesOneRequest?.activities_group_avaliation?.forEach((item: any) => {
                 item?.group_avaliations?.metric_group_avaliation?.forEach((metric: any) => {
-                    setMetricCorrectAnswer(prevItems => [...prevItems, { correctAnswer: metric.metric_group_avaliation_correct_answer[0]?.correct_answer ?? "", idMetric: metric.id }])
+                    array.push({ correctAnswer: metric.metric_group_avaliation_correct_answer[0]?.correct_answer ?? "", idMetric: metric.id })
+                    // setMetricCorrectAnswer(prevItems => [...prevItems, { correctAnswer: metric.metric_group_avaliation_correct_answer[0]?.correct_answer ?? "", idMetric: metric.id }])
                 })
             })
+            setMetricCorrectAnswer(array)
             setIsLoadingMetric(false)
         }
     }, [activitiesOneRequest, isLoadingMetric, metricCorrectAnswer])
 
-
     useEffect(() => {
-
         queryClient.removeQueries("useRequestsOneActivities")
         setIs(true)
     }, [])
@@ -107,5 +108,5 @@ export const EditActivitiesState = () => {
 
         requestAddTagActivitiesMutation.mutate(tagsUserBody)
     }
-    return { initialValue, EditActivities, isLoading, isError, activitiesOne, tags, tagsActivities, setTagsActivities, CorrectAnswerMetricActivities }
+    return { initialValue, EditActivities, isLoading, isError, activitiesOne, tags, tagsActivities, setTagsActivities, CorrectAnswerMetricActivities, metricCorrectAnswer, setMetricCorrectAnswer }
 }

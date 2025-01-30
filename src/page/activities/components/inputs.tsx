@@ -2,7 +2,7 @@ import { Chip } from "primereact/chip";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { MultiSelect } from "primereact/multiselect";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DropdownComponent from "../../../Components/Dropdown";
@@ -27,6 +27,8 @@ const Inputs = ({
   tags,
   setTags,
   tagsAll,
+  metricCorrectAnswer,
+  setMetricCorrectAnswer
 }: {
   tagsAll: any;
   errors: any;
@@ -37,6 +39,14 @@ const Inputs = ({
   isCreated?: boolean;
   tags: any;
   setTags: any;
+  metricCorrectAnswer?: {
+    idMetric: number;
+    correctAnswer: string;
+  }[];
+  setMetricCorrectAnswer?: Dispatch<SetStateAction<{
+    idMetric: number;
+    correctAnswer: string;
+  }[]>>
 }) => {
   const reactQuillRef = useRef<ReactQuill>(null);
 
@@ -45,8 +55,6 @@ const Inputs = ({
   const { data: group } = useFetchRequestGroupList()
 
   const [groupList, setGroups] = useState<any>([])
-
-  console.log(values)
 
 
   // gerencia grupos
@@ -104,14 +112,16 @@ const Inputs = ({
         <DataTable value={data?.metric_group_avaliation} tableStyle={{ minWidth: '50rem' }}>
           <Column field="description" headerStyle={{ width: "40%" }} header="Nome"></Column>
           <Column body={(row) => {
-             const correctAnswer = row.metric_group_avaliation_correct_answer?.[0];
             return (
               <TextInput
-                value={correctAnswer?.correct_answer || ""}
+                value={metricCorrectAnswer?.find(props => props.idMetric === row.id)?.correctAnswer || ""}
                 onChange={(e) => {
-                  if (correctAnswer) {
-                    setFieldValue("groups", )
-                  }
+                  if (!setMetricCorrectAnswer) return;
+                  setMetricCorrectAnswer(prevItems => 
+                    prevItems?.map(item => 
+                      item.idMetric === row.id ? { ...item, correctAnswer: e.target.value } : item
+                    ))
+
                 }}
               />
             )
@@ -121,7 +131,7 @@ const Inputs = ({
     );
   };
 
-
+console.log(values)
 
   return (
     <div className="grid">
@@ -340,8 +350,8 @@ const Inputs = ({
           </Row>
         </div>
       )}
-      {(values?.type_activities?.id === "CODE" ||
-        values?.type_activities?.id === "IA") && (
+      {((values?.type_activities?.id === "CODE" ||
+        values?.type_activities?.id === "IA") && !isCreated) && (
           <div className="col-12">
             <label>Resposta esperada</label>
             <Padding />

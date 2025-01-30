@@ -6,10 +6,10 @@ export const EditActivitiesContext = createContext<EditActivitiesType | null>(nu
 
 const EditActivitiesProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { EditActivities, initialValue, activitiesOne, isError, isLoading, tags, setTagsActivities, tagsActivities, CorrectAnswerMetricActivities } = EditActivitiesState()
+    const { EditActivities, initialValue, activitiesOne, isError, isLoading, tags, setTagsActivities, tagsActivities, CorrectAnswerMetricActivities, metricCorrectAnswer, setMetricCorrectAnswer } = EditActivitiesState()
 
     return (
-        <EditActivitiesContext.Provider value={{ EditActivities, initialValue, activitiesOne, isError, isLoading, tags, setTagsActivities, tagsActivities, CorrectAnswerMetricActivities }}>
+        <EditActivitiesContext.Provider value={{ EditActivities, initialValue, activitiesOne, isError, isLoading, tags, setTagsActivities, tagsActivities, CorrectAnswerMetricActivities, metricCorrectAnswer, setMetricCorrectAnswer }}>
             {children}
         </EditActivitiesContext.Provider>
     )
