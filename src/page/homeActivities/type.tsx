@@ -30,7 +30,7 @@ export interface PropsCodeEditor {
   form: any
   user_activities: UserActivity[]
   tags_activities: Tag_Activitie[]
-  activities_group: ActivitiesGroup[]
+  activities_group_avaliation: ActivitiesGroup[]
 
 }
 
@@ -65,30 +65,42 @@ export interface CreateResponse {
 export interface ActivitiesGroup {
   id: number
   activitie_fk: number
-  group_fk: number
-  groups: Groups
+  group_avaliation_fk: number
+  group_avaliations: GroupAvaliations
 }
-
-export interface Groups {
+export interface GroupAvaliations {
   id: number
   name: string
   createdAt: string
   updatedAt: string
-  type_group_fk: number
-  metric_group: MetricGroup[]
-  type_group: TypeGroup
-
-}
-export interface TypeGroup {
-  id: number
-  name: string
-  value: string
+  type_group_avaliation_fk: number
+  metric_group_avaliation: MetricGroupAvaliation[]
+  type_group_avaliation: TypeGroupAvaliation
 }
 
-
-export interface MetricGroup {
+export interface MetricGroupAvaliation {
   id: number
   description: string
   metric_percentange: number
-  group_fk: number
+  createdAt: string
+  updatedAt: string
+  group_avaliation_fk: number
+  metric_group_avaliation_correct_answer: MetricGroupAvaliationCorrectAnswer[]
+}
+
+export interface MetricGroupAvaliationCorrectAnswer {
+  id: number
+  createdAt: string
+  updatedAt: string
+  correct_answer: string
+  metric_group_avaliation_fk: number
+  activities_fk: number
+}
+
+export interface TypeGroupAvaliation {
+  id: number
+  name: string
+  value: string
+  createdAt: string
+  updatedAt: string
 }

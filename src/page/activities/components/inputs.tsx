@@ -117,8 +117,8 @@ const Inputs = ({
                 value={metricCorrectAnswer?.find(props => props.idMetric === row.id)?.correctAnswer || ""}
                 onChange={(e) => {
                   if (!setMetricCorrectAnswer) return;
-                  setMetricCorrectAnswer(prevItems => 
-                    prevItems?.map(item => 
+                  setMetricCorrectAnswer(prevItems =>
+                    prevItems?.map(item =>
                       item.idMetric === row.id ? { ...item, correctAnswer: e.target.value } : item
                     ))
 
@@ -131,7 +131,7 @@ const Inputs = ({
     );
   };
 
-console.log(values)
+  console.log(metricCorrectAnswer)
 
   return (
     <div className="grid">
@@ -328,8 +328,20 @@ console.log(values)
           <Padding />
           <MultiSelect
             value={values.groups}
+            defaultChecked={true}
             options={groupList}
-            onChange={(e) => setFieldValue("groups", e.target.value)}
+            onChange={(e) => {
+              setFieldValue("groups", e.target.value);
+              var array: any = []
+              if (!setMetricCorrectAnswer) return
+              e.target.value?.forEach((item: any) => {
+                item.metric_group_avaliation?.forEach((metric: any) => {
+                  array.push({ correctAnswer: metricCorrectAnswer?.find(item => item.idMetric === metric.id)?.correctAnswer ?? "", idMetric: metric.id })
+                })
+              })
+              setMetricCorrectAnswer(array)
+            }
+            }
             name="groups"
             optionLabel="name"
             placeholder="Escolha os grupos para avaliação"

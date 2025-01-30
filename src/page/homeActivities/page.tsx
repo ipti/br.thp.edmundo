@@ -93,8 +93,8 @@ const HomeActivitiesPage = () => {
                                                 console.log({
                                                     tasksDescription: propsAplication.activitiesOne?.description,
                                                     correctAnswer: propsAplication.activitiesOne?.expected_return,
-                                                    performanceMetrics: propsAplication.activitiesOne?.activities_group.map((item) => {
-                                                        return { gruop: item.groups.name, metricPercentage: item.groups.metric_group.map((metric) => { return { description: metric.description, metricPercentage: metric.metric_percentange } }) }
+                                                    performanceMetrics: propsAplication.activitiesOne?.activities_group_avaliation.map((item) => {
+                                                        return { gruop: item.group_avaliations.name,  metricPercentage: item.group_avaliations.metric_group_avaliation.map((metric) => { return { description: metric.description, metricPercentage: metric.metric_percentange, correct_answer: metric?.metric_group_avaliation_correct_answer![0]?.correct_answer ?? "" } }) }
                                                     }),
                                                     student_answer: codeEditor.map((item) => {
                                                         return item.content
@@ -213,14 +213,14 @@ const HomeActivitiesPage = () => {
                     </Row>
                 </div>
             </Row>
-            {propsAplication?.activitiesOne?.user_activities![0] && <>
-                {propsAplication?.activitiesOne?.activities_group?.map((item, index) => {
+            {propsAplication?.activitiesOne?.user_activities![0] && <div className="grid">
+                {propsAplication?.activitiesOne?.activities_group_avaliation?.map((item, index) => {
 
                     return (
-                        <Column key={index}>
-                            <h3>{item.groups.name}</h3>
+                        <Column className="col-12 md:col-6" key={index}>
+                            <h3>{item?.group_avaliations?.name}</h3>
                             <Padding />
-                            <CodeiumEditor value={codeEditor![index]?.content ?? ""} language={item?.groups?.type_group?.value ?? 'javascript'} theme="vs-dark" onChange={(e) => {
+                            <CodeiumEditor value={codeEditor![index]?.content ?? ""} language={item?.group_avaliations?.type_group_avaliation?.value ?? 'javascript'} theme="vs-dark" onChange={(e) => {
                                 if (codeEditor.find(item => item.id === index)) {
                                     setCodeEditor((prevItems) =>
                                         prevItems.map((item) =>
@@ -234,7 +234,7 @@ const HomeActivitiesPage = () => {
                         </Column>
                     )
                 })}
-            </>}
+            </div>}
 
             <ModalRating setVisible={setVisibleRating} visible={visibleRating} />
         </Container>

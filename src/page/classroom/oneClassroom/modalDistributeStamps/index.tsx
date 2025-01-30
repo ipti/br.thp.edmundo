@@ -8,7 +8,6 @@ import { useContext, useRef } from "react";
 import * as yup from 'yup';
 import RadioButtonComponent from "../../../../Components/RadioButton";
 import Stamp from "../../../../Components/Stamp";
-import { StampComponentStyle } from "../../../../Components/Stamp/style";
 import { ROLE } from "../../../../Controller/controllerGlobal";
 import color from "../../../../Styles/colors";
 import { Column, Padding, Row } from "../../../../Styles/styles";
@@ -59,9 +58,8 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                             {props.stamps?.map((item) => {
                                                 return (
                                                     <div key={item.id} onClick={(e) => { setFieldValue("idStamps", item.id) }} className="col-12 md:col-3 lg:col-2 sm:col-4  card" style={{ background: values.idStamps === item.id ? color.colorCard : "", cursor: "pointer" }} >
-                                                        <StampComponentStyle>
                                                             <Row id="center">
-                                                                <Column>
+                                                                <Column style={{width: "100%"}}>
                                                                     <Row id="center">
                                                                         <Stamp url={item?.img_url} description={item?.description} type={item.type} />
                                                                     </Row>
@@ -71,7 +69,6 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                                                     </Row>
                                                                 </Column>
                                                             </Row>
-                                                        </StampComponentStyle>
                                                     </div>
                                                 )
                                             })}

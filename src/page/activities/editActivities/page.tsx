@@ -28,7 +28,7 @@ const ActivitiesEditPage = () => {
     const activitiesEdit = useContext(EditActivitiesContext) as EditActivitiesType
     const [activeIndex, setActiveIndex] = useState(0);
     const [createdQuestion, setCreatedQuestion] = useState(false);
-    
+
 
     const { id } = useParams()
 
@@ -53,15 +53,17 @@ const ActivitiesEditPage = () => {
             <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesEdit.initialValue}
-                onSubmit={(values) => { 
-                    activitiesEdit.EditActivities({...values, groups: values.groups.map(item => { return { idGroup: item.id } })}, +id!);
-                    if(activitiesEdit.metricCorrectAnswer.length > 0){
+                onSubmit={(values) => {
+                    activitiesEdit.EditActivities({ ...values, groups: values.groups.map(item => { return { idGroup: item.id } }) }, +id!);
+                    if (activitiesEdit.metricCorrectAnswer.length > 0) {
                         activitiesEdit.CorrectAnswerMetricActivities(+id!, activitiesEdit.metricCorrectAnswer);
                     }
                 }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
-                    
+
+
+
                     return (
                         <Form>
                             <Column>

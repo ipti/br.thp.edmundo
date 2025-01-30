@@ -111,7 +111,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                         <Padding />
                         <p>Última atualização: {formatarDataHours(propsClassroomCorrectionOfActivities?.activities?.updatedAt!)}</p>
                     </Column>
-                    <div style={{ padding: 16, borderRadius: 8, height: 48, background: propsClassroomCorrectionOfActivities?.activities?.status === "COMPLETED" ? color.green : propsClassroomCorrectionOfActivities?.activities?.status === "PENDING" ? color.colorSecondary : "" }}>
+                    <div style={{ padding: 16, borderRadius: 8, height: 54, background: propsClassroomCorrectionOfActivities?.activities?.status === "COMPLETED" ? color.green : propsClassroomCorrectionOfActivities?.activities?.status === "PENDING" ? color.colorSecondary : "" }}>
                         <h4 style={{ color: "white" }}>{status[propsClassroomCorrectionOfActivities?.activities?.status as keyof typeof status]}</h4>
                     </div>
                 </Row>
@@ -159,8 +159,6 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 &&
                 <Rating style={{ marginBottom: 32 }} cancel={false} value={propsClassroomCorrectionOfActivities?.activities?.user_activities_rating.rating} />
             }
-
-
             <div style={{ padding: 8, background: prazo ? color.green : color.colorThird, width: 256, borderRadius: 8 }}>
                 <h3 style={{ textAlign: "center", color: "white" }}>
                     {prazo ? "No prazo" : "Fora do prazo"}

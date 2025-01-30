@@ -36,10 +36,10 @@ export const EditActivitiesState = () => {
 
     useEffect(() => {
         if (activitiesOneRequest && is) {
-            setactivitiessOne(activitiesOneRequest)
+            setactivitiessOne(activitiesOneRequest);
+            
             var tagsActivities = activitiesOneRequest?.tags_activities?.map((item: any) => { return item.tag })
-            setTagsActivities(tagsActivities!)
-
+            setTagsActivities(tagsActivities!);
         }
     }, [activitiesOneRequest, is, metricCorrectAnswer])
 
@@ -66,10 +66,6 @@ export const EditActivitiesState = () => {
     const findGroups = (array1: any) => {
         return array1?.map((item: any) => { return item.group_avaliations });
     }
-
-
-
-
 
     const initialValue: EditActivities = {
         name: activitiesOne?.name ?? "",
