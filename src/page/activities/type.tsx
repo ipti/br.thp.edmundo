@@ -52,11 +52,12 @@ export interface EditActivitiesType {
   metricCorrectAnswer: {
     idMetric: number;
     correctAnswer: string;
-}[]
-setMetricCorrectAnswer: Dispatch<SetStateAction<{
-  idMetric: number;
-  correctAnswer: string;
-}[]>>
+  }[]
+  setMetricCorrectAnswer: Dispatch<SetStateAction<{
+    idMetric: number;
+    correctAnswer: string;
+  }[]>>
+  handleQuestionUpdate: (body: PropsQuestionUpdate) => void
 }
 
 export interface ActivitiesOne {
@@ -210,4 +211,10 @@ export interface MetricGroupAvaliationCorrectAnswer {
   correct_answer: string
   metric_group_avaliation_fk: number
   activities_fk: number
+}
+
+
+export interface PropsQuestionUpdate {
+  id: number
+  content: string
 }

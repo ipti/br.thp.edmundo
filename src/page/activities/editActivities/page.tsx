@@ -61,9 +61,6 @@ const ActivitiesEditPage = () => {
                 }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
-
-
-
                     return (
                         <Form>
                             <Column>
@@ -91,7 +88,7 @@ const ActivitiesEditPage = () => {
                         <>
                             <h3>Lista de questões</h3>
                             <Padding padding="16px" />
-                            <FormComponent form={activitiesEdit.activitiesOne.form} />
+                            <FormComponent form={activitiesEdit.activitiesOne.form} isAlter />
                             <Padding />
                             <Row id="end">
                                 <Button label="Criar novas questões" onClick={() => { setCreatedQuestion(true) }} icon={"pi pi-plus"} />

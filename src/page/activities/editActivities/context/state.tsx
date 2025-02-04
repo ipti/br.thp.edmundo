@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { difficult, type_activities } from "../../../../Controller/controllerGlobal";
 import queryClient from "../../../../service/reactquery";
 import { Tags } from "../../../profile/service/types";
-import { ActivitiesOne, CreateActivitiesTagsDto, EditActivities, PropsCorrectAnswerMetricActivities } from "../../type";
+import { ActivitiesOne, CreateActivitiesTagsDto, EditActivities, PropsCorrectAnswerMetricActivities, PropsQuestionUpdate } from "../../type";
 import { EditActivitiesController } from "../service/controller";
 import { useFetchRequestFindOneActivities, useFetchRequestFindTagsActitvities } from "../service/query";
 
@@ -76,16 +76,22 @@ export const EditActivitiesState = () => {
         type_activities: type_activities?.find(props => props.id === activitiesOne?.type_activities) ?? { id: "", name: "" },
         expected_return: activitiesOne?.expected_return ?? "",
         groups: findGroups(activitiesOne?.activities_group_avaliation) ?? [],
-
     }
 
 
-    const { EditActivitiesMutation, requestAddTagActivitiesMutation, CorrectAnswerMetricActivitiesMutation } = EditActivitiesController();
+    const { EditActivitiesMutation, requestAddTagActivitiesMutation, CorrectAnswerMetricActivitiesMutation, UpdateQuestionMutation } = EditActivitiesController();
 
 
     const CorrectAnswerMetricActivities = (id: number, body: PropsCorrectAnswerMetricActivities[]) => {
         CorrectAnswerMetricActivitiesMutation.mutate({ data: body, id: id })
     }
+
+
+    const handleQuestionUpdate = ( body: PropsQuestionUpdate) => {
+        UpdateQuestionMutation.mutate({  data: body })
+    }
+
+
 
     const EditActivities = (body: EditActivities, id: number) => {
         EditActivitiesMutation.mutate({ data: body, id: id })
@@ -104,5 +110,5 @@ export const EditActivitiesState = () => {
 
         requestAddTagActivitiesMutation.mutate(tagsUserBody)
     }
-    return { initialValue, EditActivities, isLoading, isError, activitiesOne, tags, tagsActivities, setTagsActivities, CorrectAnswerMetricActivities, metricCorrectAnswer, setMetricCorrectAnswer }
+    return { initialValue, EditActivities, isLoading, isError, activitiesOne, tags, tagsActivities, setTagsActivities, CorrectAnswerMetricActivities, metricCorrectAnswer, setMetricCorrectAnswer, handleQuestionUpdate }
 }
