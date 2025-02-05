@@ -217,4 +217,13 @@ export interface MetricGroupAvaliationCorrectAnswer {
 export interface PropsQuestionUpdate {
   id: number
   content: string
+  options: PropsOption[]
+}
+
+
+interface PropsOption {
+  id: number | undefined;
+  content: string;
+  questionId: number | undefined;
+  response_question: boolean;
 }

@@ -4,6 +4,7 @@ import styles from "../../../../Styles";
 import { CreateActivitiesTagsDto, EditActivities, PropsCorrectAnswerMetricActivities, PropsFormActivities, PropsQuestionUpdate } from "../../type";
 import { CorrectAnswerRequest, CreateFormRequest, EditActivitiesRequest, UpdateQuestionRequest } from "./request";
 import { AddTagActivities } from "../../createActivities/service/request";
+import queryClient from "../../../../service/reactquery";
 
 export const EditActivitiesController = () => {
 
@@ -83,6 +84,7 @@ export const EditActivitiesController = () => {
           title: "Salvo com sucesso!",
           confirmButtonColor: styles.colors.colorPrimary,
         })
+        queryClient.refetchQueries("useRequestsOneActivities")
       },
 
     }
