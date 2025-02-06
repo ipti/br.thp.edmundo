@@ -54,9 +54,16 @@ const HomeActivitiesPage = () => {
     const [visibleRating, setVisibleRating] = useState(false)
     const [codeEditor, setCodeEditor] = useState<PropsCodeEditor[]>([])
 
-    console.log(codeEditor)
-
     const dif = getDifficulte(propsAplication?.activitiesOne?.difficult)
+
+    const concAnswer = (props: PropsCodeEditor[]) => {
+        var conc = "";
+        props.forEach((item) => {
+            conc = conc + `<${item.group}>` + item.content + `</${item.group}>`
+        })
+
+        return conc
+    }
 
     const { idClassroom } = useParams()
 
@@ -91,14 +98,13 @@ const HomeActivitiesPage = () => {
                                             <Padding padding="8px" />
                                             <Button label="Enviar Atividade" onClick={() => {
                                                 console.log({
+                                                    id_response: propsAplication.activitiesOne?.user_activities[0].id,
                                                     tasksDescription: propsAplication.activitiesOne?.description,
                                                     correctAnswer: propsAplication.activitiesOne?.expected_return,
                                                     performanceMetrics: propsAplication.activitiesOne?.activities_group_avaliation.map((item) => {
-                                                        return { gruop: item.group_avaliations.name,  metricPercentage: item.group_avaliations.metric_group_avaliation.map((metric) => { return { description: metric.description, metricPercentage: metric.metric_percentange, correct_answer: metric?.metric_group_avaliation_correct_answer![0]?.correct_answer ?? "" } }) }
+                                                        return { idGroup: item.group_avaliation_fk, group: item.group_avaliations.name, metrics: item.group_avaliations.metric_group_avaliation.map((metric) => { return { description: metric.description, idMetric: metric.id, metricPercentage: metric.metric_percentange, correctAnswer: metric?.metric_group_avaliation_correct_answer![0]?.correct_answer ?? "" } }) }
                                                     }),
-                                                    student_answer: codeEditor.map((item) => {
-                                                        return item.content
-                                                    })
+                                                    student_answer: concAnswer(codeEditor)
                                                 })
                                             }} />
                                             <Padding padding="16px" />
@@ -223,12 +229,12 @@ const HomeActivitiesPage = () => {
                             <CodeiumEditor value={codeEditor![index]?.content ?? ""} language={item?.group_avaliations?.type_group_avaliation?.value ?? 'javascript'} theme="vs-dark" onChange={(e) => {
                                 if (codeEditor.find(item => item.id === index)) {
                                     setCodeEditor((prevItems) =>
-                                        prevItems.map((item) =>
-                                            item.id === index ? { ...item, content: e?.toString() ?? "" } : item
+                                        prevItems.map((prvent) =>
+                                            prvent.id === index ? { ...prvent, content: e?.toString() ?? "" } : prvent
                                         )
                                     );
                                 } else {
-                                    setCodeEditor(prevt => [...prevt, { content: e?.toString() ?? "", id: index }])
+                                    setCodeEditor(prevt => [...prevt, { content: e?.toString() ?? "", id: index, group: item?.group_avaliations?.name }])
                                 }
                             }} />
                         </Column>

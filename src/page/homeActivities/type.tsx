@@ -12,7 +12,7 @@ export interface PropsRating {
 export interface PropsCodeEditor {
   id: number
   content: string
-  
+  group: string
 }
 
   export interface Activities {
