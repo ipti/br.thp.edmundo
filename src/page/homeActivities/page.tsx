@@ -11,13 +11,13 @@ import Icon from "../../Components/Icon";
 import { getDifficulte } from "../../Controller/controllerGlobal";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeActivitiesProvider, {
-    HomeActivitiesContext,
+  HomeActivitiesContext,
 } from "./context/context";
 import {
-    ButtonStart,
-    TextActivities,
-    TextActivitiesCard,
-    TextActivitiesParagraphCard,
+  ButtonStart,
+  TextActivities,
+  TextActivitiesCard,
+  TextActivitiesParagraphCard,
 } from "./styles";
 
 import { CodeiumEditor } from "@codeium/react-code-editor";
@@ -224,49 +224,32 @@ const HomeActivitiesPage = () => {
                       ? "Formulário"
                       : propsAplication?.activitiesOne?.type_activities ===
                         "CODE"
-                      ? "Implementação"
-                      : propsAplication?.activitiesOne?.type_activities === "IA"
-                      ? "Implementação"
-                      : ""}{" "}
+                        ? "Implementação"
+                        : propsAplication?.activitiesOne?.type_activities === "IA"
+                          ? "Implementação"
+                          : ""}{" "}
                     {`\n`}
                   </TextActivitiesCard>
                 </Row>
-                {propsAplication.activitiesOne?.user_activities[0]
-                  ?.answer_user_activities_ia[0]?.analyzerFeedback && (
-                  <>
-                    <Padding />
-                    <Row style={{ gap: "4px" }}>
-                      <TextActivitiesParagraphCard>
-                        Feedback:
-                      </TextActivitiesParagraphCard>
-                      <TextActivitiesCard>
-                        {
-                          propsAplication.activitiesOne?.user_activities[0]
-                            .answer_user_activities_ia[0].analyzerFeedback
-                        }{" "}
-                        {`\n`}
-                      </TextActivitiesCard>
-                    </Row>
-                  </>
-                )}
+
                 {propsAplication.activitiesOne?.user_activities[0]
                   ?.user_avaliation?.total && (
-                  <>
-                    <Padding />
-                    <Row style={{ gap: "4px" }}>
-                      <TextActivitiesParagraphCard>
-                        Nota:
-                      </TextActivitiesParagraphCard>
-                      <TextActivitiesCard>
-                        {
-                          propsAplication.activitiesOne?.user_activities[0]
-                            ?.user_avaliation?.total
-                        }{" "}
-                        {`\n`}
-                      </TextActivitiesCard>
-                    </Row>
-                  </>
-                )}
+                    <>
+                      <Padding />
+                      <Row style={{ gap: "4px" }}>
+                        <TextActivitiesParagraphCard>
+                          Nota:
+                        </TextActivitiesParagraphCard>
+                        <TextActivitiesCard>
+                          {
+                            propsAplication.activitiesOne?.user_activities[0]
+                              ?.user_avaliation?.total
+                          }{" "}
+                          {`\n`}
+                        </TextActivitiesCard>
+                      </Row>
+                    </>
+                  )}
               </div>
             </Column>
           </Row>
@@ -309,7 +292,7 @@ const HomeActivitiesPage = () => {
                     <TextActivities>Formulário</TextActivities>
                     <Padding padding="16px" />
                     {propsAplication?.activitiesOne?.form.answer_form?.length! >
-                    0 ? (
+                      0 ? (
                       <FormViewComponent
                         form={propsAplication?.activitiesOne?.form}
                       />
@@ -335,17 +318,17 @@ const HomeActivitiesPage = () => {
                                 <Padding />
                                 {propsAplication?.activitiesOne
                                   ?.user_activities![0]?.status && (
-                                  <Row id="end">
-                                    <Button
-                                      label="Enviar"
-                                      disabled={
-                                        propsAplication?.activitiesOne
-                                          ?.user_activities[0].status ===
-                                        "COMPLETED"
-                                      }
-                                    />
-                                  </Row>
-                                )}
+                                    <Row id="end">
+                                      <Button
+                                        label="Enviar"
+                                        disabled={
+                                          propsAplication?.activitiesOne
+                                            ?.user_activities[0].status ===
+                                          "COMPLETED"
+                                        }
+                                      />
+                                    </Row>
+                                  )}
                               </Form>
                             );
                           }}
@@ -359,6 +342,29 @@ const HomeActivitiesPage = () => {
           </Row>
         </div>
       </Row>
+      <Padding padding="8px" />
+      {propsAplication.activitiesOne?.user_activities[0]
+        ?.answer_user_activities_ia[0]?.analyzerFeedback && (
+          <div className="card">
+            <>
+              <Padding />
+              <Row style={{ gap: "4px" }}>
+                <TextActivitiesParagraphCard>
+                  Feedback:
+                </TextActivitiesParagraphCard>
+                <TextActivitiesCard>
+                  <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
+                    {
+                      propsAplication.activitiesOne?.user_activities[0]
+                        .answer_user_activities_ia[0].analyzerFeedback
+                    }{" "}
+                    {`\n`}
+                  </pre>
+                </TextActivitiesCard>
+              </Row>
+            </>
+          </div>
+        )}
       {propsAplication?.activitiesOne?.user_activities![0] && (
         <div className="grid">
           {propsAplication?.activitiesOne?.activities_group_avaliation?.map(
@@ -372,10 +378,10 @@ const HomeActivitiesPage = () => {
                       propsAplication?.activitiesOne?.user_activities[0]
                         .answer_user_activities_group_avaliation
                         ? propsAplication?.activitiesOne?.user_activities[0].answer_user_activities_group_avaliation.find(
-                            (props) =>
-                              props.group_avaliation_fk ===
-                              item.group_avaliation_fk
-                          )?.answer
+                          (props) =>
+                            props.group_avaliation_fk ===
+                            item.group_avaliation_fk
+                        )?.answer
                         : codeEditor![index]?.content ?? ""
                     }
                     language={

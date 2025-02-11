@@ -1,12 +1,12 @@
 import { Tag_Activitie } from "../activities/type"
 
 export interface JoinTheActivitiesUser {
-    idActivities : number
-    idClassroom: number
-  }
-  
+  idActivities: number
+  idClassroom: number
+}
+
 export interface PropsRating {
-    rating: number | undefined
+  rating: number | undefined
 }
 
 export interface PropsCodeEditor {
@@ -16,8 +16,8 @@ export interface PropsCodeEditor {
   idGroup: number
 }
 
-  export interface Activities {
-    id: number
+export interface Activities {
+  id: number
   name: string
   description: string
   expected_return: string
