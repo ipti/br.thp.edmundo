@@ -1,4 +1,4 @@
-import { Activities, CreateResponse, JoinTheActivitiesUser, PropsRating } from "../type";
+import { Activities, CreateResponse, JoinTheActivitiesUser, PropsRating, SendIA } from "../type";
 
 export interface HomeActivitiesContextType {
     activitiesOne: Activities | undefined
@@ -8,5 +8,6 @@ export interface HomeActivitiesContextType {
     initialValueForm: CreateResponse
     ResponseActivities: (body: CreateResponse) => void
     ActivitiesUserRating: (body: PropsRating) => void
+    SendAnsweAI: (body: SendIA) => void
 }
 

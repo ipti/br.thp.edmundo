@@ -13,6 +13,7 @@ export interface PropsCodeEditor {
   id: number
   content: string
   group: string
+  idGroup: number
 }
 
   export interface Activities {
@@ -42,7 +43,26 @@ export interface UserActivity {
   activities_fk: number
   user_classroomId: number
   user_avaliation: any
+  answer_user_activities_ia: answerUserActivitiesIA
+  answer_user_activities_group_avaliation: AnswerUserActivitiesGroupAvaliation[]
 }
+
+export interface AnswerUserActivitiesGroupAvaliation {
+  id: number
+  answer: string
+  createdAt: string
+  updatedAt: string
+  group_avaliation_fk: number
+  user_activities_fk: number
+}
+
+export type answerUserActivitiesIA = answerUserActivitiesIAType[]
+
+export interface answerUserActivitiesIAType {
+  id: number
+  analyzerFeedback: string
+}
+
 
 interface OptionDto {
   options_fk: number;
@@ -103,4 +123,32 @@ export interface TypeGroupAvaliation {
   value: string
   createdAt: string
   updatedAt: string
+}
+
+
+export interface SendIA {
+  id_user_activities: number
+  tasksDescription: string
+  correctAnswer: string
+  performanceMetrics: PerformanceMetric[]
+  student_answer: StudentAnswer[]
+}
+
+export interface PerformanceMetric {
+  idGroup: number
+  group: string
+  metrics: Metric[]
+}
+
+export interface Metric {
+  description: string
+  idMetric: number
+  metricPercentage: number
+  correctAnswer: string
+}
+
+export interface StudentAnswer {
+  answer: string
+  idGroup: number
+  name: string
 }

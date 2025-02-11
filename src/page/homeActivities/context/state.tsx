@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestActivitiesOne } from "../service/query";
 import { useParams } from "react-router-dom";
-import { Activities, CreateResponse, JoinTheActivitiesUser, PropsRating } from "../type";
+import { Activities, CreateResponse, JoinTheActivitiesUser, PropsRating, SendIA } from "../type";
 import { HomeActivitiesController } from "../service/controller";
 
 export const HomeActivitiesState = () => {
@@ -29,7 +29,7 @@ export const HomeActivitiesState = () => {
     }
   }, [activitiesOneRequest])
 
-  const { JoinTheActivitiesUserMutation, FinishActivitiesUserMutation, AddResponseActivitiesMutation, AddRatingActivitiesMutation } = HomeActivitiesController()
+  const { JoinTheActivitiesUserMutation, FinishActivitiesUserMutation, AddResponseActivitiesMutation, AddRatingActivitiesMutation, SendAIMutation } = HomeActivitiesController()
 
   const JoinTheActivitiesUser = (body: JoinTheActivitiesUser) => {
     JoinTheActivitiesUserMutation.mutate(body)
@@ -55,5 +55,9 @@ export const HomeActivitiesState = () => {
     AddResponseActivitiesMutation.mutate(body)
   }
 
-  return { activitiesOne, JoinTheActivitiesUser, FinishActivitiesUser, onChangeFile, initialValueForm, ResponseActivities, ActivitiesUserRating }
+  const SendAnsweAI = (body: SendIA) => {
+    SendAIMutation.mutate({data: body})
+  }
+
+  return { activitiesOne, JoinTheActivitiesUser, FinishActivitiesUser, onChangeFile, initialValueForm, ResponseActivities, ActivitiesUserRating, SendAnsweAI }
 }
