@@ -15,6 +15,7 @@ import HomeActivitiesProvider, {
 } from "./context/context";
 import {
   ButtonStart,
+  HoverContainer,
   RoboIA,
   TextActivities,
   TextActivitiesCard,
@@ -59,7 +60,7 @@ const HomeActivitiesPage = () => {
   const propsAplication = useContext(HomeActivitiesContext);
   const [visibleRating, setVisibleRating] = useState(false);
   const [codeEditor, setCodeEditor] = useState<PropsCodeEditor[]>([]);
-  const [roboModal, setRoboModal] = useState<any>()
+  const [roboModal, setRoboModal] = useState<any>();
 
   const dif = getDifficulte(propsAplication?.activitiesOne?.difficult);
 
@@ -149,7 +150,7 @@ const HomeActivitiesPage = () => {
                 (item, index) => {
                   return (
                     <Column className="col-12" key={index}>
-                      <h3>{item?.group_avaliations?.name}</h3>
+                      <h3>Editor para {item?.group_avaliations?.name}</h3>
                       <Padding />
                       <CodeiumEditor
                         value={
@@ -166,7 +167,13 @@ const HomeActivitiesPage = () => {
                           item?.group_avaliations?.type_group_avaliation
                             ?.value ?? "javascript"
                         }
-                        theme="vs-dark"
+                        theme="light"
+                        containerStyle={{
+                          border: "1px solid #BAC7D5",
+                          borderRadius: "2px",
+                          height: "100%",
+                          width: "100%"
+                        }}
                         onChange={(e) => {
                           if (codeEditor.find((item) => item.id === index)) {
                             setCodeEditor((prevItems) =>
@@ -196,7 +203,7 @@ const HomeActivitiesPage = () => {
             </div>
           )}
           <Row id="center">
-            <Column style={{ width: "100%" }}>
+            <Column style={{ width: "100%", marginTop: "16px" }}>
               {propsAplication?.activitiesOne?.user_activities.length === 0 ? (
                 <ButtonStart
                   style={{ marginBottom: 16 }}
@@ -342,74 +349,86 @@ const HomeActivitiesPage = () => {
                   />
                 </TextActivities>
                 <Padding padding="16px" />
-                {propsAplication?.activitiesOne?.form && (
-                  <>
-                    <Divider />
-                    <Padding padding="8px" />
-                    <TextActivities>Formulário</TextActivities>
-                    <Padding padding="16px" />
-                    {propsAplication?.activitiesOne?.form.answer_form?.length! >
-                    0 ? (
-                      <FormViewComponent
-                        form={propsAplication?.activitiesOne?.form}
-                      />
-                    ) : (
-                      <TextActivities>
-                        <Formik
-                          validationSchema={createResponseSchema}
-                          initialValues={propsAplication.initialValueForm}
-                          onSubmit={(values) => {
-                            propsAplication.ResponseActivities(values);
-                            setVisibleRating(true);
-                          }}
-                        >
-                          {({ values, errors, setFieldValue }) => {
-                            return (
-                              <Form>
-                                <FormComponent
-                                  form={propsAplication?.activitiesOne?.form!}
-                                  setFieldValue={setFieldValue}
-                                  values={values}
-                                  errors={errors}
-                                />
-                                <Padding />
-                                {propsAplication?.activitiesOne
-                                  ?.user_activities![0]?.status && (
-                                  <Row id="end">
-                                    <Button
-                                      label="Enviar"
-                                      disabled={
-                                        propsAplication?.activitiesOne
-                                          ?.user_activities[0].status ===
-                                        "COMPLETED"
-                                      }
-                                    />
-                                  </Row>
-                                )}
-                              </Form>
-                            );
-                          }}
-                        </Formik>
-                      </TextActivities>
-                    )}
-                  </>
-                )}
+                {propsAplication?.activitiesOne?.form &&
+                  propsAplication.activitiesOne?.user_activities[0] && (
+                    <>
+                      <Divider />
+                      <Padding padding="8px" />
+                      <TextActivities>Formulário</TextActivities>
+                      <Padding padding="16px" />
+                      {propsAplication?.activitiesOne?.form.answer_form
+                        ?.length! > 0 ? (
+                        <FormViewComponent
+                          form={propsAplication?.activitiesOne?.form}
+                        />
+                      ) : (
+                        <TextActivities>
+                          <Formik
+                            validationSchema={createResponseSchema}
+                            initialValues={propsAplication.initialValueForm}
+                            onSubmit={(values) => {
+                              propsAplication.ResponseActivities(values);
+                              setVisibleRating(true);
+                            }}
+                          >
+                            {({ values, errors, setFieldValue }) => {
+                              return (
+                                <Form>
+                                  <FormComponent
+                                    form={propsAplication?.activitiesOne?.form!}
+                                    setFieldValue={setFieldValue}
+                                    values={values}
+                                    errors={errors}
+                                  />
+                                  <Padding />
+                                  {propsAplication?.activitiesOne
+                                    ?.user_activities![0]?.status && (
+                                    <Row id="end">
+                                      <Button
+                                        label="Enviar"
+                                        disabled={
+                                          propsAplication?.activitiesOne
+                                            ?.user_activities[0].status ===
+                                          "COMPLETED"
+                                        }
+                                      />
+                                    </Row>
+                                  )}
+                                </Form>
+                              );
+                            }}
+                          </Formik>
+                        </TextActivities>
+                      )}
+                    </>
+                  )}
               </Padding>
             </Column>
           </Row>
         </div>
       </Row>
       <Padding padding="8px" />
-     
-      <RoboIA onClick={()=> setRoboModal(propsAplication.activitiesOne?.user_activities[0]
-            ?.answer_user_activities_ia)}>
-        <img alt="" src={robo} />
-      </RoboIA>
+
+      {propsAplication?.activitiesOne.type_activities === "IA" && (
+        <RoboIA
+          onClick={() =>
+            setRoboModal(
+              propsAplication.activitiesOne?.user_activities[0]
+                ?.answer_user_activities_ia
+            )
+          }
+        >
+          <img alt="" src={robo} />
+          <HoverContainer>
+            <p>Feedback</p>
+          </HoverContainer>
+        </RoboIA>
+      )}
       <ModalFeedback
-        visible={
-          roboModal
-        }
-        onHide={() => {setRoboModal(!roboModal)}}
+        visible={roboModal}
+        onHide={() => {
+          setRoboModal(!roboModal);
+        }}
       />
       <ModalRating setVisible={setVisibleRating} visible={visibleRating} />
     </Container>

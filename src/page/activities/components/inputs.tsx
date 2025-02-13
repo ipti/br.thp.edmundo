@@ -2,7 +2,14 @@ import { Chip } from "primereact/chip";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { MultiSelect } from "primereact/multiselect";
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import DropdownComponent from "../../../Components/Dropdown";
@@ -28,7 +35,7 @@ const Inputs = ({
   setTags,
   tagsAll,
   metricCorrectAnswer,
-  setMetricCorrectAnswer
+  setMetricCorrectAnswer,
 }: {
   tagsAll: any;
   errors: any;
@@ -43,36 +50,55 @@ const Inputs = ({
     idMetric: number;
     correctAnswer: string;
   }[];
-  setMetricCorrectAnswer?: Dispatch<SetStateAction<{
-    idMetric: number;
-    correctAnswer: string;
-  }[]>>
+  setMetricCorrectAnswer?: Dispatch<
+    SetStateAction<
+      {
+        idMetric: number;
+        correctAnswer: string;
+      }[]
+    >
+  >;
 }) => {
   const reactQuillRef = useRef<ReactQuill>(null);
 
   const [expandedRows, setExpandedRows] = useState<any>([]);
 
-  const { data: group } = useFetchRequestGroupList()
+  const { data: group } = useFetchRequestGroupList();
 
-  const [groupList, setGroups] = useState<any>([])
+  const [groupList, setGroups] = useState<any>([]);
+
 
 
   // gerencia grupos
   useEffect(() => {
     if (group) {
       // eslint-disable-next-line array-callback-return
-      const groupFind = group?.map((gr: any) => {
-        const soma = gr?.metric_group_avaliation?.reduce(function (total: number, item: any) {
-          return total + item.metric_percentange;
-        }, 0) ?? 0
-        if (soma >= 100) {
-          return { createdAt: gr.createdAt, id: gr.id, name: gr.name, updatedAt: gr.updatedAt, type_group_avaliation_fk: gr.type_group_avaliation_fk, metric_group_avaliation: gr.metric_group_avaliation }
-        }
-      }).filter(Boolean)
-      setGroups(groupFind)
+      const groupFind = group
+        // eslint-disable-next-line array-callback-return
+        ?.map((gr: any) => {
+          const soma =
+            gr?.metric_group_avaliation?.reduce(function (
+              total: number,
+              item: any
+            ) {
+              return total + item.metric_percentange;
+            },
+            0) ?? 0;
+          if (soma >= 100) {
+            return {
+              createdAt: gr.createdAt,
+              id: gr.id,
+              name: gr.name,
+              updatedAt: gr.updatedAt,
+              type_group_avaliation_fk: gr.type_group_avaliation_fk,
+              metric_group_avaliation: gr.metric_group_avaliation,
+            };
+          }
+        })
+        .filter(Boolean);
+      setGroups(groupFind);
     }
-  }, [group])
-
+  }, [group]);
 
   // upload imagem azure
   const uploadImage = async (file: any) => {
@@ -83,7 +109,6 @@ const Inputs = ({
     });
     return url;
   };
-
 
   // SetImagemUrl Editor
   const imageHandler = useCallback(() => {
@@ -106,32 +131,50 @@ const Inputs = ({
   }, []);
 
   const expansionTemplate = (data: any) => {
-
     return (
       <>
-        <DataTable value={data?.metric_group_avaliation} tableStyle={{ minWidth: '50rem' }}>
-          <Column field="description" headerStyle={{ width: "40%" }} header="Nome"></Column>
-          <Column body={(row) => {
-            return (
-              <TextInput
-                value={metricCorrectAnswer?.find(props => props.idMetric === row.id)?.correctAnswer || ""}
-                onChange={(e) => {
-                  if (!setMetricCorrectAnswer) return;
-                  setMetricCorrectAnswer(prevItems =>
-                    prevItems?.map(item =>
-                      item.idMetric === row.id ? { ...item, correctAnswer: e.target.value } : item
-                    ))
-
-                }}
-              />
-            )
-          }} header="Detalhes de correção"></Column>
+        <DataTable
+          value={data?.metric_group_avaliation}
+          tableStyle={{ minWidth: "50rem" }}
+        >
+          <Column
+            field="description"
+            headerStyle={{ width: "40%" }}
+            header="Nome"
+          ></Column>
+          <Column
+            body={(e) => <>{e.metric_percentange ?? 0}%</>}
+            headerStyle={{ width: "10%" }}
+            header="Peso"
+          ></Column>
+          <Column
+            body={(row) => {
+              return (
+                <TextInput
+                  value={
+                    metricCorrectAnswer?.find(
+                      (props) => props.idMetric === row.id
+                    )?.correctAnswer || ""
+                  }
+                  onChange={(e) => {
+                    if (!setMetricCorrectAnswer) return;
+                    setMetricCorrectAnswer((prevItems) =>
+                      prevItems?.map((item) =>
+                        item.idMetric === row.id
+                          ? { ...item, correctAnswer: e.target.value }
+                          : item
+                      )
+                    );
+                  }}
+                />
+              );
+            }}
+            header="Detalhes de correção"
+          ></Column>
         </DataTable>
       </>
     );
   };
-
-  console.log(metricCorrectAnswer)
 
   return (
     <div className="grid">
@@ -332,16 +375,21 @@ const Inputs = ({
             options={groupList}
             onChange={(e) => {
               setFieldValue("groups", e.target.value);
-              var array: any = []
-              if (!setMetricCorrectAnswer) return
+              var array: any = [];
+              if (!setMetricCorrectAnswer) return;
               e.target.value?.forEach((item: any) => {
                 item.metric_group_avaliation?.forEach((metric: any) => {
-                  array.push({ correctAnswer: metricCorrectAnswer?.find(item => item.idMetric === metric.id)?.correctAnswer ?? "", idMetric: metric.id })
-                })
-              })
-              setMetricCorrectAnswer(array)
-            }
-            }
+                  array.push({
+                    correctAnswer:
+                      metricCorrectAnswer?.find(
+                        (item) => item.idMetric === metric.id
+                      )?.correctAnswer ?? "",
+                    idMetric: metric.id,
+                  });
+                });
+              });
+              setMetricCorrectAnswer(array);
+            }}
             name="groups"
             optionLabel="name"
             placeholder="Escolha os grupos para avaliação"
@@ -356,23 +404,43 @@ const Inputs = ({
           <Row className="grid" style={{ gap: "8px", marginTop: 8 }}>
             {values.groups?.map((item: any) => {
               return (
-                <Chip style={{ background: color.colorBlueClean, color: "black" }} label={item.name} />
-              )
+                <Chip
+                  style={{ background: color.colorBlueClean, color: "black" }}
+                  label={item.name}
+                />
+              );
             })}
           </Row>
         </div>
       )}
-      {((values?.type_activities?.id === "CODE" ||
-        values?.type_activities?.id === "IA") && !isCreated) && (
+      {(values?.type_activities?.id === "CODE" ||
+        values?.type_activities?.id === "IA") &&
+        !isCreated && (
           <div className="col-12">
             <label>Resposta esperada</label>
             <Padding />
-            <DataTable value={values.groups} groupRowsBy="name"
-              sortMode="single" sortField="id" sortOrder={1}
-              rowExpansionTemplate={expansionTemplate} rowGroupHeaderTemplate={(e) => { return <>{e.name}</> }} expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
-              tableStyle={{ minWidth: '50rem' }}>
-              <Column expander style={{ width: '2%' }} />
-              <Column align={"left"} alignHeader={"left"} field="name" header="Nome" style={{ width: '100%' }}></Column>
+            <DataTable
+              value={values.groups}
+              groupRowsBy="name"
+              sortMode="single"
+              sortField="id"
+              sortOrder={1}
+              rowExpansionTemplate={expansionTemplate}
+              rowGroupHeaderTemplate={(e) => {
+                return <>{e.name}</>;
+              }}
+              expandedRows={expandedRows}
+              onRowToggle={(e) => setExpandedRows(e.data)}
+              tableStyle={{ minWidth: "50rem" }}
+            >
+              <Column expander style={{ width: "2%" }} />
+              <Column
+                align={"left"}
+                alignHeader={"left"}
+                field="name"
+                header="Nome"
+                style={{ width: "100%" }}
+              ></Column>
               {/* <Column field="country" header="Resposta esperada" body={MetricCorrect_Answer} style={{ width: '20%' }}></Column> */}
             </DataTable>
             {errors.expected_return && touched.expected_return ? (
@@ -382,8 +450,6 @@ const Inputs = ({
             ) : null}
           </div>
         )}
-
-
     </div>
   );
 };

@@ -130,3 +130,28 @@ export const RoboIA = styled.div`
     }
   }
 `;
+
+export const HoverContainer = styled.div`
+  position: absolute;
+  bottom: 100%;
+  top: 16px;
+  right: 132px;
+  height: 42px;
+  background-color: ${color.colorPrimary};
+  width: auto;
+  /* width: auto; */
+  padding: 10px;
+  /* border: 1px solid gray; */
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
+
+  ${RoboIA}:hover & {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+`;
