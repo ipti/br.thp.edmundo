@@ -117,32 +117,32 @@ const HomeActivitiesPage = () => {
                 {propsAplication?.activitiesOne?.type_activities === "QUIZ"
                   ? "Formulário"
                   : propsAplication?.activitiesOne?.type_activities === "CODE"
-                  ? "Implementação"
-                  : propsAplication?.activitiesOne?.type_activities === "IA"
-                  ? "Implementação"
-                  : ""}{" "}
+                    ? "Implementação"
+                    : propsAplication?.activitiesOne?.type_activities === "IA"
+                      ? "Implementação"
+                      : ""}{" "}
                 {`\n`}
               </TextActivitiesCard>
             </Row>
 
             {propsAplication.activitiesOne?.user_activities[0]?.user_avaliation
               ?.total && (
-              <>
-                <Padding />
-                <Row style={{ gap: "4px" }}>
-                  <TextActivitiesParagraphCard>
-                    Nota:
-                  </TextActivitiesParagraphCard>
-                  <TextActivitiesCard>
-                    {
-                      propsAplication.activitiesOne?.user_activities[0]
-                        ?.user_avaliation?.total
-                    }{" "}
-                    {`\n`}
-                  </TextActivitiesCard>
-                </Row>
-              </>
-            )}
+                <>
+                  <Padding />
+                  <Row style={{ gap: "4px" }}>
+                    <TextActivitiesParagraphCard>
+                      Nota:
+                    </TextActivitiesParagraphCard>
+                    <TextActivitiesCard>
+                      {
+                        propsAplication.activitiesOne?.user_activities[0]
+                          ?.user_avaliation?.total
+                      }{" "}
+                      {`\n`}
+                    </TextActivitiesCard>
+                  </Row>
+                </>
+              )}
           </div>
           {propsAplication?.activitiesOne?.user_activities![0] && (
             <div className="grid">
@@ -157,10 +157,10 @@ const HomeActivitiesPage = () => {
                           propsAplication?.activitiesOne?.user_activities[0]
                             .answer_user_activities_group_avaliation
                             ? propsAplication?.activitiesOne?.user_activities[0].answer_user_activities_group_avaliation.find(
-                                (props) =>
-                                  props.group_avaliation_fk ===
-                                  item.group_avaliation_fk
-                              )?.answer
+                              (props) =>
+                                props.group_avaliation_fk ===
+                                item.group_avaliation_fk
+                            )?.answer
                             : codeEditor![index]?.content ?? ""
                         }
                         language={
@@ -305,6 +305,45 @@ const HomeActivitiesPage = () => {
                           };
                         }),
                       });
+                      console.log({
+                        id_user_activities:
+                          propsAplication.activitiesOne?.user_activities[0]
+                            .id ?? 0,
+                        tasksDescription:
+                          propsAplication.activitiesOne?.description ?? "",
+                        correctAnswer:
+                          propsAplication.activitiesOne?.expected_return ?? "",
+                        performanceMetrics:
+                          propsAplication.activitiesOne?.activities_group_avaliation.map(
+                            (item) => {
+                              return {
+                                idGroup: item.group_avaliation_fk,
+                                group: item.group_avaliations.name,
+                                metrics:
+                                  item.group_avaliations.metric_group_avaliation.map(
+                                    (metric) => {
+                                      return {
+                                        description: metric.description,
+                                        idMetric: metric.id,
+                                        metricPercentage:
+                                          metric.metric_percentange,
+                                        correctAnswer:
+                                          metric?.metric_group_avaliation_correct_answer![0]
+                                            ?.correct_answer ?? "",
+                                      };
+                                    }
+                                  ),
+                              };
+                            }
+                          ) ?? [],
+                        student_answer: codeEditor.map((item) => {
+                          return {
+                            answer: item.content,
+                            idGroup: item.idGroup,
+                            name: item.group,
+                          };
+                        }),
+                      })
                     }}
                   />
                   <Padding padding="16px" />
@@ -383,17 +422,17 @@ const HomeActivitiesPage = () => {
                                   <Padding />
                                   {propsAplication?.activitiesOne
                                     ?.user_activities![0]?.status && (
-                                    <Row id="end">
-                                      <Button
-                                        label="Enviar"
-                                        disabled={
-                                          propsAplication?.activitiesOne
-                                            ?.user_activities[0].status ===
-                                          "COMPLETED"
-                                        }
-                                      />
-                                    </Row>
-                                  )}
+                                      <Row id="end">
+                                        <Button
+                                          label="Enviar"
+                                          disabled={
+                                            propsAplication?.activitiesOne
+                                              ?.user_activities[0].status ===
+                                            "COMPLETED"
+                                          }
+                                        />
+                                      </Row>
+                                    )}
                                 </Form>
                               );
                             }}
@@ -409,21 +448,22 @@ const HomeActivitiesPage = () => {
       </Row>
       <Padding padding="8px" />
 
-      {propsAplication?.activitiesOne.type_activities === "IA" && (
-        <RoboIA
-          onClick={() =>
-            setRoboModal(
-              propsAplication.activitiesOne?.user_activities[0]
-                ?.answer_user_activities_ia
-            )
-          }
-        >
-          <img alt="" src={robo} />
-          <HoverContainer>
-            <p>Feedback</p>
-          </HoverContainer>
-        </RoboIA>
-      )}
+      {(propsAplication?.activitiesOne.type_activities === "IA" && propsAplication.activitiesOne?.user_activities[0]
+        ?.status === 'COMPLETED') && (
+          <RoboIA
+            onClick={() =>
+              setRoboModal(
+                propsAplication.activitiesOne?.user_activities[0]
+                  ?.answer_user_activities_ia
+              )
+            }
+          >
+            <img alt="" src={robo} />
+            <HoverContainer>
+              <p>Feedback</p>
+            </HoverContainer>
+          </RoboIA>
+        )}
       <ModalFeedback
         visible={roboModal}
         onHide={() => {
