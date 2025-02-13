@@ -155,4 +155,13 @@
   .p-fileupload-choose.p-button-secondary {
     background-color: #EFF2F5;
   }
+
+  .ql-editor {
+    min-height: 128px;
+    max-height: 256px;
+  }
+  
+  .quill {
+    background-color: #ffffff;
+  }
 }

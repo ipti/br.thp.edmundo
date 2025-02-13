@@ -1,6 +1,6 @@
 import http from "../../../../service/axios"
 import { logout } from "../../../../service/localstorage"
-import { EditActivities, PropsFormActivities } from "../../type"
+import { EditActivities, PropsCorrectAnswerMetricActivities, PropsFormActivities, PropsQuestionUpdate } from "../../type"
 
 
 export const EditActivitiesRequest = async (body: EditActivities, id: number) => {
@@ -10,6 +10,16 @@ export const EditActivitiesRequest = async (body: EditActivities, id: number) =>
 export const CreateFormRequest = async (body: PropsFormActivities) => {
     return await http.post("/form-bff", body)
 }
+
+export const CorrectAnswerRequest = async (id: number, body: PropsCorrectAnswerMetricActivities[]) => {
+    return await http.put("/activities-bff/correct-answer-metric-activities?id=" + id, { metrics: body })
+}
+
+export const UpdateQuestionRequest = async (body: PropsQuestionUpdate) => {
+    return await http.put("/form-bff/questions", body)
+}
+
+
 
 export const FindOneActivitiesRequest = async (id: string) => {
     if (id) {

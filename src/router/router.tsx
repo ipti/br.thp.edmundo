@@ -33,6 +33,9 @@ import StrampsList from "../page/stramps/listStramps/page";
 import StrampsCreate from "../page/stramps/createStramps/page";
 import ViewdProfile from "../page/viewdProfile/page";
 import StampsUpdate from "../page/stramps/createStramps copy/page";
+import GroupList from "../page/group/listGroup/page";
+import GroupCreate from "../page/group/createGroup/page";
+import GroupOne from "../page/group/oneGroup/page";
 
 const RoutesApp = () => {
   return (
@@ -52,7 +55,9 @@ const RoutesApp = () => {
         <Route element={<PrivateRoute Component={<StrampsList />} />} path="/selos" />
         <Route element={<PrivateRoute Component={<StrampsCreate />} />} path="/selos/criar" />
         <Route element={<PrivateRoute Component={<StampsUpdate />} />} path="/selos/:id" />
-
+        <Route element={<PrivateRoute Component={<GroupList />} />} path="/grupos" />
+        <Route element={<PrivateRoute Component={<GroupCreate />} />} path="/grupos/criar" />
+        <Route element={<PrivateRoute Component={<GroupOne />} />} path="/grupos/:id" />
 
         <Route element={<PrivateRoute Component={<ClassroomOne />} />} path="/turma/:id" />
         <Route element={<PrivateRoute Component={<MembersClassroom />} />} path="/turma/:id/membros" />

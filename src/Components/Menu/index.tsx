@@ -161,6 +161,20 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             />
             <Padding />
           </>}
+          {propsAplication.user?.role === ROLE.ADMIN && <>
+            <Item
+              text={"Grupos de avaliação"}
+              funcActiv={() => {
+                setActive(8);
+                menuItem("8");
+              }}
+              active={active === 8 ? true : false}
+              path={"/grupos"}
+              icon={"pi pi-th-large"}
+              isIcon
+            />
+            <Padding />
+          </>}
           <Item
             text={"Meu Perfil"}
             funcActiv={() => {
@@ -172,9 +186,6 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={propsAplication.user?.registration![0]?.avatar_url ?? avatar}
           />
           <Padding />
-
-
-
         </Padding>
       ) : null}
       <ModalYear visible={visibleModal} onHide={() => setVisibleModal(false)} />

@@ -11,11 +11,12 @@ import styles from "../../../Styles";
 const CardModule = ({
   title,
   id,
-  handleDelete
+  handleDelete,
+  redirect
 }: {
   title: string;
   handleDelete?: any;
-
+  redirect: string
   id: number;
 }) => {
   const [visible, setVisible] = useState(false);
@@ -23,7 +24,7 @@ const CardModule = ({
 
   return (
     <>
-      <Container className="card" onClick={() => {history(`/modulos/`+ id); }}>
+      <Container className="card" onClick={() => {history(redirect); }}>
         <Row id="space-between">
           <Row >
             <div className={`boxQuantity`}>

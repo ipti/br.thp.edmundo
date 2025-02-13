@@ -1,6 +1,6 @@
 import http from "../../../service/axios";
 import { logout } from "../../../service/localstorage";
-import { CreateResponse, JoinTheActivitiesUser, PropsRating } from "../type";
+import { CreateResponse, JoinTheActivitiesUser, PropsRating, SendIA } from "../type";
 
 
 export const AddActivitiesUserRequest = async (body: JoinTheActivitiesUser) => {
@@ -20,6 +20,9 @@ export const FinishActivitiesUserRequest = async (id: number, files: any) => {
   return await http.put("/activities-bff/finish-activities-classroom-user?id=" + id, files)
 }
 
+export const SendAnswerAIRequest = async (body: SendIA) => {
+  return await http.post("/user-activities-bff/answer-user-activities-send",body)
+}
 
 
 

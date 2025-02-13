@@ -29,6 +29,7 @@ const ActivitiesEditPage = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [createdQuestion, setCreatedQuestion] = useState(false);
 
+
     const { id } = useParams()
 
     const items = [
@@ -52,7 +53,12 @@ const ActivitiesEditPage = () => {
             <Padding padding="16px" />
             {activeIndex === 0 && <Formik
                 initialValues={activitiesEdit.initialValue}
-                onSubmit={(values) => { activitiesEdit.EditActivities(values, +id!) }}
+                onSubmit={(values) => {
+                    activitiesEdit.EditActivities({ ...values, groups: values.groups.map(item => { return { idGroup: item.id } }) }, +id!);
+                    if (activitiesEdit.metricCorrectAnswer.length > 0) {
+                        activitiesEdit.CorrectAnswerMetricActivities(+id!, activitiesEdit.metricCorrectAnswer);
+                    }
+                }}
             >
                 {({ errors, values, touched, handleChange, setFieldValue }) => {
                     return (
@@ -62,7 +68,7 @@ const ActivitiesEditPage = () => {
                                     <Button label="Salvar" icon={"pi pi-save"} type="submit" />
                                 </Row>
                             </Column>
-                            <Inputs errors={errors} tagsAll={activitiesEdit.tags} setTags={activitiesEdit.setTagsActivities} tags={activitiesEdit.tagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
+                            <Inputs metricCorrectAnswer={activitiesEdit.metricCorrectAnswer} setMetricCorrectAnswer={activitiesEdit.setMetricCorrectAnswer} errors={errors} tagsAll={activitiesEdit.tags} setTags={activitiesEdit.setTagsActivities} tags={activitiesEdit.tagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
                         </Form>
                     );
                 }}
@@ -82,7 +88,7 @@ const ActivitiesEditPage = () => {
                         <>
                             <h3>Lista de questões</h3>
                             <Padding padding="16px" />
-                            <FormComponent form={activitiesEdit.activitiesOne.form} />
+                            <FormComponent form={activitiesEdit.activitiesOne.form} isAlter />
                             <Padding />
                             <Row id="end">
                                 <Button label="Criar novas questões" onClick={() => { setCreatedQuestion(true) }} icon={"pi pi-plus"} />

@@ -52,22 +52,7 @@ const StampsListPage = () => {
             // style={{ background: color.colorCard }}
             >
                 <Button label="Criar selos" icon="pi pi-plus" onClick={() => { history("criar") }} />
-                {/* <div>
-                    <DropdownComponent optionsLabel="name" value={""} onChange={(e) => { }} optionsValue="id" placerholder="Filtrar tipo de usuário" options={propsAplication.user?.role === ROLE.ADMIN
-
-                        ? [
-                            { id: "TODOS", name: "Todos" },
-                            { id: ROLE.ADMIN, name: "Admin" },
-                            { id: ROLE.STUDENT, name: "Estudante" },
-                            { id: ROLE.TEACHER, name: "Professor" },
-                        ]
-                        : [
-                            { id: "TODOS", name: "Todos" },
-                            { id: ROLE.STUDENT, name: "Estudante" },
-                            { id: ROLE.TEACHER, name: "Professor" },
-                        ]
-                    } />
-                </div> */}
+              
 
             </div>
         );

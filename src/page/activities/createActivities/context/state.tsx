@@ -18,7 +18,8 @@ export const CreateActivitiesState = () => {
         time_activities: 0,
         type_activities: {id:"", name: ""},
         expected_return: "",
-        id_classes: parseInt(idClasses!)
+        id_classes: parseInt(idClasses!),
+        groups: []
     }
     
 
