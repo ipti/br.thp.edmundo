@@ -40,8 +40,8 @@ const CreateOrEditForms = () => {
             // onClick={() => history(`/view/${form.id}`)}
           />{" "} */}
          { <Button
-            label={"Criar"}
-            icon="pi pi-plus"
+            label={"Salvar"}
+            icon="pi pi-save"
             onClick={() => CreateForm()}
           />}
         </Row>

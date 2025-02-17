@@ -24,6 +24,7 @@ export const EditActivitiesController = () => {
           title: "Salvo com sucesso!",
           confirmButtonColor: styles.colors.colorPrimary,
         })
+        queryClient.refetchQueries("useRequestsOneActivities")
       },
 
     }
@@ -63,6 +64,8 @@ export const EditActivitiesController = () => {
           confirmButtonColor: styles.colors.colorPrimary,
 
         })
+        queryClient.refetchQueries("useRequestsOneActivities")
+
       },
 
     }

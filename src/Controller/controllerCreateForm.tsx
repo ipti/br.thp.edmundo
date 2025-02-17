@@ -1,28 +1,50 @@
 import { PropsFormActivities } from "../page/activities/type";
 
 export const ControllerCreateForm = () => {
-  return { editType, AddRadiosButtonandBoxSelect, AddBoxSelect, editlabelRadioButtonandBoxSelect, editIsRequiredForm, deleteOptions, deleteQuestion, editLabelForm }
-}
+  return {
+    editType,
+    AddRadiosButtonandBoxSelect,
+    AddBoxSelect,
+    editlabelRadioButtonandBoxSelect,
+    editIsRequiredForm,
+    deleteOptions,
+    deleteQuestion,
+    editLabelForm,
+  };
+};
 
-const AddRadiosButtonandBoxSelect = (index: number, set: any, form: PropsFormActivities) => {
+const AddRadiosButtonandBoxSelect = (
+  index: number,
+  set: any,
+  form: PropsFormActivities
+) => {
   const newData = { ...form };
   const lastposi =
-    newData.questions![index]?.options[newData.questions![index]?.options.length - 1]?.value;
+    newData.questions![index]?.options[
+      newData.questions![index]?.options.length - 1
+    ]?.value;
   newData.questions![index]?.options?.push({
-    value: lastposi + 1,
-    content: `Options ${lastposi + 1}`,
-    isResponse: false
+    value: lastposi ? lastposi + 1 : 1,
+    content: `Options ${lastposi ? lastposi + 1 : 1}`,
+    isResponse: false,
   });
-  newData.questions![index] = { ...newData.questions![index], options: newData.questions![index]?.options };
+  newData.questions![index] = {
+    ...newData.questions![index],
+    options: newData.questions![index]?.options,
+  };
   set(newData);
 }; // adiciona outra opção em questões objetivas
 
-const editType = (index: number, novoAtributo: any, set: any, form: PropsFormActivities) => {
+const editType = (
+  index: number,
+  novoAtributo: any,
+  set: any,
+  form: PropsFormActivities
+) => {
   const newData = { ...form };
 
   if (novoAtributo === "MULTIPLE_CHOICE" || novoAtributo === "SELECTION_BOX") {
     if (novoAtributo === "MULTIPLE_CHOICE") {
-      
       newData.questions![index] = {
         ...newData.questions![index],
         type: novoAtributo,
@@ -40,7 +62,10 @@ const editType = (index: number, novoAtributo: any, set: any, form: PropsFormAct
       set(newData);
     }
   } else {
-    newData.questions![index] = { ...newData.questions![index], type: novoAtributo };
+    newData.questions![index] = {
+      ...newData.questions![index],
+      type: novoAtributo,
+    };
     set(newData);
   }
 }; // edita o tipo da questão
@@ -48,13 +73,18 @@ const editType = (index: number, novoAtributo: any, set: any, form: PropsFormAct
 const AddBoxSelect = (index: number, set: any, form: any) => {
   const newData = { ...form };
   const lastposi =
-    newData.questions![index]?.options[newData.questions![index]?.options.length - 1]?.value;
+    newData.questions![index]?.options[
+      newData.questions![index]?.options.length - 1
+    ]?.value;
   newData.questions![index]?.options?.push({
     value: lastposi + 1,
     content: `Options ${lastposi + 1}`,
-    isResponse: false
+    isResponse: false,
   });
-  newData.questions![index] = { ...newData.questions![index], options: newData.questions![index]?.options };
+  newData.questions![index] = {
+    ...newData.questions![index],
+    options: newData.questions![index]?.options,
+  };
   set(newData);
 }; // adiciona outra opção em questões objetivas
 
@@ -66,24 +96,48 @@ const editlabelRadioButtonandBoxSelect = (
   setform: any
 ) => {
   const newData = { ...form };
-  newData.questions[index] = { ...newData.questions[index], options: form.questions[index]?.options };
+  newData.questions[index] = {
+    ...newData.questions[index],
+    options: form.questions[index]?.options,
+  };
   newData.questions[index].options[indexRadioButton].content = newLabel;
   setform(newData);
 }; // edita label do radiobutton
 
-const editLabelForm = (index: number, novoLabel: string, form: any, setform: any) => {
+const editLabelForm = (
+  index: number,
+  novoLabel: string,
+  form: any,
+  setform: any
+) => {
   const newData = { ...form };
-  newData.questions[index] = { ...newData.questions[index], content: novoLabel };
+  newData.questions[index] = {
+    ...newData.questions[index],
+    content: novoLabel,
+  };
   setform(newData);
 }; // edit label form
 
-const editIsRequiredForm = (index: number, isRequerid: boolean, form: any, setform: any) => {
+const editIsRequiredForm = (
+  index: number,
+  isRequerid: boolean,
+  form: any,
+  setform: any
+) => {
   const newData = { ...form };
-  newData.questions[index] = { ...newData.questions[index], required: isRequerid };
+  newData.questions[index] = {
+    ...newData.questions[index],
+    required: isRequerid,
+  };
   setform(newData);
 }; // edit requerid form
 
-const deleteOptions = (index: number, indexRadioButton: number, form: any, setform: any) => {
+const deleteOptions = (
+  index: number,
+  indexRadioButton: number,
+  form: any,
+  setform: any
+) => {
   const newData = { ...form };
   newData.questions[index].options?.splice(indexRadioButton, 1);
   setform(newData);
