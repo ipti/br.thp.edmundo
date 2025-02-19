@@ -6,5 +6,6 @@ export interface ActivitiesSentContextType {
   isError: boolean;
   createAvaliation: (body: CreateNotasAvaliationType, id: number) => void;
   updateAvaliation: (body: CreateNotasAvaliationType, id: number) => void;
+  updateAvaliationAll: (id: number) => void
 }
 

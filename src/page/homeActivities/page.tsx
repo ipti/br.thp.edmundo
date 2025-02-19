@@ -172,7 +172,7 @@ const HomeActivitiesPage = () => {
                           border: "1px solid #BAC7D5",
                           borderRadius: "2px",
                           height: "100%",
-                          width: "100%"
+                          width: "100%",
                         }}
                         onChange={(e) => {
                           if (codeEditor.find((item) => item.id === index)) {
@@ -357,7 +357,9 @@ const HomeActivitiesPage = () => {
                       <TextActivities>Formulário</TextActivities>
                       <Padding padding="16px" />
                       {propsAplication?.activitiesOne?.form.answer_form
-                        ?.length! > 0 ? (
+                        ?.length! > 0 &&
+                      propsAplication.activitiesOne.user_activities[0]
+                        .status === "COMPLETED" ? (
                         <FormViewComponent
                           form={propsAplication?.activitiesOne?.form}
                         />

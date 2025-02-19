@@ -24,5 +24,7 @@ export const UpdateAvaliationRequest = async (body: CreateNotasAvaliationType, i
   return await http.put("/activities-bff/classroom-avaliation?id="+id, body)
 }
 
-
+export const UpdateAvaliationAllRequest = async (id: number) => {
+  return await http.put("/user-activities-bff/user-avaliation-classroom?idClassroomActivities="+id)
+}
 

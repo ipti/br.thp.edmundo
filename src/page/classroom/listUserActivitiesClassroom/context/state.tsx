@@ -11,7 +11,7 @@ export const ActivitiesSentState = () => {
 
     const { data: activitiesRequest, isLoading, isError } = useFetchRequestActivitiesSent(idClassroomUser!);
 
-    const { CreateAvaliationMutation, UpdateAvaliationMutation } = CreateAvaliationController()
+    const { CreateAvaliationMutation, UpdateAvaliationMutation, UpdateAvaliationAllMutation } = CreateAvaliationController()
 
 
     const createAvaliation = (body: CreateNotasAvaliationType, id: number) => {
@@ -22,6 +22,10 @@ export const ActivitiesSentState = () => {
     const updateAvaliation = (body: CreateNotasAvaliationType, id: number) => {
         UpdateAvaliationMutation.mutate({ data: body, id: id })
     }
+
+    const updateAvaliationAll = (id: number) => {
+        UpdateAvaliationAllMutation.mutate({ id: id })
+    }
   
     useEffect(() => {
         if (activitiesRequest) {
@@ -30,5 +34,5 @@ export const ActivitiesSentState = () => {
     }, [activitiesRequest])
 
 
-    return {activities, isLoading,isError, createAvaliation, updateAvaliation }
+    return {activities, isLoading,isError, createAvaliation, updateAvaliation, updateAvaliationAll }
 }

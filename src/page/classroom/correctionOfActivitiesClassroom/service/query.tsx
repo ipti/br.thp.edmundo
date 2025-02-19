@@ -3,6 +3,6 @@ import { ClassroomCorrectionOfActivitiesRequest } from "./request";
 
 
 
-  export const useFetchRequestClassroomCorrectionOfActivities = (id: string) => {
-    return useQuery(["useRequestsClassroomCorrectionOfActivities", id], () => ClassroomCorrectionOfActivitiesRequest(id));
+  export const useFetchRequestClassroomCorrectionOfActivities = (id: string, idClassroom: string) => {
+    return useQuery(["useRequestsClassroomCorrectionOfActivities", id, idClassroom], () => ClassroomCorrectionOfActivitiesRequest(id, idClassroom));
   };

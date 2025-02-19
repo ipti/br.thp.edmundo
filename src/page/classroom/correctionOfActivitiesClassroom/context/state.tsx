@@ -16,11 +16,11 @@ export const ClassroomCorrectionOfActivitiesState = () => {
     }, [])
 
 
-    const { idUserActivities } = useParams()
+    const { idUserActivities, id } = useParams()
 
-    const { data: activitiesRequest, isLoading, isError } = useFetchRequestClassroomCorrectionOfActivities(idUserActivities!);
+    const { data: activitiesRequest, isLoading, isError } = useFetchRequestClassroomCorrectionOfActivities(idUserActivities!, id!);
 
-    const { CreateAvaliationMutation, UpdateAvaliationMutation } = CreateAvaliationController()
+    const { CreateAvaliationMutation, UpdateAvaliationMutation,   } = CreateAvaliationController()
 
 
     const createAvaliation = (body: CreateNotasType, id: number) => {

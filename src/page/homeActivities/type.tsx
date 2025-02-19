@@ -75,6 +75,7 @@ interface QuestionDto {
 
 export interface CreateResponse {
   form_fk: number;
+  classroom_fk: number;
   question: QuestionDto[];
   user_activities_id: number;
 

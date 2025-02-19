@@ -1,46 +1,66 @@
 import { useEffect, useState } from "react";
 import { useFetchRequestActivitiesOne } from "../service/query";
 import { useParams } from "react-router-dom";
-import { Activities, CreateResponse, JoinTheActivitiesUser, PropsRating, SendIA } from "../type";
+import {
+  Activities,
+  CreateResponse,
+  JoinTheActivitiesUser,
+  PropsRating,
+  SendIA,
+} from "../type";
 import { HomeActivitiesController } from "../service/controller";
 
 export const HomeActivitiesState = () => {
-  const { idActivities } = useParams()
-  const [activitiesOne, setactivitiesOne] = useState<Activities | undefined>()
+  const { idActivities, idClassroom } = useParams();
+  const [activitiesOne, setactivitiesOne] = useState<Activities | undefined>();
 
   const initialValueForm: CreateResponse = {
     form_fk: activitiesOne?.form?.id ?? 0,
-    question: activitiesOne?.form?.question.map((item: any) => { return {question_fk: item.id, options: []}} ) ?? [],
-    user_activities_id: activitiesOne?.user_activities![0]?.id ??  0
-  }
+    classroom_fk: parseInt(idClassroom ?? "0"),
+    question:
+      activitiesOne?.form?.question.map((item: any) => {
+        return { question_fk: item.id, options: [] };
+      }) ?? [],
+    user_activities_id: activitiesOne?.user_activities![0]?.id ?? 0,
+  };
 
   const [file, setFile] = useState<any>();
 
-
   const onChangeFile = (e: any) => {
-    setFile(e)
-  }
+    setFile(e);
+  };
 
-  const { data: activitiesOneRequest } = useFetchRequestActivitiesOne(idActivities!)
+  const { data: activitiesOneRequest } = useFetchRequestActivitiesOne(
+    idActivities ?? "",
+    idClassroom ?? ""
+  );
 
   useEffect(() => {
     if (activitiesOneRequest) {
-      setactivitiesOne(activitiesOneRequest)
+      setactivitiesOne(activitiesOneRequest);
     }
-  }, [activitiesOneRequest])
+  }, [activitiesOneRequest]);
 
-  const { JoinTheActivitiesUserMutation, FinishActivitiesUserMutation, AddResponseActivitiesMutation, AddRatingActivitiesMutation, SendAIMutation } = HomeActivitiesController()
+  const {
+    JoinTheActivitiesUserMutation,
+    FinishActivitiesUserMutation,
+    AddResponseActivitiesMutation,
+    AddRatingActivitiesMutation,
+    SendAIMutation,
+  } = HomeActivitiesController();
 
   const JoinTheActivitiesUser = (body: JoinTheActivitiesUser) => {
-    JoinTheActivitiesUserMutation.mutate(body)
-  }
+    JoinTheActivitiesUserMutation.mutate(body);
+  };
 
   const ActivitiesUserRating = (body: PropsRating) => {
-    AddRatingActivitiesMutation.mutate({data: body, id: activitiesOne?.user_activities[0].id!})
-  }
+    AddRatingActivitiesMutation.mutate({
+      data: body,
+      id: activitiesOne?.user_activities[0].id!,
+    });
+  };
 
   const FinishActivitiesUser = (id: number) => {
-
     const formData = new FormData();
     if (file.length > 0) {
       file.forEach((file: any) => {
@@ -48,16 +68,25 @@ export const HomeActivitiesState = () => {
       });
     }
 
-    FinishActivitiesUserMutation.mutate({ id: id, file: formData })
-  }
+    FinishActivitiesUserMutation.mutate({ id: id, file: formData });
+  };
 
   const ResponseActivities = (body: CreateResponse) => {
-    AddResponseActivitiesMutation.mutate(body)
-  }
+    AddResponseActivitiesMutation.mutate(body);
+  };
 
   const SendAnsweAI = (body: SendIA) => {
-    SendAIMutation.mutate({data: body})
-  }
+    SendAIMutation.mutate({ data: body });
+  };
 
-  return { activitiesOne, JoinTheActivitiesUser, FinishActivitiesUser, onChangeFile, initialValueForm, ResponseActivities, ActivitiesUserRating, SendAnsweAI }
-}
+  return {
+    activitiesOne,
+    JoinTheActivitiesUser,
+    FinishActivitiesUser,
+    onChangeFile,
+    initialValueForm,
+    ResponseActivities,
+    ActivitiesUserRating,
+    SendAnsweAI,
+  };
+};
