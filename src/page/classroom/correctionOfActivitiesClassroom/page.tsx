@@ -75,12 +75,12 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
             var notaQuestion = 0;
 
-            for(const i of question.question.response_question){
-                if(question.answer_option.find(props => props.options_fk === i.option_fk)){
+            for (const i of question.question.response_question) {
+                if (question.answer_option.find(props => props.options_fk === i.option_fk)) {
                     notaQuestion++
                 }
             }
-           nota = nota + (notaQuestion/totalQuestion)
+            nota = nota + (notaQuestion / totalQuestion)
         }
         return (nota / total) * 10
     }
@@ -98,9 +98,14 @@ const ClassroomCorrectionOfActivitiesPage = () => {
     }
 
     var prazo = isTime(propsClassroomCorrectionOfActivities?.activities?.activities.time_activities!, propsClassroomCorrectionOfActivities?.activities?.createdAt, propsClassroomCorrectionOfActivities?.activities?.updatedAt)
-
     return (
         <ContentPage title={propsClassroomCorrectionOfActivities?.activities?.activities.name!} description="Visualize a atividade enviado pelo aluno">
+            <div
+                dangerouslySetInnerHTML={{
+                    __html: propsClassroomCorrectionOfActivities?.activities?.activities.description ?? "",
+                }}
+            />
+            {/* <p style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>{propsClassroomCorrectionOfActivities?.activities?.activities.description}</p> */}
             <Padding padding="16px" />
             <>
                 <Row id="space-between" style={{ marginBottom: "8px" }}>
@@ -355,9 +360,73 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 </> : <Empty title="formato de avaliações, adicione para avaliar o aluno" />}
             </>}
 
+            {propsClassroomCorrectionOfActivities?.activities?.answer_user_activities_group_avaliation && propsClassroomCorrectionOfActivities.activities.activities.type_activities === "IA" && <>
+                <Formik initialValues={{ total: propsClassroomCorrectionOfActivities.activities.user_avaliation.total }} onSubmit={(values) => {
+                    propsClassroomCorrectionOfActivities.updateAvaliation({ total: values.total }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id!)
+
+                }}>
+                    {({ values, errors, handleChange, setFieldValue }) => {
+                        return (
+                            <Form>
+                                <Row id="space-between">
+                                    <Column id="center">
+                                        <h3>
+                                            AVALIE O ALUNO
+                                        </h3>
+                                    </Column>
+                                    <Button label="Salvar" icon="pi pi-save" />
+                                </Row>
+
+                                <div className="col-12 md:col-6">
+                                    <label>Nota</label>
+                                    <Padding />
+                                    <InputNumberComponent
+                                        showButtons name="total" value={values.total} onChange={(e) => {
+                                            if (e.value! > 10) {
+                                                setFieldValue("total", 10);
+                                            } else {
+                                                setFieldValue("total", e.value);
+                                            }
+                                        }} max={10}
+                                        placeholder="Nota" />
+                                    <Padding />
+                                    {/* <label style={labelBottom}>Percepção do professor se o aluno está conectando os conteúdos apresentados.</label> */}
+                                </div>
+                            </Form>
+                        )
+                    }}
+                </Formik>
+
+                <div className="grid">
+                    {propsClassroomCorrectionOfActivities.activities?.answer_user_activities_group_avaliation?.map((item) => {
+                        return (
+                            <div className="col-12 md:col-6">
+                                <div className="card ">
+                                    <h3>{item.group_avaliation.name}</h3>
+                                    <Padding padding="8px" />
+                                    <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
+                                        {item.answer}
+                                    </pre>
+                                </div>
+                            </div>
+                        )
+                    })}
+
+                </div>
+                {propsClassroomCorrectionOfActivities.activities?.answer_user_activities_ia![0]?.analyzerFeedback && <div className="card">
+                    <h3>Feedback</h3>
+                    <Padding />
+                    <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
+                        {propsClassroomCorrectionOfActivities.activities?.answer_user_activities_ia![0]?.analyzerFeedback}
+                    </pre>
+                </div>}
+            </>}
+
             {propsClassroomCorrectionOfActivities?.activities?.activities.type_activities === "QUIZ" && <>
                 <FormViewComponent form={propsClassroomCorrectionOfActivities?.activities?.activities.form} />
             </>}
+
+
         </ContentPage >
     )
 }

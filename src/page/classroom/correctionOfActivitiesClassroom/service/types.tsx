@@ -10,6 +10,44 @@ export interface UserActivities {
     user_activities_rating: {rating: number}
     user_activities_archives: UserActivitiesArc[]
     user_classroom: UserClassroom
+    answer_user_activities_group_avaliation: AnswerUserActivitiesGroupAvaliation[]
+    answer_user_activities_ia: AnswerUserActivitiesUm[]
+  }
+
+
+  export interface AnswerUserActivitiesGroupAvaliation {
+    id: number
+    answer: string
+    createdAt: string
+    updatedAt: string
+    group_avaliation: Group
+    group_avaliation_fk: number
+    user_activities_fk: number
+  }
+
+  export interface Group {
+    id: number
+    name: string
+    createdAt: string
+    updatedAt: string
+    type_group_avaliation_fk: number
+  }
+  
+  export interface AnswerUserActivitiesUm {
+    id: number
+    analyzerFeedback: string
+    createdAt: string
+    updatedAt: string
+    user_activities_fk: number
+    answer_user_activities_ia_group_avaliation: AnswerUserActivitiesIaGroupAvaliation[]
+  }
+  
+  export interface AnswerUserActivitiesIaGroupAvaliation {
+    id: number
+    createdAt: string
+    updatedAt: string
+    group_avaliation_fk: number
+    answer_user_activities_ia_fk: number
   }
   
   export interface UserAvaliation {
@@ -28,6 +66,7 @@ export interface UserActivities {
   
   export interface Activities {
     classroom_activities: ClassroomActivity[]
+    description: string
     type_activities: string
     name: string
     points_activities: number
