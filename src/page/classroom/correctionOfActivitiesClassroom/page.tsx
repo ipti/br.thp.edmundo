@@ -196,7 +196,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                 </Row>
                                 <div style={{ padding: 8, background: color.colorSecondary, width: 128, borderRadius: 8, marginTop: 16 }}>
                                     <h3 style={{ textAlign: "center", color: "white" }}>
-                                        Nota: {values.total}
+                                        Nota: {values.total?.toFixed(2)}
                                     </h3>
 
                                 </div>
@@ -349,7 +349,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                         <Padding padding="16px" />
                                         <div style={{ padding: 8, background: color.colorSecondary, width: 128, borderRadius: 8 }}>
                                             <h3 style={{ textAlign: "center", color: "white" }}>
-                                                Nota: {handleMedia(values)}
+                                                Nota: {handleMedia(values)?.toFixed(2)}
                                             </h3>
                                         </div>
                                     </Form>
