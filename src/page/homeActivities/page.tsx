@@ -136,7 +136,7 @@ const HomeActivitiesPage = () => {
                     <TextActivitiesCard>
                       {
                         propsAplication.activitiesOne?.user_activities[0]
-                          ?.user_avaliation?.total
+                          ?.user_avaliation?.total?.toFixed(2)
                       }{" "}
                       {`\n`}
                     </TextActivitiesCard>

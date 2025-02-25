@@ -62,7 +62,7 @@ const MemberOnePage = () => {
             datasets: [
                 {
                     label: 'Notas',
-                    data: props?.moduleAtivities?.moduloActivities?.map((item: any) => item.total),
+                    data: props?.moduleAtivities?.moduloActivities?.map((item: any) => item.total?.toFixed(2)),
                     fill: false,
                     backgroundColor: [color.colorPrimary, color.colorThird, color.colorSecondary],
                     borderColor: color.colorPrimary,
