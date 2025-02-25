@@ -209,7 +209,7 @@ const ActivitiesSentPage = () => {
         <Column
           field="user_avaliation.total"
           body={(data) => {
-            return <>{data?.user_avaliation?.total ?? "-"}</>;
+            return <>{data?.user_avaliation?.total?.toFixed(2) ?? "-"}</>;
           }}
           header="Nota"
         ></Column>
