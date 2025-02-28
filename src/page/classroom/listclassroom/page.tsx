@@ -11,46 +11,78 @@ import { AplicationContext } from "../../../context/context";
 import { PropsAplicationContext } from "../../../context/type";
 import { ROLE } from "../../../Controller/controllerGlobal";
 import SearchModal from "./searchmodal";
+import ImportClassroomModal from "./importClassroomModal";
 
 const ClassroomList = () => {
-    return (
-        <ListClassroomProvider>
-            <ClassroomListPage />
-        </ListClassroomProvider>
-    )
-}
+  return (
+    <ListClassroomProvider>
+      <ClassroomListPage />
+    </ListClassroomProvider>
+  );
+};
 
 const ClassroomListPage = () => {
+  const propsAplication = useContext(
+    AplicationContext
+  ) as PropsAplicationContext;
+  const props = useContext(ListClassroomContext) as ListClassroomContextType;
+  const [search, setSearch] = useState(false);
 
-    const propsAplication = useContext(AplicationContext) as PropsAplicationContext
-    const props = useContext(ListClassroomContext) as ListClassroomContextType
-    const [search, setSearch] = useState(false)
+  const history = useNavigate();
+  return (
+    <ContentPage title="Turmas" description="Visualize as suas turmas">
+      <Column>
+        <Row id="end">
+          <Button
+            label={
+              propsAplication.user?.role === ROLE.STUDENT
+                ? "Buscar turmas"
+                : "Importar turma"
+            }
+            icon="pi pi-plus"
+            onClick={() => {
+              propsAplication.user?.role === ROLE.STUDENT
+                ? setSearch(true)
+                : history("/turmas/criar");
+            }}
+          />
 
-    const history = useNavigate()
-    return (
-        <ContentPage title="Turmas" description="Visualize as suas turmas">
-            <Column>
-                <Row id="end">
-                    <Button label={propsAplication.user?.role === ROLE.STUDENT ? "Buscar turmas" : "Criar turma"} icon="pi pi-plus" onClick={() => { propsAplication.user?.role === ROLE.STUDENT ? setSearch(true) : history("/turmas/criar") }} />
-                </Row>
-            </Column>
-            <Padding padding="16px" />
-            <div className="grid">
-                {props.classroomList?.map((item) => {
-                    return (
-                        <div className="col-12 md:col-6 lg:col-4" key={item.id}>
-
-                            <CardClassroom id={item.id} title={item.name} registrationCount={item._count.user} handleDelete={() => props.DeleteClassroom(item.id)} />
-                        </div>
-                    )
-                })}
+          <Button
+            label={
+              propsAplication.user?.role === ROLE.STUDENT
+                ? "Buscar turmas"
+                : "Criar turma"
+            }
+            icon="pi pi-plus"
+            onClick={() => {
+              propsAplication.user?.role === ROLE.STUDENT
+                ? setSearch(true)
+                : history("/turmas/criar");
+            }}
+          />
+        </Row>
+      </Column>
+      <Padding padding="16px" />
+      <div className="grid">
+        {props.classroomList?.map((item) => {
+          return (
+            <div className="col-12 md:col-6 lg:col-4" key={item.id}>
+              <CardClassroom
+                id={item.id}
+                title={item.name}
+                registrationCount={item._count.user}
+                handleDelete={() => props.DeleteClassroom(item.id)}
+              />
             </div>
+          );
+        })}
+      </div>
 
-            {props.classroomList?.length === 0 && <Empty title="turmas" />}
-
-            <SearchModal visible={search} onHide={() => setSearch(!search)} />
-        </ContentPage>
-    )
-}
+      {props.classroomList?.length === 0 && <Empty title="turmas" />}
+      <ImportClassroomModal visible={true} onHide={() => {}} />
+      <SearchModal visible={search} onHide={() => setSearch(!search)} />
+    </ContentPage>
+  );
+};
 
 export default ClassroomList;
