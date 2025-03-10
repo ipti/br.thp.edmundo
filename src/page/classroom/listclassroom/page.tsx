@@ -27,23 +27,20 @@ const ClassroomListPage = () => {
   ) as PropsAplicationContext;
   const props = useContext(ListClassroomContext) as ListClassroomContextType;
   const [search, setSearch] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const history = useNavigate();
   return (
     <ContentPage title="Turmas" description="Visualize as suas turmas">
       <Column>
-        <Row id="end">
+        <Row id="end" style={{gap: '8px'}}>
           <Button
-            label={
-              propsAplication.user?.role === ROLE.STUDENT
-                ? "Buscar turmas"
-                : "Importar turma"
-            }
-            icon="pi pi-plus"
+            label={"Importar turma"}
+            icon="pi pi-download"
             onClick={() => {
               propsAplication.user?.role === ROLE.STUDENT
                 ? setSearch(true)
-                : history("/turmas/criar");
+                : setVisible(!visible);
             }}
           />
 
@@ -79,7 +76,12 @@ const ClassroomListPage = () => {
       </div>
 
       {props.classroomList?.length === 0 && <Empty title="turmas" />}
-      <ImportClassroomModal visible={true} onHide={() => {}} />
+      <ImportClassroomModal
+        visible={visible}
+        onHide={() => {
+          setVisible(!visible);
+        }}
+      />
       <SearchModal visible={search} onHide={() => setSearch(!search)} />
     </ContentPage>
   );

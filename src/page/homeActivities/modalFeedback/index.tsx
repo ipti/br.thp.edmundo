@@ -20,7 +20,7 @@ const ModalFeedback = ({
     >
       {visible && (
         <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
-          {visible![0].analyzerFeedback} {`\n`}
+          {visible![visible.length - 1].analyzerFeedback} {`\n`}
         </pre>
       )}
       <Column>

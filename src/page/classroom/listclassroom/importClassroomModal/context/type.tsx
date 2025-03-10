@@ -17,3 +17,11 @@ export interface Project {
   createdAt: string
   updatedAt: string
 }
+
+export type ClassroomList = Clasroom[]
+
+export interface Clasroom {
+  name: string
+  id: number
+}
+
