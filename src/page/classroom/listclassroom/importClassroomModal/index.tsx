@@ -5,6 +5,7 @@ import DropdownComponent from "../../../../Components/Dropdown";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
+import * as Yup from "yup";
 
 const ImportClassroomModal = ({
   onHide,
@@ -14,6 +15,13 @@ const ImportClassroomModal = ({
   onHide: any;
 }) => {
   const props = ImportClassroomState();
+
+  const schema = Yup.object().shape({
+    ts: Yup.object().required("Campo é obrigatório"),
+    project: Yup.object().required("Campo é obrigatório"),
+    classroom: Yup.object().required("Campo é obrigatório"),
+  });
+
   return (
     <Dialog
       header={"Importar turma"}
@@ -24,12 +32,13 @@ const ImportClassroomModal = ({
       <Padding />
       <Formik
         initialValues={props.initialState}
+        validationSchema={schema}
         onSubmit={(values) => {
           props.handleMigrateClassroom(values.classroom.id);
           onHide();
         }}
       >
-        {({ values, handleChange }) => {
+        {({ values, handleChange, errors, touched, setFieldValue }) => {
           return (
             <Form>
               <div className="grid">
@@ -42,8 +51,17 @@ const ImportClassroomModal = ({
                     value={values.ts}
                     name="ts"
                     optionsLabel="name"
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      handleChange(e);
+                      setFieldValue('project', undefined);
+                      setFieldValue('classroom', undefined)
+                    }}
                   />
+                  {errors.ts && touched.ts ? (
+                    <div style={{ color: "red", marginTop: "8px" }}>
+                      {errors.ts.toString()}
+                    </div>
+                  ) : null}
                 </div>
 
                 {values.ts?.project && (
@@ -61,6 +79,11 @@ const ImportClassroomModal = ({
                         props.setProjectId(e.target.value.id);
                       }}
                     />
+                    {errors.project && touched.project ? (
+                      <div style={{ color: "red", marginTop: "8px" }}>
+                        {errors.project.toString()}
+                      </div>
+                    ) : null}
                   </div>
                 )}
                 {props.projectId &&
@@ -70,12 +93,19 @@ const ImportClassroomModal = ({
                       <label>Turmas</label>
                       <Padding />
                       <DropdownComponent
-                        options={props.classroomList.filter((item) => item.name !== "")}
+                        options={props.classroomList.filter(
+                          (item) => item.name !== ""
+                        )}
                         placerholder="Escolha uma turma"
                         value={values.classroom}
                         name="classroom"
                         onChange={handleChange}
                       />
+                      {errors.classroom && touched.classroom ? (
+                        <div style={{ color: "red", marginTop: "8px" }}>
+                          {errors.classroom.toString()}
+                        </div>
+                      ) : null}
                     </div>
                   )}
                 {props.isLoadingClassroom && (
