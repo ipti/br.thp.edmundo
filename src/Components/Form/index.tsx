@@ -1,12 +1,12 @@
 import { FormikErrors } from "formik";
-import { Button } from "primereact/button";
+import { useState } from "react";
 import { Form } from "../../page/activities/type";
 import { CreateResponse } from "../../page/homeActivities/type";
 import { Column, Padding, Row } from "../../Styles/styles";
+import ButtonComponent from "../Button";
 import ModalEditForm from "./ModalEditForm";
 import RenderCheckBoxCard from "./View/checkbox";
 import RenderRadioButtonCard from "./View/radiobutton";
-import { useState } from "react";
 
 const FormComponent = ({
   form,
@@ -41,7 +41,7 @@ const FormComponent = ({
                     }}
                   />
                   {isAlter && (
-                    <Button
+                    <ButtonComponent
                       icon="pi pi-pencil"
                       onClick={() => setVisible(item)}
                     />

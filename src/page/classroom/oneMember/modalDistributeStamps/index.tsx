@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import * as yup from 'yup';
+import ButtonComponent from "../../../../Components/Button";
 import RadioButtonComponent from "../../../../Components/RadioButton";
 import Stamp from "../../../../Components/Stamp";
 import color from "../../../../Styles/colors";
@@ -68,7 +68,7 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                 {(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}
                             </div>
                             <div className="flex pt-4 justify-content-end">
-                                <Button label="Finalizar" disabled={!values.idStamps} icon="pi pi-save" iconPos="right" type="submit" />
+                                <ButtonComponent label="Finalizar" disabled={!values.idStamps} icon="pi pi-save" iconPos="right" type="submit" />
                             </div>
                         </Form>
 

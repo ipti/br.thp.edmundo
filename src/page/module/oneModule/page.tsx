@@ -1,10 +1,10 @@
 import { Accordion, AccordionTab } from "primereact/accordion"
-import { Button } from "primereact/button"
 import { ConfirmDialog } from "primereact/confirmdialog"
 import { Divider } from "primereact/divider"
 import { useContext, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import activitiesIcon from "../../../assets/image/activities.svg"
+import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
 import Icon from "../../../Components/Icon"
 import { Column, Padding, Row } from "../../../Styles/styles"
@@ -36,7 +36,7 @@ const ModuleOnePage = () => {
     return (
         <ContentPage title={moduleOneContext.moduleOne?.name!} description={moduleOneContext.moduleOne?.description!} >
             <Row id="end">
-                <Button
+                <ButtonComponent
                     icon="pi pi-pencil"
                     onClick={() => {
                         history("/modulos/" + id + "/editar");
@@ -46,7 +46,7 @@ const ModuleOnePage = () => {
             <Padding padding="16px" />
             <Row id="space-between">
                 <h2>Aulas</h2>
-                <Button label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar") }} />
+                <ButtonComponent label="Adicionar aulas" icon={'pi pi-plus'} onClick={() => { history("/aulas/" + id + "/criar") }} />
             </Row>
             <Padding padding="16px" />
             <Accordion activeIndex={0}>
@@ -123,7 +123,7 @@ const ModuleOnePage = () => {
                                 )
                             })}
                             <Padding padding="8px" />
-                            <Button icon={"pi pi-plus"} label="Adicionar atividade" onClick={() => { history("/atividades/" + item.id + "/criar/" + id) }} />
+                            <ButtonComponent icon={"pi pi-plus"} label="Adicionar atividade" onClick={() => { history("/atividades/" + item.id + "/criar/" + id) }} />
                         </AccordionTab>
                     )
                 })}

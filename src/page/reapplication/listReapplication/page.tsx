@@ -1,12 +1,12 @@
-import { Button } from "primereact/button"
-import ContentPage from "../../../Components/ContentPage"
-import { Column, Padding, Row } from "../../../Styles/styles"
-import { useNavigate } from "react-router-dom"
-import ListReapplicationProvider, { ListReapplicationContext } from "./context/context"
 import { useContext } from "react"
-import { ListReapplicationContextType } from "./context/types"
+import { useNavigate } from "react-router-dom"
+import ButtonComponent from "../../../Components/Button"
 import CardProject from "../../../Components/Card/CardProject"
+import ContentPage from "../../../Components/ContentPage"
 import Empty from "../../../Components/Empty"
+import { Column, Padding, Row } from "../../../Styles/styles"
+import ListReapplicationProvider, { ListReapplicationContext } from "./context/context"
+import { ListReapplicationContextType } from "./context/types"
 
 const ReapplicationList = () => {
     return (
@@ -25,7 +25,7 @@ const ReapplicationListPage = () => {
         <ContentPage title="Reaplicações" description="Visualize as seus locais de reaplicação">
             <Column>
                 <Row id="end">
-                    <Button label="Criar Reaplicação" icon="pi pi-plus" onClick={() => { history("/reaplicacoes/criar") }} />
+                    <ButtonComponent label="Criar Reaplicação" icon="pi pi-plus" onClick={() => { history("/reaplicacoes/criar") }} />
                 </Row>
             </Column>
             <Padding padding="32px" />

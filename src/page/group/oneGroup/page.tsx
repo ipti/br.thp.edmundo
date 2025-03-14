@@ -1,7 +1,7 @@
-import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useContext, useState } from "react";
+import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
 import { Padding, Row } from "../../../Styles/styles";
 import GroupOneProvider, { GroupOneContext } from "./context/context";
@@ -24,7 +24,7 @@ const GroupOnePage = () => {
   const ActionsUserBody = (rowData: any) => {
     return (
       <Row id="center">
-        <Button
+        <ButtonComponent
           icon="pi pi-pencil"
           rounded
           className="mr-2"
@@ -50,7 +50,7 @@ const GroupOnePage = () => {
         className="flex justify-content-between"
       // style={{ background: color.colorCard }}
       >
-        <Button
+        <ButtonComponent
           label="Criar métricas"
           icon="pi pi-plus"
           onClick={() => {

@@ -1,6 +1,6 @@
-import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { useContext, useState } from "react";
+import ButtonComponent from "../../../../Components/Button";
 import RenderFormCheckbox from "../../../../Components/ComponentsForm/ComponentCheckbox/Create";
 import RenderForm from "../../../../Components/ComponentsForm/ComponentMulti/Create";
 import RenderFormTextField from "../../../../Components/ComponentsForm/ComponentTextFiled/Create";
@@ -11,8 +11,8 @@ import Icon from "../../../../Components/Icon";
 import { ControllerCreateForm } from "../../../../Controller/controllerCreateForm";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import {
-    CreateOrEditFormTypes,
-    PropsComponentForm,
+  CreateOrEditFormTypes,
+  PropsComponentForm,
 } from "../../../../Types/types";
 import { EditActivitiesContext } from "../../editActivities/context/context";
 import { EditActivitiesType } from "../../type";
@@ -52,7 +52,7 @@ const Form = () => {
       })}
       <Padding padding="8px" />
       <Row id="end">
-        <Button
+        <ButtonComponent
           label="Adicionar Pergunta"
           icon="pi pi-plus"
           onClick={() =>

@@ -1,7 +1,7 @@
-import { Button } from "primereact/button";
 import { useContext, useState } from "react";
 
 import { TabMenu } from "primereact/tabmenu";
+import ButtonComponent from "../../../Components/Button";
 import { Padding, Row } from "../../../Styles/styles";
 import { CreateOrEditFormTypes } from "../../../Types/types";
 import { CreateOrEditFormContext } from "./context/context";
@@ -39,7 +39,7 @@ const CreateOrEditForms = () => {
             icon="pi pi-eye"
             // onClick={() => history(`/view/${form.id}`)}
           />{" "} */}
-         { <Button
+         { <ButtonComponent
             label={"Salvar"}
             icon="pi pi-save"
             onClick={() => CreateForm()}

@@ -2,9 +2,7 @@ import { Form } from "formik";
 import { useContext } from "react";
 import DropdownComponent from "../../../Components/Dropdown";
 import TextInput from "../../../Components/TextInput";
-import {
-  ROLE
-} from "../../../Controller/controllerGlobal";
+import { ROLE, RoleList } from "../../../Controller/controllerGlobal";
 import { Padding } from "../../../Styles/styles";
 import { PropsAplicationContext } from "../../../Types/types";
 import { AplicationContext } from "../../../context/context";
@@ -20,7 +18,6 @@ const InputsUser = ({
   errors: any;
   touched: any;
 }) => {
-
   const props = useContext(AplicationContext) as PropsAplicationContext;
   return (
     <Form>
@@ -60,7 +57,6 @@ const InputsUser = ({
             </div>
           ) : null}
         </div>
-
       </div>{" "}
       <div className="grid">
         <div className="col-12 md:col-6">
@@ -73,18 +69,7 @@ const InputsUser = ({
             optionsValue="id"
             value={values.role}
             onChange={handleChange}
-            options={
-              props.user?.role === ROLE.ADMIN
-                ? [
-                  { id: ROLE.ADMIN, name: "Admin" },
-                  { id: ROLE.STUDENT, name: "Estudante" },
-                  { id: ROLE.TEACHER, name: "Professor" },
-                ]
-                : [
-                  { id: ROLE.STUDENT, name: "Estudante" },
-                  { id: ROLE.TEACHER, name: "Professor" },
-                ]
-            }
+            options={RoleList(props.user?.role === ROLE.ADMIN)}
           />
           <Padding />
           {errors.role && touched.role ? (

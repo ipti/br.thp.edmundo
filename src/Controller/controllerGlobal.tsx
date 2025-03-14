@@ -1,8 +1,7 @@
-import { useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 import React from "react";
-
 
 export const gerarIdAleatorio = (tamanho: number) => {
   const caracteres =
@@ -18,14 +17,10 @@ export const gerarIdAleatorio = (tamanho: number) => {
 };
 
 export function formatarData(data: string): string {
-
-  
-
   var date = data.toString().split("T")[0];
   var dataEdit = date.split("-").reverse().join("/");
   return dataEdit;
 }
-
 
 export function formatarDataHours(data: string): string {
   // Criando um objeto Date a partir da string ISO (data)
@@ -35,11 +30,11 @@ export function formatarDataHours(data: string): string {
   dateObj.setHours(dateObj.getHours());
 
   // Formatando a data no formato dd/mm/yyyy
-  const dataEdit = dateObj.toLocaleDateString('pt-BR'); // Converte para dd/mm/yyyy
+  const dataEdit = dateObj.toLocaleDateString("pt-BR"); // Converte para dd/mm/yyyy
 
   // Formatando as horas e minutos (hh:mm)
-  const horas = dateObj.getHours().toString().padStart(2, '0'); // Adiciona zero à esquerda se necessário
-  const minutos = dateObj.getMinutes().toString().padStart(2, '0');
+  const horas = dateObj.getHours().toString().padStart(2, "0"); // Adiciona zero à esquerda se necessário
+  const minutos = dateObj.getMinutes().toString().padStart(2, "0");
 
   // Retornando a data no formato desejado (dd/mm/yyyy hh:mm)
   return `${dataEdit} às ${horas}:${minutos}`;
@@ -47,7 +42,7 @@ export function formatarDataHours(data: string): string {
 
 export function converterData(data: string) {
   // Divide a string pelo separador "/"
-  const partes = data.split('/');
+  const partes = data.split("/");
 
   // As partes serão: partes[0] = dia, partes[1] = mês, partes[2] = ano
   const dia = partes[0];
@@ -61,8 +56,6 @@ export function converterData(data: string) {
 }
 
 export function somarNumeros(num1: number, num2: number): number {
-
-
   return parseInt(`${num1 + num2}`);
 }
 
@@ -126,18 +119,18 @@ export const question = [
 
 export enum Type_Tags {
   ACTIVITIES,
-  USERS
+  USERS,
 }
 
 export const type_tags = [
-  { id: "USERS", name: "Usuário"},
-  {id: "ACTIVITIES", name: "Atividades"}
-]
+  { id: "USERS", name: "Usuário" },
+  { id: "ACTIVITIES", name: "Atividades" },
+];
 
 export const type_stamp = [
-  { id: "GOLD", name: "Ouro"},
-  {id: "STANDARD", name: "Padrão"}
-]
+  { id: "GOLD", name: "Ouro" },
+  { id: "STANDARD", name: "Padrão" },
+];
 export const Status = {
   APPROVED: "APPROVED",
   PENDING: "PENDING",
@@ -150,41 +143,52 @@ export const ROLE = {
   TEACHER: "TEACHER",
 };
 
+export const RoleList = (isTrue: boolean) => {
+  return isTrue
+    ? [
+        { id: ROLE.ADMIN, name: "Admin" },
+        { id: ROLE.STUDENT, name: "Estudante" },
+        { id: ROLE.TEACHER, name: "Professor" },
+      ]
+    : [
+        { id: ROLE.STUDENT, name: "Estudante" },
+        { id: ROLE.TEACHER, name: "Professor" },
+      ];
+};
+
 export const kinship = [
-  { id: "PAI", name: 'Pai' },
-  { id: "MAE", name: 'Mãe' },
-  { id: "CONJUGE", name: 'Cônjuge' },
-  { id: "FILHO_A", name: 'Filho(a)' },
-  { id: "ENTEADO_A", name: 'Enteado(a)' },
-  { id: "NETO_A", name: 'Neto(a)' },
-  { id: "SOGRO_A", name: 'Sogro(a)' },
-  { id: "IRMAO_A", name: 'Irmão(a)' },
-  { id: "GENRO", name: 'Genro' },
-  { id: "NORA", name: 'Nora' },
-  { id: "OUTRO", name: 'Outro' },
-  { id: "NAO_PARENTE", name: 'Não Parente' }
-]
+  { id: "PAI", name: "Pai" },
+  { id: "MAE", name: "Mãe" },
+  { id: "CONJUGE", name: "Cônjuge" },
+  { id: "FILHO_A", name: "Filho(a)" },
+  { id: "ENTEADO_A", name: "Enteado(a)" },
+  { id: "NETO_A", name: "Neto(a)" },
+  { id: "SOGRO_A", name: "Sogro(a)" },
+  { id: "IRMAO_A", name: "Irmão(a)" },
+  { id: "GENRO", name: "Genro" },
+  { id: "NORA", name: "Nora" },
+  { id: "OUTRO", name: "Outro" },
+  { id: "NAO_PARENTE", name: "Não Parente" },
+];
 
 type DifficulteKeys = keyof typeof difficulte;
-
 
 export function getDifficulte(key: DifficulteKeys): string {
   return difficulte[key];
 }
 
-
 export function useQuery() {
-    const { search } = useLocation();
-  
-    return React.useMemo(() => new URLSearchParams(search), [search]);
-  }
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 export const difficulte = {
   BAIXO: "Baixo",
   MEDIO: "Media",
   ALTO: "Alto",
   MUITO_ALTO: "Muito alto",
-}
+};
 
 export const loadImageFileAsBase64 = (imagePath: string): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -202,21 +206,21 @@ export const loadImageFileAsBase64 = (imagePath: string): Promise<string> => {
   });
 };
 
-
-export const convertImageUrlToBase64 = async (imageUrl: string): Promise<string> => {
+export const convertImageUrlToBase64 = async (
+  imageUrl: string
+): Promise<string> => {
   try {
-    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-    const base64 = Buffer.from(response.data, 'binary').toString('base64');
-    const mimeType = response.headers['content-type'];
+    const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
+    const base64 = Buffer.from(response.data, "binary").toString("base64");
+    const mimeType = response.headers["content-type"];
     return `data:${mimeType};base64,${base64}`;
   } catch (error: any) {
     throw new Error(`Failed to convert image to Base64: ${error.message}`);
   }
 };
 
-
 export function isMaiorDeIdade(dataString: string) {
-  const [dia, mes, ano] = dataString.split('/');
+  const [dia, mes, ano] = dataString.split("/");
   const dataNascimento = new Date(`${mes}/${dia}/${ano}`);
   const hoje = new Date();
   const idadeMinima = 18;
@@ -227,7 +231,10 @@ export function isMaiorDeIdade(dataString: string) {
   const mesNascimento = dataNascimento.getMonth();
 
   // Ajusta a idade se o aniversário não foi atingido este ano
-  if (mesAtual < mesNascimento || (mesAtual === mesNascimento && hoje.getDate() < dataNascimento.getDate())) {
+  if (
+    mesAtual < mesNascimento ||
+    (mesAtual === mesNascimento && hoje.getDate() < dataNascimento.getDate())
+  ) {
     idade--;
   }
 
@@ -235,10 +242,9 @@ export function isMaiorDeIdade(dataString: string) {
 }
 
 export function generateCode(id: number) {
-  return String(id).padStart(6, '0');
+  return String(id).padStart(6, "0");
 }
 
 export function removeLeadingZeros(code: string) {
   return parseInt(code, 10);
 }
-

@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import {
   Dispatch,
@@ -12,12 +11,13 @@ import {
 } from "react";
 import ReactQuill from "react-quill";
 import { AddEditorImage } from "../../../page/activities/createActivities/service/request";
+import { EditActivitiesContext } from "../../../page/activities/editActivities/context/context";
 import { Question } from "../../../page/activities/type";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import { EditActivitiesContext } from "../../../page/activities/editActivities/context/context";
+import ButtonComponent from "../../Button";
 import CheckboxComponent from "../../Checkbox";
-import TextInput from "../../TextInput";
 import RadioButtonComponent from "../../RadioButton";
+import TextInput from "../../TextInput";
 
 const ModalEditForm = ({
   visible,
@@ -226,7 +226,7 @@ const ModalEditForm = ({
               <Padding padding="8px" />
               <Column>
                 <Row id="end">
-                  <Button label="Salvar" type="submit" />
+                  <ButtonComponent label="Salvar" type="submit" />
                 </Row>
               </Column>
             </Form>

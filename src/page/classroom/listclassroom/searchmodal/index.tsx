@@ -1,16 +1,16 @@
-import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputOtp } from 'primereact/inputotp';
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useState } from "react";
+import ButtonComponent from "../../../../Components/Button";
 import { Container } from "../../../../Components/Card/CardClassroom/style";
-import { generateCode, removeLeadingZeros } from "../../../../Controller/controllerGlobal";
-import { Column, Padding, Row } from "../../../../Styles/styles";
-import { Classroom, ListClassroomContextType } from "../context/types";
-import { useFetchRequestOneClassroom } from "../service/query";
-import { ListClassroomContext } from "../context/context";
 import { AplicationContext } from "../../../../context/context";
 import { PropsAplicationContext } from "../../../../context/type";
+import { generateCode, removeLeadingZeros } from "../../../../Controller/controllerGlobal";
+import { Column, Padding, Row } from "../../../../Styles/styles";
+import { ListClassroomContext } from "../context/context";
+import { Classroom, ListClassroomContextType } from "../context/types";
+import { useFetchRequestOneClassroom } from "../service/query";
 
 const SearchModal = ({ onHide, visible }: { onHide(): void, visible?: boolean | undefined }) => {
     const [token, setTokens] = useState<string | number | null | undefined>();
@@ -30,7 +30,7 @@ const SearchModal = ({ onHide, visible }: { onHide(): void, visible?: boolean | 
                         <InputOtp value={token} onChange={(e) => setTokens(e.value)} length={6} integerOnly />
                     </div>
                     <Column id="end">
-                        <Button label="Buscar" style={{ height: "48px" }} icon="pi pi-search" disabled={token?.toString().length !== 6} onClick={() => setSearch(true)} />
+                        <ButtonComponent label="Buscar" style={{ height: "48px" }} icon="pi pi-search" disabled={token?.toString().length !== 6} onClick={() => setSearch(true)} />
                     </Column>
                 </Row>
                 <Padding padding="16px" />
@@ -64,7 +64,7 @@ const ClassroomFind = ({ idClassroom, onHide }: { idClassroom: string | number |
                     </p>
                 </Column>
                 <Column id="end">
-                    <Button label={classroom.isOpen ? "Entrar" : "Não disponivel" } disabled={!classroom.isOpen} style={{ height: "48px" }} icon="pi pi-sign-in" onClick={() => { props.JoinTheClassroomClassroom({idClassroom: parseInt(idClassroom?.toString()!), idUser: propsAplication.user?.id!}); onHide()}} />
+                    <ButtonComponent label={classroom.isOpen ? "Entrar" : "Não disponivel" } disabled={!classroom.isOpen} style={{ height: "48px" }} icon="pi pi-sign-in" onClick={() => { props.JoinTheClassroomClassroom({idClassroom: parseInt(idClassroom?.toString()!), idUser: propsAplication.user?.id!}); onHide()}} />
                 </Column>
             </Row>
         </Container>

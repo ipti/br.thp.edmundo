@@ -8,20 +8,20 @@ import activities from "../../../assets/image/activities.svg";
 
 
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { SelectButton } from "primereact/selectbutton";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ButtonComponent from "../../../Components/Button";
+import CardQuant from "../../../Components/Chart/CardQuant";
+import Icon from "../../../Components/Icon";
 import TextInput from "../../../Components/TextInput";
+import color from "../../../Styles/colors";
 import meeting from "../../../assets/image/iconsMenu/module.svg";
-import OneClassroomProvider, { OneClassroomContext } from "./context/context";
-import { OneClassroomContextType } from "./context/types";
 import { AplicationContext } from "../../../context/context";
 import { PropsAplicationContext } from "../../../context/type";
-import Icon from "../../../Components/Icon";
-import color from "../../../Styles/colors";
-import CardQuant from "../../../Components/Chart/CardQuant";
-import { ProgressSpinner } from "primereact/progressspinner";
+import OneClassroomProvider, { OneClassroomContext } from "./context/context";
+import { OneClassroomContextType } from "./context/types";
 import ModalDistributeStamps from "./modalDistributeStamps";
 import ModalMigrationMeuBen from "./modalMigrationMeuBen";
 
@@ -51,15 +51,15 @@ const ClassroomOnePage = () => {
 
     return (
         <ContentPage title={props.classroomOne?.classroom?.name!} description={"Dono da turma: " + props.classroomOne?.owner?.name}>
-            {(!edit && propsAplication.user?.role !== ROLE.STUDENT) && <Row id="end"><Button icon="pi pi-pencil" onClick={() => { setEdit(!edit) }} /></Row>}
+            {(!edit && propsAplication.user?.role !== ROLE.STUDENT) && <Row id="end"><ButtonComponent icon="pi pi-pencil" onClick={() => { setEdit(!edit) }} /></Row>}
 
             {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false }); setEdit(!edit) }}>
                 {({ values, handleChange }) => {
                     return (
                         <Form>
                             <Row id="end" style={{ gap: "10px" }}>
-                                <Button label="Salvar" icon={"pi pi-save"} type="submit" />
-                                <Button label="Cancelar" type="button" severity="secondary" style={{ color: "black" }} onClick={() => { setEdit(!edit) }} />
+                                <ButtonComponent label="Salvar" icon={"pi pi-save"} type="submit" />
+                                <ButtonComponent label="Cancelar" type="button" severity="secondary" style={{ color: "black" }} onClick={() => { setEdit(!edit) }} />
                             </Row>
                             <Padding />
                             <div className="grid">
@@ -95,11 +95,11 @@ const ClassroomOnePage = () => {
             <h3>Código da turma: {generateCode(props.classroomOne?.classroom?.id!)}</h3>
             <Padding padding="8px" />
             <Row>
-                <Button label="Distribuir selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
+                <ButtonComponent label="Distribuir selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
                     setVisible(!visible)
                 }} />
                 <Padding padding="8px" />
-                <Button label="Migrar turma" icon={"pi pi-upload"} iconPos="right" onClick={() => {
+                <ButtonComponent label="Migrar turma" icon={"pi pi-upload"} iconPos="right" onClick={() => {
                     setVisibleMigration(!visibleMigration)
                 }} />
             </Row>

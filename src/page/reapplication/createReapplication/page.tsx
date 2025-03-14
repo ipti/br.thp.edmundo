@@ -1,10 +1,10 @@
 import { Form, Formik } from "formik";
+import { useContext } from "react";
+import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
 import TextInput from "../../../Components/TextInput";
 import { Column, Padding, Row } from "../../../Styles/styles";
-import { Button } from "primereact/button";
 import CreateReapplicationProvider, { CreateReapplicationContext } from "./context/context";
-import { useContext } from "react";
 import { CreateReapplicationContextType } from "./context/types";
 
 
@@ -30,7 +30,7 @@ const ReapplicationCreatePage = () => {
 
                             <Column>
                                 <Row id="end">
-                                    <Button label="Criar" type="submit" />
+                                    <ButtonComponent label="Criar" type="submit" />
                                 </Row>
                             </Column>
 

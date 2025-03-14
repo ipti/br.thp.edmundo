@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik";
 import { Dialog } from "primereact/dialog";
-import { ImportClassroomState } from "./context/state";
-import DropdownComponent from "../../../../Components/Dropdown";
-import { Column, Padding, Row } from "../../../../Styles/styles";
-import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
 import * as Yup from "yup";
+import ButtonComponent from "../../../../Components/Button";
+import DropdownComponent from "../../../../Components/Dropdown";
+import { Column, Padding, Row } from "../../../../Styles/styles";
+import { ImportClassroomState } from "./context/state";
 
 const ImportClassroomModal = ({
   onHide,
@@ -117,7 +117,7 @@ const ImportClassroomModal = ({
               <Padding padding="8px" />
               <Column>
                 <Row id="end">
-                  <Button label="Importar" icon={"pi pi-download"} />
+                  <ButtonComponent label="Importar" icon={"pi pi-download"} type="submit" />
                 </Row>
               </Column>
             </Form>

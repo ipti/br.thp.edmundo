@@ -1,17 +1,17 @@
-import { Button } from "primereact/button";
-import ContentPage from "../../../Components/ContentPage";
-import { Column, Padding, Row } from "../../../Styles/styles";
-import { useNavigate } from "react-router-dom";
-import ListClassroomProvider, { ListClassroomContext } from "./context/context";
-import CardClassroom from "../../../Components/Card/CardClassroom";
 import { useContext, useState } from "react";
-import { ListClassroomContextType } from "./context/types";
+import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../../../Components/Button";
+import CardClassroom from "../../../Components/Card/CardClassroom";
+import ContentPage from "../../../Components/ContentPage";
 import Empty from "../../../Components/Empty";
 import { AplicationContext } from "../../../context/context";
 import { PropsAplicationContext } from "../../../context/type";
 import { ROLE } from "../../../Controller/controllerGlobal";
-import SearchModal from "./searchmodal";
+import { Column, Padding, Row } from "../../../Styles/styles";
+import ListClassroomProvider, { ListClassroomContext } from "./context/context";
+import { ListClassroomContextType } from "./context/types";
 import ImportClassroomModal from "./importClassroomModal";
+import SearchModal from "./searchmodal";
 
 const ClassroomList = () => {
   return (
@@ -34,7 +34,7 @@ const ClassroomListPage = () => {
     <ContentPage title="Turmas" description="Visualize as suas turmas">
       <Column>
         <Row id="end" style={{gap: '8px'}}>
-          <Button
+          <ButtonComponent
             label={"Importar turma"}
             icon="pi pi-download"
             onClick={() => {
@@ -44,7 +44,7 @@ const ClassroomListPage = () => {
             }}
           />
 
-          <Button
+          <ButtonComponent
             label={
               propsAplication.user?.role === ROLE.STUDENT
                 ? "Buscar turmas"

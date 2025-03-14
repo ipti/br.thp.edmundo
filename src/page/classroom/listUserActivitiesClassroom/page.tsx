@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { MultiSelect } from "primereact/multiselect";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
 import Icon from "../../../Components/Icon";
 import {
@@ -162,7 +162,7 @@ const ActivitiesSentPage = () => {
                           justifyContent: "center",
                         }}
                       >
-                        <Button label="Salvar" icon="pi pi-save" />
+                        <ButtonComponent label="Salvar" icon="pi pi-save" type="submit" />
                       </div>
                     </Row>
                   </Form>
@@ -173,7 +173,7 @@ const ActivitiesSentPage = () => {
         </>
       )}
       {propsActivitiesSent?.activities?.activities?.type_activities ===
-        "QUIZ" && <Button label="Atualizar notas" onClick={() => {propsActivitiesSent.updateAvaliationAll(parseInt(idClassroomUser ?? "0"))}} />}
+        "QUIZ" && <ButtonComponent label="Atualizar notas" onClick={() => {propsActivitiesSent.updateAvaliationAll(parseInt(idClassroomUser ?? "0"))}} />}
       <Padding padding="16px" />
       <DataTable
         value={propsActivitiesSent?.activities?.activities?.user_activities}

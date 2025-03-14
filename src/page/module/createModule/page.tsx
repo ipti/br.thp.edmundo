@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik"
 import { useContext } from "react"
+import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
+import { Column, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
 import { CreateModuleContextType } from "../type"
 import CreateModuleProvider, { CreateModuleContext } from "./context/context"
-import { Column, Row } from "../../../Styles/styles"
-import { Button } from "primereact/button"
 
 
 const ModulesCreate = () => {
@@ -28,7 +28,7 @@ const ModulesCreatePage = () => {
 
                             <Column>
                                 <Row id="end">
-                                    <Button label="Criar" icon="pi pi-plus" type="submit" />
+                                    <ButtonComponent label="Criar" icon="pi pi-plus" type="submit" />
                                 </Row>
                             </Column>
                             <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} />

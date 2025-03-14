@@ -1,13 +1,13 @@
-import { DataTable } from "primereact/datatable";
-import ContentPage from "../../../Components/ContentPage";
 import { Column } from "primereact/column";
-import { Button } from "primereact/button";
-import { useContext, useState } from "react";
-import ModalInputs from "./modalInputs";
-import TagsProvider, { TagsContext } from "./context/context";
-import { Row } from "../../../Styles/styles";
 import { ConfirmDialog } from "primereact/confirmdialog";
+import { DataTable } from "primereact/datatable";
+import { useContext, useState } from "react";
+import ButtonComponent from "../../../Components/Button";
+import ContentPage from "../../../Components/ContentPage";
 import { type_tags } from "../../../Controller/controllerGlobal";
+import { Row } from "../../../Styles/styles";
+import TagsProvider, { TagsContext } from "./context/context";
+import ModalInputs from "./modalInputs";
 
 const TagList = () => {
     return (
@@ -32,7 +32,7 @@ const TagListPage = () => {
                 className="flex justify-content-between"
             // style={{ background: color.colorCard }}
             >
-                <Button label="Criar tag" icon="pi pi-plus" onClick={() => { setVisible(true) }} />
+                <ButtonComponent label="Criar tag" icon="pi pi-plus" onClick={() => { setVisible(true) }} />
 
                 {/* <div>
                     <DropdownComponent optionsLabel="name" value={""} onChange={(e) => { }} optionsValue="id" placerholder="Filtrar tipo de usuário" options={propsAplication.user?.role === ROLE.ADMIN
@@ -58,7 +58,7 @@ const TagListPage = () => {
     const ActionsUserBody = (rowData: any) => {
         return (
             <Row id="center">
-                <Button
+                <ButtonComponent
                     icon="pi pi-pencil"
                     rounded
                     className="mr-2"
@@ -66,7 +66,7 @@ const TagListPage = () => {
                         setVisible(rowData)
                     }}
                 />
-                <Button
+                <ButtonComponent
                     severity="danger"
                     rounded
                     icon={"pi pi-trash"}

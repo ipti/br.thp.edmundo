@@ -1,12 +1,12 @@
-import { DataTable } from "primereact/datatable"
-import ContentPage from "../../../Components/ContentPage"
-import { Column } from "primereact/column"
-import { Button } from "primereact/button";
-import { useNavigate } from "react-router-dom";
-import ListStampsProvider, { ListStampsContext } from "./context/context";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../../../Components/Button";
+import ContentPage from "../../../Components/ContentPage";
 import Stamp from "../../../Components/Stamp";
 import { Row } from "../../../Styles/styles";
+import ListStampsProvider, { ListStampsContext } from "./context/context";
 
 const StampsList = () => {
     return (
@@ -25,7 +25,7 @@ const StampsListPage = () => {
     const ActionsUserBody = (rowData: any) => {
         return (
             <Row id="center">
-                <Button
+                <ButtonComponent
                     icon="pi pi-pencil"
                     rounded
                     className="mr-2"
@@ -51,7 +51,7 @@ const StampsListPage = () => {
                 className="flex justify-content-between"
             // style={{ background: color.colorCard }}
             >
-                <Button label="Criar selos" icon="pi pi-plus" onClick={() => { history("criar") }} />
+                <ButtonComponent label="Criar selos" icon="pi pi-plus" onClick={() => { history("criar") }} />
               
 
             </div>

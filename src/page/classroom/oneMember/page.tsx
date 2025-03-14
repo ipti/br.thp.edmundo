@@ -1,10 +1,10 @@
 import { Form, Formik } from "formik"
-import { Button } from "primereact/button"
 import { Chart } from 'primereact/chart'
 import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
+import ButtonComponent from "../../../Components/Button"
 import CardQuant from "../../../Components/Chart/CardQuant"
 import ContentPage from "../../../Components/ContentPage"
 import DropdownComponent from "../../../Components/Dropdown"
@@ -250,7 +250,7 @@ const MemberOnePage = () => {
             </Formik>}
             <Padding padding="8px" />
 
-            <Button label="Adicionar selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
+            <ButtonComponent label="Adicionar selos" icon={"pi pi-crown"} iconPos="right" onClick={() => {
                 setVisible(!visible)
             }} />
             <Padding padding="8px" />
