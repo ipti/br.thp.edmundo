@@ -1,10 +1,10 @@
-import { Button } from "primereact/button"
 import { Column } from "primereact/column"
 import { ConfirmDialog } from "primereact/confirmdialog"
 import { DataTable } from "primereact/datatable"
 import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
 import { ROLE } from "../../../Controller/controllerGlobal"
 import { Padding, Row } from "../../../Styles/styles"
@@ -51,15 +51,15 @@ const UserListPage = () => {
     const ActionsUserBody = (rowData: any) => {
         return (
             <Row>
-                {/* <Button
+                <ButtonComponent
                     icon="pi pi-pencil"
                     rounded
                     className="mr-2"
                     onClick={() => {
-                        history("/users/" + rowData.id);
+                        history("/usuarios/" + rowData.id);
                     }}
-                /> */}
-                <Button
+                />
+                <ButtonComponent
                     severity="danger"
                     rounded
                     icon={"pi pi-trash"}
@@ -79,7 +79,7 @@ const UserListPage = () => {
                 className="flex justify-content-between"
             // style={{ background: color.colorCard }}
             >
-                <Button label="Criar usuário" icon="pi pi-plus" onClick={() => history("/usuarios/criar")} />
+                <ButtonComponent label="Criar usuário" icon="pi pi-plus" onClick={() => history("/usuarios/criar")} />
 
                 {/* <div>
                     <DropdownComponent optionsLabel="name" value={""} onChange={(e) => { }} optionsValue="id" placerholder="Filtrar tipo de usuário" options={propsAplication.user?.role === ROLE.ADMIN

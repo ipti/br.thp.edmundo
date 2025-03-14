@@ -36,6 +36,7 @@ import StampsUpdate from "../page/stramps/createStramps copy/page";
 import GroupList from "../page/group/listGroup/page";
 import GroupCreate from "../page/group/createGroup/page";
 import GroupOne from "../page/group/oneGroup/page";
+import UserEdit from "../page/user/editarUser/page";
 
 const RoutesApp = () => {
   return (
@@ -83,6 +84,8 @@ const RoutesApp = () => {
 
         <Route element={<PrivateRoute Component={<UserList />} />} path="/usuarios" />
         <Route element={<PrivateRoute Component={<UserCreate />} />} path="/usuarios/criar" />
+        <Route element={<PrivateRoute Component={<UserEdit />} />} path="/usuarios/:id" />
+
 
 
         {/* <Route path="/*" element={<NotFoundPage />} /> */}

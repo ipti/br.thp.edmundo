@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { MultiSelect } from "primereact/multiselect";
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { useContext, useRef } from "react";
 import * as yup from 'yup';
+import ButtonComponent from "../../../../Components/Button";
 import RadioButtonComponent from "../../../../Components/RadioButton";
 import Stamp from "../../../../Components/Stamp";
 import { ROLE } from "../../../../Controller/controllerGlobal";
@@ -77,7 +77,7 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                         {(errors.idStamps && touched.idStamps) && <label style={{ color: color.red }}>{errors.idStamps}</label>}
                                     </div>
                                     <div className="flex pt-4 justify-content-end">
-                                        <Button label="Continuar" disabled={!values.idStamps} icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+                                        <ButtonComponent label="Continuar" disabled={!values.idStamps} icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
                                     </div>
                                 </StepperPanel>
                                 <StepperPanel header="Alunos">
@@ -89,8 +89,8 @@ const ModalDistributeStamps = ({ onHide, visible }: { visible: boolean, onHide()
                                         </Column>
                                     </div>
                                     <div className="flex pt-4 justify-content-between">
-                                        <Button label="Voltar" severity="info" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
-                                        <Button label="Finalizar" icon="pi pi-save" iconPos="right" type="submit" />
+                                        <ButtonComponent label="Voltar" severity="info" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
+                                        <ButtonComponent label="Finalizar" icon="pi pi-save" iconPos="right" type="submit" />
                                     </div>
                                 </StepperPanel>
 

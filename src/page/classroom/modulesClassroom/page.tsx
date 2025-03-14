@@ -1,16 +1,16 @@
-import { Button } from "primereact/button"
 import { Divider } from "primereact/divider"
 import { InputSwitch } from "primereact/inputswitch"
 import { useContext, useState } from "react"
 import { useParams } from "react-router-dom"
+import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
+import Empty from "../../../Components/Empty"
 import Icon from "../../../Components/Icon"
 import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomModulesProvider, { ClassroomModulesContext } from "./context/context"
 import { Class } from "./context/type"
 import ModalAddModule from "./modalAddModule"
-import Empty from "../../../Components/Empty"
 
 
 const ClassroomModules = () => {
@@ -27,7 +27,7 @@ const ClassroomModulesPage = () => {
     return (
         <ContentPage title="Módulos da turma" description="Gerencie os módulos, aulas e atividades da turma">
             <Padding padding="16px" />
-            <Button label="Adicionar módulo" icon="pi pi-plus" onClick={() => setVisible(!visible)} />
+            <ButtonComponent label="Adicionar módulo" icon="pi pi-plus" onClick={() => setVisible(!visible)} />
             <Padding padding="16px" />
             {props?.modulesClassroomList?.map((item) => {
                 return (

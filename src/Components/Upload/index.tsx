@@ -1,13 +1,11 @@
-import { Button } from 'primereact/button';
 import { FileUpload, FileUploadHeaderTemplateOptions, ItemTemplateOptions } from 'primereact/fileupload';
-import { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import ButtonComponent from '../Button';
 
 export default function Upload() {
 
     const [file, setFile] = useState<Array<any>>([])
 
-    const {idMeeting} = useParams()
 
 
     const headerTemplate = (options: FileUploadHeaderTemplateOptions) => {
@@ -16,7 +14,7 @@ export default function Upload() {
         return (
             <div className={className} style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center' }}>
                 {chooseButton}
-                <Button rounded outlined icon="pi pi-save" disabled={file.length === 0} onClick={() => props.onClear!()} />
+                <ButtonComponent rounded outlined icon="pi pi-save" disabled={file.length === 0} onClick={() => props.onClear!()} />
                 {cancelButton}
 
             </div>
@@ -49,7 +47,7 @@ export default function Upload() {
                         <small>{new Date().toLocaleDateString()}</small>
                     </span>
                 </div>
-                <Button type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
+                <ButtonComponent type="button" icon="pi pi-times" className="p-button-outlined p-button-rounded p-button-danger ml-auto" onClick={() => onTemplateRemove(file, props.onRemove)} />
             </div>
         );
     };

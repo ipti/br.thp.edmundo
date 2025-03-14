@@ -1,10 +1,12 @@
 import { Form, Formik } from "formik"
-import { Button } from "primereact/button"
 import { ProgressSpinner } from "primereact/progressspinner"
+import { Rating } from "primereact/rating"
 import { useContext } from "react"
+import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
 import { ImageConfig } from "../../../Components/DragAndDropFile/imageConfig"
 import Empty from "../../../Components/Empty"
+import FormViewComponent from "../../../Components/FormView"
 import Icon from "../../../Components/Icon"
 import InputNumberComponent from "../../../Components/InputNumber"
 import { formatarDataHours } from "../../../Controller/controllerGlobal"
@@ -12,8 +14,6 @@ import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
 import ClassroomCorrectionOfActivitiesProvider, { ClassroomCorrectionOfActivitiesContext } from "./context/context"
 import { NotasType } from "./context/types"
-import { Rating } from "primereact/rating"
-import FormViewComponent from "../../../Components/FormView"
 import { FormView } from "./service/types"
 
 const ClassroomCorrectionOfActivities = () => {
@@ -192,7 +192,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                             AVALIE O ALUNO
                                         </h3>
                                     </Column>
-                                    <Button label="Salvar" icon="pi pi-save" />
+                                    <ButtonComponent label="Salvar" icon="pi pi-save" type="submit"/>
                                 </Row>
                                 <div style={{ padding: 8, background: color.colorSecondary, width: 128, borderRadius: 8, marginTop: 16 }}>
                                     <h3 style={{ textAlign: "center", color: "white" }}>
@@ -244,7 +244,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                                     AVALIE O ALUNO
                                                 </h3>
                                             </Column>
-                                            <Button label="Salvar" icon="pi pi-save" />
+                                            <ButtonComponent label="Salvar" icon="pi pi-save" type="submit" />
                                         </Row>
 
                                         <Padding padding="16px" />
@@ -374,7 +374,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                             AVALIE O ALUNO
                                         </h3>
                                     </Column>
-                                    <Button label="Salvar" icon="pi pi-save" />
+                                    <ButtonComponent label="Salvar" icon="pi pi-save" type="submit" />
                                 </Row>
 
                                 <div className="col-12 md:col-6">

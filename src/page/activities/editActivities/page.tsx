@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik"
-import { Button } from "primereact/button"
 import { ProgressSpinner } from "primereact/progressspinner"
 import { TabMenu } from "primereact/tabmenu"
 import { useContext, useState } from "react"
 import { useParams } from "react-router-dom"
+import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
 import FormComponent from "../../../Components/Form"
 import { Column, Padding, Row } from "../../../Styles/styles"
@@ -65,7 +65,7 @@ const ActivitiesEditPage = () => {
                         <Form>
                             <Column>
                                 <Row id="end">
-                                    <Button label="Salvar" icon={"pi pi-save"} type="submit" />
+                                    <ButtonComponent label="Salvar" icon={"pi pi-save"} type="submit" />
                                 </Row>
                             </Column>
                             <Inputs metricCorrectAnswer={activitiesEdit.metricCorrectAnswer} setMetricCorrectAnswer={activitiesEdit.setMetricCorrectAnswer} errors={errors} tagsAll={activitiesEdit.tags} setTags={activitiesEdit.setTagsActivities} tags={activitiesEdit.tagsActivities} handleChange={handleChange} setFieldValue={setFieldValue} touched={touched} values={values} />
@@ -80,7 +80,7 @@ const ActivitiesEditPage = () => {
                         ?
                         <>
                             {activitiesEdit.activitiesOne.form.question.length > 0 && <div>
-                                <Button severity="danger" label="Cancelar" onClick={() => { setCreatedQuestion(false) }} />
+                                <ButtonComponent severity="danger" label="Cancelar" onClick={() => { setCreatedQuestion(false) }} />
                             </div>}
                             <CreateOrEditForm />
                         </>
@@ -91,7 +91,7 @@ const ActivitiesEditPage = () => {
                             <FormComponent form={activitiesEdit.activitiesOne.form} isAlter />
                             <Padding />
                             <Row id="end">
-                                <Button label="Criar novas questões" onClick={() => { setCreatedQuestion(true) }} icon={"pi pi-plus"} />
+                                <ButtonComponent label="Criar novas questões" onClick={() => { setCreatedQuestion(true) }} icon={"pi pi-plus"} />
                             </Row>
                         </>
                     }

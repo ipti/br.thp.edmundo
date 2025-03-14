@@ -1,10 +1,10 @@
-import { Button } from "primereact/button";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../../../Components/Button";
+import CardModule from "../../../Components/Card/CardModule";
 import ContentPage from "../../../Components/ContentPage";
 import { Padding, Row } from "../../../Styles/styles";
-import { useNavigate } from "react-router-dom";
 import ListGroupProvider, { ListGroupContext } from "./context/context";
-import CardModule from "../../../Components/Card/CardModule";
-import { useContext } from "react";
 
 const GroupList = () => {
   return (
@@ -23,7 +23,7 @@ const GroupListPage = () => {
       description="Gerencie os grupos para correções de atividades com IA "
     >
       <Row id="end">
-        <Button
+        <ButtonComponent
           label="Criar grupo"
           icon="pi pi-plus"
           onClick={() => {

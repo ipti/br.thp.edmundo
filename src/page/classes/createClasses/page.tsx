@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { useContext } from "react";
+import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import Inputs from "../components/inputs";
@@ -27,7 +27,7 @@ const ClassesCreatePage = () => {
             <Form>
               <Column>
                 <Row id="end">
-                  <Button label="Criar" icon="pi pi-plus" type="submit" />
+                  <ButtonComponent label="Criar" icon="pi pi-plus" type="submit" />
                 </Row>
               </Column>
               <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} />

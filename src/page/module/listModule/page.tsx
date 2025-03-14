@@ -1,6 +1,6 @@
-import { Button } from "primereact/button";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../../../Components/Button";
 import CardModule from "../../../Components/Card/CardModule";
 import ContentPage from "../../../Components/ContentPage";
 import Empty from "../../../Components/Empty";
@@ -25,7 +25,7 @@ const ModuleListPage = () => {
   return (
     <ContentPage title="Módulos adicionados" description="Listar módulos ">
       <Row id="end">
-        <Button
+        <ButtonComponent
           label="Criar módulos"
           icon="pi pi-plus"
           onClick={() => {

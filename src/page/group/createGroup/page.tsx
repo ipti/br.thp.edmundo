@@ -1,12 +1,12 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
+import { useContext } from "react";
+import * as Yup from "yup";
+import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
+import DropdownComponent from "../../../Components/Dropdown";
 import TextInput from "../../../Components/TextInput";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import CreateGroupProvider, { CreateGroupContext } from "./context/context";
-import { useContext } from "react";
-import * as Yup from "yup"
-import DropdownComponent from "../../../Components/Dropdown";
 
 
 
@@ -32,7 +32,6 @@ const GroupCreatePage = () => {
     name: "", idTypeGroup: "",
   }
 
-  console.log(props?.typeGroupList)
 
   return (
     <ContentPage
@@ -45,7 +44,7 @@ const GroupCreatePage = () => {
             <Form>
               <Column>
                 <Row id="end">
-                  <Button label="Criar" type="submit" icon="pi pi-plus" />
+                  <ButtonComponent label="Criar" type="submit" icon="pi pi-plus" />
                 </Row>
               </Column>
 

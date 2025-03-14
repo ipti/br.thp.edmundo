@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { useContext } from "react";
 import * as Yup from "yup";
 import TextInput from "../../Components/TextInput";
@@ -12,6 +11,7 @@ import formaRight from "../../assets/image/formaRight.svg";
 import personLeft from "../../assets/image/personLeft.png";
 import personRight from "../../assets/image/personRight.png";
 
+import ButtonComponent from "../../Components/Button";
 import logo from "../../assets/image/logo-edmundo.svg";
 import LoginProvider, { LoginContext } from "./context/context";
 import { LoginContextText } from "./context/types";
@@ -129,7 +129,7 @@ const LoginPage = () => {
                       <div className="p-2" />
                       <div>
                         <div>
-                          <Button
+                          <ButtonComponent
                             className={"t-button-primary"}
                             type="submit"
                             label="Entrar"

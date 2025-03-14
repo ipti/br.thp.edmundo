@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik"
-import { Button } from "primereact/button"
 import { Chip } from "primereact/chip"
 import { InputTextarea } from "primereact/inputtextarea"
 import { MultiSelect } from "primereact/multiselect"
 import { useContext } from "react"
 import styled from "styled-components"
 import * as Yup from "yup"
+import ButtonComponent from "../../Components/Button"
 import ContentPage from "../../Components/ContentPage"
 import MaskInput from "../../Components/InputMask"
 import Stamp from "../../Components/Stamp"
@@ -87,7 +87,7 @@ const ProfilePage = () => {
                         <Form>
                             {!id && <Column>
                                 <Row id="end">
-                                    <Button label="Salvar" icon="pi pi-save" type="submit" />
+                                    <ButtonComponent label="Salvar" icon="pi pi-save" type="submit" />
                                 </Row>
                             </Column>}
                             <Padding />

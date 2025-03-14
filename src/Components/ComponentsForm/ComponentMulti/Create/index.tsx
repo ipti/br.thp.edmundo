@@ -1,8 +1,8 @@
-import { Button } from "primereact/button";
-import RadioButtonCard from "./RadioButtonCard";
 import { ControllerCreateForm } from "../../../../Controller/controllerCreateForm";
-import { PropsComponentForm, PropsComponets } from "../../../../Types/types";
 import { Padding } from "../../../../Styles/styles";
+import { PropsComponentForm, PropsComponets } from "../../../../Types/types";
+import ButtonComponent from "../../../Button";
+import RadioButtonCard from "./RadioButtonCard";
 
 const props = ControllerCreateForm()
 
@@ -19,7 +19,7 @@ const Mult = ({ form, index, item, setform }: PropsComponets) =>
             />
         </Padding>
         <Padding padding="16px">
-            <Button
+            <ButtonComponent
                 icon="pi pi-plus"
                 onClick={() => {
                     props.AddRadiosButtonandBoxSelect(index!, setform, form);

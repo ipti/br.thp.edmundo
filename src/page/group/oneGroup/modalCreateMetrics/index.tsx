@@ -1,13 +1,13 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useContext } from "react";
-import { Column, Padding, Row } from "../../../../Styles/styles";
-import { GroupOneContext } from "../context/context";
 import * as Yup from "yup";
+import ButtonComponent from "../../../../Components/Button";
+import { Column, Padding, Row } from "../../../../Styles/styles";
 import { Group } from "../../listGroup/service/types";
+import { GroupOneContext } from "../context/context";
 
 const ModalInputs = ({ visible, setOpen, group }: { visible: any; setOpen: any, group?: Group }) => {
   const props = useContext(GroupOneContext);
@@ -105,7 +105,7 @@ const ModalInputs = ({ visible, setOpen, group }: { visible: any; setOpen: any, 
               <Padding padding="16px" />
               <Column>
                 <Row id="end">
-                  <Button
+                  <ButtonComponent
                     type="submit"
                     disabled={(visible.metric_percentange ? 100 - (total - visible.metric_percentange) : 100 - total) <= 0}
                     label={visible.description ? "Salvar" : "Criar"}

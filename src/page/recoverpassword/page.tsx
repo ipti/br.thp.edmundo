@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import forma from "../../assets/image/forma-recover.png";
 import logo from "../../assets/image/logo-edmundo.svg";
 import person from "../../assets/image/person-recover.png";
 import recoverreponsive from "../../assets/image/recover-reponsive.png";
+import ButtonComponent from "../../Components/Button";
 import TextInput from "../../Components/TextInput";
 import { Column, Padding, Row } from "../../Styles/styles";
 import { ContainerOut } from "../login/styles";
@@ -72,7 +72,7 @@ const RecoverPassword = () => {
                         <div className="p-2" />
                         <div>
                           <div>
-                            <Button
+                            <ButtonComponent
                               className={"t-button-primary"}
                               type="submit"
                               label="Solicitar Nova Senha"

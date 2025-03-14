@@ -1,8 +1,8 @@
-import { Button } from "primereact/button";
-import BoxSelectCard from "./BoxSelectCard";
 import { ControllerCreateForm } from "../../../../Controller/controllerCreateForm";
-import { PropsComponentForm, PropsComponets } from "../../../../Types/types";
 import { Padding } from "../../../../Styles/styles";
+import { PropsComponentForm, PropsComponets } from "../../../../Types/types";
+import ButtonComponent from "../../../Button";
+import BoxSelectCard from "./BoxSelectCard";
 
 const props = ControllerCreateForm()
 
@@ -19,7 +19,7 @@ const Checkbox = ({ form, index, item, setform }: PropsComponets) =>
             />
         </Padding>
         <Padding padding="16px">
-            <Button
+            <ButtonComponent
                 onClick={() => {
                     props.AddBoxSelect(index!, setform, form);
                 }}

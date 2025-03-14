@@ -2,15 +2,15 @@ import { Form, Formik } from "formik";
 import { Calendar } from "primereact/calendar";
 import { Dialog } from "primereact/dialog";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import * as yup from 'yup';
+import ButtonComponent from "../../../../Components/Button";
 import DropdownComponent from "../../../../Components/Dropdown";
 import TextInput from "../../../../Components/TextInput";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { OneClassroomContext } from "../context/context";
 import { OneClassroomContextType } from "../context/types";
 import { ProjectsTs } from "../service/type";
-import { Button } from "primereact/button";
-import { useParams } from "react-router-dom";
 
 const ModalMigrationMeuBen = ({ onHide, visible }: { visible: boolean, onHide(): void }) => {
 
@@ -37,7 +37,6 @@ const ModalMigrationMeuBen = ({ onHide, visible }: { visible: boolean, onHide():
     return (
         <Dialog header={"Migração para MeuBen"} visible={visible} style={{ width: "60vw" }} onHide={onHide} >
             <Formik validationSchema={schema} initialValues={initialValue} onSubmit={(values) => {
-                console.log(values)
                 props.handleMigrateMeuben({ idClassroom: parseInt(id!), name: values.name, project: values.project?.id, year: values.year?.getFullYear() })
                 onHide()
             }}>
@@ -120,7 +119,7 @@ const ModalMigrationMeuBen = ({ onHide, visible }: { visible: boolean, onHide():
                             <Padding padding="8px" />
                             <Column>
                                 <Row id="end">
-                                    <Button label="Criar" type="submit" icon="pi pi-plus" />
+                                    <ButtonComponent label="Criar" type="submit" icon="pi pi-plus" />
                                 </Row>
                             </Column>
                         </Form>

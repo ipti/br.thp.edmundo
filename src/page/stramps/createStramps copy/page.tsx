@@ -1,12 +1,12 @@
 import { Form, Formik } from "formik"
-import { Button } from "primereact/button"
+import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext } from "react"
+import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
+import { type_stamp } from "../../../Controller/controllerGlobal"
 import { Padding, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
 import StampsProvider, { StampsContext } from "./context/context"
-import { ProgressSpinner } from "primereact/progressspinner"
-import { type_stamp } from "../../../Controller/controllerGlobal"
 
 const StampsUpdate = () => {
     return (
@@ -31,7 +31,7 @@ const StampsUpdatePage = () => {
                     return (
                         <Form>
                             <Row id="end">
-                                <Button label="Salvar" icon={"pi pi-save"} />
+                                <ButtonComponent label="Salvar" type="submit" icon={"pi pi-save"} />
                             </Row>
                             <Padding />
                             <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} />

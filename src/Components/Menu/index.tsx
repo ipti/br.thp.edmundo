@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 
-import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import TagLogin from "../../assets/image/logo-edmundo.svg";
 
@@ -9,7 +8,7 @@ import DropdownComponent from "../Dropdown";
 import Item from "./Item";
 import { Container } from "./style";
 
-import avatar from "../../assets/image/avatar.svg"
+import avatar from "../../assets/image/avatar.svg";
 
 import classroom from "../../assets/image/iconsMenu/classroom.svg";
 import classroomHover from "../../assets/image/iconsMenu/classroom_hover.svg";
@@ -24,10 +23,11 @@ import reapplication_hover from "../../assets/image/iconsMenu/interactive_space_
 
 import user from "../../assets/image/iconsMenu/user.svg";
 import user_hover from "../../assets/image/iconsMenu/user_hover.svg";
-import { getMenuItem, getYear, menuItem, setYear } from "../../service/localstorage";
 import { AplicationContext } from "../../context/context";
 import { PropsAplicationContext } from "../../context/type";
 import { ROLE } from "../../Controller/controllerGlobal";
+import { getMenuItem, getYear, menuItem, setYear } from "../../service/localstorage";
+import ButtonComponent from "../Button";
 
 const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
   const propsAplication = useContext(AplicationContext) as PropsAplicationContext
@@ -238,8 +238,8 @@ const ModalYear = ({
       <Padding padding="16px" />
       <Column>
         <Row id="space-between" style={{ width: "100%" }}>
-          <Button label="Cancelar" severity="secondary" />
-          <Button
+          <ButtonComponent label="Cancelar" severity="secondary" />
+          <ButtonComponent
             label="Selecionar ano"
             onClick={() => {
               setYear(year.toString());

@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { useContext } from "react";
+import Swal from "sweetalert2";
+import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
 import TextInput from "../../../Components/TextInput";
 import { GetIdReapplication } from "../../../service/localstorage";
@@ -9,7 +10,6 @@ import CreateClassroomProvider, {
   CreateClassroomContext,
 } from "./context/context";
 import { CreateClassroomContextType } from "./context/types";
-import Swal from "sweetalert2";
 
 const ClassroomCreate = () => {
   return (
@@ -45,7 +45,7 @@ const ClassroomCreatePage = () => {
             <Form>
               <Column>
                 <Row id="end">
-                  <Button label="Criar" type="submit" icon="pi pi-plus" />
+                  <ButtonComponent label="Criar" type="submit" icon="pi pi-plus" />
                 </Row>
               </Column>
 

@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik";
-import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useState } from "react";
@@ -25,12 +24,13 @@ import {
 import { CodeiumEditor } from "@codeium/react-code-editor";
 import { ProgressBar } from "primereact/progressbar";
 import * as Yup from "yup";
+import robo from "../../assets/image/robozinho.svg";
+import ButtonComponent from "../../Components/Button";
 import FormViewComponent from "../../Components/FormView";
 import color from "../../Styles/colors";
+import ModalFeedback from "./modalFeedback";
 import ModalRating from "./modalRating";
 import { PropsCodeEditor } from "./type";
-import robo from "../../assets/image/robozinho.svg";
-import ModalFeedback from "./modalFeedback";
 
 const optionSchema = Yup.object().shape({
   options_fk: Yup.number().required("Option is required"),
@@ -117,32 +117,31 @@ const HomeActivitiesPage = () => {
                 {propsAplication?.activitiesOne?.type_activities === "QUIZ"
                   ? "Formulário"
                   : propsAplication?.activitiesOne?.type_activities === "CODE"
-                    ? "Implementação"
-                    : propsAplication?.activitiesOne?.type_activities === "IA"
-                      ? "Implementação"
-                      : ""}{" "}
+                  ? "Implementação"
+                  : propsAplication?.activitiesOne?.type_activities === "IA"
+                  ? "Implementação"
+                  : ""}{" "}
                 {`\n`}
               </TextActivitiesCard>
             </Row>
 
             {propsAplication.activitiesOne?.user_activities[0]?.user_avaliation
               ?.total && (
-                <>
-                  <Padding />
-                  <Row style={{ gap: "4px" }}>
-                    <TextActivitiesParagraphCard>
-                      Nota:
-                    </TextActivitiesParagraphCard>
-                    <TextActivitiesCard>
-                      {
-                        propsAplication.activitiesOne?.user_activities[0]
-                          ?.user_avaliation?.total?.toFixed(2)
-                      }{" "}
-                      {`\n`}
-                    </TextActivitiesCard>
-                  </Row>
-                </>
-              )}
+              <>
+                <Padding />
+                <Row style={{ gap: "4px" }}>
+                  <TextActivitiesParagraphCard>
+                    Nota:
+                  </TextActivitiesParagraphCard>
+                  <TextActivitiesCard>
+                    {propsAplication.activitiesOne?.user_activities[0]?.user_avaliation?.total?.toFixed(
+                      2
+                    )}{" "}
+                    {`\n`}
+                  </TextActivitiesCard>
+                </Row>
+              </>
+            )}
           </div>
           {propsAplication?.activitiesOne?.user_activities![0] && (
             <div className="grid">
@@ -157,10 +156,10 @@ const HomeActivitiesPage = () => {
                           propsAplication?.activitiesOne?.user_activities[0]
                             .answer_user_activities_group_avaliation
                             ? propsAplication?.activitiesOne?.user_activities[0].answer_user_activities_group_avaliation.find(
-                              (props) =>
-                                props.group_avaliation_fk ===
-                                item.group_avaliation_fk
-                            )?.answer
+                                (props) =>
+                                  props.group_avaliation_fk ===
+                                  item.group_avaliation_fk
+                              )?.answer
                             : codeEditor![index]?.content ?? ""
                         }
                         language={
@@ -220,8 +219,9 @@ const HomeActivitiesPage = () => {
                     <img style={{ width: 48 }} src={sound} alt="" />
                   </Row>
                 </ButtonStart>
-              ) : propsAplication?.activitiesOne.type_activities !== "IA" && propsAplication?.activitiesOne?.user_activities[0].status ===
-                "COMPLETED" ? (
+              ) : propsAplication?.activitiesOne.type_activities !== "IA" &&
+                propsAplication?.activitiesOne?.user_activities[0].status ===
+                  "COMPLETED" ? (
                 <>
                   <ButtonStart type="SUCCESS">
                     <Row id="space-around">
@@ -250,7 +250,7 @@ const HomeActivitiesPage = () => {
                   <Padding padding="8px" />
                   <DropFileInput onFileChange={propsAplication?.onChangeFile} />
                   <Padding padding="8px" />
-                  <Button
+                  <ButtonComponent
                     label="Enviar Atividade"
                     onClick={() =>
                       propsAplication?.FinishActivitiesUser(
@@ -260,11 +260,12 @@ const HomeActivitiesPage = () => {
                   />
                   <Padding padding="16px" />
                 </>
-              ) : propsAplication?.activitiesOne.type_activities === "IA" && propsAplication?.activitiesOne?.user_activities[0].status ===
-                "PENDING" ? (
+              ) : propsAplication?.activitiesOne.type_activities === "IA" &&
+                propsAplication?.activitiesOne?.user_activities[0].status ===
+                  "PENDING" ? (
                 <>
                   <Padding padding="8px" />
-                  <Button
+                  <ButtonComponent
                     label="Enviar Atividade"
                     onClick={() => {
                       // propsAplication.SendAnsweAI({
@@ -344,19 +345,20 @@ const HomeActivitiesPage = () => {
                             name: item.group,
                           };
                         }),
-                      })
+                      });
                     }}
                   />
                   <Padding padding="16px" />
                 </>
-              ) : propsAplication?.activitiesOne.type_activities === "IA" && propsAplication?.activitiesOne?.user_activities[0].status ===
-                "COMPLETED" ? (
+              ) : propsAplication?.activitiesOne.type_activities === "IA" &&
+                propsAplication?.activitiesOne?.user_activities[0].status ===
+                  "COMPLETED" ? (
                 <>
                   <Padding padding="8px" />
-                  <Button
+                  <ButtonComponent
                     label="Enviar Atividade Novamente"
                     onClick={() => {
-                     propsAplication.SendAnsweAI({
+                      propsAplication.SendAnsweAI({
                         id_user_activities:
                           propsAplication.activitiesOne?.user_activities[0]
                             .id ?? 0,
@@ -433,7 +435,7 @@ const HomeActivitiesPage = () => {
                             name: item.group,
                           };
                         }),
-                      })
+                      });
                     }}
                   />
                   <Padding padding="16px" />
@@ -487,8 +489,8 @@ const HomeActivitiesPage = () => {
                       <Padding padding="16px" />
                       {propsAplication?.activitiesOne?.form.answer_form
                         ?.length! > 0 &&
-                        propsAplication.activitiesOne.user_activities[0]
-                          .status === "COMPLETED" ? (
+                      propsAplication.activitiesOne.user_activities[0]
+                        .status === "COMPLETED" ? (
                         <FormViewComponent
                           form={propsAplication?.activitiesOne?.form}
                         />
@@ -514,17 +516,18 @@ const HomeActivitiesPage = () => {
                                   <Padding />
                                   {propsAplication?.activitiesOne
                                     ?.user_activities![0]?.status && (
-                                      <Row id="end">
-                                        <Button
-                                          label="Enviar"
-                                          disabled={
-                                            propsAplication?.activitiesOne
-                                              ?.user_activities[0].status ===
-                                            "COMPLETED"
-                                          }
-                                        />
-                                      </Row>
-                                    )}
+                                    <Row id="end">
+                                      <ButtonComponent
+                                        type="submit"
+                                        label="Enviar"
+                                        disabled={
+                                          propsAplication?.activitiesOne
+                                            ?.user_activities[0].status ===
+                                          "COMPLETED"
+                                        }
+                                      />
+                                    </Row>
+                                  )}
                                 </Form>
                               );
                             }}

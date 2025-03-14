@@ -1,23 +1,23 @@
-import { Button } from "primereact/button";
 import { InputOtp } from "primereact/inputotp";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import avatar from "../../assets/image/avatar.svg";
 import forma from "../../assets/image/person-recover.png";
+import ButtonComponent from "../../Components/Button";
+import CardHome from "../../Components/Card/CardsHome";
+import DropdownComponent from "../../Components/Dropdown";
+import ListMembers from "../../Components/ListMembers";
 import { AplicationContext } from "../../context/context";
 import { generateCode, removeLeadingZeros, ROLE } from "../../Controller/controllerGlobal";
+import styles from "../../Styles";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import { useFetchRequestOneClassroom } from "../classroom/listclassroom/service/query";
+import IconClassroom from "./../../assets/image/cardturmas.svg";
 import HomeProvider, { HomeContext } from "./context/context";
 import { FormaRecover } from "./styles";
-import avatar from "../../assets/image/avatar.svg"
-import styled from "styled-components";
-import styles from "../../Styles";
-import CardHome from "../../Components/Card/CardsHome";
-import { useNavigate } from "react-router-dom";
-import IconClassroom from "./../../assets/image/cardturmas.svg";
-import DropdownComponent from "../../Components/Dropdown";
 import { Classroom } from "./type";
-import ListMembers from "../../Components/ListMembers";
 
 
 
@@ -88,7 +88,7 @@ const HomeClassroomPage = () => {
             <Padding padding="8px" />
             <Row id="end">
 
-                <Button label="Buscar turma" icon="pi pi-search" iconPos="right" onClick={() => {
+                <ButtonComponent label="Buscar turma" icon="pi pi-search" iconPos="right" onClick={() => {
                     propsHome.setSearchClassroom(!propsHome.searchClassroom)
                 }} />
             </Row>
@@ -158,7 +158,7 @@ const HomeSearchClassroomPage = () => {
         <div style={{
             height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "4%"
         }} >
-            <Button label="Voltar" icon="pi pi-chevron-left" onClick={() => {
+            <ButtonComponent label="Voltar" icon="pi pi-chevron-left" onClick={() => {
                 propsHome?.setSearchClassroom(!propsHome.searchClassroom)
             }} />
             <Column style={{ height: "100%" }} id="center">
@@ -228,13 +228,13 @@ const ClassroomFind = ({ idClassroom, onHide }: { idClassroom: string | number |
                     </Column>
                 </Row>
                 <Column id="end">
-                    <Button label={classroom?.isOpen ? "Entrar" : "Não disponivel"} disabled={!classroom?.isOpen} style={{ height: "48px" }} icon="pi pi-sign-in" onClick={() => {
+                    <ButtonComponent label={classroom?.isOpen ? "Entrar" : "Não disponivel"} disabled={!classroom?.isOpen} style={{ height: "48px" }} icon="pi pi-sign-in" onClick={() => {
                         props?.JoinTheClassroomClassroom({ idClassroom: classroom.id, idUser: propsAplication?.user?.id! }); onHide()
                     }} />
                 </Column>
             </Row>}
             <Padding padding="8px" />
-            <Button style={{ marginTop: "auto" }} label="Voltar" onClick={onHide} />
+            <ButtonComponent style={{ marginTop: "auto" }} label="Voltar" onClick={onHide} />
         </Container>
     )
 }
