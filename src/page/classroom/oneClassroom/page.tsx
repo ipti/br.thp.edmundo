@@ -51,7 +51,7 @@ const ClassroomOnePage = () => {
 
     return (
         <ContentPage title={props.classroomOne?.classroom?.name!} description={"Dono da turma: " + props.classroomOne?.owner?.name}>
-            {(!edit && propsAplication.user?.role !== ROLE.STUDENT) && <Row id="end"><ButtonComponent icon="pi pi-pencil" onClick={() => { setEdit(!edit) }} /></Row>}
+            {(!edit && propsAplication.user?.role !== ROLE.STUDENT) && <Row id="end"><ButtonComponent label={window.innerWidth > 600 ? "Editar turma" : undefined} icon="pi pi-pencil" onClick={() => { setEdit(!edit) }} /></Row>}
 
             {edit && <Formik initialValues={{ name: props.classroomOne?.classroom.name, isOpen: props.classroomOne?.classroom.isOpen }} onSubmit={(values) => { props.UpdateClassroom(id!, { name: values.name!, isOpen: values.isOpen ? true : false }); setEdit(!edit) }}>
                 {({ values, handleChange }) => {
@@ -82,7 +82,7 @@ const ClassroomOnePage = () => {
 
             </Formik>}
             <Padding />
-            <Row id="center" style={{ padding: 8, background: color.colorPrimary, width: 220, borderRadius: 8 }}>
+            {!edit && <Row id="center" onClick={() => { setEdit(!edit) }} style={{ padding: 12, background: props.classroomOne?.classroom.isOpen ? color.green : '#dd0201', width: 256, borderRadius: 8, cursor: "pointer" }}>
                 <Column id="center">
                     <h3 style={{ textAlign: "center", color: "white" }}>
                         Turma {props.classroomOne?.classroom.isOpen ? <>Liberada</> : <>Bloqueada</>}
@@ -90,7 +90,7 @@ const ClassroomOnePage = () => {
                 </Column>
                 <Padding />
                 <Icon color={color.white} icon={props.classroomOne?.classroom.isOpen ? "pi pi-lock-open" : "pi pi-lock"} />
-            </Row>
+            </Row>}
             <Padding padding="8px" />
             <h3>Código da turma: {generateCode(props.classroomOne?.classroom?.id!)}</h3>
             <Padding padding="8px" />
