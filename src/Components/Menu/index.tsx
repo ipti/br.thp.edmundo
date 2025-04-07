@@ -119,20 +119,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             icon={active === 5 ? beneficiaries_hover : beneficiaries}
           />
           <Padding /> */}
-          {propsAplication.user?.role !== ROLE.STUDENT && <>
-            <Item
-              text={"Usuários"}
-              funcActiv={() => {
-                setActive(4);
-                menuItem("4");
-              }}
-              active={active === 4 ? true : false}
-              path={"/usuarios"}
-              icon={active === 4 ? user_hover : user}
-            />
-
-            <Padding />
-          </>}
+         
           {propsAplication.user?.role === ROLE.ADMIN && <>
             <Item
               text={"Tags"}
@@ -161,7 +148,7 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
             />
             <Padding />
           </>}
-          {propsAplication.user?.role === ROLE.ADMIN && <>
+          {(propsAplication.user?.role === ROLE.ADMIN || propsAplication.user?.role === ROLE.TEACHER) && <>
             <Item
               text={"Grupos de avaliação"}
               funcActiv={() => {
@@ -173,6 +160,20 @@ const Menu = ({ viewdMenu }: { viewdMenu: boolean }) => {
               icon={"pi pi-th-large"}
               isIcon
             />
+            <Padding />
+          </>}
+          {propsAplication.user?.role !== ROLE.STUDENT && <>
+            <Item
+              text={"Usuários"}
+              funcActiv={() => {
+                setActive(4);
+                menuItem("4");
+              }}
+              active={active === 4 ? true : false}
+              path={"/usuarios"}
+              icon={active === 4 ? user_hover : user}
+            />
+
             <Padding />
           </>}
           <Item
