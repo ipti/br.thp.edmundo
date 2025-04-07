@@ -25,7 +25,9 @@ const ButtonComponent = ({ onClick, loading, type, ...rest }: ButtonProps) => {
     }
 
     if (onClick) {
+      setIsLoading(true);
       onClick(e);
+      setInterval(() => setIsLoading(false), 1000); // Simula o carregamento
     }
   };
 

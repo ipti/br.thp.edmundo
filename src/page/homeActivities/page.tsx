@@ -268,96 +268,6 @@ const HomeActivitiesPage = () => {
                   <ButtonComponent
                     label="Enviar Atividade"
                     onClick={() => {
-                      // propsAplication.SendAnsweAI({
-                      //   id_user_activities:
-                      //     propsAplication.activitiesOne?.user_activities[0]
-                      //       .id ?? 0,
-                      //   tasksDescription:
-                      //     propsAplication.activitiesOne?.description ?? "",
-                      //   correctAnswer:
-                      //     propsAplication.activitiesOne?.expected_return ?? "",
-                      //   performanceMetrics:
-                      //     propsAplication.activitiesOne?.activities_group_avaliation.map(
-                      //       (item) => {
-                      //         return {
-                      //           idGroup: item.group_avaliation_fk,
-                      //           group: item.group_avaliations.name,
-                      //           metrics:
-                      //             item.group_avaliations.metric_group_avaliation.map(
-                      //               (metric) => {
-                      //                 return {
-                      //                   description: metric.description,
-                      //                   idMetric: metric.id,
-                      //                   metricPercentage:
-                      //                     metric.metric_percentange,
-                      //                   correctAnswer:
-                      //                     metric?.metric_group_avaliation_correct_answer![0]
-                      //                       ?.correct_answer ?? "",
-                      //                 };
-                      //               }
-                      //             ),
-                      //         };
-                      //       }
-                      //     ) ?? [],
-                      //   student_answer: codeEditor.map((item) => {
-                      //     return {
-                      //       answer: item.content,
-                      //       idGroup: item.idGroup,
-                      //       name: item.group,
-                      //     };
-                      //   }),
-                      // });
-                      console.log({
-                        id_user_activities:
-                          propsAplication.activitiesOne?.user_activities[0]
-                            .id ?? 0,
-                        tasksDescription:
-                          propsAplication.activitiesOne?.description ?? "",
-                        correctAnswer:
-                          propsAplication.activitiesOne?.expected_return ?? "",
-                        performanceMetrics:
-                          propsAplication.activitiesOne?.activities_group_avaliation.map(
-                            (item) => {
-                              return {
-                                idGroup: item.group_avaliation_fk,
-                                group: item.group_avaliations.name,
-                                metrics:
-                                  item.group_avaliations.metric_group_avaliation.map(
-                                    (metric) => {
-                                      return {
-                                        description: metric.description,
-                                        idMetric: metric.id,
-                                        metricPercentage:
-                                          metric.metric_percentange,
-                                        correctAnswer:
-                                          metric?.metric_group_avaliation_correct_answer![0]
-                                            ?.correct_answer ?? "",
-                                      };
-                                    }
-                                  ),
-                              };
-                            }
-                          ) ?? [],
-                        student_answer: codeEditor.map((item) => {
-                          return {
-                            answer: item.content,
-                            idGroup: item.idGroup,
-                            name: item.group,
-                          };
-                        }),
-                      });
-                    }}
-                  />
-                  <Padding padding="16px" />
-                </>
-              ) : propsAplication?.activitiesOne.type_activities === "IA" &&
-                propsAplication?.activitiesOne?.user_activities[0].status ===
-                  "COMPLETED" ? (
-                <>
-                  <Padding padding="8px" />
-                  <ButtonComponent
-                    label="Enviar Atividade Novamente"
-                    onClick={() => {
                       propsAplication.SendAnsweAI({
                         id_user_activities:
                           propsAplication.activitiesOne?.user_activities[0]
@@ -397,7 +307,59 @@ const HomeActivitiesPage = () => {
                           };
                         }),
                       });
-                      console.log({
+                      // console.log({
+                      //   id_user_activities:
+                      //     propsAplication.activitiesOne?.user_activities[0]
+                      //       .id ?? 0,
+                      //   tasksDescription:
+                      //     propsAplication.activitiesOne?.description ?? "",
+                      //   correctAnswer:
+                      //     propsAplication.activitiesOne?.expected_return ?? "",
+                      //   performanceMetrics:
+                      //     propsAplication.activitiesOne?.activities_group_avaliation.map(
+                      //       (item) => {
+                      //         return {
+                      //           idGroup: item.group_avaliation_fk,
+                      //           group: item.group_avaliations.name,
+                      //           metrics:
+                      //             item.group_avaliations.metric_group_avaliation.map(
+                      //               (metric) => {
+                      //                 return {
+                      //                   description: metric.description,
+                      //                   idMetric: metric.id,
+                      //                   metricPercentage:
+                      //                     metric.metric_percentange,
+                      //                   correctAnswer:
+                      //                     metric?.metric_group_avaliation_correct_answer![0]
+                      //                       ?.correct_answer ?? "",
+                      //                 };
+                      //               }
+                      //             ),
+                      //         };
+                      //       }
+                      //     ) ?? [],
+                      //   student_answer: codeEditor.map((item) => {
+                      //     return {
+                      //       answer: item.content,
+                      //       idGroup: item.idGroup,
+                      //       name: item.group,
+                      //     };
+                      //   }),
+                      // });
+                    }}
+                  />
+                  <Padding padding="16px" />
+                </>
+              ) : propsAplication?.activitiesOne.type_activities === "IA" &&
+                propsAplication?.activitiesOne?.user_activities[0].status ===
+                  "COMPLETED" ? (
+                <>
+                  <Padding padding="8px" />
+                  <ButtonComponent
+                    
+                    label="Enviar Atividade Novamente"
+                    onClick={() => {
+                      propsAplication.SendAnsweAI({
                         id_user_activities:
                           propsAplication.activitiesOne?.user_activities[0]
                             .id ?? 0,
