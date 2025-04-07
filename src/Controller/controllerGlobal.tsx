@@ -94,9 +94,9 @@ export var difficult = [
 ];
 
 export var type_activities = [
-  { id: "QUIZ", name: "Quiz" },
-  { id: "CODE", name: "Código" },
-  { id: "IA", name: "Código IA" },
+  { id: "QUIZ", name: "Formulário" },
+  { id: "CODE", name: "Envio de arquivo" },
+  { id: "IA", name: "Correção por IA" },
 ];
 
 export const color_race = [
