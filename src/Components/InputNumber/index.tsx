@@ -12,18 +12,21 @@ const InputNumberComponent = ({
     name,
     suffix,
     max,
-    showButtons
+    showButtons,
+    maxFractionDigits, 
+    minFractionDigits,
+    min
 }: PropsInputNumber) => {
     return (
         <div>
             <InputNumber
                 style={{ width: "100%" }}
                 onBlur={onBlur}
-                
+                min={min}
                 disabled={disabled}
                 max={max}
-                minFractionDigits={2}
-                maxFractionDigits={5}
+                minFractionDigits={minFractionDigits}
+                maxFractionDigits={maxFractionDigits}
                 showButtons={showButtons}
                 value={value}
                 name={name}

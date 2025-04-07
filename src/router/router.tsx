@@ -27,7 +27,7 @@ import ModulesEdit from "../page/module/editModule/page";
 import ActivitiesEdit from "../page/activities/editActivities/page";
 import ActivitiesSent from "../page/classroom/listUserActivitiesClassroom/page";
 import MemberOne from "../page/classroom/oneMember/page";
-import ClassesEdit from "../page/classes/createClasses copy/page";
+import ClassesEdit from "../page/classes/EditClasses/page";
 import TagList from "../page/tags/listTags/page";
 import StrampsList from "../page/stramps/listStramps/page";
 import StrampsCreate from "../page/stramps/createStramps/page";

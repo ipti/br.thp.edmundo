@@ -60,6 +60,8 @@ const Inputs = ({ errors, handleChange, touched, values }: { errors: any, values
                   value={values.duration}
                   placeholder="Escreva a duração da aula"
                   onChange={handleChange}
+                  min={0}
+                  maxFractionDigits={1}
                   name="duration"
                 />
                 {errors.duration && touched.duration ? (

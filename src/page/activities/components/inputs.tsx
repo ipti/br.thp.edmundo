@@ -201,6 +201,7 @@ const Inputs = ({
         <Padding />
         <InputNumberComponent
           value={values.time_activities!}
+          min={0}
           placeholder="Escreva a duração da atividade"
           onChange={handleChange}
           name="time_activities"

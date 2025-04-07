@@ -38,6 +38,9 @@ export interface PropsInputNumber {
     suffix?: string,
     max?: number | undefined
     showButtons?: boolean | undefined
+    minFractionDigits?: number | undefined
+    maxFractionDigits?: number | undefined
+    min?: number | undefined
 }
 
 export interface PropsInputCalendar {
