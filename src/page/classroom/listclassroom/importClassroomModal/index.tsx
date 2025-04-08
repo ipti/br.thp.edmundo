@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik";
 import { Dialog } from "primereact/dialog";
-import { ProgressSpinner } from "primereact/progressspinner";
 import * as Yup from "yup";
 import ButtonComponent from "../../../../Components/Button";
 import DropdownComponent from "../../../../Components/Dropdown";
+import Loading from "../../../../Components/Loading";
 import { Column, Padding, Row } from "../../../../Styles/styles";
 import { ImportClassroomState } from "./context/state";
 
@@ -110,7 +110,7 @@ const ImportClassroomModal = ({
                   )}
                 {props.isLoadingClassroom && (
                   <Row id="start">
-                    <ProgressSpinner />
+                    <Loading />
                   </Row>
                 )}
               </div>

@@ -2,11 +2,11 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../Components/Layout/layout";
-import { isAuthenticated } from "../service/localstorage";
+import LayoutStudent from "../Components/LayoutStudent/layout";
+import Loading from "../Components/Loading";
 import AplicationProvider, { AplicationContext } from "../context/context";
 import { ROLE } from "../Controller/controllerGlobal";
-import LayoutStudent from "../Components/LayoutStudent/layout";
-import { ProgressSpinner } from "primereact/progressspinner";
+import { isAuthenticated } from "../service/localstorage";
 
 const PrivateRoute = ({ Component }: { Component: React.ReactNode }) => {
 
@@ -29,7 +29,7 @@ const LayoutVerify = ({ Component }: { Component: React.ReactNode }) => {
 
         {Component}
       </Layout>}
-    </> : <ProgressSpinner />}
+    </> : <Loading />}
     </>
   )
 }

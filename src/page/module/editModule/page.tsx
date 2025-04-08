@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik"
-import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext } from "react"
 import { useParams } from "react-router-dom"
 import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
+import Loading from "../../../Components/Loading"
 import { Column, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
 import EditModuleProvider, { EditModuleContext } from "./context/context"
@@ -37,7 +37,7 @@ const ModulesEditPage = () => {
                         </Form>
                     )
                 }}
-            </Formik> : <ProgressSpinner />}
+            </Formik> : <Loading />}
         </ContentPage>
     )
 }

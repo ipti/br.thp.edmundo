@@ -8,13 +8,13 @@ import activities from "../../../assets/image/activities.svg";
 
 
 import { Form, Formik } from "formik";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { SelectButton } from "primereact/selectbutton";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ButtonComponent from "../../../Components/Button";
 import CardQuant from "../../../Components/Chart/CardQuant";
 import Icon from "../../../Components/Icon";
+import Loading from "../../../Components/Loading";
 import TextInput from "../../../Components/TextInput";
 import color from "../../../Styles/colors";
 import meeting from "../../../assets/image/iconsMenu/module.svg";
@@ -124,7 +124,7 @@ const ClassroomOnePage = () => {
                 <div className="col-12 md:col-4 lg:col-2">
                     <CardQuant quant={props.classroomChart?.media_notas?.toFixed(2)} title="Média da turma" color="secondary" />
                 </div>
-            </div> : <ProgressSpinner />}
+            </div> : <Loading />}
             <Padding padding="16px" />
             <div className="grid">
                 <div

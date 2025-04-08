@@ -1,6 +1,5 @@
 import { Form, Formik } from "formik";
 import { Divider } from "primereact/divider";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import sound from "../../assets/image/sound_sampler.svg";
@@ -27,6 +26,7 @@ import * as Yup from "yup";
 import robo from "../../assets/image/robozinho.svg";
 import ButtonComponent from "../../Components/Button";
 import FormViewComponent from "../../Components/FormView";
+import Loading from "../../Components/Loading";
 import color from "../../Styles/colors";
 import ModalFeedback from "./modalFeedback";
 import ModalRating from "./modalRating";
@@ -67,7 +67,7 @@ const HomeActivitiesPage = () => {
   const { idClassroom } = useParams();
 
   if (!propsAplication?.activitiesOne?.user_activities)
-    return <ProgressSpinner />;
+    return <Loading />;
 
   return (
     <Container

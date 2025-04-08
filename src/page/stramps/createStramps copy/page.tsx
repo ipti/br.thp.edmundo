@@ -1,8 +1,8 @@
 import { Form, Formik } from "formik"
-import { ProgressSpinner } from "primereact/progressspinner"
 import { useContext } from "react"
 import ButtonComponent from "../../../Components/Button"
 import ContentPage from "../../../Components/ContentPage"
+import Loading from "../../../Components/Loading"
 import { type_stamp } from "../../../Controller/controllerGlobal"
 import { Padding, Row } from "../../../Styles/styles"
 import Inputs from "../components/inputs"
@@ -20,7 +20,7 @@ const StampsUpdatePage = () => {
 
     const propsStamps = useContext(StampsContext)
 
-    if(propsStamps?.isLoading) return <ProgressSpinner />
+    if(propsStamps?.isLoading) return <Loading />
 
     return (
         <ContentPage title="Editar Selo" description="Edite selos para distribuir aos alunos.">

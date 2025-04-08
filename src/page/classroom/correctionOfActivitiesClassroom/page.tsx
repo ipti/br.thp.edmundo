@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik"
-import { ProgressSpinner } from "primereact/progressspinner"
 import { Rating } from "primereact/rating"
 import { useContext } from "react"
 import ButtonComponent from "../../../Components/Button"
@@ -9,6 +8,7 @@ import Empty from "../../../Components/Empty"
 import FormViewComponent from "../../../Components/FormView"
 import Icon from "../../../Components/Icon"
 import InputNumberComponent from "../../../Components/InputNumber"
+import Loading from "../../../Components/Loading"
 import { formatarDataHours } from "../../../Controller/controllerGlobal"
 import color from "../../../Styles/colors"
 import { Column, Padding, Row } from "../../../Styles/styles"
@@ -39,7 +39,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
     const propsClassroomCorrectionOfActivities = useContext(ClassroomCorrectionOfActivitiesContext)
 
-    if (propsClassroomCorrectionOfActivities?.isLoading) return <ProgressSpinner />
+    if (propsClassroomCorrectionOfActivities?.isLoading) return <Loading />
 
     const handleMedia = (value: NotasType | any) => {
         let total = 0;

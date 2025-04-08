@@ -1,5 +1,4 @@
 import { InputOtp } from "primereact/inputotp";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -9,6 +8,7 @@ import ButtonComponent from "../../Components/Button";
 import CardHome from "../../Components/Card/CardsHome";
 import DropdownComponent from "../../Components/Dropdown";
 import ListMembers from "../../Components/ListMembers";
+import Loading from "../../Components/Loading";
 import { AplicationContext } from "../../context/context";
 import { generateCode, removeLeadingZeros, ROLE } from "../../Controller/controllerGlobal";
 import styles from "../../Styles";
@@ -59,7 +59,7 @@ const HomeClassroomPage = () => {
         }
     }, [propsHome?.classroomUser])
 
-    if (!propsHome?.classroomUser) return <ProgressSpinner />
+    if (!propsHome?.classroomUser) return <Loading />
 
 
     return (
@@ -209,7 +209,7 @@ const ClassroomFind = ({ idClassroom, onHide }: { idClassroom: string | number |
 
 
 
-    if (isLoading) return <ProgressSpinner />
+    if (isLoading) return <Loading />
     var classroom: Classroom = data
     return (
 

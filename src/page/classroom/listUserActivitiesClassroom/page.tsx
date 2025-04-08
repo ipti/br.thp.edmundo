@@ -2,12 +2,12 @@ import { Form, Formik } from "formik";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { MultiSelect } from "primereact/multiselect";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
 import Icon from "../../../Components/Icon";
+import Loading from "../../../Components/Loading";
 import {
   formatarDataHours,
   question,
@@ -74,7 +74,7 @@ const ActivitiesSentPage = () => {
     PENDING: "Em andamento",
   };
 
-  if (propsActivitiesSent?.isLoading) return <ProgressSpinner />;
+  if (propsActivitiesSent?.isLoading) return <Loading />;
 
   return (
     <ContentPage
