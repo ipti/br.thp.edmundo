@@ -157,8 +157,16 @@
   }
 
   .ql-editor {
-    min-height: 128px;
+    min-height: 600px;
     max-height: 256px;
+  }
+
+  iframe.ql-video {
+  top: 0;
+  left: 0;
+  width: 80% !important;
+  height: 512px !important;
+  border: 0;
   }
   
   .quill {

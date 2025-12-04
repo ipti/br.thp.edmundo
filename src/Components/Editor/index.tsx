@@ -62,7 +62,9 @@ const Editor = ({
                 { indent: "-1" },
                 { indent: "+1" },
               ],
+              [{ 'align': [] }],
               ["link", "image"],
+              ['video'],
               ["code-block"],
               ["clean"],
             ],
@@ -88,6 +90,8 @@ const Editor = ({
           "indent",
           "link",
           "image",
+          "align",
+          "video",
           "code-block",
         ]}
         value={values}

@@ -212,55 +212,6 @@ const Inputs = ({
           </div>
         ) : null}
       </div>
-      <div className="col-12 md:col-12">
-        <label>Descrição</label>
-        <Padding />
-        <Editor
-          values={values.description}
-          onChange={(e: any) => {
-            console.log(e);
-            setFieldValue("description", e);
-          }}
-        />
-        {/* <Editor 
-                
-                modules={{
-                    toolbar: {
-                        container: [
-                            [{ header: "1" }, { header: "2" }, { font: [] }],
-                            [{ size: [] }],
-                            ["bold", "italic", "underline", "strike", "blockquote"],
-                            [
-                                { list: "ordered" },
-                                { list: "bullet" },
-                                { indent: "-1" },
-                                { indent: "+1" },
-                            ],
-                            ["link", "image", "video"],
-                            ["code-block"],
-                            ["clean"],
-                        ],
-                    },
-                    handlers: {
-                        image: imageHandler,   // <- 
-                      },
-                    clipboard: {
-                        matchVisual: false,
-                    },
-                }}  onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} /> */}
-        {/* <TextAreaComponent
-                                    value={values.description}
-                                    placeholder="Escreva a descrição da atividades"
-                                    onChange={handleChange}
-                                    name="description"
-                                /> */}
-        {errors.description && touched.description ? (
-          <div style={{ color: "red", marginTop: "8px" }}>
-            {errors.description}
-          </div>
-        ) : null}
-      </div>
-
       {!isCreated && (
         <div className="col-12 md:col-6">
           <label>Tags </label>
@@ -375,6 +326,57 @@ const Inputs = ({
             ) : null}
           </div>
         )}
+      <div className="col-12 md:col-12">
+        <label>Descrição</label>
+        <Padding />
+        <Editor
+        style={{minHeight: '400px'}}
+          values={values.description}
+          onChange={(e: any) => {
+            console.log(e);
+            setFieldValue("description", e);
+          }}
+        />
+        {/* <Editor 
+                
+                modules={{
+                    toolbar: {
+                        container: [
+                            [{ header: "1" }, { header: "2" }, { font: [] }],
+                            [{ size: [] }],
+                            ["bold", "italic", "underline", "strike", "blockquote"],
+                            [
+                                { list: "ordered" },
+                                { list: "bullet" },
+                                { indent: "-1" },
+                                { indent: "+1" },
+                            ],
+                            ["link", "image", "video"],
+                            ["code-block"],
+                            ["clean"],
+                        ],
+                    },
+                    handlers: {
+                        image: imageHandler,   // <- 
+                      },
+                    clipboard: {
+                        matchVisual: false,
+                    },
+                }}  onTextChange={(e) => setFieldValue("description", e.htmlValue)} style={{ height: '320px' }} /> */}
+        {/* <TextAreaComponent
+                                    value={values.description}
+                                    placeholder="Escreva a descrição da atividades"
+                                    onChange={handleChange}
+                                    name="description"
+                                /> */}
+        {errors.description && touched.description ? (
+          <div style={{ color: "red", marginTop: "8px" }}>
+            {errors.description}
+          </div>
+        ) : null}
+      </div>
+
+      
     </div>
   );
 };
