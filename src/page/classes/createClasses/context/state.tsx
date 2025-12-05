@@ -12,7 +12,8 @@ export const CreateClassesState = () => {
         duration: 0,
         necessary_material: "",
         objective: "",
-        module_id: parseInt(idModule!)
+        module_id: parseInt(idModule!),
+        content: "",
     }
 
 

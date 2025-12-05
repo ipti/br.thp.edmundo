@@ -20,6 +20,7 @@ export const EditClassesState = () => {
         duration: classesOne?.duration ?? 0,
         necessary_material: classesOne?.necessary_material ?? "",
         objective: classesOne?.objective ?? "",
+        content: classesOne?.content ?? ""
     }
 
     const [is, setIs] = useState(false)
@@ -28,7 +29,6 @@ export const EditClassesState = () => {
 
     const { data: classesOneRequest } = useFetchRequestFindOneClasses(idClasses!);
 
-    console.log(idClasses)
 
     useEffect(() => {
         if (classesOneRequest && is) {
