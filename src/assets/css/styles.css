@@ -168,6 +168,12 @@
   height: 512px !important;
   border: 0;
   }
+
+  @media (max-width: 600px) {
+    iframe.ql-video {
+    width: 100% !important;
+    height: 256px !important;
+  }}
   
   .quill {
     background-color: #ffffff;

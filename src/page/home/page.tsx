@@ -95,7 +95,7 @@ const HomeClassroomPage = () => {
             <Padding padding="8px" />
             <div className="grid">
                 <div className="col-12 md:col-4">
-                    <label>Selecione a aula</label>
+                    <label>Selecione a turma</label>
                     <Padding />
                     <DropdownComponent options={propsHome?.classroomUser} value={classes} onChange={(e) => setClass(e.target.value)} placerholder="selecione a aula" />
                 </div>

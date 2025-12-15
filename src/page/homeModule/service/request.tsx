@@ -1,5 +1,6 @@
 import http from "../../../service/axios";
 import { logout } from "../../../service/localstorage";
+import { ViewdClassesProps } from "../type";
 
 
 export const FindOneModuleClassroomRequest = async (id: string, idClassroom: string) => {
@@ -16,3 +17,8 @@ export const FindOneModuleClassroomRequest = async (id: string, idClassroom: str
             });
     }
 }
+
+
+export const ViewdClassesUserRequest = async (body: ViewdClassesProps) => {
+    return await http.patch("/classe-bff/viewd-classe-user", body)
+  }

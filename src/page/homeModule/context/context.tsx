@@ -6,10 +6,10 @@ export const HomeModulesContext = createContext<HomeModulesContextType | null>(n
 
 const HomeModulesProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { modules } = HomeModulesState()
+    const { modules, handleViewdClassesUser } = HomeModulesState()
 
     return (
-        <HomeModulesContext.Provider value={{ modules }}>
+        <HomeModulesContext.Provider value={{ modules, handleViewdClassesUser }}>
             {children}
         </HomeModulesContext.Provider>
     )

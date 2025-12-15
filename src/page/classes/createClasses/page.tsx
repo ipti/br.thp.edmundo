@@ -40,8 +40,6 @@ const ClassesCreatePage = () => {
                   <ButtonComponent label="Criar" icon="pi pi-plus" type="submit" />
                 </Row>
               </Column>
-              <Padding />
-              <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
               {<Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} setFieldValue={setFieldValue} />}
             </Form>
           );

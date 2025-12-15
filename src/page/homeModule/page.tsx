@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-import avatar from "../../assets/image/avatar.svg";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import pessoa from "../../assets/image/pessoa_visao.svg";
+import ButtonComponent from "../../Components/Button";
 import CardHome from "../../Components/Card/CardsHome";
-import DropdownComponent from "../../Components/Dropdown";
+import ListActivities from "../../Components/ListActivities";
+import ListClassroom from "../../Components/ListClasses";
 import ListMembers from "../../Components/ListMembers";
 import Loading from "../../Components/Loading";
 import { AplicationContext } from "../../context/context";
-import styles from "../../Styles";
 import color from "../../Styles/colors";
 import { Column, Container, Padding, Row } from "../../Styles/styles";
 import HomeModulesProvider, { HomeModulesContext } from "./context/context";
-import { ImagePessoa } from "./styles";
+import { ContentPaper, ImagePessoa } from "./styles";
 import { Class } from "./type";
+
 
 
 
@@ -25,23 +25,27 @@ const HomeModules = () => {
     )
 }
 
-const Avatar = styled.div`
-  border: 1px solid ${styles.colors.colorBorderCard};
-  height: 64px;
-  width: 64px;
-  border-radius: 50%;
+// const Avatar = styled.div`
+//   border: 1px solid ${styles.colors.colorBorderCard};
+//   height: 64px;
+//   width: 64px;
+//   border-radius: 50%;
   
-  img {
-    border-radius: 50%; /* This will make the image circular */
-    height: 100%;
-    width: 100%;
-  }
-`;
+//   img {
+//     border-radius: 50%; /* This will make the image circular */
+//     height: 100%;
+//     width: 100%;
+//   }
+// `;
 
 
 const HomeModulePage = () => {
     const history = useNavigate()
     const { idClassroom, idModule } = useParams()
+    const [searchParams] = useSearchParams();
+    const idClasses = searchParams.get("idClasses");
+
+    const flag = true
 
     const [classes, setClass] = useState<Class | undefined>()
     const propsAplication = useContext(AplicationContext)
@@ -52,19 +56,25 @@ const HomeModulePage = () => {
     useEffect(() => {
         if (propsHome?.modules?.classes) {
             if (propsHome?.modules?.classes[0]) {
-                setClass(propsHome?.modules?.classes[0])
+
+                let classFound = propsHome?.modules?.classes.find((item) => item.id === Number(idClasses))
+                if (classFound) {
+                    setClass(classFound)
+                } else {
+                    setClass(propsHome?.modules?.classes[0])
+                }
             }
         }
-    }, [propsHome?.modules?.classes])
+    }, [propsHome?.modules?.classes, idClasses])
 
     if (!propsHome?.modules) return <Loading />
 
 
     return (
         <Container style={{
-            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "64px 64px 0 64px"
+            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)"
         }}>
-            <Row>
+            {/* <Row>
                 <Avatar>
                     <img alt="" src={propsAplication?.user?.registration![0]?.avatar_url ? propsAplication?.user?.registration![0]?.avatar_url : avatar} />
                 </Avatar>
@@ -74,12 +84,12 @@ const HomeModulePage = () => {
                         {propsAplication?.user?.name}
                     </h2>
                 </Column>
-            </Row>
+            </Row> */}
             <Padding />
             <h1>
                 {propsHome.modules.name}
             </h1>
-            <Padding />
+            {/* <Padding />
             <p>
                 Visualize as suas atividades:
             </p>
@@ -90,10 +100,31 @@ const HomeModulePage = () => {
                     <Padding />
                     <DropdownComponent options={propsHome?.modules!.classes} value={classes} onChange={(e) => setClass(e.target.value)} placerholder="selecione a aula" />
                 </div>
-            </div>
+            </div> */}
             <Padding padding="16px" />
-
-            <div className="grid">
+            {flag ? <div className="grid">
+                <div className="col-12 md:col-9">
+                    <ContentPaper>
+                        <h2>{classes?.name}</h2>
+                        {classes?.content ? <div
+                            dangerouslySetInnerHTML={{ __html: classes?.content || "" }}
+                        /> : <p>Sem conteúdo para esta aula.</p>}
+                        <div className="flex flex-row justify-content-center">
+                            {classes?.user_classes[0]?.viewed ? <div style={{background: '#52c41a', color: 'white', padding: '8px',borderRadius: '8px', fontWeight: '800'}}>
+                                <i className="pi pi-check-circle"/>
+                                <label style={{ marginLeft: 8}}>Aula concluída</label>
+                            </div> :
+                                <ButtonComponent label="Finalizar aula" icon='pi pi-check-square' onClick={() => propsHome.handleViewdClassesUser(propsAplication?.user?.id ?? 0, classes?.id ?? 0)}/>
+                            }
+                        </div>
+                    </ContentPaper>
+                </div>
+                <div className="col-12 md:col-3">
+                    <ListClassroom classes={propsHome.modules.classes} idClasses={classes?.id || 0} />
+                    <ListActivities activities={classes?.activities} idClassroom={idClassroom} idModule={idModule} />
+                    <ListMembers users={propsHome.modules.classroom_module[0].classroom.user!} />
+                </div>
+            </div> : <div className="grid">
                 <div className="col-12 md:col-9">
                     <div className="grid">
                         {classes?.activities?.map((item, index) => {
@@ -128,7 +159,9 @@ const HomeModulePage = () => {
                 <div className="col-12 md:col-3">
                     <ListMembers users={propsHome.modules.classroom_module[0].classroom.user!} />
                 </div>
-            </div>
+            </div>}
+
+
             {propsHome?.modules?.classes.length === 0 && <h3>Sem atividades</h3>}
 
         </Container>
