@@ -3,7 +3,8 @@ export interface CreateClasses {
     objective?: string,
     necessary_material?: string,
     duration?: number,
-    module_id?: number
+    module_id?: number,
+    content?: string
 }
 
 export interface CreateClassesContextType {
@@ -17,6 +18,7 @@ export interface EditClasses {
     objective?: string,
     necessary_material?: string,
     duration?: number,
+    content?: string
 }
 
 
@@ -36,5 +38,6 @@ export interface Classes {
     createdAt: string
     updatedAt: string
     moduleId: number
+    content: string
   }
   

@@ -26,7 +26,7 @@ const ClassesEditPage = () => {
         initialValues={props.initialValue}
         onSubmit={(values) => { props.EditClasses(values, parseInt(idClasses!)) }}
       >
-        {({ errors, values, touched, handleChange }) => {
+        {({ errors, values, touched, handleChange, setFieldValue }) => {
           return (
             <Form>
               <Column>
@@ -34,7 +34,7 @@ const ClassesEditPage = () => {
                   <ButtonComponent label="Salvar" icon="pi pi-save" type="submit" />
                 </Row>
               </Column>
-              <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} />
+              <Inputs errors={errors} handleChange={handleChange} touched={touched} values={values} setFieldValue={setFieldValue} />
             </Form>
           );
         }}
