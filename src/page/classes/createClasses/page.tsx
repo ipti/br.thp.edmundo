@@ -1,12 +1,11 @@
 import { Form, Formik } from "formik";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import ButtonComponent from "../../../Components/Button";
 import ContentPage from "../../../Components/ContentPage";
-import { Column, Padding, Row } from "../../../Styles/styles";
+import { Column, Row } from "../../../Styles/styles";
 import Inputs from "../components/inputs";
 import { CreateClassesContextType } from "../type";
 import CreateClassesProvider, { CreateClassesContext } from "./context/context";
-import { TabMenu } from "primereact/tabmenu";
 
 const ClassesCreate = () => {
 
@@ -14,16 +13,7 @@ const ClassesCreate = () => {
 };
 
 const ClassesCreatePage = () => {
-   const [activeIndex, setActiveIndex] = useState(0);
-  
-      const items = [
-          { label: 'Informações', icon: 'pi pi-home' },
-          { label: 'Conteúdo', icon: 'pi pi-book' },
-          // { label: 'Formulário', icon: ' pi pi-list' },
-      ];
-  
-  
-  
+
 
   const createClassesContext = useContext(CreateClassesContext) as CreateClassesContextType
   return (
