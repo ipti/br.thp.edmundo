@@ -1,24 +1,19 @@
 {
-    "responseOverrides": {
-      "400": {
-        "redirect": "/"
-      },
-      "401": {
-        "statusCode": 302,
-        "redirect": "/"
-      },
-      "404": {
-        "redirect": "/"
-      }
-    },
-    "navigationFallback": {
-
-      "rewrite": "/index.html",
-  
-      "exclude": ["/src/Assets/images/*.{png,jpg,gif}","/src/Assets/images/iconsMenu/*.{png,jpg,gif}", "/src/Assets/css/*", "/src/Assets/font/*"]
-  
-    },
-    "globalHeaders": {
-    "Content-Security-Policy": "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;"
+  "responseOverrides": {
+    "400": { "redirect": "/" },
+    "401": { "statusCode": 302, "redirect": "/" },
+    "404": { "redirect": "/" }
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/src/Assets/images/*.{png,jpg,gif}",
+      "/src/Assets/images/iconsMenu/*.{png,jpg,gif}",
+      "/src/Assets/css/*",
+      "/src/Assets/font/*"
+    ]
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;"
   }
-  }
+}
