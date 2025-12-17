@@ -1,6 +1,7 @@
 import ReactQuill from "react-quill";
 import { AddEditorImage } from "../../page/activities/createActivities/service/request";
 import { CSSProperties, useCallback, useRef } from "react";
+import './videoBlod'
 
 const Editor = ({
   onChange,
