@@ -17,5 +17,8 @@
   
       "exclude": ["/src/Assets/images/*.{png,jpg,gif}","/src/Assets/images/iconsMenu/*.{png,jpg,gif}", "/src/Assets/css/*", "/src/Assets/font/*"]
   
-    }
+    },
+    "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;"
+  }
   }
