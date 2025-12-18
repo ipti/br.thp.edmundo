@@ -19,6 +19,6 @@
   
     },
     "globalHeaders": {
-    "Content-Security-Policy": "default-src 'self'; img-src 'self' data: https://i.ytimg.com https://*.googleusercontent.com; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; child-src https://www.youtube.com https://www.youtube-nocookie.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://youtubei.googleapis.com https://coded-api.azurewebsites.net https://*.googlevideo.com; media-src https://*.googlevideo.com;"
+    "Content-Security-Policy": "default-src 'self' data: https://www.gstatic.com https://www.google.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://*; img-src 'self' data: https://*; style-src 'self' 'unsafe-inline'; frame-src 'self' https://www.youtube.com https://youtube.com;"
   }
   }
