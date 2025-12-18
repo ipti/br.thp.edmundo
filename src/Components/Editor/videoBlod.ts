@@ -36,4 +36,4 @@ export class VideoBlot extends BlockEmbed {
   }
 }
 
-Quill.register(VideoBlot);
+Quill.register(VideoBlot, true);
