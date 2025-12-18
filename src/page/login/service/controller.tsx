@@ -23,7 +23,7 @@ export const LoginController = () => {
         logout()
         login(data.data?.access_token);
         idUser(data.data?.userRegistered?.id);
-        idReapplication(data.data?.reapplication[0]?.id)
+        // idReapplication(data.data?.reapplication[0]?.id)
         history("/");
         menuItem("1");
         // console.log(data)

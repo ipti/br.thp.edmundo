@@ -24,12 +24,12 @@ export class VideoBlot extends BlockEmbed {
       "allow",
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     );
-    node.setAttribute("allowfullscreen", "true");
-    node.setAttribute("width", "100%");
-    node.setAttribute("height", "400");
+    node.setAttribute("allowfullscreen", "");
+    node.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
 
     return node;
   }
+
 
   static value(node: HTMLIFrameElement) {
     return node.getAttribute("src") || "";
