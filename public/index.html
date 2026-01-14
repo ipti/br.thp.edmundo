@@ -9,13 +9,14 @@
     <meta
       http-equiv="Content-Security-Policy"
       content="
-    default-src 'self';
-    img-src 'self' data: https://i.ytimg.com https://*.googleusercontent.com https://coded.blob.core.windows.net;
-    style-src 'self' 'unsafe-inline';
-    script-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
-    connect-src 'self' https://www.youtube.com https://coded-api.azurewebsites.net;
-    frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
-  "
+        default-src 'self';
+        img-src 'self' data: https://i.ytimg.com https://*.googleusercontent.com https://coded.blob.core.windows.net;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        script-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://cdn.jsdelivr.net;
+        connect-src 'self' https://www.youtube.com https://coded-api.azurewebsites.net https://cdn.jsdelivr.net;
+        frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+        worker-src 'self' blob:;
+      "
     />
 
     <!-- SEO -->
