@@ -22,7 +22,7 @@ export const HomeModuleController = () => {
                 queryClient.refetchQueries("useRequestsListClassroom")
                 Swal.fire({
                     icon: 'success',
-                    title: "Usuário entrou na turma!",
+                    title: "Aula finalizada!",
                     confirmButtonColor: styles.colors.colorPrimary,
                 })
                 window.location.reload()
