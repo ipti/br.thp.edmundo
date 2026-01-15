@@ -35,10 +35,17 @@ const ListClassroom = ({ classes, idClasses }: { classes: Class[], idClasses: nu
                                 {item.name}
                             </h3>
                         </Column> */}
-                        <ItemStatus title={item.name} isCompleted={item?.user_classes![0]?.viewed ?? false} isSelected={false} onView={() => propsHome?.handleViewdClassesUser(propsAplication?.user?.id ?? 0, item.id)}/>
+                        <ItemStatus title={item.name} isCompleted={item?.user_classes![0]?.viewed ?? false} isSelected={false} onView={() => propsHome?.handleViewdClassesUser(propsAplication?.user?.id ?? 0, item.id, Number(idClassroom))}/>
                     </UserStyled>
                 )
             })}
+            {classes.length === 0 && (
+                <Column id="center">
+                    <h3>
+                        Sem aulas disponíveis
+                    </h3>
+                </Column>
+            )}
             </Column>
         </div>
     )

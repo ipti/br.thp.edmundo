@@ -1,6 +1,7 @@
 export interface ViewdClassesProps {
   idUser: number
   idClasse: number
+  idClassroom: number
 }
 
 export interface JoinTheClassroom {

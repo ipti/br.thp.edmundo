@@ -13,8 +13,8 @@ export const HomeModulesState = () => {
 
   const controller = HomeModuleController()
 
-  const handleViewdClassesUser = (idUser: number, idClasse: number) => {
-    controller.ViewdClassesUsersMutation.mutate({ idUser, idClasse })
+  const handleViewdClassesUser = (idUser: number, idClasse: number, idClassroom: number) => {
+    controller.ViewdClassesUsersMutation.mutate({ idUser, idClasse , idClassroom })
   }
 
   useEffect(() => {

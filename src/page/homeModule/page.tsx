@@ -114,7 +114,7 @@ const HomeModulePage = () => {
                                 <i className="pi pi-check-circle"/>
                                 <label style={{ marginLeft: 8}}>Aula concluída</label>
                             </div> :
-                                <ButtonComponent label="Finalizar aula" icon='pi pi-check-square' onClick={() => propsHome.handleViewdClassesUser(propsAplication?.user?.id ?? 0, classes?.id ?? 0)}/>
+                                (classes?.content && <ButtonComponent label="Finalizar aula" icon='pi pi-check-square' onClick={() => propsHome.handleViewdClassesUser(propsAplication?.user?.id ?? 0, classes?.id ?? 0, Number(idClassroom))}/>)
                             }
                         </div>
                     </ContentPaper>
@@ -161,8 +161,7 @@ const HomeModulePage = () => {
                 </div>
             </div>}
 
-
-            {propsHome?.modules?.classes.length === 0 && <h3>Sem atividades</h3>}
+.
 
         </Container>
     )

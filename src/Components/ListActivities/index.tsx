@@ -19,8 +19,8 @@ const ListActivities = ({ activities, idClassroom, idModule }: { activities: Act
             <Divider />
             <Padding />
             <Column style={{gap: 16}}>
-            {activities?.length === 0 && (
-                <p>Nenhuma atividade disponível para esta aula.</p>
+            {(activities?.length === 0 || !activities) && (
+                <h3>Nenhuma atividade disponível para esta aula.</h3>
             )}
             {activities?.map((item) => {
                 return (
