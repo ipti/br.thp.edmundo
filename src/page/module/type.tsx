@@ -1,15 +1,12 @@
-
 export interface ListModulesContextType {
   DeleteModule: (id: number) => void
-  modulesList: ModulesList | undefined;
-  isLoading: boolean;
-  isError: boolean;
-
+  modulesList: ModulesList | undefined
+  isLoading: boolean
+  isError: boolean
+  setModulesList: React.Dispatch<React.SetStateAction<ModulesList | undefined>>
 }
 
 export type ModulesList = Modules[]
-
-
 
 export interface Modules {
   id: number
@@ -46,31 +43,28 @@ export interface Activity {
   classesId: number
 }
 
-
-
 export interface CreateModule {
-  name: string,
+  name: string
   description?: string
 }
 
 export interface CreateModuleContextType {
-  initialValue: CreateModule;
-  CreateModule: (body: CreateModule) => void;
+  initialValue: CreateModule
+  CreateModule: (body: CreateModule) => void
 }
 
-
 export interface EditModuleContextType {
-  initialValue: CreateModule;
+  initialValue: CreateModule
   EditModule: (body: CreateModule, id: number) => void
-  moduleOne: ModulesOneEdit | undefined;
-  isLoading: boolean;
-  isError: boolean;
+  moduleOne: ModulesOneEdit | undefined
+  isLoading: boolean
+  isError: boolean
 }
 
 export interface OneModulesContextType {
-  moduleOne: Modules | undefined;
-  isLoading: boolean;
-  isError: boolean;
+  moduleOne: Modules | undefined
+  isLoading: boolean
+  isError: boolean
   DeleteActivities: (id: number) => void
   DeleteClasses: (id: number) => void
 }
@@ -82,4 +76,3 @@ export interface ModulesOneEdit {
   createdAt: string
   updatedAt: string
 }
-
