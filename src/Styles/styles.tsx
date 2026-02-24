@@ -30,7 +30,6 @@ export const Column = styled.div<PropsReverse>`
 export const Row = styled.div<PropsReverse>`
   display: flex;
   flex-direction: row;
-  gap: 1rem;
 
   #space-around {
     justify-content: space-around;

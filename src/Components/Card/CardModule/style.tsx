@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 128px;
 
   border: 1.22px solid rgba(219, 230, 255, 1);
   background: ${styles.colors.colorCard};
