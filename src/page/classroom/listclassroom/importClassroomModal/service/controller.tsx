@@ -29,6 +29,6 @@ export const ListClassroomController = () => {
   );
 
   return {
-    MigrateClassroomMutation
+    MigrateClassroomMutation,
   }
 }

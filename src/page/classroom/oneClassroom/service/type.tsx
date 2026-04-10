@@ -3,9 +3,10 @@ export interface ClassroomOne {
     owner: Owner
   }
   
-  export interface Classroom {
+export interface Classroom {
     id: number
     name: string
+    idClassroomMeuBen?: number | null
     owner_user_fk: number
     reapplication_fk: number
     isOpen: boolean

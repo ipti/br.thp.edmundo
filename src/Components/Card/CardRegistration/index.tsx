@@ -5,21 +5,29 @@ import { ROLE } from "../../../Controller/controllerGlobal";
 import { Column, Padding, Row } from "../../../Styles/styles";
 import { Container } from "./style";
 import { useNavigate } from "react-router-dom";
+import Icon from "../../Icon";
+import styles from "../../../Styles";
 
 const CardRegistration = ({
   title,
   subtitle,
+  username,
   idRegistration,
   userId,
   status,
-  url_avatar
+  url_avatar,
+  onRemove,
+  isLoadingRemove
 }: {
   title: string;
   subtitle: string;
+  username?: string;
   idRegistration: number;
   status: string;
   userId: number;
-  url_avatar?: string
+  url_avatar?: string;
+  onRemove?: () => void;
+  isLoadingRemove?: boolean;
 }) => {
   const [visible, setVisible] = useState(false);
   const history = useNavigate()
@@ -38,18 +46,19 @@ const CardRegistration = ({
           // }
         }}
       >
-        <Row id="space-between">
-
-          {/* {(propsAplication.user?.role === ROLE.ADMIN ||
-            propsAplication.user?.role === ROLE.COORDINATORS) && <div
+        <Row id="end">
+          {onRemove && (
+            <div
               className="cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
+                if (isLoadingRemove) return;
                 setVisible(true);
               }}
             >
-              <Icon icon="pi pi-trash" size="1rem" />
-            </div>} */}
+              <Icon icon="pi pi-trash" color={styles.colors.grayOne} size="1rem" />
+            </div>
+          )}
         </Row>
         {/* <Padding padding="8px" /> */}
         <Row>
@@ -58,7 +67,7 @@ const CardRegistration = ({
               <img
                 src={
                   url_avatar ? url_avatar :
-                  avatar
+                    avatar
                 }
                 alt=""
                 style={{ height: 72, width: 72, borderRadius: "50%" }}
@@ -73,6 +82,14 @@ const CardRegistration = ({
               {"Matricula - " + title}
             </div>
             <Padding />
+            {username && (
+              <>
+                <div className={"boxDescriptionScheduleSubtitle"}>
+                  {"Nome de usuário: " + username}
+                </div>
+                <Padding />
+              </>
+            )}
             <div className={"boxDescriptionScheduleSubtitle"}>
               {status === ROLE.STUDENT
                 ? "Aluno"
@@ -91,7 +108,10 @@ const CardRegistration = ({
         message="Tem certeza de que deseja prosseguir?"
         header="Confirmation"
         icon="pi pi-exclamation-triangle"
-        // accept={() => props.DeleteRegistration(idRegistration)}
+        accept={() => {
+          onRemove?.();
+          setVisible(false);
+        }}
         reject={() => setVisible(false)}
       />
     </>

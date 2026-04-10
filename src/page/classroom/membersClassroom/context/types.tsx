@@ -3,6 +3,8 @@ export interface MembersClassroomContextType {
     classroomMembersList: ClassroomMembers | undefined;
     isLoading: boolean;
     isError: boolean;
+    handleRemoveMember: (idUser: number) => void;
+    isLoadingRemoveMember: boolean;
 }
 
 export interface ClassroomMembers {
@@ -40,6 +42,7 @@ export interface Root2 {
   
   export interface Users {
     name: string
+    email: string
     role: string
     registration: RegistartionAvatar
   }

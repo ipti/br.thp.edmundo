@@ -102,7 +102,36 @@ const ClassroomOnePage = () => {
                 <ButtonComponent label="Migrar turma" icon={"pi pi-upload"} iconPos="right" onClick={() => {
                     setVisibleMigration(!visibleMigration)
                 }} />
+                {Boolean(props.classroomOne?.classroom?.idClassroomMeuBen) && (
+                    <>
+                        <Padding padding="8px" />
+                        <ButtonComponent
+                            label="Sincronizar turma"
+                            icon={"pi pi-refresh"}
+                            iconPos="right"
+                            loading={props.isLoadingSyncClassroom}
+                            onClick={props.handleSyncClassroom}
+                        />
+                    </>
+                )}
             </Row>
+            {Boolean(props.classroomOne?.classroom?.idClassroomMeuBen) && (
+                <>
+                    <Padding padding="8px" />
+                    <div
+                        style={{
+                            background: "#fff4d6",
+                            border: "1px solid #f7cf6e",
+                            borderRadius: 8,
+                            padding: 12,
+                            color: "#5f5b5b",
+                            fontWeight: 600,
+                        }}
+                    >
+                        Atenção no acesso dos usuários importados: nome de usuário = CPF e senha = data de nascimento no formato DDMMYYYY (dia, mês e ano).
+                    </div>
+                </>
+            )}
             <Padding padding="8px" />
             <h2>
                 Informações

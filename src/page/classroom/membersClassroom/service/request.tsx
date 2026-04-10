@@ -16,5 +16,25 @@ export const MembersClassroomRequest = async (id: string) => {
   
 }
 
+export const RemoveMemberFromClassroomRequest = async (body: {
+  idUser: number;
+  idClassroom: number;
+}) => {
+  return await http
+    .put(
+      "/classroom-bff/remove-from-classroom?idClassroom=" +
+        body.idClassroom +
+        "&idUser=" +
+        body.idUser
+    )
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      throw err;
+    });
+};
 
 

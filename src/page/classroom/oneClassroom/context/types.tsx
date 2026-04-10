@@ -12,4 +12,6 @@ export interface OneClassroomContextType {
     handleDistributeStamps: (body: DistributeStamps) => void
     projectMigration: ProjectsTsArray | undefined
     handleMigrateMeuben: (body: MigrateMeuBen) => void
+    handleSyncClassroom: () => void
+    isLoadingSyncClassroom: boolean
 }

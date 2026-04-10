@@ -13,7 +13,7 @@ export const OneClassroomState = () => {
     const [stamps, setStamps] = useState<StampsType[] | undefined>()
     const [projectMigration, setProjectMigration] = useState<ProjectsTsArray | undefined>()
 
-    const { PutClassroomMutation, DistributeStampsMutation, MigrationMeuBenMutation } = OneClassroomController()
+    const { PutClassroomMutation, DistributeStampsMutation, MigrationMeuBenMutation, SyncClassroomMutation } = OneClassroomController()
 
 
     const { data: classroomOneRequest, isLoading, isError } = useFetchRequestFindOneClassroomBff(id!);
@@ -75,6 +75,34 @@ export const OneClassroomState = () => {
         MigrationMeuBenMutation.mutate({ data: body })
     }
 
+    const handleSyncClassroom = () => {
+        const idClassroomCoded = classroomOne?.classroom?.id
+        const idClassroomMeuBen = classroomOne?.classroom?.idClassroomMeuBen
 
-    return { handleMigrateMeuben,classroomOne, isLoading, isError, UpdateClassroom, classroomChart, stamps, classroomMembersList, handleDistributeStamps, projectMigration }
+        if (!idClassroomCoded || !idClassroomMeuBen) {
+            return
+        }
+
+        SyncClassroomMutation.mutate({
+            idClassroomCoded,
+            idClassroomMeuBen,
+            idReaplication: classroomOne?.classroom?.reapplication_fk,
+        })
+    }
+
+
+    return {
+        handleMigrateMeuben,
+        classroomOne,
+        isLoading,
+        isError,
+        UpdateClassroom,
+        classroomChart,
+        stamps,
+        classroomMembersList,
+        handleDistributeStamps,
+        projectMigration,
+        handleSyncClassroom,
+        isLoadingSyncClassroom: SyncClassroomMutation.isLoading,
+    }
 }

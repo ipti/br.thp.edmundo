@@ -108,3 +108,32 @@ export const MigrationMeuBenRequest = async (body: MigrateMeuBen) => {
     });
 
 }
+
+export const SyncClassroomMeuBenRequest = async (body: {
+  idClassroomCoded: number;
+  idClassroomMeuBen: number;
+  idReaplication?: number;
+}) => {
+  return await http
+    .post("/migration-bff/meubentocoded/sync", {
+      idClassroom: body.idClassroomMeuBen,
+      idReaplication: body.idReaplication,
+    })
+    .catch(async (err) => {
+      if (err?.response?.status === 404) {
+        return await http.post("/migration-bff/meubentocoded", {
+          idClassroom: body.idClassroomMeuBen,
+          idReaplication: body.idReaplication,
+        });
+      }
+      throw err;
+    })
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      throw err;
+    });
+}
