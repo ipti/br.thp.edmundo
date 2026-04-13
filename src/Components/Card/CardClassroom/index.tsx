@@ -15,12 +15,14 @@ const CardClassroom = ({
   handleDelete,
   registrationCount,
   id,
+  showDelete = true,
 }: {
   title: string;
   meetingCount?: number;
   handleDelete?: any;
   registrationCount?: number;
   id: number;
+  showDelete?: boolean;
 }) => {
   const history = useNavigate();
   const [visible, setVisible] = useState(false);
@@ -44,7 +46,7 @@ const CardClassroom = ({
               <h3>{title}</h3>
             </Column>
           </Row>
-          {
+          {showDelete && handleDelete && (
             <div
               className="cursor-pointer"
               onClick={(e) => {
@@ -59,7 +61,7 @@ const CardClassroom = ({
                 fontWeight="900"
               />
             </div>
-          }
+          )}
         </Row>
         <Padding padding="8px" />
         <Row style={{ gap: 16 }}>
@@ -69,15 +71,17 @@ const CardClassroom = ({
           </Row>
         </Row>
       </Container>
-      <ConfirmDialog
-        visible={visible}
-        onHide={() => setVisible(false)}
-        message="Tem certeza de que deseja prosseguir?"
-        header="Confirmation"
-        icon="pi pi-exclamation-triangle"
-        accept={() => handleDelete(id)}
-        reject={() => setVisible(false)}
-      />
+      {showDelete && handleDelete && (
+        <ConfirmDialog
+          visible={visible}
+          onHide={() => setVisible(false)}
+          message="Tem certeza de que deseja prosseguir?"
+          header="Confirmation"
+          icon="pi pi-exclamation-triangle"
+          accept={() => handleDelete(id)}
+          reject={() => setVisible(false)}
+        />
+      )}
     </>
   );
 };

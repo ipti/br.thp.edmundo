@@ -69,17 +69,63 @@ const HomeActivitiesPage = () => {
   if (!propsAplication?.activitiesOne?.user_activities)
     return <Loading />;
 
+  const userActivity = propsAplication?.activitiesOne?.user_activities[0];
+  const hasStarted = propsAplication?.activitiesOne?.user_activities.length > 0;
+  const activityStatus = userActivity?.status;
+  const statusLabel =
+    activityStatus === "COMPLETED"
+      ? "Concluída"
+      : activityStatus === "AWAITING_RESPONSE"
+      ? "Em processamento"
+      : activityStatus === "PENDING"
+      ? "Em andamento"
+      : "Não iniciada";
+  const statusColor =
+    activityStatus === "COMPLETED"
+      ? "#2F9E44"
+      : activityStatus === "AWAITING_RESPONSE"
+      ? "#F08C00"
+      : activityStatus === "PENDING"
+      ? "#2458D3"
+      : "#64748B";
+  const activityTypeLabel =
+    propsAplication?.activitiesOne?.type_activities === "QUIZ"
+      ? "Formulário"
+      : propsAplication?.activitiesOne?.type_activities === "CODE"
+      ? "Envio de arquivo"
+      : propsAplication?.activitiesOne?.type_activities === "IA"
+      ? "Correção por IA"
+      : "";
+
   return (
     <Container
       style={{
         height: "100%",
         background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)",
-        padding: "64px 64px",
+        padding: "24px clamp(16px, 4vw, 48px)",
       }}
     >
       <Row className="grid" id="space-between" style={{ width: "100%" }}>
         <div className="col-12 md:col-4 lg:col:6">
-          <div className="card">
+          <div className="card" style={{ borderRadius: 12 }}>
+            <h3 style={{ marginTop: 0 }}>Resumo da atividade</h3>
+            <Padding padding="8px" />
+            <Row style={{ gap: "8px", alignItems: "center" }}>
+              <TextActivitiesParagraphCard>Status:</TextActivitiesParagraphCard>
+              <span
+                style={{
+                  padding: "4px 10px",
+                  borderRadius: 999,
+                  background: `${statusColor}1A`,
+                  color: statusColor,
+                  fontSize: 12,
+                  fontWeight: 700,
+                }}
+              >
+                {statusLabel}
+              </span>
+            </Row>
+            <Padding />
             {/* <Row style={{ gap: "4px" }}>
                                   <TextActivitiesParagraph>
                                       Pontos da Atividade:
@@ -114,13 +160,7 @@ const HomeActivitiesPage = () => {
                 Tipo de atividade:
               </TextActivitiesParagraphCard>
               <TextActivitiesCard>
-                {propsAplication?.activitiesOne?.type_activities === "QUIZ"
-                  ? "Formulário"
-                  : propsAplication?.activitiesOne?.type_activities === "CODE"
-                  ? "Implementação"
-                  : propsAplication?.activitiesOne?.type_activities === "IA"
-                  ? "Implementação"
-                  : ""}{" "}
+                {activityTypeLabel}{" "}
                 {`\n`}
               </TextActivitiesCard>
             </Row>
@@ -143,13 +183,24 @@ const HomeActivitiesPage = () => {
               </>
             )}
           </div>
-          {propsAplication?.activitiesOne?.user_activities![0] && (
-            <div className="grid">
+          {hasStarted && propsAplication?.activitiesOne?.user_activities![0] && (
+            <div className="grid" style={{ marginTop: 8 }}>
               {propsAplication?.activitiesOne?.activities_group_avaliation?.map(
                 (item, index) => {
                   return (
                     <Column className="col-12" key={index}>
-                      <h3>Editor para {item?.group_avaliations?.name}</h3>
+                      <div
+                        style={{
+                          border: "1px solid #D9E3F0",
+                          borderRadius: 12,
+                          background: "#FFFFFF",
+                          padding: 12,
+                        }}
+                      >
+                      <h3 style={{ marginTop: 0, marginBottom: 4 }}>Editor: {item?.group_avaliations?.name}</h3>
+                      <p style={{ margin: "0 0 8px 0", color: "#7A8798", fontSize: 13 }}>
+                        Linguagem: {item?.group_avaliations?.type_group_avaliation?.value ?? "javascript"}
+                      </p>
                       <Padding />
                       <CodeiumEditor
                         value={
@@ -169,7 +220,7 @@ const HomeActivitiesPage = () => {
                         theme="light"
                         containerStyle={{
                           border: "1px solid #BAC7D5",
-                          borderRadius: "2px",
+                          borderRadius: "8px",
                           height: "100%",
                           width: "100%",
                         }}
@@ -195,6 +246,7 @@ const HomeActivitiesPage = () => {
                           }
                         }}
                       />
+                      </div>
                     </Column>
                   );
                 }
@@ -203,6 +255,24 @@ const HomeActivitiesPage = () => {
           )}
           <Row id="center">
             <Column style={{ width: "100%", marginTop: "16px" }}>
+              <div
+                style={{
+                  border: "1px solid #D9E3F0",
+                  borderRadius: 12,
+                  background: "#FFFFFF",
+                  padding: 12,
+                }}
+              >
+              <h3 style={{ marginTop: 0 }}>Próxima ação</h3>
+              <p style={{ margin: "0 0 12px 0", color: "#7A8798" }}>
+                {statusLabel === "Não iniciada"
+                  ? "Inicie a atividade para começar."
+                  : statusLabel === "Em processamento"
+                  ? "Sua resposta está sendo processada."
+                  : statusLabel === "Concluída"
+                  ? "Atividade já enviada."
+                  : "Finalize sua resposta e envie."}
+              </p>
               {propsAplication?.activitiesOne?.user_activities.length === 0 ? (
                 <ButtonStart
                   style={{ marginBottom: 16 }}
@@ -220,7 +290,7 @@ const HomeActivitiesPage = () => {
                   </Row>
                 </ButtonStart>
               ) : propsAplication?.activitiesOne.type_activities !== "IA" &&
-                propsAplication?.activitiesOne?.user_activities[0].status ===
+                userActivity?.status ===
                   "COMPLETED" ? (
                 <>
                   <ButtonStart type="SUCCESS">
@@ -232,11 +302,11 @@ const HomeActivitiesPage = () => {
                   </ButtonStart>
                   <Padding padding="16px" />
                 </>
-              ) : propsAplication?.activitiesOne?.user_activities[0].status ===
+              ) : userActivity?.status ===
                 "AWAITING_RESPONSE" ? (
                 <Column>
                   <Padding padding="8px" />
-                  <>Atvidade em processamento</>
+                  <>Atividade em processamento</>
                   <Padding padding="8px" />
                   <ProgressBar
                     mode="indeterminate"
@@ -246,7 +316,7 @@ const HomeActivitiesPage = () => {
                 </Column>
               ) : propsAplication?.activitiesOne.type_activities === "CODE" ? (
                 <>
-                  <h1>1. Anexe sua atividade clicando no botão a seguir:</h1>
+                  <h3 style={{ marginTop: 0 }}>Anexe sua atividade para enviar</h3>
                   <Padding padding="8px" />
                   <DropFileInput onFileChange={propsAplication?.onChangeFile} />
                   <Padding padding="8px" />
@@ -356,7 +426,6 @@ const HomeActivitiesPage = () => {
                 <>
                   <Padding padding="8px" />
                   <ButtonComponent
-                    
                     label="Enviar Atividade Novamente"
                     onClick={() => {
                       propsAplication.SendAnsweAI({
@@ -405,26 +474,34 @@ const HomeActivitiesPage = () => {
               ) : (
                 <></>
               )}
+              </div>
             </Column>
           </Row>
         </div>
         <div
           className="card col-12 md:col-7 lg:col:6"
-          style={{ height: "100%" }}
+          style={{ height: "100%", borderRadius: 12 }}
         >
           <Row>
             <Column style={{ width: "100%" }}>
-              <Padding padding="32px">
-                <div className="grid">
+              <Padding padding="24px">
+                <div className="flex flex-wrap gap-2">
                   {propsAplication?.activitiesOne?.tags_activities?.map(
-                    (item) => {
+                    (item, index) => {
                       return (
-                        <>
-                          <h4 style={{ color: color.colorPrimary }}>
+                        <span
+                          key={`${item.tag.content}-${index}`}
+                          style={{
+                            color: color.colorPrimary,
+                            background: "#EFF4FF",
+                            borderRadius: 999,
+                            padding: "4px 10px",
+                            fontWeight: 700,
+                            fontSize: 12,
+                          }}
+                        >
                             #{item.tag.content}
-                          </h4>
-                          <Padding />
-                        </>
+                        </span>
                       );
                     }
                   )}
@@ -434,30 +511,56 @@ const HomeActivitiesPage = () => {
                   {propsAplication?.activitiesOne?.name}
                 </TextActivities>
                 <Padding padding="16px" />
-                <TextActivities>
+                <div style={{ fontSize: 16, lineHeight: "26px", color: "#203246" }}>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: propsAplication?.activitiesOne?.description!,
                     }}
                   />
-                </TextActivities>
+                </div>
                 <Padding padding="16px" />
                 {propsAplication?.activitiesOne?.form &&
-                  propsAplication.activitiesOne?.user_activities[0] && (
+                  userActivity && (
                     <>
                       <Divider />
                       <Padding padding="8px" />
-                      <TextActivities>Formulário</TextActivities>
+                      <h3 style={{ margin: 0 }}>Formulário</h3>
+                      <p style={{ margin: "6px 0 0 0", color: "#7A8798", fontSize: 14 }}>
+                        Responda às perguntas abaixo e envie ao finalizar.
+                      </p>
                       <Padding padding="16px" />
                       {propsAplication?.activitiesOne?.form.answer_form
                         ?.length! > 0 &&
                       propsAplication.activitiesOne.user_activities[0]
                         .status === "COMPLETED" ? (
-                        <FormViewComponent
-                          form={propsAplication?.activitiesOne?.form}
-                        />
+                        <div
+                          style={{
+                            border: "1px solid #D9E3F0",
+                            borderRadius: 12,
+                            background: "#F8FBFF",
+                            padding: 12,
+                          }}
+                        >
+                          <Row style={{ gap: 8, alignItems: "center" }}>
+                            <i className="pi pi-check-circle" style={{ color: "#2F9E44" }} />
+                            <span style={{ color: "#2F9E44", fontWeight: 700, fontSize: 13 }}>
+                              Formulário enviado
+                            </span>
+                          </Row>
+                          <Padding padding="8px" />
+                          <FormViewComponent
+                            form={propsAplication?.activitiesOne?.form}
+                          />
+                        </div>
                       ) : (
-                        <TextActivities>
+                        <div
+                          style={{
+                            border: "1px solid #D9E3F0",
+                            borderRadius: 12,
+                            background: "#FFFFFF",
+                            padding: 12,
+                          }}
+                        >
                           <Formik
                             validationSchema={createResponseSchema}
                             initialValues={propsAplication.initialValueForm}
@@ -481,11 +584,9 @@ const HomeActivitiesPage = () => {
                                     <Row id="end">
                                       <ButtonComponent
                                         type="submit"
-                                        label="Enviar"
+                                        label="Enviar formulário"
                                         disabled={
-                                          propsAplication?.activitiesOne
-                                            ?.user_activities[0].status ===
-                                          "COMPLETED"
+                                          userActivity?.status === "COMPLETED"
                                         }
                                       />
                                     </Row>
@@ -494,7 +595,7 @@ const HomeActivitiesPage = () => {
                               );
                             }}
                           </Formik>
-                        </TextActivities>
+                        </div>
                       )}
                     </>
                   )}

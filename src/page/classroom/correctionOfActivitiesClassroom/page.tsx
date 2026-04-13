@@ -40,6 +40,11 @@ const ClassroomCorrectionOfActivitiesPage = () => {
     const propsClassroomCorrectionOfActivities = useContext(ClassroomCorrectionOfActivitiesContext)
 
     if (propsClassroomCorrectionOfActivities?.isLoading) return <Loading />
+    if (!propsClassroomCorrectionOfActivities?.activities) return <Empty title="atividade" />
+
+    const activityData = propsClassroomCorrectionOfActivities.activities
+    const activityType = String(activityData.activities.type_activities || "").toUpperCase()
+    const hasQuizAnswers = !!activityData?.activities?.form?.answer_form?.[0]?.answer_question?.length
 
     const handleMedia = (value: NotasType | any) => {
         let total = 0;
@@ -67,11 +72,13 @@ const ClassroomCorrectionOfActivitiesPage = () => {
     }
 
     const handleNotaForm = (form: FormView) => {
+        if (!form?.answer_form?.[0]?.answer_question?.length) return 0
         const total = form.answer_form[0].answer_question.length
 
         var nota = 0
         for (const question of form.answer_form[0].answer_question) {
             const totalQuestion = question.question.response_question.length;
+            if (totalQuestion === 0) continue
 
             var notaQuestion = 0;
 
@@ -88,6 +95,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
     const isTime = (time: number, start: any, end: any) => {
         const createdAt = new Date(start);
         const updatedAt = new Date(end);
+        if (Number.isNaN(createdAt.getTime()) || Number.isNaN(updatedAt.getTime())) return false
 
         const differenceInMs = updatedAt.getTime() - createdAt.getTime();
 
@@ -97,31 +105,33 @@ const ClassroomCorrectionOfActivitiesPage = () => {
         return differenceInMinutes <= time
     }
 
-    var prazo = isTime(propsClassroomCorrectionOfActivities?.activities?.activities.time_activities!, propsClassroomCorrectionOfActivities?.activities?.createdAt, propsClassroomCorrectionOfActivities?.activities?.updatedAt)
+    var prazo = isTime(activityData.activities.time_activities!, activityData.createdAt, activityData.updatedAt)
     return (
-        <ContentPage title={propsClassroomCorrectionOfActivities?.activities?.activities.name!} description="Visualize a atividade enviado pelo aluno">
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: propsClassroomCorrectionOfActivities?.activities?.activities.description ?? "",
-                }}
-            />
+        <ContentPage title={activityData.activities.name!} description="Visualize a atividade enviado pelo aluno">
+            <div style={{ border: `1px solid ${color.colorBorderCard}`, borderRadius: 12, padding: 12, background: "#FFFFFF" }}>
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: activityData.activities.description ?? "",
+                    }}
+                />
+            </div>
             {/* <p style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>{propsClassroomCorrectionOfActivities?.activities?.activities.description}</p> */}
             <Padding padding="16px" />
             <>
-                <Row id="space-between" style={{ marginBottom: "8px" }}>
+                <Row id="space-between" style={{ marginBottom: "8px", flexWrap: "wrap", gap: 12 }}>
                     <Column>
                         <h3>
-                            {propsClassroomCorrectionOfActivities?.activities?.user_classroom.users.name}
+                            {activityData.user_classroom.users.name}
                         </h3>
                         <Padding />
-                        <p>Última atualização: {formatarDataHours(propsClassroomCorrectionOfActivities?.activities?.updatedAt!)}</p>
+                        <p>Última atualização: {formatarDataHours(activityData.updatedAt!)}</p>
                     </Column>
-                    <div style={{ padding: 16, borderRadius: 8, height: 54, background: propsClassroomCorrectionOfActivities?.activities?.status === "COMPLETED" ? color.green : propsClassroomCorrectionOfActivities?.activities?.status === "PENDING" ? color.colorSecondary : "" }}>
-                        <h4 style={{ color: "white" }}>{status[propsClassroomCorrectionOfActivities?.activities?.status as keyof typeof status]}</h4>
+                    <div style={{ padding: "10px 16px", borderRadius: 999, height: 42, background: activityData.status === "COMPLETED" ? color.green : activityData.status === "PENDING" ? color.colorSecondary : "" }}>
+                        <h4 style={{ color: "white", margin: 0 }}>{status[activityData.status as keyof typeof status]}</h4>
                     </div>
                 </Row>
                 {
-                    propsClassroomCorrectionOfActivities?.activities?.user_activities_archives.length! > 0 ? (
+                    activityData.user_activities_archives.length! > 0 ? (
                         <div className="col-12 md:col-6">
                             <h4 className="drop-file-preview__title">
                                 Arquivos Anexados
@@ -129,7 +139,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                             <div style={{ border: "2px solid #E3E3E3" }}>
 
                                 {
-                                    propsClassroomCorrectionOfActivities?.activities?.user_activities_archives.map((item, index: number) => (
+                                    activityData.user_activities_archives.map((item, index: number) => (
                                         <Row id="space-between" key={index} className="drop-file-preview__item">
                                             <Row>
                                                 <img src={ImageConfig[item.archive_url.split('/')[1]] ||
@@ -160,11 +170,11 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 }
             </>
             <Padding padding="8px" />
-            {propsClassroomCorrectionOfActivities?.activities?.user_activities_rating
+            {activityData.user_activities_rating
                 &&
-                <Rating style={{ marginBottom: 32 }} cancel={false} value={propsClassroomCorrectionOfActivities?.activities?.user_activities_rating.rating} />
+                <Rating style={{ marginBottom: 16 }} cancel={false} value={activityData.user_activities_rating.rating} />
             }
-            <div style={{ padding: 8, background: prazo ? color.green : color.colorThird, width: 256, borderRadius: 8 }}>
+            <div style={{ padding: "8px 12px", background: prazo ? color.green : color.colorThird, width: 256, borderRadius: 999 }}>
                 <h3 style={{ textAlign: "center", color: "white" }}>
                     {prazo ? "No prazo" : "Fora do prazo"}
                 </h3>
@@ -172,14 +182,14 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
 
 
-            {propsClassroomCorrectionOfActivities?.activities?.activities?.form?.answer_form?.length! > 0
+            {hasQuizAnswers
                 &&
-                <Formik initialValues={{ total: handleNotaForm(propsClassroomCorrectionOfActivities?.activities?.activities.form!) }} onSubmit={(values) => {
+                <Formik initialValues={{ total: handleNotaForm(activityData.activities.form!) }} onSubmit={(values) => {
 
-                    if (propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id) {
-                        propsClassroomCorrectionOfActivities.updateAvaliation({ ...values }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id!)
+                    if (activityData.user_avaliation?.id) {
+                        propsClassroomCorrectionOfActivities.updateAvaliation({ ...values }, activityData.user_avaliation?.id!)
                     } else {
-                        propsClassroomCorrectionOfActivities?.createAvaliation({ ...values }, propsClassroomCorrectionOfActivities.activities?.id!)
+                        propsClassroomCorrectionOfActivities?.createAvaliation({ ...values }, activityData.id!)
                     }
                 }}>
                     {({ values }) => {
@@ -208,29 +218,29 @@ const ClassroomCorrectionOfActivitiesPage = () => {
             {/* {propsClassroomCorrectionOfActivities?.activities?.activities?.form.answer_form && <FormComponent form={propsClassroomCorrectionOfActivities?.activities?.activities?.form.answer_form[0].answer_question} />} */}
 
             <Padding padding="16px" />
-            {propsClassroomCorrectionOfActivities?.activities?.activities.type_activities === "CODE" && <>
-                {(propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.complete_the_activity_correctly ||
-                    propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.collaboration ||
-                    propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.completion_within_the_indicated_deadline ||
-                    propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.content_organization ||
-                    propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.understanding_the_content ||
-                    propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.creativity_in_the_response
+            {activityType === "CODE" && <>
+                {(activityData.activities?.classroom_activities[0]?.classroom_avaliation?.complete_the_activity_correctly ||
+                    activityData.activities?.classroom_activities[0]?.classroom_avaliation?.collaboration ||
+                    activityData.activities?.classroom_activities[0]?.classroom_avaliation?.completion_within_the_indicated_deadline ||
+                    activityData.activities?.classroom_activities[0]?.classroom_avaliation?.content_organization ||
+                    activityData.activities?.classroom_activities[0]?.classroom_avaliation?.understanding_the_content ||
+                    activityData.activities?.classroom_activities[0]?.classroom_avaliation?.creativity_in_the_response
                 ) ? <>
                     {
-                        propsClassroomCorrectionOfActivities?.activities && <Formik initialValues={{
-                            complete_the_activity_correctly: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.complete_the_activity_correctly ?? undefined,
-                            content_organization: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.content_organization ?? undefined,
-                            completion_within_the_indicated_deadline: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.completion_within_the_indicated_deadline || propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.completion_within_the_indicated_deadline ? prazo ? 10 : 5 : undefined,
-                            creativity_in_the_response: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.creativity_in_the_response ?? undefined,
-                            collaboration: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.collaboration ?? undefined,
-                            understanding_the_content: propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.understanding_the_content ?? undefined
+                        activityData && <Formik initialValues={{
+                            complete_the_activity_correctly: activityData?.user_avaliation?.complete_the_activity_correctly ?? undefined,
+                            content_organization: activityData?.user_avaliation?.content_organization ?? undefined,
+                            completion_within_the_indicated_deadline: activityData?.user_avaliation?.completion_within_the_indicated_deadline || activityData?.activities.classroom_activities[0].classroom_avaliation?.completion_within_the_indicated_deadline ? prazo ? 10 : 5 : undefined,
+                            creativity_in_the_response: activityData?.user_avaliation?.creativity_in_the_response ?? undefined,
+                            collaboration: activityData?.user_avaliation?.collaboration ?? undefined,
+                            understanding_the_content: activityData?.user_avaliation?.understanding_the_content ?? undefined
                         }}
                             onSubmit={(values) => {
 
-                                if (propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id) {
-                                    propsClassroomCorrectionOfActivities.updateAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id!)
+                                if (activityData?.user_avaliation?.id) {
+                                    propsClassroomCorrectionOfActivities.updateAvaliation({ ...values, total: handleMedia(values) }, activityData?.user_avaliation?.id!)
                                 } else {
-                                    propsClassroomCorrectionOfActivities?.createAvaliation({ ...values, total: handleMedia(values) }, propsClassroomCorrectionOfActivities.activities?.id!)
+                                    propsClassroomCorrectionOfActivities?.createAvaliation({ ...values, total: handleMedia(values) }, activityData.id!)
                                 }
                             }}>
                             {({ values, setFieldValue }) => {
@@ -249,7 +259,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
 
                                         <Padding padding="16px" />
                                         <div className="grid">
-                                            {propsClassroomCorrectionOfActivities?.activities?.activities?.classroom_activities[0]?.classroom_avaliation?.complete_the_activity_correctly && <div className="col-12 md:col-6">
+                                            {activityData?.activities?.classroom_activities[0]?.classroom_avaliation?.complete_the_activity_correctly && <div className="col-12 md:col-6">
                                                 <label>Cumpriu a atividade corretamente</label>
                                                 <Padding />
                                                 <InputNumberComponent name="complete_the_activity_correctly"
@@ -267,7 +277,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                                 <Padding />
                                                 <label style={labelBottom}>Quando os alunos realizam a atividade prevista de forma completa.</label>
                                             </div>}
-                                            {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.content_organization && <div className="col-12 md:col-6">
+                                            {activityData?.activities?.classroom_activities[0].classroom_avaliation?.content_organization && <div className="col-12 md:col-6">
                                                 <label>Organização do conteúdo</label>
                                                 <Padding />
                                                 <InputNumberComponent showButtons name="content_organization" value={values.content_organization} onChange={(e) => {
@@ -280,7 +290,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                                 <Padding />
                                                 <label style={labelBottom}>Quando os alunos organizam as informações de forma estruturada conforme as instruções compartilhadas.</label>
                                             </div>}
-                                            {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.completion_within_the_indicated_deadline && <div className="col-12 md:col-6">
+                                            {activityData?.activities?.classroom_activities[0].classroom_avaliation?.completion_within_the_indicated_deadline && <div className="col-12 md:col-6">
                                                 <label>Conclusão no prazo indicado</label>
                                                 <Padding />
                                                 <div >
@@ -289,9 +299,9 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                                         showButtons
                                                         onChange={(e) => {
                                                             if (e.value! > 10) {
-                                                                setFieldValue("content_organization", 10);
+                                                                setFieldValue("completion_within_the_indicated_deadline", 10);
                                                             } else {
-                                                                setFieldValue("content_organization", e.value);
+                                                                setFieldValue("completion_within_the_indicated_deadline", e.value);
                                                             }
                                                         }} max={10}
                                                         value={values.completion_within_the_indicated_deadline}
@@ -300,7 +310,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                                 <Padding />
                                                 <label style={labelBottom}>Quando os alunos realizam a atividade dentro do prazo estipulado pelo professor.</label>
                                             </div>}
-                                            {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.creativity_in_the_response && <div className="col-12 md:col-6">
+                                            {activityData?.activities?.classroom_activities[0].classroom_avaliation?.creativity_in_the_response && <div className="col-12 md:col-6">
                                                 <label>Criatividade na resposta</label>
                                                 <Padding />
                                                 <InputNumberComponent
@@ -315,7 +325,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                                 <Padding />
                                                 <label style={labelBottom}>Quando o aluno entrega algo além do que foi pedido ou utiliza uma nova solução para realizar o desafio.</label>
                                             </div>}
-                                            {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.collaboration && <div className="col-12 md:col-6">
+                                            {activityData?.activities?.classroom_activities[0].classroom_avaliation?.collaboration && <div className="col-12 md:col-6">
                                                 <label>Colaboração</label>
                                                 <Padding />
                                                 <InputNumberComponent
@@ -330,7 +340,7 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                                                 <Padding />
                                                 <label style={labelBottom}>Quando o aluno ajuda um colega a realizar o desafio, sendo necessário sinalizar na atividade.</label>
                                             </div>}
-                                            {propsClassroomCorrectionOfActivities?.activities?.activities.classroom_activities[0].classroom_avaliation?.understanding_the_content && <div className="col-12 md:col-6">
+                                            {activityData?.activities?.classroom_activities[0].classroom_avaliation?.understanding_the_content && <div className="col-12 md:col-6">
                                                 <label>Compreensão sobre o conteúdo</label>
                                                 <Padding />
                                                 <InputNumberComponent
@@ -360,9 +370,13 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 </> : <Empty title="formato de avaliações, adicione para avaliar o aluno" />}
             </>}
 
-            {propsClassroomCorrectionOfActivities?.activities?.answer_user_activities_group_avaliation && propsClassroomCorrectionOfActivities.activities.activities.type_activities === "IA" && <>
-                <Formik initialValues={{ total: propsClassroomCorrectionOfActivities.activities.user_avaliation.total }} onSubmit={(values) => {
-                    propsClassroomCorrectionOfActivities.updateAvaliation({ total: values.total }, propsClassroomCorrectionOfActivities?.activities?.user_avaliation?.id!)
+            {activityData?.answer_user_activities_group_avaliation && activityType === "IA" && <>
+                <Formik initialValues={{ total: activityData.user_avaliation?.total ?? 0 }} onSubmit={(values) => {
+                    if (activityData?.user_avaliation?.id) {
+                        propsClassroomCorrectionOfActivities.updateAvaliation({ total: values.total }, activityData?.user_avaliation?.id!)
+                    } else {
+                        propsClassroomCorrectionOfActivities.createAvaliation({ total: values.total }, activityData.id)
+                    }
 
                 }}>
                     {({ values, errors, handleChange, setFieldValue }) => {
@@ -398,9 +412,9 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                 </Formik>
 
                 <div className="grid">
-                    {propsClassroomCorrectionOfActivities.activities?.answer_user_activities_group_avaliation?.map((item) => {
+                    {activityData?.answer_user_activities_group_avaliation?.map((item, index) => {
                         return (
-                            <div className="col-12 md:col-6">
+                            <div className="col-12 md:col-6" key={index}>
                                 <div className="card ">
                                     <h3>{item.group_avaliation.name}</h3>
                                     <Padding padding="8px" />
@@ -413,17 +427,21 @@ const ClassroomCorrectionOfActivitiesPage = () => {
                     })}
 
                 </div>
-                {propsClassroomCorrectionOfActivities.activities?.answer_user_activities_ia![0]?.analyzerFeedback && <div className="card">
+                {activityData?.answer_user_activities_ia![0]?.analyzerFeedback && <div className="card">
                     <h3>Feedback</h3>
                     <Padding />
                     <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
-                        {propsClassroomCorrectionOfActivities.activities?.answer_user_activities_ia![0]?.analyzerFeedback}
+                        {activityData?.answer_user_activities_ia![0]?.analyzerFeedback}
                     </pre>
                 </div>}
             </>}
 
-            {propsClassroomCorrectionOfActivities?.activities?.activities.type_activities === "QUIZ" && <>
-                <FormViewComponent form={propsClassroomCorrectionOfActivities?.activities?.activities.form} />
+            {activityType === "QUIZ" && <>
+                {hasQuizAnswers ? (
+                    <FormViewComponent form={activityData?.activities.form} />
+                ) : (
+                    <Empty title="respostas do formulário" />
+                )}
             </>}
 
 

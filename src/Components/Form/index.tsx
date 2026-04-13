@@ -29,13 +29,38 @@ const FormComponent = ({
 
   return (
     <div>
-      <Column style={{ gap: 32 }}>
+      <Column style={{ gap: 16 }}>
         {form.question.map((item, key) => {
           return (
-            <Padding padding="0" key={key}>
-              <Column>
-                <Row id="space-between">
+            <div
+              key={key}
+              style={{
+                border: "1px solid #D9E3F0",
+                borderRadius: 12,
+                background: "#FFFFFF",
+                padding: 12,
+              }}
+            >
+              <Column style={{ gap: 8 }}>
+                <Row id="space-between" style={{ alignItems: "flex-start", gap: 8 }}>
+                  <span
+                    style={{
+                      minWidth: 24,
+                      height: 24,
+                      borderRadius: 999,
+                      background: "#EFF4FF",
+                      color: "#2458D3",
+                      fontSize: 12,
+                      fontWeight: 700,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {key + 1}
+                  </span>
                   <div
+                    style={{ flex: 1 }}
                     dangerouslySetInnerHTML={{
                       __html: item.content,
                     }}
@@ -48,7 +73,7 @@ const FormComponent = ({
                   )}
                 </Row>
               </Column>
-              <Padding padding="8px" />
+              <Padding padding="4px" />
               {item.type === "MULTIPLE_CHOICE" && (
                 <RenderRadioButtonCard
                   question={item}
@@ -78,7 +103,7 @@ const FormComponent = ({
                   setVisible(false);
                 }}
               />
-            </Padding>
+            </div>
           );
         })}
       </Column>

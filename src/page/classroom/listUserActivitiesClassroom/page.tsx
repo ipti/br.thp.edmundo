@@ -28,30 +28,29 @@ const ActivitiesSent = () => {
 };
 
 interface InitialForm {
-  selection: { name: string; id: number }[];
+  selection: number[];
 }
 
 const ActivitiesSentPage = () => {
 
     const {idClassroomUser} = useParams()
   const getNotas = (values: CreateNotasAvaliationType) => {
-    var array = [];
-    if (values.collaboration) array.push({ id: 4, name: "Colaboração" });
+    const array: number[] = [];
+    if (values.collaboration) array.push(4);
 
     if (values.complete_the_activity_correctly)
-      array.push({ id: 0, name: "Cumpriu a atividade corretamente" });
+      array.push(0);
 
     if (values.completion_within_the_indicated_deadline)
-      array.push({ id: 2, name: "Conclusão no prazo indicado" });
+      array.push(2);
 
     if (values.content_organization)
-      array.push({ id: 1, name: "Organização do conteúdo" });
+      array.push(1);
 
     if (values.creativity_in_the_response)
-      array.push({ id: 3, name: "Criatividade na resposta" });
+      array.push(3);
 
-    if (values.understanding_the_content)
-      array.push({ id: 5, name: "Compreensão sobre o conteúdo" });
+    if (values.understanding_the_content) array.push(5);
 
     return array;
   };
@@ -90,35 +89,12 @@ const ActivitiesSentPage = () => {
               initialValues={initialForm}
               onSubmit={(values) => {
                 const select: CreateNotasAvaliationType = {
-                  collaboration: values.selection.find(
-                    (props) => props.id === 4
-                  )
-                    ? true
-                    : false,
-                  complete_the_activity_correctly: values.selection.find(
-                    (props) => props.id === 0
-                  )
-                    ? true
-                    : false,
-                  completion_within_the_indicated_deadline:
-                    values.selection.find((props) => props.id === 2)
-                      ? true
-                      : false,
-                  content_organization: values.selection.find(
-                    (props) => props.id === 1
-                  )
-                    ? true
-                    : false,
-                  creativity_in_the_response: values.selection.find(
-                    (props) => props.id === 3
-                  )
-                    ? true
-                    : false,
-                  understanding_the_content: values.selection.find(
-                    (props) => props.id === 5
-                  )
-                    ? true
-                    : false,
+                  collaboration: values.selection.includes(4),
+                  complete_the_activity_correctly: values.selection.includes(0),
+                  completion_within_the_indicated_deadline: values.selection.includes(2),
+                  content_organization: values.selection.includes(1),
+                  creativity_in_the_response: values.selection.includes(3),
+                  understanding_the_content: values.selection.includes(5),
                 };
                 if (
                   propsActivitiesSent!.activities?.activities
@@ -137,34 +113,82 @@ const ActivitiesSentPage = () => {
                 }
               }}
             >
-              {({ values, handleChange }) => {
+              {({ values, setFieldValue }) => {
+                const selectedQuestions = question.filter((item) =>
+                  values.selection.includes(item.id)
+                );
                 return (
                   <Form>
-                    <Row id="space-between">
-                      <div style={{ display: "flex", flexDirection: "column" }}>
-                        <label>Formato de Avaliação</label>
-                        <Padding />
-                        <MultiSelect
-                          style={{ width: 320 }}
-                          maxSelectedLabels={3}
-                          options={question}
-                          optionLabel="name"
-                          name="selection"
-                          onChange={handleChange}
-                          value={values.selection}
-                          placeholder="Escolha sua forma de avaliação"
-                        />
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <ButtonComponent label="Salvar" icon="pi pi-save" type="submit" />
-                      </div>
-                    </Row>
+                    <div
+                      style={{
+                        border: `1px solid ${color.colorBorderCard}`,
+                        borderRadius: 12,
+                        background: "#FFFFFF",
+                        padding: 12,
+                        marginBottom: 16,
+                      }}
+                    >
+                      <Row id="space-between" style={{ alignItems: "flex-end", gap: 12, flexWrap: "wrap" }}>
+                        <div style={{ display: "flex", flexDirection: "column", flex: 1, minWidth: 280 }}>
+                          <label style={{ fontWeight: 700 }}>Formato de avaliação</label>
+                          <p style={{ margin: "6px 0 10px 0", color: color.colorsBaseInkLight, fontSize: 13 }}>
+                            Defina quais critérios serão usados para calcular a nota dos envios.
+                          </p>
+                          <MultiSelect
+                            style={{ width: "100%" }}
+                            display="chip"
+                            options={question}
+                            optionLabel="name"
+                            optionValue="id"
+                            name="selection"
+                            value={values.selection}
+                            onChange={(e) => setFieldValue("selection", e.value)}
+                            placeholder="Escolha os critérios de avaliação"
+                            selectedItemsLabel={`${values.selection.length} critérios selecionados`}
+                          />
+                          <Padding padding="8px" />
+                          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                            <ButtonComponent
+                              label="Selecionar tudo"
+                              className="p-button-text"
+                              loading={false}
+                              onClick={() => setFieldValue("selection", question.map((item) => item.id))}
+                            />
+                            <ButtonComponent
+                              label="Limpar"
+                              className="p-button-text"
+                              loading={false}
+                              onClick={() => setFieldValue("selection", [])}
+                            />
+                          </div>
+                          {selectedQuestions.length > 0 && (
+                            <>
+                              <Padding padding="8px" />
+                              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                                {selectedQuestions.map((item) => (
+                                  <span
+                                    key={item.id}
+                                    style={{
+                                      padding: "4px 10px",
+                                      borderRadius: 999,
+                                      background: "#EFF4FF",
+                                      color: color.colorPrimary,
+                                      fontSize: 12,
+                                      fontWeight: 700,
+                                    }}
+                                  >
+                                    {item.name}
+                                  </span>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                          <ButtonComponent label="Salvar formato" icon="pi pi-save" type="submit" />
+                        </div>
+                      </Row>
+                    </div>
                   </Form>
                 );
               }}
@@ -173,11 +197,33 @@ const ActivitiesSentPage = () => {
         </>
       )}
       {propsActivitiesSent?.activities?.activities?.type_activities ===
-        "QUIZ" && <ButtonComponent label="Atualizar notas" onClick={() => {propsActivitiesSent.updateAvaliationAll(parseInt(idClassroomUser ?? "0"))}} />}
+        "QUIZ" && (
+        <div
+          style={{
+            border: `1px solid ${color.colorBorderCard}`,
+            borderRadius: 12,
+            background: "#FFFFFF",
+            padding: 12,
+            marginBottom: 16,
+          }}
+        >
+          <Row id="space-between" style={{ gap: 12, flexWrap: "wrap" }}>
+            <div>
+              <h4 style={{ margin: 0 }}>Atualização de notas</h4>
+              <p style={{ margin: "6px 0 0 0", color: color.colorsBaseInkLight }}>
+                Recalcule automaticamente as notas das respostas do formulário.
+              </p>
+            </div>
+            <ButtonComponent label="Atualizar notas" onClick={() => {propsActivitiesSent.updateAvaliationAll(parseInt(idClassroomUser ?? "0"))}} />
+          </Row>
+        </div>
+      )}
       <Padding padding="16px" />
       <DataTable
         value={propsActivitiesSent?.activities?.activities?.user_activities}
         tableStyle={{ minWidth: "50rem" }}
+        stripedRows
+        responsiveLayout="scroll"
       >
         <Column field="user_classroom.users.name" header="Nome"></Column>
         <Column
@@ -188,9 +234,9 @@ const ActivitiesSentPage = () => {
           body={(data) => (
             <div
               style={{
-                padding: 16,
-                width: 160,
-                borderRadius: 8,
+                padding: 10,
+                width: 140,
+                borderRadius: 999,
                 background:
                   data?.status === "COMPLETED"
                     ? color.green
@@ -199,7 +245,7 @@ const ActivitiesSentPage = () => {
                     : "",
               }}
             >
-              <h4 style={{ color: "white", textAlign: "center" }}>
+              <h4 style={{ color: "white", textAlign: "center", margin: 0, fontSize: 13 }}>
                 {status[data?.status as keyof typeof status]}
               </h4>
             </div>

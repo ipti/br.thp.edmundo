@@ -1,17 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import pessoa from "../../assets/image/pessoa_visao.svg";
+import { useParams, useSearchParams } from "react-router-dom";
 import ButtonComponent from "../../Components/Button";
-import CardHome from "../../Components/Card/CardsHome";
 import ListActivities from "../../Components/ListActivities";
 import ListClassroom from "../../Components/ListClasses";
 import ListMembers from "../../Components/ListMembers";
 import Loading from "../../Components/Loading";
 import { AplicationContext } from "../../context/context";
-import color from "../../Styles/colors";
-import { Column, Container, Padding, Row } from "../../Styles/styles";
+import { Container, Padding, Row } from "../../Styles/styles";
 import HomeModulesProvider, { HomeModulesContext } from "./context/context";
-import { ContentPaper, ImagePessoa } from "./styles";
+import { ContentPaper } from "./styles";
 import { Class } from "./type";
 
 
@@ -40,12 +37,9 @@ const HomeModules = () => {
 
 
 const HomeModulePage = () => {
-    const history = useNavigate()
     const { idClassroom, idModule } = useParams()
     const [searchParams] = useSearchParams();
     const idClasses = searchParams.get("idClasses");
-
-    const flag = true
 
     const [classes, setClass] = useState<Class | undefined>()
     const propsAplication = useContext(AplicationContext)
@@ -69,44 +63,42 @@ const HomeModulePage = () => {
 
     if (!propsHome?.modules) return <Loading />
 
+    const totalClasses = propsHome.modules.classes?.length ?? 0
+    const totalActivities = propsHome.modules.classes?.reduce((acc, item) => acc + (item.activities?.length ?? 0), 0) ?? 0
+    const selectedClassHasContent = !!classes?.content
 
     return (
         <Container style={{
-            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)"
+            height: "100%", background: "linear-gradient(180deg, #FFFFFF 0%, #E6F0FF 100%)", padding: "24px"
         }}>
-            {/* <Row>
-                <Avatar>
-                    <img alt="" src={propsAplication?.user?.registration![0]?.avatar_url ? propsAplication?.user?.registration![0]?.avatar_url : avatar} />
-                </Avatar>
-                <Padding />
-                <Column id="center">
-                    <h2>
-                        {propsAplication?.user?.name}
-                    </h2>
-                </Column>
-            </Row> */}
-            <Padding />
-            <h1>
-                {propsHome.modules.name}
-            </h1>
-            {/* <Padding />
-            <p>
-                Visualize as suas atividades:
-            </p>
+            <div
+                style={{
+                    border: "1px solid #D9E3F0",
+                    borderRadius: 12,
+                    padding: 12,
+                    background: "#FFFFFF",
+                }}
+            >
+                <h1 style={{ margin: 0 }}>{propsHome.modules.name}</h1>
+                <p style={{ margin: "8px 0 0 0", color: "#61758A" }}>
+                    {propsAplication?.user?.name}, acompanhe sua aula e avance para as atividades.
+                </p>
+                <Padding padding="8px" />
+                <Row style={{ gap: 8, flexWrap: "wrap" }}>
+                    <span style={{ padding: "4px 10px", borderRadius: 999, background: "#EFF4FF", color: "#2458D3", fontWeight: 700, fontSize: 12 }}>
+                        {totalClasses} aulas
+                    </span>
+                    <span style={{ padding: "4px 10px", borderRadius: 999, background: "#FFF4E9", color: "#D9781E", fontWeight: 700, fontSize: 12 }}>
+                        {totalActivities} atividades
+                    </span>
+                </Row>
+            </div>
             <Padding padding="16px" />
             <div className="grid">
-                <div className="col-12 md:col-4">
-                    <label>Selecione a aula</label>
-                    <Padding />
-                    <DropdownComponent options={propsHome?.modules!.classes} value={classes} onChange={(e) => setClass(e.target.value)} placerholder="selecione a aula" />
-                </div>
-            </div> */}
-            <Padding padding="16px" />
-            {flag ? <div className="grid">
                 <div className="col-12 md:col-9">
                     <ContentPaper>
-                        <h2>{classes?.name}</h2>
-                        {classes?.content ? <div
+                        <h2 style={{ marginTop: 0 }}>{classes?.name || "Aula"}</h2>
+                        {selectedClassHasContent ? <div
                             dangerouslySetInnerHTML={{ __html: classes?.content || "" }}
                         /> : <p>Sem conteúdo para esta aula.</p>}
                         <div className="flex flex-row justify-content-center">
@@ -124,44 +116,7 @@ const HomeModulePage = () => {
                     <ListActivities activities={classes?.activities} idClassroom={idClassroom} idModule={idModule} />
                     <ListMembers users={propsHome.modules.classroom_module[0].classroom.user!} />
                 </div>
-            </div> : <div className="grid">
-                <div className="col-12 md:col-9">
-                    <div className="grid">
-                        {classes?.activities?.map((item, index) => {
-                            return (
-                                <div className="col-12 md:col-5"
-                                    style={{ cursor: item?.classroom_activities[0]?.active ? "pointer" : "not-allowed" }}
-                                    onClick={() =>
-                                        item?.classroom_activities[0]?.active ? history("/turma/" + idClassroom + "/modulo/" + idModule + "/atividade/" + item.id) : null
-                                    }>
-                                    <CardHome name={item.name} status={item?.classroom_activities[0]?.active} index={index} />
-                                </div>
-                            )
-                        })}
-                        {classes?.activities.length === 0 && <Column id="end">
-                            <Row id="space-between">
-                                <ImagePessoa>
-                                    <img src={pessoa} alt="Não existe atividades"
-                                    />
-                                </ImagePessoa>
-                                <Column id="center">
-                                    <div style={{ height: "100px", background: color.colorFourth }} className="card">
-                                        <Column id="center">
-                                            <h2>Não existe atividade!</h2>
-                                            <p>Não há material cadastrado no módulo.</p>
-                                        </Column>
-                                    </div>
-                                </Column>
-                            </Row>
-                        </Column>}
-                    </div>
-                </div>
-                <div className="col-12 md:col-3">
-                    <ListMembers users={propsHome.modules.classroom_module[0].classroom.user!} />
-                </div>
-            </div>}
-
-.
+            </div>
 
         </Container>
     )

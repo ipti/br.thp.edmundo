@@ -30,29 +30,23 @@ const ClassroomListPage = () => {
   const [visible, setVisible] = useState(false);
 
   const history = useNavigate();
+  const isStudent = propsAplication.user?.role === ROLE.STUDENT
   return (
     <ContentPage title="Turmas" description="Visualize as suas turmas">
       <Column>
         <Row id="end" style={{gap: '8px'}}>
-          <ButtonComponent
+          {!isStudent && <ButtonComponent
             label={"Importar turma"}
             icon="pi pi-download"
             onClick={() => {
-              propsAplication.user?.role === ROLE.STUDENT
-                ? setSearch(true)
-                : setVisible(!visible);
+              setVisible(!visible);
             }}
-          />
-
+          />}
           <ButtonComponent
-            label={
-              propsAplication.user?.role === ROLE.STUDENT
-                ? "Buscar turmas"
-                : "Criar turma"
-            }
+            label={isStudent ? "Buscar turmas" : "Criar turma"}
             icon="pi pi-plus"
             onClick={() => {
-              propsAplication.user?.role === ROLE.STUDENT
+              isStudent
                 ? setSearch(true)
                 : history("/turmas/criar");
             }}
@@ -69,6 +63,7 @@ const ClassroomListPage = () => {
                 title={item.name}
                 registrationCount={item._count.user}
                 handleDelete={() => props.DeleteClassroom(item.id)}
+                showDelete={!isStudent}
               />
             </div>
           );

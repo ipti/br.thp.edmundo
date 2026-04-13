@@ -1,12 +1,12 @@
 import { InputOtp } from "primereact/inputotp";
 import { useContext, useEffect, useState } from "react";
+import { Dropdown } from "primereact/dropdown";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import avatar from "../../assets/image/avatar.svg";
 import forma from "../../assets/image/person-recover.png";
 import ButtonComponent from "../../Components/Button";
 import CardHome from "../../Components/Card/CardsHome";
-import DropdownComponent from "../../Components/Dropdown";
 import ListMembers from "../../Components/ListMembers";
 import Loading from "../../Components/Loading";
 import { AplicationContext } from "../../context/context";
@@ -47,19 +47,104 @@ const HomeClassroomPage = () => {
     const propsAplication = useContext(AplicationContext)
     const propsHome = useContext(HomeContext)
     const history = useNavigate()
-    const [classes, setClass] = useState<Classroom | undefined>()
+    const [selectedClassroomId, setSelectedClassroomId] = useState<number | undefined>()
+
+    const classroomOptions =
+        propsHome?.classroomUser?.map((item) => ({
+            label: item.name,
+            value: item.id,
+            code: generateCode(item.id),
+            moduleCount: item.classroom_module?.length ?? 0,
+            memberCount: item.user?.length ?? 0,
+        })) ?? []
 
 
     useEffect(() => {
-        if (propsHome?.classroomUser) {
+        if (!propsHome?.classroomUser?.length) return
 
-            if (propsHome?.classroomUser![0]!) {
-                setClass(propsHome?.classroomUser[0])
-            }
+        const hasCurrentSelection = propsHome.classroomUser.some(
+            (item) => item.id === selectedClassroomId
+        )
+
+        if (!hasCurrentSelection) {
+            setSelectedClassroomId(propsHome.classroomUser[0].id)
         }
-    }, [propsHome?.classroomUser])
+    }, [propsHome?.classroomUser, selectedClassroomId])
 
     if (!propsHome?.classroomUser) return <Loading />
+
+    const classes = propsHome?.classroomUser?.find(
+        (item) => item.id === selectedClassroomId
+    )
+
+    const classroomValueTemplate = (option: any) => {
+        if (!option) {
+            return <span style={{ color: "#7A8798" }}>Selecione uma turma</span>
+        }
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    minWidth: 0,
+                }}
+            >
+                <strong
+                    style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "100%",
+                        display: "block",
+                    }}
+                >
+                    {option.label}
+                </strong>
+                <span style={{ color: "#7A8798", fontSize: 12, whiteSpace: "nowrap" }}>
+                    ({option.code})
+                </span>
+            </div>
+        )
+    }
+
+    const classroomItemTemplate = (option: any) => (
+        <Row id="space-between" style={{ width: "100%", gap: 8 }}>
+            <Column>
+                <strong>{option.label}</strong>
+                <p style={{ margin: 0, fontSize: 12, color: "#7A8798" }}>
+                    Código: {option.code}
+                </p>
+            </Column>
+            <Column id="end">
+                <span
+                    style={{
+                        padding: "3px 8px",
+                        borderRadius: 999,
+                        background: "#EFF4FF",
+                        color: "#2458D3",
+                        fontSize: 11,
+                        fontWeight: 700,
+                    }}
+                >
+                    {option.moduleCount} módulos
+                </span>
+                <span
+                    style={{
+                        marginTop: 6,
+                        padding: "3px 8px",
+                        borderRadius: 999,
+                        background: "#EAF8EF",
+                        color: "#2F9E44",
+                        fontSize: 11,
+                        fontWeight: 700,
+                    }}
+                >
+                    {option.memberCount} membros
+                </span>
+            </Column>
+        </Row>
+    )
 
 
     return (
@@ -79,7 +164,7 @@ const HomeClassroomPage = () => {
             </Row>
             <Padding />
             <h1>
-                Bem vindo a {propsHome?.classroomUser[0]?.name ?? "Coded"}!
+                Bem vindo a {classes?.name ?? propsHome?.classroomUser[0]?.name ?? "Coded"}!
             </h1>
             <Padding />
             <p>
@@ -94,10 +179,34 @@ const HomeClassroomPage = () => {
             </Row>
             <Padding padding="8px" />
             <div className="grid">
-                <div className="col-12 md:col-4">
-                    <label>Selecione a turma</label>
-                    <Padding />
-                    <DropdownComponent options={propsHome?.classroomUser} value={classes} onChange={(e) => setClass(e.target.value)} placerholder="selecione a aula" />
+                <div className="col-12 md:col-6">
+                    <div
+                        style={{
+                            border: `1px solid ${styles.colors.colorBorderCard}`,
+                            borderRadius: 12,
+                            padding: 12,
+                            background: "#FFFFFF",
+                        }}
+                    >
+                        <label style={{ fontWeight: 700 }}>Selecionar turma</label>
+                        <p style={{ margin: "6px 0 10px 0", color: "#7A8798", fontSize: 13 }}>
+                            Escolha sua turma para visualizar módulos e membros.
+                        </p>
+                        <Dropdown
+                            options={classroomOptions}
+                            optionLabel="label"
+                            optionValue="value"
+                            value={selectedClassroomId}
+                            onChange={(e) => setSelectedClassroomId(Number(e.value))}
+                            placeholder="Selecione uma turma"
+                            className="w-full"
+                            filter
+                            filterBy="label"
+                            itemTemplate={classroomItemTemplate}
+                            valueTemplate={classroomValueTemplate}
+                            emptyFilterMessage="Nenhuma turma encontrada"
+                        />
+                    </div>
                 </div>
             </div>
             <Padding padding="16px" />
@@ -118,7 +227,18 @@ const HomeClassroomPage = () => {
                 </div>
                 </div>
                 <div className="col-12 md:col-3">
-                    <ListMembers users={classes?.user!} />
+                    {classes ? <ListMembers users={classes.user} /> : (
+                        <div
+                            style={{
+                                border: `1px solid ${styles.colors.colorBorderCard}`,
+                                borderRadius: 12,
+                                background: "#FFFFFF",
+                                padding: 12,
+                            }}
+                        >
+                            <p style={{ margin: 0, color: "#7A8798" }}>Selecione uma turma para ver os membros.</p>
+                        </div>
+                    )}
                 </div>
             </div>
 

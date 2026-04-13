@@ -8,15 +8,21 @@ export const Container = styled.div`
 
    display: flex;   
    flex-direction: row;
-   height: 128px;
+   min-height: 96px;
    justify-content: space-around;
-   padding: 10px;
+   padding: 10px 16px;
    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+   gap: 8px;
 
    .iconResponsive {
       @media screen and (min-width: 750px) {
         display: none ;
     }
+   }
+
+   @media screen and (max-width: 900px) {
+    flex-wrap: wrap;
+    justify-content: center;
    }
 `;
 
@@ -41,9 +47,14 @@ export const TextHeader = styled.div<TextHeaderType>`
 color: ${props => props.isActive ? "black" : color.grayOne};
 cursor: pointer;
   font-family: ${typography.types.regular};
-font-size: 22px;
+font-size: 18px;
 font-weight: bold;
 line-height: 22px;
 text-align: "justified";
+padding: 6px 2px;
+
+&:hover {
+  color: ${color.colorPrimary};
+}
 
 `;

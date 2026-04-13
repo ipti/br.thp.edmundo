@@ -10,7 +10,7 @@ export default function RenderRadioButtonCard({ question, setFieldValue, values,
 
 
     return (
-        <div className="card flex justify-content-start">
+        <div style={{ border: "1px solid #EEF3F8", borderRadius: 10, background: "#FAFCFF", padding: 10 }}>
             <div className="flex flex-column gap-3">
                 {question?.options?.map((category: any, key: number) => {
                     return (
@@ -35,7 +35,7 @@ export default function RenderRadioButtonCard({ question, setFieldValue, values,
                                 }
                             }} />
                             <Column id="center">
-                                <p style={{ fontSize: 16, marginLeft: 8 }}>{category.content}</p>
+                                <p style={{ fontSize: 15, marginLeft: 8, marginTop: 0, marginBottom: 0 }}>{category.content}</p>
                             </Column>
 
                         </div>

@@ -8,16 +8,14 @@ export const TextActivities = styled.div`
   }
   font-family: ${typography.types.regular};
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 700;
   gap: 8;
-  line-height: 22px;
-  text-align: "justified";
+  line-height: 30px;
   p {
     font-family: ${typography.types.regular};
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 22px;
-    text-align: "justified";
+    line-height: 26px;
   }
 `;
 
@@ -26,17 +24,15 @@ export const TextActivitiesCard = styled.div`
     font-family: ${typography.types.regular};
   }
   font-family: ${typography.types.regular};
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 700;
   gap: 8;
   line-height: 22px;
-  text-align: "justified";
   p {
     font-family: ${typography.types.regular};
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
     line-height: 22px;
-    text-align: "justified";
   }
 `;
 
@@ -56,9 +52,9 @@ export const ButtonStart = styled.div<ButtonStartType>`
       : color.colorPrimary};
   border-radius: 27px;
   font-family: ${typography.types.regular};
-  font-size: 30.34px;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 26.14px;
+  line-height: 24px;
   text-align: left;
   cursor: ${(props) =>
     props.type === "PRIMARY"
@@ -70,18 +66,16 @@ export const ButtonStart = styled.div<ButtonStartType>`
 
 export const TextActivitiesParagraph = styled.div`
   font-family: ${typography.types.regular};
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  text-align: "justified";
 `;
 
 export const TextActivitiesParagraphCard = styled.div`
   font-family: ${typography.types.regular};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 22px;
-  text-align: "justified";
+  line-height: 20px;
 `;
 
 export const FormaRecover = styled.div`

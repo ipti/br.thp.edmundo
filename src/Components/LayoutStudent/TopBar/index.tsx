@@ -17,7 +17,12 @@ const TopBar = ({
 
   const history = useNavigate()
 
-  const [active, setActive] = useState(parseInt(getMenuItem()!));
+  const [active, setActive] = useState(parseInt(getMenuItem() || "1"));
+
+  const navigationItems = [
+    { id: 1, label: "Início", path: "/" },
+    { id: 6, label: "Perfil", path: "/perfil" },
+  ];
 
 
 
@@ -52,18 +57,16 @@ const TopBar = ({
         </Row>
       </Column>
       <Column id="center">
-        <Row style={{ gap: "32px" }}>
-          <TextHeader isActive={active === 1 ? true : false} onClick={() => {
-            history("/");
-            setActive(1);
-            menuItem("1");
-          }}>Home</TextHeader>
-          <TextHeader isActive={false}>Acessar turma</TextHeader>
-          <TextHeader isActive={false}>Historico</TextHeader>
-          <TextHeader isActive={active === 6 ? true : false} onClick={() => {
-            history("/perfil"); setActive(6);
-            menuItem("6");
-          }}>Perfil</TextHeader>
+        <Row style={{ gap: "24px", flexWrap: "wrap", justifyContent: "center" }}>
+          {navigationItems.map((item) => (
+            <TextHeader key={item.id} isActive={active === item.id} onClick={() => {
+              history(item.path);
+              setActive(item.id);
+              menuItem(item.id.toString());
+            }}>
+              {item.label}
+            </TextHeader>
+          ))}
         </Row>
       </Column>
       <Column style={{ width: "auto" }} id="center">
