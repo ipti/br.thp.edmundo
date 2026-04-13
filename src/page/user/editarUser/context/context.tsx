@@ -6,10 +6,10 @@ export const EditUserContext = createContext<EditUserContextType | null>(null);
 
 const EditUserProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { users, isError, isLoading, UpdateUser } = EditUserState()
+    const { users, isError, isLoading, UpdateUser, ResetPassword, AddUserReapplication, RemoveUserReapplication, reapplications } = EditUserState()
 
     return (
-        <EditUserContext.Provider value={{ users, isError, isLoading, UpdateUser }}>
+        <EditUserContext.Provider value={{ users, isError, isLoading, UpdateUser, ResetPassword, AddUserReapplication, RemoveUserReapplication, reapplications }}>
             {children}
         </EditUserContext.Provider>
     )

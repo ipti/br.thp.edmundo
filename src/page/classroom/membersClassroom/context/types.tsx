@@ -5,6 +5,9 @@ export interface MembersClassroomContextType {
     isError: boolean;
     handleRemoveMember: (idUser: number) => void;
     isLoadingRemoveMember: boolean;
+    teachers: TeacherUser[];
+    handleAddTeacher: (idUser: number) => void;
+    isLoadingAddTeacher: boolean;
 }
 
 export interface ClassroomMembers {
@@ -47,9 +50,17 @@ export interface Root2 {
     registration: RegistartionAvatar
   }
   
-  export interface Owner {
+export interface Owner {
     id: number
     name: string
     email: string
+  }
+
+  export interface TeacherUser {
+    id: number
+    name: string
+    email: string
+    role: string
+    active: boolean
   }
   

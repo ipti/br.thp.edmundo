@@ -6,10 +6,10 @@ export const UpdateUserContext = createContext<UpdateUserContextType | null>(nul
 
 const UpdateUserProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { UpdateUser, initialValue, user, isError, isLoading, file, setFile, tags, AddUser, tagsUser, settagsUser } = UpdateUserState()
+    const { UpdateUser, initialValue, user, isError, isLoading, file, setFile, tags, AddUser, tagsUser, settagsUser, ResetPassword, AddUserReapplication, reapplications } = UpdateUserState()
 
     return (
-        <UpdateUserContext.Provider value={{ UpdateUser, initialValue, user, isError, isLoading, file, setFile, tags, AddUser, tagsUser, settagsUser}}>
+        <UpdateUserContext.Provider value={{ UpdateUser, initialValue, user, isError, isLoading, file, setFile, tags, AddUser, tagsUser, settagsUser, ResetPassword, AddUserReapplication, reapplications }}>
             {children}
         </UpdateUserContext.Provider>
     )

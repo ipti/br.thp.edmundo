@@ -37,4 +37,36 @@ export const RemoveMemberFromClassroomRequest = async (body: {
     });
 };
 
+export const TeachersByReapplicationRequest = async (idReapplication: number) => {
+  return await http
+    .get("/classroom-bff/teachers-by-reapplication?idReapplication=" + idReapplication)
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      throw err;
+    });
+};
 
+export const AddTeacherToClassroomRequest = async (body: {
+  idUser: number;
+  idClassroom: number;
+}) => {
+  return await http
+    .put(
+      "/classroom-bff/join-the-classroom?idClassroom=" +
+        body.idClassroom +
+        "&idUser=" +
+        body.idUser
+    )
+    .then((response) => response.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        logout();
+        window.location.reload();
+      }
+      throw err;
+    });
+};

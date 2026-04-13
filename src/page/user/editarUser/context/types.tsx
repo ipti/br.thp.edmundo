@@ -7,7 +7,11 @@ export interface EditUserContextType {
     UpdateUser: (body: {
         data: UpdateUser;
         id: string;
-    }) => void
+    }) => void;
+    ResetPassword: (idUser: number, password: string) => void;
+    AddUserReapplication: (idUser: number, idReapplication: number) => void;
+    RemoveUserReapplication: (idUser: number, idReapplication: number) => void;
+    reapplications: any[];
 }
 
 export interface User {
@@ -17,8 +21,21 @@ export interface User {
     active: boolean
     tags_users: TagsUser[]
     stamps_user: any[]
+    user_reapplication: UserReapplication[]
     role: string
     registration: Registration[]
+  }
+
+  export interface UserReapplication {
+    id: number
+    user_fk: number
+    reapplication_fk: number
+    reapplication: Reapplication
+  }
+
+  export interface Reapplication {
+    id: number
+    name: string
   }
   
   export interface TagsUser {

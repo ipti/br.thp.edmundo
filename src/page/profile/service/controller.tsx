@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import styles from "../../../Styles";
 import queryClient from "../../../service/reactquery";
-import { AddTagUser, requestUpdateAvatarRegistration, UpdateUserRequest } from "./request";
+import { AddTagUser, AddUserReapplicationRequest, ResetPasswordRequest, requestUpdateAvatarRegistration, UpdateUserRequest } from "./request";
 import { CreateUserTagsDto, UpdateUser } from "./types";
 
 export const UpdateUserController = () => {
@@ -54,7 +54,50 @@ export const UpdateUserController = () => {
     }
   );
 
+  const resetPasswordMutation = useMutation(
+    ({ idUser, password }: { idUser: number; password: string }) =>
+      ResetPasswordRequest(idUser, password),
+    {
+      onError: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.response?.data?.message ?? 'Erro ao resetar senha',
+          confirmButtonColor: styles.colors.colorPrimary,
+        })
+      },
+      onSuccess: () => {
+        Swal.fire({
+          icon: "success",
+          title: "Senha alterada com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+        });
+      },
+    }
+  );
+
+  const addUserReapplicationMutation = useMutation(
+    ({ idUser, idReapplication }: { idUser: number; idReapplication: number }) =>
+      AddUserReapplicationRequest(idUser, idReapplication),
+    {
+      onError: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.response?.data?.message ?? 'Erro ao vincular reaplicação',
+          confirmButtonColor: styles.colors.colorPrimary,
+        })
+      },
+      onSuccess: () => {
+        Swal.fire({
+          icon: "success",
+          title: "Reaplicação vinculada com sucesso!",
+          confirmButtonColor: styles.colors.colorPrimary,
+        });
+        queryClient.refetchQueries("useRequestsFindOneUser");
+      },
+    }
+  );
+
   return {
-    UpdateUserMutation, requestChangeAvatarRegistrationMutation, requestAddTagUserMutation
+    UpdateUserMutation, requestChangeAvatarRegistrationMutation, requestAddTagUserMutation, resetPasswordMutation, addUserReapplicationMutation
   }
 }

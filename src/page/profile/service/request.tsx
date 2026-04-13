@@ -2,6 +2,36 @@ import http from "../../../service/axios"
 import { GetIdUser, logout } from "../../../service/localstorage"
 import { CreateUserTagsDto, UpdateUser } from "./types"
 
+export const ResetPasswordRequest = async (idUser: number, password: string) => {
+    return await http
+        .put("/user-registration-bff/reset-password/" + idUser, { password })
+        .then((response) => response.data)
+}
+
+export const AddUserReapplicationRequest = async (idUser: number, idReapplication: number) => {
+    const reapplicationId =
+        typeof idReapplication === "object"
+            ? Number((idReapplication as any)?.id)
+            : Number(idReapplication)
+
+    return await http
+        .post("/user-registration-bff/add-reapplication?idUser=" + idUser + "&idReapplication=" + reapplicationId)
+        .then((response) => response.data)
+}
+
+export const FindAllReapplicationsRequest = async () => {
+    return await http
+        .get("/reapplication")
+        .then((response) => response.data)
+        .catch((err) => {
+            if (err.response?.status === 401) {
+                logout()
+                window.location.reload()
+            }
+            throw err;
+        });
+}
+
 export const UpdateUserRequest = async (body: UpdateUser) => {
     if (GetIdUser()) {
         return await http.put("/user-registration-bff?idUser=" + GetIdUser(), { ...body, responsable_telephone: body?.responsable_telephone?.replace(/[^a-zA-Z0-9]/g, '') })

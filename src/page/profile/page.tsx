@@ -8,9 +8,9 @@ import * as Yup from "yup"
 import ButtonComponent from "../../Components/Button"
 import ContentPage from "../../Components/ContentPage"
 import MaskInput from "../../Components/InputMask"
+import TextInput from "../../Components/TextInput"
 import Stamp from "../../Components/Stamp"
 import { StampComponentStyle } from "../../Components/Stamp/style"
-import TextInput from "../../Components/TextInput"
 import { formatarData, useQuery } from "../../Controller/controllerGlobal"
 import styles from "../../Styles"
 import color from "../../Styles/colors"
@@ -43,7 +43,6 @@ const Profile = () => {
 const ProfilePage = () => {
 
     const props = useContext(UpdateUserContext) as UpdateUserContextType
-
     const query = useQuery()
 
     const id = query.get("id")
@@ -251,6 +250,49 @@ const ProfilePage = () => {
                     )
                 }}
             </Formik>}
+
+            {/* Seção: Vincular Reaplicação (apenas para TEACHER/ADMIN, visível por ADMIN) */}
+            {/* {!id && appContext.user?.role === 'ADMIN' && props.user && props.user.role !== 'STUDENT' && (
+                <>
+                    <Padding padding="32px" />
+                    <h3 style={{ color: color.colorPrimary }}>Vincular Reaplicação</h3>
+                    <Padding padding="8px" />
+                    <div className="grid">
+                        <div className="col-12 md:col-6">
+                            <label>Reaplicação *</label>
+                            <Padding />
+                            <Dropdown
+                                value={selectedReapplication}
+                                onChange={(e) => setSelectedReapplication(e.value)}
+                                options={props.reapplications}
+                                optionLabel="name"
+                                optionValue="id"
+                                placeholder="Selecione uma reaplicação"
+                                className="w-full"
+                            />
+                        </div>
+                        <div className="col-12 md:col-6" style={{ display: "flex", alignItems: "flex-end" }}>
+                            <ButtonComponent
+                                label="Vincular"
+                                icon="pi pi-link"
+                                className="t-button-primary"
+                                onClick={() => {
+                                    if (!selectedReapplication) {
+                                        Swal.fire({
+                                            icon: "warning",
+                                            title: "Selecione uma reaplicação",
+                                            confirmButtonColor: styles.colors.colorPrimary,
+                                        })
+                                        return
+                                    }
+                                    props.AddUserReapplication(props.user!.id, selectedReapplication)
+                                    setSelectedReapplication(null)
+                                }}
+                            />
+                        </div>
+                    </div>
+                </>
+            )} */}
         </ContentPage>
     )
 }

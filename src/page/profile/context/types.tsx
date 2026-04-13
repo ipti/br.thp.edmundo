@@ -13,4 +13,7 @@ export interface UpdateUserContextType {
     AddUser: (idTag: number) => void
     tagsUser: Tags
     settagsUser: Dispatch<SetStateAction<Tags>>
+    ResetPassword: (idUser: number, password: string) => void
+    AddUserReapplication: (idUser: number, idReapplication: number) => void
+    reapplications: any[]
 }

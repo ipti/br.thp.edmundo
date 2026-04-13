@@ -1,16 +1,20 @@
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 import { InputText } from "primereact/inputtext";
+import { Dropdown } from "primereact/dropdown";
 import { useContext, useState } from "react";
 import { ROLE } from "../../../Controller/controllerGlobal";
+import ButtonComponent from "../../../Components/Button";
 import CardRegistration from "../../../Components/Card/CardRegistration";
 import ContentPage from "../../../Components/ContentPage";
 import Empty from "../../../Components/Empty";
 import { Padding, Row } from "../../../Styles/styles";
+import Swal from "sweetalert2";
+import styles from "../../../Styles";
 import { AplicationContext } from "../../../context/context";
 import { PropsAplicationContext } from "../../../context/type";
 import MembersClassroomProvider, { MembersClassroomContext } from "./context/context";
-import { MembersClassroomContextType } from "./context/types";
+import { MembersClassroomContextType, TeacherUser } from "./context/types";
 
 
 const MembersClassroom = () => {
@@ -26,6 +30,7 @@ const MembersClassroomPage = () => {
     const props = useContext(MembersClassroomContext) as MembersClassroomContextType
     const propsAplication = useContext(AplicationContext) as PropsAplicationContext
     const [filter, setFilter] = useState("");
+    const [teacherSelected, setTeacherSelected] = useState<TeacherUser | null>(null)
     const canRemoveMembers = propsAplication.user?.role !== ROLE.STUDENT
 
     const search = () => {
@@ -53,6 +58,46 @@ const MembersClassroomPage = () => {
                     />
                 </IconField>
             </Row>
+            {canRemoveMembers && (
+                <>
+                    <Padding padding="12px" />
+                    <div className="grid">
+                        <div className="col-12 md:col-8">
+                            <label>Adicionar professor na turma</label>
+                            <Padding padding="6px" />
+                            <Dropdown
+                                value={teacherSelected}
+                                onChange={(e) => setTeacherSelected(e.value)}
+                                options={props.teachers}
+                                optionLabel="name"
+                                placeholder="Selecione um professor"
+                                emptyMessage="Nenhum professor adicionado a essa reaplicação"
+                                className="w-full"
+                                filter
+                            />
+                        </div>
+                        <div className="col-12 md:col-4" style={{ display: "flex", alignItems: "flex-end" }}>
+                            <ButtonComponent
+                                label="Adicionar professor"
+                                icon="pi pi-plus"
+                                loading={props.isLoadingAddTeacher}
+                                onClick={() => {
+                                    if (!teacherSelected?.id) {
+                                        Swal.fire({
+                                            icon: "warning",
+                                            title: "Selecione um professor para adicionar",
+                                            confirmButtonColor: styles.colors.colorPrimary,
+                                        })
+                                        return
+                                    }
+                                    props.handleAddTeacher(teacherSelected.id)
+                                    setTeacherSelected(null)
+                                }}
+                            />
+                        </div>
+                    </div>
+                </>
+            )}
             <Padding padding="8px" />
             <div
                 style={{
@@ -80,7 +125,7 @@ const MembersClassroomPage = () => {
                                     idRegistration={item?.id}
                                     status={item?.users?.role}
                                     userId={item.usersId}
-                                    url_avatar={item?.users?.registration[0]?.avatar_url }
+                                    url_avatar={item?.users?.registration[0]?.avatar_url}
                                     onRemove={
                                         canRemoveMembers
                                             ? () => props.handleRemoveMember(item.usersId)

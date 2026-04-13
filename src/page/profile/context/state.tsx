@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useQuery } from "../../../Controller/controllerGlobal"
 import { GetIdUser } from "../../../service/localstorage"
 import { UpdateUserController } from "../service/controller"
-import { useFetchRequestFindOneUser, useFetchRequestFindTagsUser } from "../service/query"
+import { useFetchRequestFindOneUser, useFetchRequestFindAllReapplications, useFetchRequestFindTagsUser } from "../service/query"
 import { CreateUserTagsDto, Tags, UpdateUser, User } from "../service/types"
 
 
@@ -22,6 +22,7 @@ export const UpdateUserState = () => {
     const { data: userRequest, isLoading, isError } = useFetchRequestFindOneUser(id ?? GetIdUser()!);
 
     const { data: tagsRequest } = useFetchRequestFindTagsUser()
+    const { data: reapplicationsRequest } = useFetchRequestFindAllReapplications()
 
     useEffect(() => {
         if (userRequest) {
@@ -53,7 +54,7 @@ export const UpdateUserState = () => {
     }
 
 
-    const { UpdateUserMutation, requestChangeAvatarRegistrationMutation, requestAddTagUserMutation } = UpdateUserController();
+    const { UpdateUserMutation, requestChangeAvatarRegistrationMutation, requestAddTagUserMutation, resetPasswordMutation, addUserReapplicationMutation } = UpdateUserController();
 
     const UpdateUser = (body: UpdateUser) => {
         if (file) {
@@ -79,5 +80,16 @@ export const UpdateUserState = () => {
 
     const AddUser = (idTag: number) => {
     }
-    return { initialValue, UpdateUser, user, isLoading, isError, file, setFile, tags, AddUser, tagsUser, settagsUser }
+
+    const ResetPassword = (idUser: number, password: string) => {
+        resetPasswordMutation.mutate({ idUser, password })
+    }
+
+    const AddUserReapplication = (idUser: number, idReapplication: number) => {
+        addUserReapplicationMutation.mutate({ idUser, idReapplication })
+    }
+
+    const reapplications = reapplicationsRequest ?? []
+
+    return { initialValue, UpdateUser, user, isLoading, isError, file, setFile, tags, AddUser, tagsUser, settagsUser, ResetPassword, AddUserReapplication, reapplications }
 }
